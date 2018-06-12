@@ -8,6 +8,13 @@ class Moovly
 {
     public $version;
 
+    public $settings;
+
+    public function __construct()
+    {
+        $this->settings = new Settings();
+    }
+
     public function initialize()
     {
         $this->version = get_plugin_data(__DIR__ . '/../moovly.php')['Version'];
@@ -35,7 +42,7 @@ class Moovly
                 'manage_options',
                 'moovly',
                 function () {
-                    return Settings::make();
+                    return $this->settings->makeView();
                 }
             );
         });

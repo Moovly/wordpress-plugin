@@ -4,7 +4,7 @@ namespace Moovly;
 
 class Settings
 {
-    public static function make()
+    public function makeView()
     {
         echo '<moovly-settings></moovly-settings>';
     }
