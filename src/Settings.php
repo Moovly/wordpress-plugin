@@ -6,6 +6,6 @@ class Settings
 {
     public static function make()
     {
-        return '';
+        echo '<moovly-settings></moovly-settings>';
     }
 }
