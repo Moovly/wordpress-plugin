@@ -1,20 +1,19 @@
 <?php
 
-namespace Moovly;
+namespace Moovly\Api;
 
 use WP_Error;
 
 class Auth
 {
-    protected $version = "v1";
-
     protected $namespace;
 
-    protected $auth_key = 'moovly_access_token';
+    protected $auth_key;
 
-    public function __construct()
+    public function __construct($domain, $version)
     {
-        $this->namespace = "moovly/{$this->version}/auth";
+        $this->namespace = "{$domain}/{$version}/auth";
+        $this->auth_key = "{$domain}_access_token";
         add_action('rest_api_init', [$this, 'registerEndPoints']);
     }
 
