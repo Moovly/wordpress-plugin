@@ -10,6 +10,7 @@
         "cross-env": "^4.0.0"
     },
     "dependencies": {
+        "axios": "^0.18.0",
         "bootstrap": "^4.0.0",
         "vue": "^2.5.16"
     }

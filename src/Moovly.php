@@ -20,6 +20,7 @@ class Moovly
         $this->version = get_plugin_data(__DIR__ . '/../moovly.php')['Version'];
         $this->registerAssets();
         $this->addMenuItems();
+        $this->settings->initialize();
     }
 
     private function registerAssets()
