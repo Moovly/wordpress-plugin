@@ -19,6 +19,7 @@ class Moovly
     {
         add_action('admin_enqueue_scripts', function ($page) {
             if (strpos($page, 'moovly') !== false) {
+                wp_enqueue_style('moovly', plugins_url("moovly/dist/moovly.css"), $dependencies = [], $this->version, $media = 'all');
                 wp_register_script('moovly', plugins_url("moovly/dist/moovly.js"), $dependencies = [], $this->version, $in_footer = true);
                 wp_enqueue_script('moovly');
             }

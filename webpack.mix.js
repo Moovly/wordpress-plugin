@@ -1,4 +1,6 @@
 let mix = require('laravel-mix');
 
-mix.js('src/assets/js/app.js', 'moovly.js')
+mix
+    .sass('src/assets/sass/app.scss', 'moovly.css')
+    .js('src/assets/js/app.js', 'moovly.js')
     .setPublicPath('dist');
