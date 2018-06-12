@@ -6,9 +6,23 @@ use Moovly\Settings;
 
 class Moovly
 {
+    public $version;
+
     public function initialize()
     {
+        $this->version = get_plugin_data(__DIR__ . '/../moovly.php')['Version'];
+        $this->registerAssets();
         $this->addMenuItems();
+    }
+
+    private function registerAssets()
+    {
+        add_action('admin_enqueue_scripts', function ($page) {
+            if (strpos($page, 'moovly') !== false) {
+                wp_register_script('moovly', plugins_url("moovly/dist/moovly.js"), $dependencies = [], $this->version, $in_footer = true);
+                wp_enqueue_script('moovly');
+            }
+        });
     }
 
     private function addMenuItems()

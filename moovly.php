@@ -11,4 +11,7 @@
 
 require __DIR__ .'/src/autoload.php';
 
-(new \Moovly\Moovly())->initialize();
+
+add_action('init', function () {
+    (new \Moovly\Moovly())->initialize();
+});
