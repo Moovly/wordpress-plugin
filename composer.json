@@ -1,0 +1,7 @@
+{
+    "name": "moovly/moovly",
+    "description": "An integration plugin for the Moovly API",
+    "type": "wordpress-plugin",
+    "minimum-stability": "dev",
+    "require": {}
+}
