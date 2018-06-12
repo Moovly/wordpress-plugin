@@ -48,7 +48,7 @@ class Auth
 
     public function callback_permissions()
     {
-        return true;
+        return current_user_can('manage_options');
     }
 
     public function token()
@@ -58,6 +58,6 @@ class Auth
 
     public function token_permissions()
     {
-        return true;
+        return current_user_can('manage_options');
     }
 }

@@ -28,6 +28,10 @@ class Moovly
         if (strpos($page, 'moovly') !== false) {
             wp_enqueue_style('moovly', plugins_url("moovly/dist/moovly.css"), $dependencies = [], $this->version, $media = 'all');
             wp_register_script('moovly', plugins_url("moovly/dist/moovly.js"), $dependencies = [], $this->version, $in_footer = true);
+            wp_localize_script('moovly', 'moovlyApiSettings', [
+                'root' => esc_url_raw(rest_url('/moovly')),
+                'nonce' => wp_create_nonce('wp_rest'),
+            ]);
             wp_enqueue_script('moovly');
         }
     }
