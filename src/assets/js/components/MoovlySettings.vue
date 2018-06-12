@@ -4,7 +4,7 @@
             <div class="row" >
                 <div class="col-12" >
                     <h1>Moovly</h1>
-                    <div class="card bg-white" v-if="auth.token && !ui.loading">
+                    <div class="card bg-white" v-if="ui.token.value && !ui.loading">
                         <div class="card-body">
                             <h2 class="card-title mb-3">Settings</h2>
                             <label for="token">Access Token</label>
@@ -20,7 +20,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12" v-if="!auth.token">
+                <div class="col-12" v-if="!ui.token.value">
                     <div class="embed-responsive embed-responsive-16by9">
                         <iframe class="embed-responsive-item" :src="auth.url + auth.callback"></iframe>
                     </div>
@@ -40,7 +40,7 @@
             return {
                 auth: {
                     url: "https://oauth.services.moovly.com/login?callback=",
-                    callback: `${window.location.origin}/wp-json/moovly/v1/auth/callback`,
+                    callback: `${window.location.origin}/wp-json/moovly/v1/auth/callback?_wpnonce=${window.moovlyApiSettings.nonce}`,
                     token: `${window.location.origin}/wp-json/moovly/v1/auth/token`,
                 },
                 ui: {
