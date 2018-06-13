@@ -3,6 +3,9 @@
     "description": "An integration plugin for the Moovly API",
     "type": "wordpress-plugin",
     "minimum-stability": "dev",
+    "require": {
+        "moovly/moovly-php-sdk": "1.0.0"
+    },
     "autoload": {
         "psr-4": {
             "Moovly\\": "src/"
