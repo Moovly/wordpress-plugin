@@ -28,6 +28,7 @@ class Api
         foreach ($this->routes as $group=>$route) {
             $this->{$group} = new $route();
         }
+
         return $this;
     }
 }
