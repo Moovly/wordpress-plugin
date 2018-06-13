@@ -4,6 +4,7 @@ namespace Moovly;
 
 use Moovly\Api\Api;
 use Moovly\Settings;
+use Moovly\Shortcodes\Shortcodes;
 
 class Moovly
 {
@@ -15,6 +16,7 @@ class Moovly
 
     public function __construct()
     {
+        $this->shortcodes = new Shortcodes;
         $this->settings = new Settings;
         $this->api = new Api;
     }
@@ -22,6 +24,7 @@ class Moovly
     public function initialize()
     {
         $this->api->register();
+        $this->shortcodes->register();
         $this->version = get_plugin_data(__DIR__ . '/../moovly.php')['Version'];
         add_action('admin_enqueue_scripts', [$this, 'registerAssets']);
         add_action('admin_menu', [$this, 'addMenuItems']);

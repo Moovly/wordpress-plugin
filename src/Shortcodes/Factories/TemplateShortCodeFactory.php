@@ -4,8 +4,11 @@ namespace Moovly\Shortcodes\Factories;
 
 class TemplateShortCodeFactory
 {
+    public static $tag = "moovly-template";
+
     public static function generate($template)
     {
-        return sprintf('[moovly-template id="%s"]', $template->getId());
+        $tag = self::$tag;
+        return sprintf("[{$tag} id='%s']", $template->getId());
     }
 }
