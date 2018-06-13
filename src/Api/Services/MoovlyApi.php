@@ -3,18 +3,19 @@
 namespace Moovly\Api\Services;
 
 use WP_Error;
-use Moovly\Api\Auth;
+use Moovly\Api\Api;
+use Moovly\Api\Routes\Auth;
 use Moovly\SDK\Client\APIClient;
 use Moovly\SDK\Service\MoovlyService;
 use Moovly\SDK\Exception\MoovlyException;
 
-class MoovlyApi
+trait MoovlyApi
 {
     protected $client;
 
     protected $moovly;
 
-    public function __construct()
+    public function registerMoovlyService()
     {
         $this->client = new APIClient;
         $this->moovly = new MoovlyService($this->client, Auth::getToken());
