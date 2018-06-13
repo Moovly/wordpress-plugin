@@ -2,6 +2,7 @@
     <div id="moovly-auth">
         <div class="card bg-white" v-if="ui.token.value && !ui.loading">
             <div class="card-body">
+                <moovly-account/>
                 <h2 class="card-title mb-3">Authentication</h2>
                 <label for="token">Access Token</label>
                 <div class="input-group mb-5">
