@@ -1,19 +1,20 @@
 <?php
 
-namespace Moovly\Api;
+namespace Moovly\Api\Routes;
 
 use WP_Error;
+use Moovly\Api\Api;
 
-class Auth
+class Auth extends Api
 {
-    protected $namespace;
+    public $group = "auth";
 
     protected static $auth_key;
 
-    public function __construct($domain, $version)
+    public function __construct()
     {
-        self::$auth_key = "{$domain}_access_token";
-        $this->namespace = "{$domain}/{$version}/auth";
+        parent::__construct();
+        self::$auth_key = "{$this->domain}_access_token";
         add_action('rest_api_init', [$this, 'registerEndpoints']);
     }
 

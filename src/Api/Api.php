@@ -2,7 +2,7 @@
 
 namespace Moovly\Api;
 
-use Moovly\Api\Auth;
+use Moovly\Api\Routes\Auth;
 
 class Api
 {
@@ -10,14 +10,22 @@ class Api
 
     public $version = "v1";
 
-    protected $modules = [
+    public $group = '';
+
+    protected $routes = [
         'auth' => Auth::class,
     ];
 
     public function __construct()
     {
-        foreach ($this->modules as $name=>$module) {
-            $this->{$name} = new $module($this->domain, $this->version);
+        $this->namespace = "{$this->domain}/{$this->version}/{$this->group}";
+    }
+
+    public function registerRoutes()
+    {
+        foreach ($this->routes as $group=>$route) {
+            $this->{$group} = new $route();
         }
+        return $this;
     }
 }

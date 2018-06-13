@@ -11,14 +11,17 @@ class Moovly
 
     public $settings;
 
+    public $api;
+
     public function __construct()
     {
-        $this->api = new Api();
-        $this->settings = new Settings();
+        $this->settings = new Settings;
+        $this->api = new Api;
     }
 
     public function initialize()
     {
+        $this->api->registerRoutes();
         $this->version = get_plugin_data(__DIR__ . '/../moovly.php')['Version'];
         add_action('admin_enqueue_scripts', [$this, 'registerAssets']);
         add_action('admin_menu', [$this, 'addMenuItems']);
