@@ -8,13 +8,18 @@ class Auth
 {
     protected $namespace;
 
-    protected $auth_key;
+    protected static $auth_key;
 
     public function __construct($domain, $version)
     {
+        self::$auth_key = "{$domain}_access_token";
         $this->namespace = "{$domain}/{$version}/auth";
-        $this->auth_key = "{$domain}_access_token";
         add_action('rest_api_init', [$this, 'registerEndpoints']);
+    }
+
+    public static function getToken()
+    {
+        return get_option(self::$auth_key);
     }
 
     public function registerEndpoints()
@@ -46,7 +51,7 @@ class Auth
             return new WP_Error('rest_bad_request', __('Missing required access token'), ['status' => 400]);
         }
 
-        update_option($this->auth_key, $token);
+        update_option(self::$auth_key, $token);
 
         wp_redirect(admin_url("/admin.php?page=moovly"), 301);
     }
@@ -58,7 +63,7 @@ class Auth
 
     public function token()
     {
-        return get_option($this->auth_key);
+        return self::getToken();
     }
 
     public function token_permissions()
@@ -68,7 +73,7 @@ class Auth
 
     public function logout()
     {
-        return update_option($this->auth_key, null);
+        return update_option(self::$auth_key, null);
     }
 
     public function logout_permissions()
