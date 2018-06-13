@@ -15,7 +15,7 @@ class Api
 
     protected $routes = [
         'auth' => Auth::class,
-        'account' => Account::class,
+        'accounts' => Account::class,
     ];
 
     public function __construct()

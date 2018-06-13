@@ -15,7 +15,7 @@
                     loading: false,
                 },
                 account: {
-                    get: `${window.location.origin}/wp-json/moovly/v1/account/me`,
+                    get: `${window.location.origin}/wp-json/moovly/v1/accounts/me`,
                 }
             }
         },

@@ -9,7 +9,7 @@ class Account extends Api
 {
     use MoovlyApi;
 
-    public $group= "account";
+    public $group= "accounts";
 
     public function __construct()
     {
