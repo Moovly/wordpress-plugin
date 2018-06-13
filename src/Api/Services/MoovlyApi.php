@@ -21,7 +21,7 @@ trait MoovlyApi
         $this->moovly = new MoovlyService($this->client, Auth::getToken());
     }
 
-    public function call($method, $arguments = null, $successCallback = null, $errorCallback = null)
+    public function moovlyApi($method, $arguments = null, $successCallback = null, $errorCallback = null)
     {
         if (is_callable($arguments)) {
             $errorCallback = $successCallback;

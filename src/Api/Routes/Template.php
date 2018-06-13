@@ -29,7 +29,7 @@ class Template extends Api
 
     public function index()
     {
-        return $this->call('getTemplates', function ($templates) {
+        return $this->moovlyApi('getTemplates', function ($templates) {
             return $templates;
         });
     }

@@ -29,7 +29,7 @@ class Account extends Api
 
     public function me()
     {
-        return $this->call('getCurrentUser', function ($user) {
+        return $this->moovlyApi('getCurrentUser', function ($user) {
             return $user;
         });
     }
