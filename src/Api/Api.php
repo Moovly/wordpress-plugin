@@ -3,6 +3,7 @@
 namespace Moovly\Api;
 
 use Moovly\Api\Routes\Auth;
+use Moovly\Api\Routes\Account;
 
 class Api
 {
@@ -14,6 +15,7 @@ class Api
 
     protected $routes = [
         'auth' => Auth::class,
+        'account' => Account::class,
     ];
 
     public function __construct()
