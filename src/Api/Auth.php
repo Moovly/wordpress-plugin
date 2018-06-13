@@ -14,7 +14,7 @@ class Auth
     {
         $this->namespace = "{$domain}/{$version}/auth";
         $this->auth_key = "{$domain}_access_token";
-        add_action('rest_api_init', [$this, 'registerEndPoints']);
+        add_action('rest_api_init', [$this, 'registerEndpoints']);
     }
 
     public function registerEndpoints()
