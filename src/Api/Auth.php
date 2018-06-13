@@ -30,6 +30,12 @@ class Auth
             'callback' => [$this, 'token'],
             'permission_callback' => [$this, 'token_permissions'],
         ]);
+
+        register_rest_route($this->namespace, '/logout', [
+            'methods' => 'POST',
+            'callback' => [$this, 'logout'],
+            'permission_callback' => [$this, 'logout_permissions'],
+        ]);
     }
 
     public function callback($request)
@@ -56,6 +62,16 @@ class Auth
     }
 
     public function token_permissions()
+    {
+        return current_user_can('manage_options');
+    }
+
+    public function logout()
+    {
+        return update_option($this->auth_key, null);
+    }
+
+    public function logout_permissions()
     {
         return current_user_can('manage_options');
     }
