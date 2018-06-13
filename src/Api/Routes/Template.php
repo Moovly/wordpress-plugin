@@ -4,7 +4,7 @@ namespace Moovly\Api\Routes;
 
 use Moovly\Api\Api;
 use Moovly\Api\Services\MoovlyApi;
-use Moovly\Shortcode\TemplateShortCodeFactory;
+use Moovly\Shortcodes\Factories\TemplateShortCodeFactory;
 
 class Template extends Api
 {

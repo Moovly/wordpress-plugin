@@ -1,6 +1,6 @@
 <?php
 
-namespace Moovly\Shortcode;
+namespace Moovly\Shortcodes\Factories;
 
 class TemplateShortCodeFactory
 {
