@@ -25,7 +25,7 @@ class Api
         $this->namespace = "{$this->domain}/{$this->version}/{$this->group}";
     }
 
-    public function registerRoutes()
+    public function register()
     {
         foreach ($this->routes as $group=>$route) {
             $this->{$group} = new $route();

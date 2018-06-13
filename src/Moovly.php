@@ -21,7 +21,7 @@ class Moovly
 
     public function initialize()
     {
-        $this->api->registerRoutes();
+        $this->api->register();
         $this->version = get_plugin_data(__DIR__ . '/../moovly.php')['Version'];
         add_action('admin_enqueue_scripts', [$this, 'registerAssets']);
         add_action('admin_menu', [$this, 'addMenuItems']);
