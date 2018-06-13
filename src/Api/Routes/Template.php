@@ -4,6 +4,7 @@ namespace Moovly\Api\Routes;
 
 use Moovly\Api\Api;
 use Moovly\Api\Services\MoovlyApi;
+use Moovly\Shortcode\TemplateShortCodeFactory;
 
 class Template extends Api
 {
@@ -30,6 +31,12 @@ class Template extends Api
     public function index()
     {
         return $this->moovlyApi('getTemplates', function ($templates) {
+            foreach ($templates as $template) {
+                $template->identifier = $template->getId();
+                $template->title = $template->getName();
+                $template->shortcode = TemplateShortCodeFactory::generate($template);
+            }
+
             return $templates;
         });
     }
