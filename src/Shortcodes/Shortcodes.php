@@ -14,8 +14,8 @@ class Shortcodes
     public function register()
     {
         foreach ($this->shortcodes as $shortcode=>$handler) {
-            add_shortcode($shortcode::$tag, function ($atts, $content = null) use ($handler) {
-                return (new $handler)->handle($atts, $content);
+            add_shortcode($shortcode::$tag, function ($atts, $content = null) use ($shortcode, $handler) {
+                return (new $handler($shortcode::$tag, $atts, $content))->handle();
             });
         }
     }
