@@ -26,6 +26,11 @@ class Template extends Api
             'callback' => [$this, 'index'],
             'permission_callback' => [$this, 'index_permissions'],
         ]);
+
+        register_rest_route($this->namespace, '/(?P<id>[^/]+)', [
+            'methods' => 'GET',
+            'callback' => [$this, 'show'],
+        ]);
     }
 
     public function index()
@@ -44,5 +49,34 @@ class Template extends Api
     public function index_permissions()
     {
         return current_user_can('manage_options');
+    }
+
+    public function show($request)
+    {
+        return $this->moovlyApi('getTemplate', $request->get_param('id'), function ($template) {
+            return $this->mapTemplateToResponse($template);
+        });
+    }
+
+    private function mapTemplateToResponse($template)
+    {
+        return [
+            'id' => $template->getId(),
+            'name' => $template->getName(),
+            'variables' => $this->mapTemplateVariablesToResponse($template->getVariables()),
+        ];
+    }
+
+    private function mapTemplateVariablesToResponse($templateVariables)
+    {
+        return collect($templateVariables)->map(function ($variable) {
+            return [
+                'id' => $variable->getId(),
+                'weight' => $variable->getWeight(),
+                'type' => $variable->getType(),
+                'name' => $variable->getName(),
+                'requirements' => $variable->getRequirements(),
+            ];
+        })->sortBy('weight');
     }
 }
