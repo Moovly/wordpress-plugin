@@ -1,4 +1,5 @@
 {
-    "/moovly.js": "/moovly.js",
-    "/moovly.css": "/moovly.css"
+    "/moovly-plugin.js": "/moovly-plugin.js",
+    "/moovly.css": "/moovly.css",
+    "/moovly.js": "/moovly.js"
 }
