@@ -19,4 +19,24 @@ abstract class ShortcodeHandler
 
     abstract public function handle();
 
+    public function getAttribute($name, $default = '')
+    {
+        return shortcode_atts([
+            $name => $default,
+        ], $this->attributes)[$name];
+    }
+
+    public function make($attributes)
+    {
+        return "<div id='{$this->tag}'><{$this->tag} {$this->mapAttributesToHtmlProperties($attributes)} ></{$this->tag}></div>";
+    }
+
+    protected function mapAttributesToHtmlProperties($attributes)
+    {
+        array_walk($attributes, function (&$value, $key) {
+            $value = "$key='$value'";
+        });
+
+        return implode(' ', $attributes);
+    }
 }
