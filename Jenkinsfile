@@ -25,7 +25,11 @@ pipeline {
     }
 
     stage('Register') {
-
+      steps {
+        script {
+          currentBuild.description = "https://s3-eu-west-1.amazonaws.com/${S3_BUCKET}/player/${S3_BUCKET_DIR_WITH_BUILD_NUMBER}"
+        }
+      }
     }
 
     stage('SonarQube') {
