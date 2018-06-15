@@ -3,25 +3,25 @@
         <div class="container-fluid">
             <h1 class="mt-2">Moovly</h1>
             <h2 class="mt-3 mb-5">Templates</h2>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <table class="table" v-if="!ui.loading">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Template name</th>
-                            <th scope="col">Shortcode</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(template, index) in ui.templates" :key="template.identifier">
-                            <th scope="row">{{ index + 1 }}</th>
-                            <th>{{ template.title }}</th>
-                            <th><code>{{ template.shortcode }}</code></th>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="row">
+                <div class="col-12">
+                    <table class="table" v-if="!ui.loading">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Template name</th>
+                                <th scope="col">Shortcode</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(template, index) in ui.templates" :key="template.identifier">
+                                <th scope="row">{{ index + 1 }}</th>
+                                <th>{{ template.title }}</th>
+                                <th><code>{{ template.shortcode }}</code></th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
