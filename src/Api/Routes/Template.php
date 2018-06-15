@@ -4,6 +4,8 @@ namespace Moovly\Api\Routes;
 
 use Moovly\Api\Api;
 use Moovly\Api\Services\MoovlyApi;
+use Moovly\SDK\Factory\JobFactory;
+use Moovly\SDK\Factory\ValueFactory;
 use Moovly\Shortcodes\Factories\TemplateShortCodeFactory;
 
 class Template extends Api
@@ -30,6 +32,11 @@ class Template extends Api
         register_rest_route($this->namespace, '/(?P<id>[^/]+)', [
             'methods' => 'GET',
             'callback' => [$this, 'show'],
+        ]);
+
+        register_rest_route($this->namespace, '/(?P<id>[^/]+)/store', [
+            'methods' => 'POST',
+            'callback' => [$this, 'store'],
         ]);
     }
 
@@ -58,6 +65,13 @@ class Template extends Api
         });
     }
 
+    public function store($request)
+    {
+        return $this->moovlyApi('getTemplate', $request->get_param('id'), function ($template) use ($request) {
+            return $this->createTemplateJobFromRequest($template, $request);
+        });
+    }
+
     private function mapTemplateToResponse($template)
     {
         return [
@@ -78,5 +92,20 @@ class Template extends Api
                 'requirements' => $variable->getRequirements(),
             ];
         })->sortBy('weight');
+    }
+
+    private function createTemplateJobFromRequest($template, $request)
+    {
+        $job = JobFactory::create([
+                ValueFactory::create('external_wp_moovly_plugin_id_1', 'Moovly plugin job', collect($request->get_param('variables'))->mapWithKeys(function ($variable) {
+                    return $variable;
+                })->toArray()),
+        ])->setTemplate($template);
+
+        return $this->moovlyApi('createJob', $job, function ($job) {
+            return [
+                'job_id' => $job->getId(),
+            ];
+        });
     }
 }
