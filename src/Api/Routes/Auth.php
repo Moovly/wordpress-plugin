@@ -23,6 +23,11 @@ class Auth extends Api
         return get_option(self::$auth_key);
     }
 
+    public function hasToken()
+    {
+        return (bool) $this->token();
+    }
+
     public function registerEndpoints()
     {
         register_rest_route($this->namespace, '/callback', [
@@ -54,7 +59,7 @@ class Auth extends Api
 
         update_option(self::$auth_key, $token);
 
-        wp_redirect(admin_url("/admin.php?page=moovly"), 301);
+        wp_redirect(admin_url("/admin.php?page=moovly-settings"), 301);
     }
 
     public function callback_permissions()

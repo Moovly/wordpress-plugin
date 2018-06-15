@@ -17,6 +17,7 @@ class Moovly
     public function __construct()
     {
         $this->shortcodes = new Shortcodes;
+        $this->templates = new Templates;
         $this->settings = new Settings;
         $this->api = new Api;
     }
@@ -66,10 +67,23 @@ class Moovly
             __('Moovly', 'moovly'),
             __('Moovly', 'moovly'),
             'manage_options',
-            'moovly',
+            'moovly-settings',
             function () {
                 return $this->settings->makeView();
             }
         );
+
+        if ($this->api->auth->hasToken()) {
+            add_submenu_page(
+                'moovly-settings',
+                __('Templates', 'moovly'),
+                __('Templates', 'moovly'),
+                'manage_options',
+                'moovly-templates',
+                function () {
+                    return $this->templates->makeView();
+                }
+            );
+        }
     }
 }
