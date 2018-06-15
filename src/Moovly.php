@@ -25,7 +25,9 @@ class Moovly
     {
         $this->api->register();
         $this->shortcodes->register();
-        $this->version = get_plugin_data(__DIR__ . '/../moovly.php')['Version'];
+        $this->version = get_file_data(__DIR__ . '/../moovly.php', [
+            'Version' => 'Version',
+        ])['Version'];
         add_action('admin_enqueue_scripts', [$this, 'registerAdminAssets']);
         add_action('wp_enqueue_scripts', [$this, 'registerAssets']);
         add_action('admin_menu', [$this, 'addMenuItems']);
