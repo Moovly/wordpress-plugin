@@ -51,7 +51,7 @@
                 },
                 templates: {
                     show: `${window.location.origin}/wp-json/moovly/v1/templates/${this.id}`,
-                    save:  `${window.location.origin}/wp-json/moovly/v1/templates/${this.id}/save`,
+                    save:  `${window.location.origin}/wp-json/moovly/v1/templates/${this.id}/store`,
                 }
             }
         },
@@ -78,7 +78,14 @@
 
             submit() {
                 this.form.loading = true;
-                axios.post(this.templates.save).then(response => {
+                let variableValues = this.ui.template.variables.map(variable => {
+                    return {
+                       [variable.id]: variable.value,
+                    }
+                });
+                axios.post(this.templates.save, {
+                    variables: variableValues,
+                }).then(response => {
                     this.form.error = false;
                     this.form.loading = false;
                 }).catch(error => {
