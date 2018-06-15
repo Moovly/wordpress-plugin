@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2f51e92491fcb00124585827fc4a8302",
+    "content-hash": "baaf15ff14a1b733a817a7113290b6f2",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -362,16 +362,16 @@
         },
         {
             "name": "moovly/moovly-php-sdk",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Moovly/moovly-php-sdk.git",
-                "reference": "08e6d70054737e66bf24b3c7986be0cd7c177133"
+                "reference": "fb74ce93c7090da8ffc5b9456b76f2a9318ec0c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Moovly/moovly-php-sdk/zipball/08e6d70054737e66bf24b3c7986be0cd7c177133",
-                "reference": "08e6d70054737e66bf24b3c7986be0cd7c177133",
+                "url": "https://api.github.com/repos/Moovly/moovly-php-sdk/zipball/fb74ce93c7090da8ffc5b9456b76f2a9318ec0c5",
+                "reference": "fb74ce93c7090da8ffc5b9456b76f2a9318ec0c5",
                 "shasum": ""
             },
             "require": {
@@ -401,7 +401,7 @@
                 "moovly",
                 "video"
             ],
-            "time": "2018-05-18T16:58:00+00:00"
+            "time": "2018-06-15T12:17:29+00:00"
         },
         {
             "name": "nesbot/carbon",

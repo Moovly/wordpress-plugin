@@ -4,7 +4,7 @@
     "type": "wordpress-plugin",
     "minimum-stability": "dev",
     "require": {
-        "moovly/moovly-php-sdk": "1.0.0",
+        "moovly/moovly-php-sdk": "^1.0.0",
         "illuminate/support": "^5.6"
     },
     "autoload": {
