@@ -42,10 +42,10 @@ class Auth extends Api
             'permission_callback' => [$this, 'token_permissions'],
         ]);
 
-        register_rest_route($this->namespace, '/logout', [
+        register_rest_route($this->namespace, '/token', [
             'methods' => 'POST',
-            'callback' => [$this, 'logout'],
-            'permission_callback' => [$this, 'logout_permissions'],
+            'callback' => [$this, 'store'],
+            'permission_callback' => [$this, 'token_permissions'],
         ]);
     }
 
@@ -77,13 +77,8 @@ class Auth extends Api
         return current_user_can('manage_options');
     }
 
-    public function logout()
+    public function store($request)
     {
-        return update_option(self::$auth_key, null);
-    }
-
-    public function logout_permissions()
-    {
-        return current_user_can('manage_options');
+        return update_option(self::$auth_key, $request->get_param('token'));
     }
 }
