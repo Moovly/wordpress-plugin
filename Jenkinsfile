@@ -26,13 +26,24 @@ pipeline {
         sh 'docker run --rm --workdir=/app -v ${WORKSPACE}:/app node:8-stretch npm install'
         sh 'docker run --rm --workdir=/app -v ${WORKSPACE}:/app node:8-stretch npm run production'
         sh 'docker run --rm --workdir=/app -v ${WORKSPACE]:/app samepagelabs/zip zip moovly-wordpress-plugin dist/ src/ vendor/ moovly.php package.json package-lock.json'
-        sh 'docker build -t ${BUILD_TAG_PARSED} .'
       }
     }
 
     stage('Package') {
       steps {
          sh 'aws s3 sync moovly-wordpress-plugin.zip s3://${S3_BUCKET}/wordpress-plugin/${S3_BUCKET_DIR_WITH_BUILD_NUMBER}/'
+         sh 'docker build -t ${BUILD_TAG_PARSED} .'
+      }
+    }
+
+    stage('Register') {
+      steps {
+        sh 'docker tag ${BUILD_TAG_PARSED} ${CONTAINER_URL_NUMBER} && docker push ${CONTAINER_URL_NUMBER}'
+        sh 'docker tag ${BUILD_TAG_PARSED} ${CONTAINER_URL_BRANCH} && docker push ${CONTAINER_URL_BRANCH}'
+
+        script {
+            currentBuild.description = "${CONTAINER_URL_NUMBER} | ${CONTAINER_URL_BRANCH}"
+        }
       }
     }
 
