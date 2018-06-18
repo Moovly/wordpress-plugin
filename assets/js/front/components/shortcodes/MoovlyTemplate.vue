@@ -1,6 +1,7 @@
 <template>
     <div class="row justify-content-center">
         <div class="col-12 col-md-8">
+            <moovly-job :job="job"></moovly-job>
             <div class="my-5 card p-5">
                 <h5 class="card-title">Moovly Template</h5>
                 <form action="" v-if="!ui.loading && !ui.error" @submit.prevent="submit">
@@ -21,7 +22,8 @@
     </div>
 </template>
 <script>
-    import MoovlyVariable from './../variables/MoovlyVariable';
+    import MoovlyVariable from './../MoovlyVariable';
+    import MoovlyJob from './../MoovlyJob';
 
     export default {
         props: {
@@ -33,6 +35,7 @@
 
         components: {
             MoovlyVariable,
+            MoovlyJob,
         },
 
         data() {
@@ -48,11 +51,13 @@
                 form: {
                     error: false,
                     loading: false,
+                    processing: false,
                 },
+                job: null,
                 templates: {
                     show: `${window.location.origin}/wp-json/moovly/v1/templates/${this.id}`,
                     save:  `${window.location.origin}/wp-json/moovly/v1/templates/${this.id}/store`,
-                }
+                },
             }
         },
 
@@ -88,6 +93,10 @@
                 }).then(response => {
                     this.form.error = false;
                     this.form.loading = false;
+                    this.form.processing = true;
+                    this.job = {
+                        id: response.data.job_id,
+                    };
                 }).catch(error => {
                     this.form.error = true;
                     this.form.loading = false;
