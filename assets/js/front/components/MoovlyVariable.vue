@@ -1,33 +1,22 @@
 <template>
-    <div class="form-group">
-        <label :for="variable.id"> {{ variable.name }}</label>
-        <input
-            v-if="variable.type === 'text' && !variable.requirements.multiline"
-            :type="variable.type"
-            :id="variable.id"
-            v-model="variable.value"
+        <component
+            :is="'moovly-' + variable.type"
+            v-model="variable"
             @input="input"
-            class="form-control"
-            :placeholder="'Minimum: ' + variable.requirements.minimum_length + ', Maximum: ' + variable.requirements.maximum_length"
-            required
-        >
-        <textarea
-            v-if="variable.type === 'text' && variable.requirements.multiline"
-            :id="variable.id"
-            class="form-control"
-            v-model="variable.value"
-            @input="input"
-            :placeholder="'Minimum: ' + variable.requirements.minimum_length + ', Maximum: ' + variable.requirements.maximum_length"
-            required
-        ></textarea>
-    </div>
+        />
 </template>
 <script>
+    import TextVariable from './variables/MoovlyTextVariable';
+
     export default {
         props: {
             value: {
                 required: true,
             },
+        },
+
+        components: {
+            'moovly-text' : TextVariable,
         },
 
         data() {
