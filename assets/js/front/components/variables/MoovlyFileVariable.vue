@@ -12,7 +12,7 @@
         >
         <div v-else>
             <slot></slot>
-            <button type="button" @click="resetObject" class="btn">Reset Image</button>
+            <button type="button" @click="resetObject" class="btn">Reset {{ variable.type }}</button>
         </div>
         <p v-if="ui.loading && ui.file.name"> Uploading file {{ ui.file.name }}...</p>
     </div>
@@ -64,11 +64,12 @@
                 const file = event.target.files[0];
                 const formData = new FormData();
                 formData.append('file', file);
+                this.$emit('change', file);
 
+                this.ui.loading = true;
                 this.ui.file = {
                     name: file.name,
                 };
-                this.ui.loading = true;
 
                 axios.post(`${window.location.origin}/wp-json/moovly/v1/objects/upload-${this.variable.type}`, formData, {
                     headers: {'Content-Type': 'multipart/form-data'},
