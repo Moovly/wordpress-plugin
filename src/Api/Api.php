@@ -6,6 +6,7 @@ use Moovly\Api\Routes\Job;
 use Moovly\Api\Routes\Auth;
 use Moovly\Api\Routes\Object;
 use Moovly\Api\Routes\Account;
+use Moovly\Api\Routes\Project;
 use Moovly\Api\Routes\Template;
 
 class Api
@@ -22,6 +23,7 @@ class Api
         'templates' => Template::class,
         'jobs' => Job::class,
         'objects' => Object::class,
+        'projects' => Project::class,
     ];
 
     public function __construct()

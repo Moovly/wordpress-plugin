@@ -3,6 +3,7 @@
 namespace Moovly;
 
 use Moovly\Api\Api;
+use Moovly\Projects;
 use Moovly\Settings;
 use Moovly\Shortcodes\Shortcodes;
 
@@ -18,6 +19,7 @@ class Moovly
     {
         $this->shortcodes = new Shortcodes;
         $this->templates = new Templates;
+        $this->projects = new Projects;
         $this->settings = new Settings;
         $this->api = new Api;
     }
@@ -82,6 +84,17 @@ class Moovly
                 'moovly-templates',
                 function () {
                     return $this->templates->makeView();
+                }
+            );
+
+            add_submenu_page(
+                'moovly-settings',
+                __('Projects', 'moovly'),
+                __('Projects', 'moovly'),
+                'manage_options',
+                'moovly-projects',
+                function () {
+                    return $this->projects->makeView();
                 }
             );
         }

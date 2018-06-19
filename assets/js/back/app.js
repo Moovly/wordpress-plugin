@@ -2,6 +2,7 @@ require('./bootstrap');
 
 import MoovlySettings from './components/MoovlySettings';
 import MoovlyTemplates from './components/MoovlyTemplates';
+import MoovlyProjects from './components/MoovlyProjects';
 
 const moovly = {
     settings: new Vue({
@@ -9,6 +10,7 @@ const moovly = {
         components: {
             MoovlySettings,
             MoovlyTemplates,
+            MoovlyProjects,
         },
     }),
 };
