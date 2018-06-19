@@ -75,7 +75,8 @@
                     headers: {'Content-Type': 'multipart/form-data'},
                 }).then(response => {
                     this.ui.object = response.data;
-                    this.variable.value = this.ui.object;
+                    this.variable.value = this.ui.object.id;
+                    this.variable.object = this.ui.object;
                     this.ui.loading = false;
                     this.input();
                 }).catch(error => {

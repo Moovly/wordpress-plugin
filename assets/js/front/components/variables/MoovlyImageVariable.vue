@@ -3,7 +3,7 @@
         v-model="value"
         @input="input"
     >
-        <img v-if="variable.value" :src="variable.value.assets[0].source" class="img-fluid">
+        <img v-if="variable.value" :src="variable.object.assets[0].source" class="img-fluid">
     </moovly-file-variable>
 </template>
 <script>
