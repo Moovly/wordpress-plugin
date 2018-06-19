@@ -7,6 +7,7 @@
 </template>
 <script>
     import TextVariable from './variables/MoovlyTextVariable';
+    import VideoVariable from './variables/MoovlyVideoVariable';
     import ImageVariable from './variables/MoovlyImageVariable';
 
     export default {
@@ -18,6 +19,7 @@
 
         components: {
             'moovly-text' : TextVariable,
+            'moovly-video': VideoVariable,
             'moovly-image': ImageVariable,
         },
 
