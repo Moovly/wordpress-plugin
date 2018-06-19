@@ -1,13 +1,13 @@
 <template>
-        <component
-            :is="'moovly-' + variable.type"
-            v-model="variable"
-            @input="input"
-        />
+    <moovly-file-variable
+        v-model="value"
+        @input="input"
+    >
+        <img v-if="variable.value" :src="variable.value.assets[0].source" class="img-fluid">
+    </moovly-file-variable>
 </template>
 <script>
-    import TextVariable from './variables/MoovlyTextVariable';
-    import ImageVariable from './variables/MoovlyImageVariable';
+    import MoovlyFileVariable from './MoovlyFileVariable';
 
     export default {
         props: {
@@ -17,14 +17,7 @@
         },
 
         components: {
-            'moovly-text' : TextVariable,
-            'moovly-image': ImageVariable,
-        },
-
-        data() {
-            return {
-                variable: null,
-            }
+            MoovlyFileVariable,
         },
 
         watch: {
@@ -33,6 +26,12 @@
 
         created() {
             this.setValue();
+        },
+
+        data() {
+            return {
+                variable: null,
+            }
         },
 
         methods: {
