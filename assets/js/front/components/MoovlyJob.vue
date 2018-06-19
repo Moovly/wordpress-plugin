@@ -30,7 +30,7 @@
                     videos: [],
                     loading: false,
                     error: false,
-                    refreshRate: 1000, //1 second
+                    refreshRate: 4000, //4 seconds
                 }
             }
         },
