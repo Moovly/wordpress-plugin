@@ -82,6 +82,8 @@ class Template extends Api
         return [
             'id' => $template->getId(),
             'name' => $template->getName(),
+            'thumbnail' => $template->getThumbnail(),
+            'preview' => $template->getPreview(),
             'variables' => $this->mapTemplateVariablesToResponse($template->getVariables()),
         ];
     }

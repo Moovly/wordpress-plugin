@@ -5,7 +5,7 @@
             <div class="my-5 card p-5">
                 <div v-if="ui.template.preview !== null">
                     <video controls>
-                        <source src="{{ ui.template.preview }}" />
+                        <source :src="ui.template.preview" />
                     </video>
                 </div>
 
