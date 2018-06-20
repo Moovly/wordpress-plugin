@@ -23,8 +23,14 @@
             </div>
             <div class="col-12 col-lg-8">
                 <div class="jumbotron">
-                    <h2 class="display-4">Obtaining an access token</h2>
-                    <p class="lead">Add some information here about how to authenticate and obtain an access token</p>
+                    <h2 class="display-4">Retrieving an access token</h2>
+                    <p>
+                      Access tokens are our mechanism of veryfing who you are, in order to get your templates and projects. 
+                      To get an access token, you'll need to visit our API Hub (developer.moovly.com) and head over to the <a href="https://developer.moovly.com/docs/personal-access-tokens">Personal Access Token</a>
+                      section of the documentation.
+                    </p>
+                    
+                    <p>You need to have a Moovly account in order to create access tokens. If you do not have an account yet, head over to our <a href="https://www.moovly.com/sign-up">registration page</a> and sign up.</p>
                 </div>
             </div>
         </div>
