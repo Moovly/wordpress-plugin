@@ -3,7 +3,7 @@
         <div class="col-12 col-md-8">
             <moovly-job :job="job"></moovly-job>
             <div class="my-5 card p-5">
-                <div v-if="ui.template.preview !== null">
+                <div v-if="ui.template.preview">
                     <video controls>
                         <source :src="ui.template.preview" />
                     </video>
