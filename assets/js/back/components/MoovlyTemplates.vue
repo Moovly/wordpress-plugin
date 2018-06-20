@@ -18,10 +18,10 @@
                         <tbody>
                             <tr v-for="(template, index) in ui.templates" :key="template.identifier">
                                 <th scope="row">{{ index + 1 }}</th>
-                                <th><img src="{{ template.thumbnail }}" style="max-width: 75px"/></th>
+                                <th><img :src="template.thumbnail" style="max-width: 75px"/></th>
                                 <th>{{ template.title }}</th>
                                 <th><pre><code>{{ template.shortcode }}</code></pre></th>
-                                <th><a href="{{ template.preview }}">See preview</a></th>
+                                <th><a :href="template.preview">See preview</a></th>
                             </tr>
                         </tbody>
                     </table>
