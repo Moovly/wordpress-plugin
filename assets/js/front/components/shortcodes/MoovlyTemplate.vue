@@ -2,6 +2,12 @@
     <div class="row justify-content-center">
         <div class="col-12 col-md-8">
             <div class="my-5 card p-5">
+                <div v-if="ui.template.preview !== null">
+                    <video controls>
+                        <source src="{{ ui.template.preview }}" />
+                    </video>
+                </div>
+
                 <h5 class="card-title">Moovly Template</h5>
                 <form action="" v-if="!ui.loading && !ui.error" @submit.prevent="submit">
                     <h6 class="mb-5">{{ ui.template.name }}</h6>
@@ -41,6 +47,7 @@
                     template: {
                         name: '',
                         variables: [],
+                        preview: null
                     },
                     loading: false,
                     error: false,
