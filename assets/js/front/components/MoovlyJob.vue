@@ -4,7 +4,7 @@
             <p class="mb-0">We're currently processing your video...</p>
             <p class="mb-0"></p>
         </div>
-        <spinner v-if="ui.loading"></spinner>
+        <spinner v-if="ui.loading"/>
         <div class="alert alert-danger text-center my-5" v-if="ui.error && job && job.id">
             <p class="mb-0"> Whoops, looks like something went wrong.</p>
             <p class="mb-0">Refresh the application to try again.</p>
