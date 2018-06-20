@@ -3,7 +3,10 @@
         v-model="value"
         @input="input"
     >
-        <img v-if="variable.value" :src="variable.object.assets[0].source" class="img-fluid">
+        <span slot="requirements">
+            Image dimensions: {{ variable.requirements.height}} x {{ variable.requirements.width }}
+        </span>
+        <img slot="preview" v-if="variable.value" :src="variable.object.assets[0].source" class="img-fluid">
     </moovly-file-variable>
 </template>
 <script>

@@ -1,17 +1,22 @@
 <template>
     <div class="form-group">
         <label :for="variable.id"> {{ variable.name}} </label>
-        <input
-            type="file"
-            :accept="accept"
-            class="form-control-file"
-            @change="setObject"
-            required
-            :disabled="disabled"
-            v-if="!ui.object"
-        >
+        <template v-if="!ui.object">
+            <input
+                type="file"
+                :accept="accept"
+                class="form-control-file"
+                @change="setObject"
+                required
+                :disabled="disabled"
+                v-if="!ui.object"
+            >
+            <small class="form-text text-muted">
+                <slot name="requirements"></slot>
+            </small>
+        </template>
         <div v-else>
-            <slot></slot>
+            <slot name="preview"></slot>
             <button type="button" @click="resetObject" class="btn">Reset {{ variable.type }}</button>
         </div>
         <p v-if="ui.loading && ui.file.name"> Uploading file {{ ui.file.name }}...</p>

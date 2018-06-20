@@ -4,7 +4,17 @@
         @input="input"
         @change="change"
     >
-        <div v-if="variable.value && file" class="embed-responsive embed-responsive-16by9">
+        <span slot="requirements">
+            Video dimensions: {{ variable.requirements.height}} x {{ variable.requirements.width }}
+            <br>
+            <template v-if="variable.requirements.minimum_duration === variable.requirements.maximum_duration">
+                Duration must be {{ variable.requirements.minimum_duration }} seconds
+            </template>
+            <template v-else>
+                Duration must be between {{ variable.requirements.minimum_duration }} seconds and  {{ variable.requirements.maximum_duration }} seconds
+            </template>
+        </span>
+        <div slot="preview" v-if="variable.value && file" class="embed-responsive embed-responsive-16by9">
             <video controls class="embed-responsive-item py-3">
                 <source :src="file.src" :type="file.type">
                 Your browser does not support the video tag!
