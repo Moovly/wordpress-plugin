@@ -1,7 +1,7 @@
 <template>
     <div id="moovly-job">
         <div class="alert alert-info text-center my-5" v-if="ui.loading && job && job.id">
-            <p class="mb-0">We're currently processing your template...</p>
+            <p class="mb-0">We're currently processing your video...</p>
             <p class="mb-0"></p>
         </div>
         <spinner v-if="ui.loading"></spinner>
