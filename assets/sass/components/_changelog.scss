@@ -1,0 +1,19 @@
+ul.changelog {
+  margin: 0;
+  padding: 0;
+  list-style-type: square;
+
+  li {
+    margin: 6px 2rem;
+
+    img {
+      max-width: 100%;
+      margin-top: 6px;
+      margin-bottom: 5rem;
+
+      &:after {
+        content: '---'
+      }
+    }
+  }
+}
