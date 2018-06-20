@@ -2,7 +2,12 @@
     <div class="row justify-content-center">
         <div class="col-12 col-md-8">
             <div v-if="!ui.loading && ui.project">
-                <img :src="ui.project.thumbnail" alt="">
+                <div class="embed-responsive embed-responsive-16by9" >
+                    <video controls class="embed-responsive-item py-3" :poster="ui.project.thumbnail">
+                        <source v-for="render in ui.project.renders" :key="render.id" :src="render.url">
+                        Your browser does not support the video tag!
+                    </video>
+                </div>
             </div>
         </div>
     </div>
