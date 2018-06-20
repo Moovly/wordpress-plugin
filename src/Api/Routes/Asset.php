@@ -5,7 +5,7 @@ namespace Moovly\Api\Routes;
 use Moovly\Api\Api;
 use Moovly\Api\Services\MoovlyApi;
 
-class Object extends Api
+class Asset extends Api
 {
     use MoovlyApi;
 
