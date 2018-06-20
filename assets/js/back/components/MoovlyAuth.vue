@@ -4,7 +4,6 @@
             <div class="col-12 col-lg-4">
                 <div class="card m-0 bg-white" v-if="!ui.loading">
                     <div class="card-body">
-                        <moovly-account v-if="ui.token.value" />
                         <h2 class="card-title mb-3">Authentication</h2>
                         <form @submit.prevent="saveToken">
                             <label for="token">Access Token</label>

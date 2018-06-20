@@ -28,11 +28,7 @@
             fetch() {
                 this.ui.loading = true;
                 axios.get(this.account.get).then(response => {
-                    // this.ui.user = response.data;
-                    this.ui.user = {
-                        first_name: 'Laurens',
-                        email: 'laurens@starringjane.com',
-                    };
+                    this.ui.user = response.data;
                     this.ui.loading = false;
                 });
             }
