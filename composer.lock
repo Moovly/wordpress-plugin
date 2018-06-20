@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "baaf15ff14a1b733a817a7113290b6f2",
+    "content-hash": "8b9a6c4960cab0f0daec0d4a5eb4fcf7",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -362,16 +362,16 @@
         },
         {
             "name": "moovly/moovly-php-sdk",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Moovly/moovly-php-sdk.git",
-                "reference": "fb74ce93c7090da8ffc5b9456b76f2a9318ec0c5"
+                "reference": "9a75e4806b28dc13a12ba26ff412153741e663be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Moovly/moovly-php-sdk/zipball/fb74ce93c7090da8ffc5b9456b76f2a9318ec0c5",
-                "reference": "fb74ce93c7090da8ffc5b9456b76f2a9318ec0c5",
+                "url": "https://api.github.com/repos/Moovly/moovly-php-sdk/zipball/9a75e4806b28dc13a12ba26ff412153741e663be",
+                "reference": "9a75e4806b28dc13a12ba26ff412153741e663be",
                 "shasum": ""
             },
             "require": {
@@ -401,7 +401,7 @@
                 "moovly",
                 "video"
             ],
-            "time": "2018-06-15T12:17:29+00:00"
+            "time": "2018-06-20T15:15:13+00:00"
         },
         {
             "name": "nesbot/carbon",

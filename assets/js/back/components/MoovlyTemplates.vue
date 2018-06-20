@@ -9,15 +9,19 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
+                                <th scope="col">Thumbnail</th>
                                 <th scope="col">Template name</th>
                                 <th scope="col">Shortcode</th>
+                                <th scope="col">Preview</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(template, index) in ui.templates" :key="template.identifier">
                                 <th scope="row">{{ index + 1 }}</th>
+                                <th><img src="{{ template.thumbnail }}" style="max-width: 75px"/></th>
                                 <th>{{ template.title }}</th>
-                                <th><code>{{ template.shortcode }}</code></th>
+                                <th><pre><code>{{ template.shortcode }}</code></pre></th>
+                                <th><a href="{{ template.preview }}">See preview</a></th>
                             </tr>
                         </tbody>
                     </table>

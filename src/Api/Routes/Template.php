@@ -7,6 +7,7 @@ use Moovly\Api\Services\MoovlyApi;
 use Moovly\SDK\Factory\JobFactory;
 use Moovly\SDK\Factory\ValueFactory;
 use Moovly\Shortcodes\Factories\TemplateShortCodeFactory;
+use Moovly\SDK\Model\Template as TemplateModel;
 
 class Template extends Api
 {
@@ -43,13 +44,17 @@ class Template extends Api
     public function index()
     {
         return $this->moovlyApi('getTemplates', function ($templates) {
-            foreach ($templates as $template) {
-                $template->identifier = $template->getId();
-                $template->title = $template->getName();
-                $template->shortcode = TemplateShortCodeFactory::generate($template);
-            }
+            return array_map(function (TemplateModel $template) {
+                $result = new \stdClass();
 
-            return $templates;
+                $result->identifier = $template->getId();
+                $result->title = $template->getName();
+                $result->shortcode = TemplateShortCodeFactory::generate($template);
+                $result->thumbnail = $template->getThumbnail();
+                $result->preview = $template->getPreview();
+
+                return $result;
+            }, $templates);
         });
     }
 
