@@ -9,16 +9,22 @@
                     </video>
                 </div>
             </div>
+            <spinner v-else/>
         </div>
     </div>
 </template>
 <script>
+    import Spinner from './../Spinner';
     export default {
         props: {
             id: {
                 type: String,
                 required: true,
             }
+        },
+
+        components: {
+            Spinner,
         },
 
         mounted() {
