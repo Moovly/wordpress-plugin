@@ -1,27 +1,25 @@
 <template>
-    <div id="moovly-templates">
+    <div id="moovly-projects">
         <div class="container-fluid">
             <h1 class="mt-2">Moovly</h1>
-            <h2 class="mt-3 mb-5">Templates</h2>
+            <h2 class="mt-3 mb-5">Projects</h2>
             <div class="row">
                 <div class="col-12">
                     <table class="table table-moovly" v-if="!ui.loading">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Thumbnail</th>
-                                <th scope="col">Template name</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Description</th>
                                 <th scope="col">Shortcode</th>
-                                <th scope="col">Preview</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(template, index) in ui.templates" :key="template.identifier">
+                            <tr v-for="(project, index) in ui.projects" :key="project.identifier">
                                 <th scope="row">{{ index + 1 }}</th>
-                                <th><img src="{{ template.thumbnail }}" style="max-width: 75px"/></th>
-                                <th>{{ template.title }}</th>
-                                <th><pre><code>{{ template.shortcode }}</code></pre></th>
-                                <th><a href="{{ template.preview }}">See preview</a></th>
+                                <th>{{ project.title }}</th>
+                                <th>{{ project.description }}</th>
+                                <th><code>{{ project.shortcode }}</code></th>
                             </tr>
                         </tbody>
                     </table>
@@ -39,11 +37,11 @@
         data() {
             return {
                 ui: {
-                    templates: [],
+                    projects: [],
                     loading: false,
                 },
-                templates: {
-                    index: `${window.location.origin}/wp-json/moovly/v1/templates/index`,
+                projects: {
+                    index: `${window.location.origin}/wp-json/moovly/v1/projects/index`,
                 }
             }
         },
@@ -51,8 +49,8 @@
         methods: {
             fetch() {
                 this.ui.loading = true;
-                axios.get(this.templates.index).then(response => {
-                    this.ui.templates = response.data;
+                axios.get(this.projects.index).then(response => {
+                    this.ui.projects = response.data;
                     this.ui.loading = false;
                 });
             }

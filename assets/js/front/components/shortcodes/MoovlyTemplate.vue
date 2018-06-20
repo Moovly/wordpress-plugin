@@ -1,6 +1,7 @@
 <template>
     <div class="row justify-content-center">
         <div class="col-12 col-md-8">
+            <moovly-job :job="job"></moovly-job>
             <div class="my-5 card p-5">
                 <div v-if="ui.template.preview !== null">
                     <video controls>
@@ -18,6 +19,7 @@
                         <p class="mb-0">Please try again later.</p>
                     </div>
                 </form>
+                 <spinner v-else/>
                 <div class="alert alert-danger text-center my-5" v-if="!ui.loading && ui.error">
                     <p class="mb-0"> Whoops, looks like something went wrong.</p>
                     <p class="mb-0">Refresh the application to try again.</p>
@@ -27,7 +29,9 @@
     </div>
 </template>
 <script>
-    import MoovlyVariable from './../variables/MoovlyVariable';
+    import MoovlyVariable from './../MoovlyVariable';
+    import MoovlyJob from './../MoovlyJob';
+    import Spinner from './../Spinner';
 
     export default {
         props: {
@@ -39,6 +43,8 @@
 
         components: {
             MoovlyVariable,
+            MoovlyJob,
+            Spinner,
         },
 
         data() {
@@ -55,11 +61,13 @@
                 form: {
                     error: false,
                     loading: false,
+                    processing: false,
                 },
+                job: null,
                 templates: {
                     show: `${window.location.origin}/wp-json/moovly/v1/templates/${this.id}`,
                     save:  `${window.location.origin}/wp-json/moovly/v1/templates/${this.id}/store`,
-                }
+                },
             }
         },
 
@@ -95,6 +103,10 @@
                 }).then(response => {
                     this.form.error = false;
                     this.form.loading = false;
+                    this.form.processing = true;
+                    this.job = {
+                        id: response.data.job_id,
+                    };
                 }).catch(error => {
                     this.form.error = true;
                     this.form.loading = false;

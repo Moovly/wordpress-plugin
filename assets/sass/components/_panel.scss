@@ -1,0 +1,42 @@
+.panel {
+  transition: 0.33s;
+
+  &.panel-default {
+    box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0 0 rgba(0, 0, 0, 0.02);
+    border: none;
+
+    .panel-heading {
+      background-color: #fff;
+      border: none;
+      text-transform: uppercase;
+      color: #7b7c88;
+
+      h1, h2, h3, h4 {
+        font-weight: 400;
+        font-size: 16px;
+      }
+    }
+  }
+
+  &.panel-hover:hover {
+    background-color: #e5e5e5;
+    transition: 0.33s;
+    cursor: pointer;
+  }
+
+  &.panel-context-menu {
+    .list-group {
+      .list-group-item {
+        padding: 6px 12px;
+
+        &:hover {
+          background: #e7e7e7;
+        }
+
+        &.list-group-item--darker {
+          background-color: #f3f3f3;
+        }
+      }
+    }
+  }
+}

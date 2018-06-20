@@ -36,11 +36,18 @@ trait MoovlyApi
 
             return $response;
         } catch (MoovlyException $e) {
-            if (is_callable($errorCallback)) {
-                return $errorCallback($e);
-            }
-
-            return new WP_Error($e->getCode(), $e->getMessage(), ['status' => $e->getCode()]);
+            return $this->throwWPError($errorCallback);
+        } catch (\Exception $e) {
+            return $this->throwWPError($errorCallback);
         }
+    }
+
+    private function throwWPError($errorCallback)
+    {
+        if (is_callable($errorCallback)) {
+            return $errorCallback($e);
+        }
+
+        return new WP_Error($e->getCode(), $e->getMessage(), ['status' => $e->getCode()]);
     }
 }

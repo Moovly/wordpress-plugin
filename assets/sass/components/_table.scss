@@ -1,0 +1,38 @@
+$border-radius: 6px;
+
+.table-moovly {
+  border-radius: $border-radius;
+  border: 1px solid #d0cece;
+  background: #fff;
+  margin-bottom: 2rem;
+
+  table {
+    border-radius: $border-radius;
+    tbody {
+      tr {
+        &:first-of-type {
+          background: #e5e5e5;
+        }
+      }
+    }
+    
+    .draggable-header {
+      user-select: none;
+      white-space: nowrap;
+
+      .handle {
+        width: 2px;
+        background: rgb(202, 194, 194);
+        height: 20px;
+        display: inline-block;
+        float: right;
+        cursor: ew-resize;
+
+        &:active, &:hover {
+          cursor: ew-resize;
+        }
+      }
+    }
+  }
+}
+

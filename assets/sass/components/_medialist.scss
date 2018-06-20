@@ -1,0 +1,19 @@
+.media-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: stretch;
+
+  .media-list__item {
+    width: 75px;
+    height: 75px;
+    margin: 3px;
+    opacity: 0.8;
+    background: #e5e5e5;
+
+    &:hover {
+      transition: 0.33s;
+      opacity: 1;
+    }
+  }
+}

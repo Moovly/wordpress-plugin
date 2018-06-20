@@ -1,7 +1,7 @@
 <template>
     <div id="moovly-settings" class="mt-5">
         <div class="container-fluid">
-            <h1>Moovly</h1>
+            <h1 class="mb-5">Moovly</h1>
             <div class="row">
                 <div class="col-12">
                     <moovly-auth />

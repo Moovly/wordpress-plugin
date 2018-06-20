@@ -96,7 +96,7 @@ class Template extends Api
                 'name' => $variable->getName(),
                 'requirements' => $variable->getRequirements(),
             ];
-        })->sortBy('weight');
+        })->sortBy('weight')->values();
     }
 
     private function createTemplateJobFromRequest($template, $request)

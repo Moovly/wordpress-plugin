@@ -3,6 +3,7 @@
 namespace Moovly;
 
 use Moovly\Api\Api;
+use Moovly\Projects;
 use Moovly\Settings;
 use Moovly\Shortcodes\Shortcodes;
 
@@ -18,6 +19,7 @@ class Moovly
     {
         $this->shortcodes = new Shortcodes;
         $this->templates = new Templates;
+        $this->projects = new Projects;
         $this->settings = new Settings;
         $this->api = new Api;
     }
@@ -32,11 +34,21 @@ class Moovly
         add_action('admin_enqueue_scripts', [$this, 'registerAdminAssets']);
         add_action('wp_enqueue_scripts', [$this, 'registerAssets']);
         add_action('admin_menu', [$this, 'addMenuItems']);
+
+        return $this;
+    }
+
+    public function terminate()
+    {
+        $this->api->auth->deleteToken();
     }
 
     public function registerAdminAssets($page)
     {
         if (strpos($page, 'moovly') !== false) {
+            add_filter('admin_body_class', function ($classes) {
+                return "$classes moovly-plugin";
+            });
             wp_enqueue_style('moovly', plugins_url("moovly/dist/moovly.css"), $dependencies = [], $this->version, $media = 'all');
             wp_register_script('moovly', plugins_url("moovly/dist/moovly-plugin.js"), $dependencies = [], $this->version, $in_footer = true);
             wp_localize_script('moovly', 'moovlyApiSettings', [
@@ -51,6 +63,7 @@ class Moovly
 
     public function registerAssets()
     {
+        wp_enqueue_style('moovly', plugins_url("moovly/dist/moovly.css"), $dependencies = [], $this->version, $media = 'all');
         wp_register_script('moovly', plugins_url("moovly/dist/moovly.js"), $dependencies = [], $this->version, $in_footer = true);
         wp_localize_script('moovly', 'moovlyApiSettings', [
             'root' => esc_url_raw(rest_url($this->api->domain)),
@@ -82,6 +95,17 @@ class Moovly
                 'moovly-templates',
                 function () {
                     return $this->templates->makeView();
+                }
+            );
+
+            add_submenu_page(
+                'moovly-settings',
+                __('Projects', 'moovly'),
+                __('Projects', 'moovly'),
+                'manage_options',
+                'moovly-projects',
+                function () {
+                    return $this->projects->makeView();
                 }
             );
         }

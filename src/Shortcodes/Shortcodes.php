@@ -2,6 +2,8 @@
 
 namespace Moovly\Shortcodes;
 
+use Moovly\Shortcodes\Handlers\ProjectShortcodeHandler;
+use Moovly\Shortcodes\Factories\ProjectShortCodeFactory;
 use Moovly\Shortcodes\Handlers\TemplateShortcodeHandler;
 use Moovly\Shortcodes\Factories\TemplateShortCodeFactory;
 
@@ -9,6 +11,7 @@ class Shortcodes
 {
     protected $shortcodes = [
         TemplateShortCodeFactory::class => TemplateShortcodeHandler::class,
+        ProjectShortCodeFactory::class => ProjectShortcodeHandler::class,
     ];
 
     public function register()

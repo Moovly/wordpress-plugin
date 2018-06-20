@@ -2,8 +2,11 @@
 
 namespace Moovly\Api;
 
+use Moovly\Api\Routes\Job;
 use Moovly\Api\Routes\Auth;
+use Moovly\Api\Routes\Asset;
 use Moovly\Api\Routes\Account;
+use Moovly\Api\Routes\Project;
 use Moovly\Api\Routes\Template;
 
 class Api
@@ -18,6 +21,9 @@ class Api
         'auth' => Auth::class,
         'accounts' => Account::class,
         'templates' => Template::class,
+        'jobs' => Job::class,
+        'assets' => Asset::class,
+        'projects' => Project::class,
     ];
 
     public function __construct()

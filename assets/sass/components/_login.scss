@@ -1,0 +1,68 @@
+$border-radius-amount: 6px;
+$form-height: 580px;
+$form-width: 400px;
+$border-color: #e7e7e7;
+
+.moovly-login {
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 10;
+
+  .login-container{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .login-box {
+      background: #fff;
+      border: 1px solid #dadada;
+      width: 400px;
+
+      .login-box__explainer, .login-box__switcher {
+        text-align: center;
+      }
+
+      .login-box__explainer {
+        border-bottom: 1px solid $border-color;
+      }
+
+      .login-box__form {
+        padding: 1rem;
+        iframe {
+          border: 0;
+          min-width: 100%;
+          min-height: $form-height;
+        }
+
+
+        .token-form {
+          width: 100%;
+
+          input {
+            width: 100%;
+            border-radius: 3px;
+            border: 1px solid #e7e7e7;
+            padding: 6px;
+            margin: 1rem 0;
+          }
+        }
+      }
+
+      .login-box__switcher {
+        border-top: 1px solid $border-color;
+        padding: 1rem;
+        font-weight: bold;
+        transition: 0.33s;
+
+        &:hover {
+          background: #e7e7e7;
+        }
+      }
+    }
+  }
+}

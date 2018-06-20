@@ -1,0 +1,35 @@
+.modal-moovly {
+  position: relative;
+
+  .modal__modal-header {
+    background: #e5e5e5;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .modal__modal-header__title {
+      font-size: 14px;
+      padding: 1.25rem;
+      font-weight: bold;
+    }
+
+    .modal__modal-header__close {
+      a {
+        font-size: 3rem;
+        color: #808080;
+        padding: 0 8px;
+        font-weight: bold;
+
+        &:hover {
+          text-decoration: none;
+          color: #B0B0B0;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .modal__modal-body {
+    padding: 20px;
+  }
+}

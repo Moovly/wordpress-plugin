@@ -1,16 +1,6 @@
 <template>
     <div class="form-group">
         <label :for="variable.id"> {{ variable.name }}</label>
-        <input
-            v-if="variable.type === 'text' && !variable.requirements.multiline"
-            :type="variable.type"
-            :id="variable.id"
-            v-model="variable.value"
-            @input="input"
-            class="form-control"
-            :placeholder="'Minimum: ' + variable.requirements.minimum_length + ', Maximum: ' + variable.requirements.maximum_length"
-            required
-        >
         <textarea
             v-if="variable.type === 'text' && variable.requirements.multiline"
             :id="variable.id"
@@ -20,6 +10,16 @@
             :placeholder="'Minimum: ' + variable.requirements.minimum_length + ', Maximum: ' + variable.requirements.maximum_length"
             required
         ></textarea>
+         <input
+            v-else
+            type="text"
+            :id="variable.id"
+            v-model="variable.value"
+            @input="input"
+            class="form-control"
+            :placeholder="'Minimum: ' + variable.requirements.minimum_length + ', Maximum: ' + variable.requirements.maximum_length"
+            required
+        >
     </div>
 </template>
 <script>
