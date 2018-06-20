@@ -34,6 +34,13 @@ class Moovly
         add_action('admin_enqueue_scripts', [$this, 'registerAdminAssets']);
         add_action('wp_enqueue_scripts', [$this, 'registerAssets']);
         add_action('admin_menu', [$this, 'addMenuItems']);
+
+        return $this;
+    }
+
+    public function terminate()
+    {
+        $this->api->auth->deleteToken();
     }
 
     public function registerAdminAssets($page)

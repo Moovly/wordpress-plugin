@@ -28,6 +28,11 @@ class Auth extends Api
         return (bool) $this->token();
     }
 
+    public function deleteToken()
+    {
+        return delete_option(self::$auth_key);
+    }
+
     public function registerEndpoints()
     {
         register_rest_route($this->namespace, '/callback', [
