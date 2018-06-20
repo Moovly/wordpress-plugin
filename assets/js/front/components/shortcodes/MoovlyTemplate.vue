@@ -13,6 +13,7 @@
                         <p class="mb-0">Please try again later.</p>
                     </div>
                 </form>
+                 <spinner v-else/>
                 <div class="alert alert-danger text-center my-5" v-if="!ui.loading && ui.error">
                     <p class="mb-0"> Whoops, looks like something went wrong.</p>
                     <p class="mb-0">Refresh the application to try again.</p>
@@ -24,6 +25,7 @@
 <script>
     import MoovlyVariable from './../MoovlyVariable';
     import MoovlyJob from './../MoovlyJob';
+    import Spinner from './../Spinner';
 
     export default {
         props: {
@@ -36,6 +38,7 @@
         components: {
             MoovlyVariable,
             MoovlyJob,
+            Spinner,
         },
 
         data() {
