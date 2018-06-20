@@ -61,6 +61,19 @@ class Project extends Api
             'description' => $project->getDescription(),
             'shortcode' => ProjectShortCodeFactory::generate($project),
             'thumbnail' => $project->getThumbnailPath(),
+            'renders' => $this->mapRendersToResponse($project->getRenders()),
         ];
+    }
+
+    private function mapRendersToResponse($renders)
+    {
+        return collect(array_wrap($renders))->map(function ($render) {
+            return [
+                'id' => $render->getId(),
+                'url' => $render->getUrl(),
+                'quality' => $render->getQuality(),
+                'project_id' => $render->getProjectId(),
+            ];
+        });
     }
 }
