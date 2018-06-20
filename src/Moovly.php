@@ -46,6 +46,9 @@ class Moovly
     public function registerAdminAssets($page)
     {
         if (strpos($page, 'moovly') !== false) {
+            add_filter('admin_body_class', function ($classes) {
+                return "$classes moovly-plugin";
+            });
             wp_enqueue_style('moovly', plugins_url("moovly/dist/moovly.css"), $dependencies = [], $this->version, $media = 'all');
             wp_register_script('moovly', plugins_url("moovly/dist/moovly-plugin.js"), $dependencies = [], $this->version, $in_footer = true);
             wp_localize_script('moovly', 'moovlyApiSettings', [
@@ -60,6 +63,7 @@ class Moovly
 
     public function registerAssets()
     {
+        wp_enqueue_style('moovly', plugins_url("moovly/dist/moovly.css"), $dependencies = [], $this->version, $media = 'all');
         wp_register_script('moovly', plugins_url("moovly/dist/moovly.js"), $dependencies = [], $this->version, $in_footer = true);
         wp_localize_script('moovly', 'moovlyApiSettings', [
             'root' => esc_url_raw(rest_url($this->api->domain)),
