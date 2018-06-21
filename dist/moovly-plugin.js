@@ -13590,6 +13590,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -13786,199 +13790,206 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "moovly-auth" } }, [
+  return _c("div", { staticClass: "mb-3", attrs: { id: "moovly-auth" } }, [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-12 col-md-6 col-lg-4" }, [
+      _c("div", { staticClass: "col-12" }, [
         !_vm.ui.loading
-          ? _c("div", { staticClass: "card m-0 bg-white" }, [
+          ? _c("div", { staticClass: "jumbotron m-0 bg-white" }, [
               _c("div", { staticClass: "card-body" }, [
-                _c("h2", { staticClass: "card-title mb-3" }, [
+                _c("h2", { staticClass: "card-title mb-5" }, [
                   _vm._v("Authentication")
                 ]),
                 _vm._v(" "),
-                _c(
-                  "form",
-                  {
-                    on: {
-                      submit: function($event) {
-                        $event.preventDefault()
-                        return _vm.saveToken($event)
-                      }
-                    }
-                  },
-                  [
-                    _c("label", { attrs: { for: "token" } }, [
-                      _vm._v("Access Token")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "input-group mb-5" }, [
-                      _vm.tokenInputType === "checkbox"
-                        ? _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.ui.token.value,
-                                expression: "ui.token.value"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { type: "checkbox" },
-                            domProps: {
-                              checked: Array.isArray(_vm.ui.token.value)
-                                ? _vm._i(_vm.ui.token.value, null) > -1
-                                : _vm.ui.token.value
-                            },
-                            on: {
-                              change: function($event) {
-                                var $$a = _vm.ui.token.value,
-                                  $$el = $event.target,
-                                  $$c = $$el.checked ? true : false
-                                if (Array.isArray($$a)) {
-                                  var $$v = null,
-                                    $$i = _vm._i($$a, $$v)
-                                  if ($$el.checked) {
-                                    $$i < 0 &&
-                                      _vm.$set(
-                                        _vm.ui.token,
-                                        "value",
-                                        $$a.concat([$$v])
-                                      )
-                                  } else {
-                                    $$i > -1 &&
-                                      _vm.$set(
-                                        _vm.ui.token,
-                                        "value",
-                                        $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1))
-                                      )
-                                  }
-                                } else {
-                                  _vm.$set(_vm.ui.token, "value", $$c)
-                                }
-                              }
-                            }
-                          })
-                        : _vm.tokenInputType === "radio"
-                          ? _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.ui.token.value,
-                                  expression: "ui.token.value"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: { type: "radio" },
-                              domProps: {
-                                checked: _vm._q(_vm.ui.token.value, null)
-                              },
-                              on: {
-                                change: function($event) {
-                                  _vm.$set(_vm.ui.token, "value", null)
-                                }
-                              }
-                            })
-                          : _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.ui.token.value,
-                                  expression: "ui.token.value"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: { type: _vm.tokenInputType },
-                              domProps: { value: _vm.ui.token.value },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.ui.token,
-                                    "value",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "input-group-append" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "input-group-text",
-                            attrs: { href: "#", title: "Show access token" },
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                return _vm.toggleToken($event)
-                              }
-                            }
-                          },
-                          [
-                            _vm.ui.token.show
-                              ? _c(
-                                  "svg",
-                                  {
-                                    staticClass: "input-icon",
-                                    attrs: {
-                                      xmlns: "http://www.w3.org/2000/svg",
-                                      viewBox: "0 0 20 20"
-                                    }
-                                  },
-                                  [
-                                    _c("path", {
-                                      attrs: {
-                                        d:
-                                          "M12.81 4.36l-1.77 1.78a4 4 0 0 0-4.9 4.9l-2.76 2.75C2.06 12.79.96 11.49.2 10a11 11 0 0 1 12.6-5.64zm3.8 1.85c1.33 1 2.43 2.3 3.2 3.79a11 11 0 0 1-12.62 5.64l1.77-1.78a4 4 0 0 0 4.9-4.9l2.76-2.75zm-.25-3.99l1.42 1.42L3.64 17.78l-1.42-1.42L16.36 2.22z"
-                                      }
-                                    })
-                                  ]
-                                )
-                              : _c(
-                                  "svg",
-                                  {
-                                    staticClass: "input-icon",
-                                    attrs: {
-                                      xmlns: "http://www.w3.org/2000/svg",
-                                      viewBox: "0 0 20 20"
-                                    }
-                                  },
-                                  [
-                                    _c("path", {
-                                      attrs: {
-                                        d:
-                                          "M.2 10a11 11 0 0 1 19.6 0A11 11 0 0 1 .2 10zm9.8 4a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0-2a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"
-                                      }
-                                    })
-                                  ]
-                                )
-                          ]
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-12 col-md-6 col-lg-8" }, [
                     _c(
-                      "button",
+                      "form",
                       {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "submit" }
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.saveToken($event)
+                          }
+                        }
                       },
-                      [_vm._v("Save Token")]
+                      [
+                        _c("label", { attrs: { for: "token" } }, [
+                          _vm._v("Access Token")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-group mb-5" }, [
+                          _vm.tokenInputType === "checkbox"
+                            ? _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.ui.token.value,
+                                    expression: "ui.token.value"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "checkbox" },
+                                domProps: {
+                                  checked: Array.isArray(_vm.ui.token.value)
+                                    ? _vm._i(_vm.ui.token.value, null) > -1
+                                    : _vm.ui.token.value
+                                },
+                                on: {
+                                  change: function($event) {
+                                    var $$a = _vm.ui.token.value,
+                                      $$el = $event.target,
+                                      $$c = $$el.checked ? true : false
+                                    if (Array.isArray($$a)) {
+                                      var $$v = null,
+                                        $$i = _vm._i($$a, $$v)
+                                      if ($$el.checked) {
+                                        $$i < 0 &&
+                                          _vm.$set(
+                                            _vm.ui.token,
+                                            "value",
+                                            $$a.concat([$$v])
+                                          )
+                                      } else {
+                                        $$i > -1 &&
+                                          _vm.$set(
+                                            _vm.ui.token,
+                                            "value",
+                                            $$a
+                                              .slice(0, $$i)
+                                              .concat($$a.slice($$i + 1))
+                                          )
+                                      }
+                                    } else {
+                                      _vm.$set(_vm.ui.token, "value", $$c)
+                                    }
+                                  }
+                                }
+                              })
+                            : _vm.tokenInputType === "radio"
+                              ? _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.ui.token.value,
+                                      expression: "ui.token.value"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { type: "radio" },
+                                  domProps: {
+                                    checked: _vm._q(_vm.ui.token.value, null)
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      _vm.$set(_vm.ui.token, "value", null)
+                                    }
+                                  }
+                                })
+                              : _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.ui.token.value,
+                                      expression: "ui.token.value"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { type: _vm.tokenInputType },
+                                  domProps: { value: _vm.ui.token.value },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.ui.token,
+                                        "value",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "input-group-append" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "input-group-text",
+                                attrs: {
+                                  href: "#",
+                                  title: "Show access token"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.toggleToken($event)
+                                  }
+                                }
+                              },
+                              [
+                                _vm.ui.token.show
+                                  ? _c(
+                                      "svg",
+                                      {
+                                        staticClass: "input-icon",
+                                        attrs: {
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          viewBox: "0 0 20 20"
+                                        }
+                                      },
+                                      [
+                                        _c("path", {
+                                          attrs: {
+                                            d:
+                                              "M12.81 4.36l-1.77 1.78a4 4 0 0 0-4.9 4.9l-2.76 2.75C2.06 12.79.96 11.49.2 10a11 11 0 0 1 12.6-5.64zm3.8 1.85c1.33 1 2.43 2.3 3.2 3.79a11 11 0 0 1-12.62 5.64l1.77-1.78a4 4 0 0 0 4.9-4.9l2.76-2.75zm-.25-3.99l1.42 1.42L3.64 17.78l-1.42-1.42L16.36 2.22z"
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  : _c(
+                                      "svg",
+                                      {
+                                        staticClass: "input-icon",
+                                        attrs: {
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          viewBox: "0 0 20 20"
+                                        }
+                                      },
+                                      [
+                                        _c("path", {
+                                          attrs: {
+                                            d:
+                                              "M.2 10a11 11 0 0 1 19.6 0A11 11 0 0 1 .2 10zm9.8 4a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0-2a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"
+                                          }
+                                        })
+                                      ]
+                                    )
+                              ]
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("Save Token")]
+                        )
+                      ]
                     )
-                  ]
-                )
+                  ])
+                ])
               ])
             ])
           : _vm._e()
-      ]),
-      _vm._v(" "),
-      _vm._m(0)
+      ])
     ])
   ])
 }
@@ -13987,43 +13998,56 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 col-md-6 col-lg-8" }, [
-      _c("div", { staticClass: "jumbotron jumbotron-light" }, [
-        _c("p", [
-          _vm._v(
-            "\n                  Access tokens are our mechanism of veryfing who you are, in order to get your templates and projects.\n                  To get an access token, you'll need to visit our API Hub (developer.moovly.com) and head over to the "
-          ),
-          _c(
-            "a",
-            {
-              attrs: {
-                href:
-                  "https://developer.moovly.com/docs/personal-access-tokens",
-                target: "_blank"
-              }
-            },
-            [_vm._v("Personal Access Token")]
-          ),
-          _vm._v(
-            "\n                  section of the documentation.\n                "
-          )
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "Personal access tokens are long lived, but do expire. When this happens, you will have to create a new one. You can see how long your tokens are valid in the "
-          ),
-          _c(
-            "a",
-            {
-              attrs: {
-                href: "https://developer.moovly.com/docs/personal-access-tokens"
-              }
-            },
-            [_vm._v("Personal Access Token")]
-          ),
-          _vm._v(" section")
-        ])
+    return _c("div", { staticClass: "col-12 col-md-6 col-lg-4" }, [
+      _c("h2", { staticClass: "h6" }, [_vm._v("Access tokens")]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "\n                            Access tokens are our mechanism of veryfing who you are, in order to get your templates and projects.\n                            To get an access token, you'll need to visit our API Hub (developer.moovly.com) and head over to the "
+        ),
+        _c(
+          "a",
+          {
+            attrs: {
+              href: "https://developer.moovly.com/docs/personal-access-tokens",
+              target: "_blank"
+            }
+          },
+          [_vm._v("Personal Access Token")]
+        ),
+        _vm._v(
+          "\n                            section of the documentation.\n                            "
+        )
+      ]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "You need to have a Moovly account in order to create access tokens. If you do not have an account yet, head over to our "
+        ),
+        _c(
+          "a",
+          {
+            attrs: { href: "https://www.moovly.com/sign-up", target: "_blank" }
+          },
+          [_vm._v("registration page")]
+        ),
+        _vm._v(" and sign up.")
+      ]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "Personal access tokens are long lived, but do expire. When this happens, you will have to create a new one. You can see how long your tokens are valid in the "
+        ),
+        _c(
+          "a",
+          {
+            attrs: {
+              href: "https://developer.moovly.com/docs/personal-access-tokens"
+            }
+          },
+          [_vm._v("Personal Access Token")]
+        ),
+        _vm._v(" section")
       ])
     ])
   }
