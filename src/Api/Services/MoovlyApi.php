@@ -36,13 +36,13 @@ trait MoovlyApi
 
             return $response;
         } catch (MoovlyException $e) {
-            return $this->throwWPError($errorCallback);
+            return $this->throwWPError($errorCallback, $e);
         } catch (\Exception $e) {
-            return $this->throwWPError($errorCallback);
+            return $this->throwWPError($errorCallback, $e);
         }
     }
 
-    private function throwWPError($errorCallback)
+    private function throwWPError($errorCallback, $e)
     {
         if (is_callable($errorCallback)) {
             return $errorCallback($e);
