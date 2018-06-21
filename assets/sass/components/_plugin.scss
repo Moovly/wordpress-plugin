@@ -1,0 +1,35 @@
+.plugin-header {
+  background: #fff;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: 1px solid #e2e2e2;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  h2, h3, h4 {
+    font-weight: lighter;
+    margin: 0;
+    padding: 0;
+  }
+
+  .plugin-header__branding {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    img {
+      width: 50px;
+      border-radius: 11px;
+      margin-right: 12px;
+    }
+  }
+
+  .plugin-header__page-name {
+    margin-left: 6px;
+  }
+}

@@ -1,8 +1,14 @@
 <template>
     <div id="moovly-projects">
         <div class="container-fluid">
-            <h1 class="mt-2">Moovly</h1>
-            <h2 class="mt-3 mb-5">Projects</h2>
+            <div class="plugin-header">
+                <div class="plugin-header__branding">
+                    <img src="/wp-content/plugins/moovly/src/../dist/images/moovly.png" /><h2>Moovly</h2>
+                </div>
+                <div class="plugin-header__page-name">
+                    <h3> > Projects</h3>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-12">
                     <table class="table table-moovly" v-if="!ui.loading">
@@ -19,7 +25,7 @@
                                 <th scope="row">{{ index + 1 }}</th>
                                 <th>{{ project.title }}</th>
                                 <th>{{ project.description }}</th>
-                                <th><code>{{ project.shortcode }}</code></th>
+                                <th><pre><code>{{ project.shortcode }}</code></pre></th>
                             </tr>
                         </tbody>
                     </table>

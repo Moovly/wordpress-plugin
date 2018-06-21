@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="390px" height="346px" viewBox="0 0 390 346" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-2">
+            <rect id="Rectangle" fill="#222A63" x="0" y="0" width="390" height="346" rx="32"></rect>
+            <g id="Group" transform="translate(29.000000, 94.000000)">
+                <ellipse id="Oval-2" fill="#FFFFFF" cx="78.6084656" cy="78.5" rx="78.6084656" ry="78.5"></ellipse>
+                <ellipse id="Oval-2" fill="#FFFFFF" cx="253.391534" cy="78.5" rx="78.6084656" ry="78.5"></ellipse>
+                <ellipse id="Oval" fill="#E02566" cx="78.6084656" cy="78.5" rx="36.4497354" ry="36.3994413"></ellipse>
+                <ellipse id="Oval" fill="#E02566" cx="253.391534" cy="78.5" rx="36.4497354" ry="36.3994413"></ellipse>
+                <rect id="Rectangle-2" fill="#E02566" x="96.6137566" y="70.1675978" width="135.259259" height="16.6648045"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -78,12 +78,13 @@ class Moovly
     {
         add_menu_page(
             __('Moovly', 'moovly'),
-            __('Moovly', 'moovly'),
+            __('Moovly', 'settings'),
             'manage_options',
             'moovly-settings',
             function () {
                 return $this->settings->makeView();
-            }
+            },
+            plugin_dir_url( __FILE__ ) . '../dist/images/moovly_small.png'
         );
 
         if ($this->api->auth->hasToken()) {

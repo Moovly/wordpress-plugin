@@ -1,4 +1,8 @@
 .jumbotron {
-  box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0 0 rgba(0, 0, 0, 0.02);
   background-color: #fff;
+  border: 1px solid #e6e6e6;
+
+  &.jumbotron-light {
+    padding: 1rem;
+  }
 }
