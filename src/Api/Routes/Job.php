@@ -13,17 +13,25 @@ class Job extends Api
 
     public static $save_projects_key;
 
+    public static $quality_key;
+
     public function __construct()
     {
         parent::__construct();
         $this->registerMoovlyService();
         self::$save_projects_key = "{$this->domain}_jobs_create_moov";
+        self::$quality_key = "{$this->domain}_jobs_quality";
         add_action('rest_api_init', [$this, 'registerEndpoints']);
     }
 
     public static function savesProjects()
     {
         return (bool) get_option(self::$save_projects_key);
+    }
+
+    public static function getQuality()
+    {
+        return get_option(self::$quality_key);
     }
 
     public function registerEndpoints()
@@ -55,9 +63,13 @@ class Job extends Api
     {
         if ($request->get_method() === 'POST') {
             update_option(self::$save_projects_key, $request->get_param('create_moov'));
+            update_option(self::$quality_key, $request->get_param('quality'));
         }
 
-        return get_option(self::$save_projects_key);
+        return [
+            'create_moov' => get_option(self::$save_projects_key),
+            'quality' => self::getQuality(),
+        ];
     }
 
     public function settings_permissions()
