@@ -25,7 +25,7 @@ pipeline {
         sh 'docker run --rm -v ${WORKSPACE}:/app composer install --no-dev --optimize-autoloader --no-scripts'
         sh 'docker run --rm --workdir=/app -v ${WORKSPACE}:/app node:8-stretch npm install'
         sh 'docker run --rm --workdir=/app -v ${WORKSPACE}:/app node:8-stretch npm run production'
-        sh 'docker run --rm --workdir=/app -v ${WORKSPACE}:/app samepagelabs/zip zip moovly-wordpress-plugin dist/* src/* vendor/* moovly.php package.json package-lock.json'
+        sh 'docker run --rm --workdir=/app -v ${WORKSPACE}:/app samepagelabs/zip zip -r moovly-wordpress-plugin dist/* src/* vendor/* moovly.php package.json package-lock.json'
         sh 'ls -al'
       }
 
