@@ -1,8 +1,11 @@
 <template>
     <div id="moovly-settings" class="settings">
         <div class="container-fluid">
-            <div class="settings__header">
-                <img src="/wp-content/plugins/moovly/src/../dist/images/moovly.png" /><h2>Moovly</h2>
+            <div class="plugin-header">
+                <div class="plugin-header__branding">
+                    <img src="/wp-content/plugins/moovly/src/../dist/images/moovly.png" /><h2>Moovly</h2>
+                </div>
+                <div class="plugin-header__page-name"><h3> > Settings</h3></div>
             </div>
             <div class="settings__body">
                 <div class="jumbotron jumbotron-light">
