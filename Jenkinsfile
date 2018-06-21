@@ -38,6 +38,7 @@ pipeline {
 
     stage('Package') {
       steps {
+         sh 'aws s3 sync moovly-wordpress-plugin.zip s3://${S3_BUCKET}/wordpress-plugin/${S3_BUCKET_DIR_WITH_BUILD_NUMBER}/'
          sh 'docker build -t ${BUILD_TAG_PARSED} .'
       }
     }
@@ -49,15 +50,6 @@ pipeline {
 
         script {
             currentBuild.description = "${CONTAINER_URL_NUMBER} | ${CONTAINER_URL_BRANCH}"
-        }
-      }
-    }
-
-    stage('SonarQube') {
-      steps {
-        withSonarQubeEnv('SonarQube') {
-          sh "echo ${SCANNER_HOME}"
-          sh "${SCANNER_HOME}/bin/sonar-scanner -Dsonar.projectKey=${CONTAINER_NAME} -Dsonar.sources=./src -Dsonar.projectVersion=${SENTRY_VERSION}"
         }
       }
     }
