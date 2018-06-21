@@ -84,7 +84,7 @@ class Moovly
             function () {
                 return $this->settings->makeView();
             },
-            plugin_dir_url( __FILE__ ) . 'dist/images/moovly.png'
+            plugin_dir_url( __FILE__ ) . '../dist/images/moovly.png'
         );
 
         if ($this->api->auth->hasToken()) {
