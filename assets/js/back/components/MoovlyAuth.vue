@@ -1,7 +1,7 @@
 <template>
     <div id="moovly-auth">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-4">
+            <div class="col-12 col-md-6 col-lg-6">
                 <div class="card m-0 bg-white" v-if="!ui.loading">
                     <div class="card-body">
                         <h2 class="card-title mb-3">Authentication</h2>
@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6 col-lg-8">
+            <div class="col-12 col-md-6 col-lg-6">
                 <div class="jumbotron jumbotron-light">
                     <p>
                       Access tokens are our mechanism of veryfing who you are, in order to get your templates and projects.

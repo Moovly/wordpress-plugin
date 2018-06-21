@@ -51,10 +51,12 @@
                     </div>
                 </div>
 
+                <br />
+
                 <div class="row">
                     <div class="col-12">
                         <div class="row">
-                            <div class="col-12 col-md-6 col-lg-4">
+                            <div class="col-12 col-md-6 col-lg-6">
                                 <div class="card bg-white m-0">
                                     <div class="card-body">
                                         <h2 class="card-title">Templates</h2>
