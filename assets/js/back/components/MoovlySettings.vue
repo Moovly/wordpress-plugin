@@ -53,7 +53,7 @@
                 <div class="col-12">
                     <div class="card bg-white m-0">
                         <div class="card-body">
-                            <h2 class="card-title">Settings</h2>
+                            <h2 class="card-title">Templates</h2>
                             <form @submit.prevent="submit">
                                 <div class="form-group form-check">
                                     <input
