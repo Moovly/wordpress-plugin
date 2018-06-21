@@ -25,7 +25,7 @@
                                 <th scope="row">{{ index + 1 }}</th>
                                 <th>{{ project.title }}</th>
                                 <th>{{ project.description }}</th>
-                                <th><code>{{ project.shortcode }}</code></th>
+                                <th><pre><code>{{ project.shortcode }}</code></pre></th>
                             </tr>
                         </tbody>
                     </table>
