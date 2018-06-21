@@ -3,11 +3,12 @@
 namespace Moovly\Api\Routes;
 
 use Moovly\Api\Api;
+use Moovly\Api\Routes\Job;
 use Moovly\Api\Services\MoovlyApi;
 use Moovly\SDK\Factory\JobFactory;
 use Moovly\SDK\Factory\ValueFactory;
-use Moovly\Shortcodes\Factories\TemplateShortCodeFactory;
 use Moovly\SDK\Model\Template as TemplateModel;
+use Moovly\Shortcodes\Factories\TemplateShortCodeFactory;
 
 class Template extends Api
 {
@@ -104,14 +105,18 @@ class Template extends Api
     private function createTemplateJobFromRequest($template, $request)
     {
         $job = JobFactory::create([
-                ValueFactory::create('external_wp_moovly_plugin_id_1', 'Moovly plugin job', collect($request->get_param('variables'))->mapWithKeys(function ($variable) {
+                ValueFactory::create("moovly_wp_plugin_" . time(), "Moovly Wordpress Plugin: {$template->getName()}, " . date('d/m/Y'), collect($request->get_param('variables'))->mapWithKeys(function ($variable) {
                     return $variable;
                 })->toArray()),
-        ])->setTemplate($template);
+        ])->setTemplate($template)
+        ->setOptions([
+            'create_moov' => Job::savesProjects(),
+        ]);
 
         return $this->moovlyApi('createJob', $job, function ($job) {
             return [
                 'job_id' => $job->getId(),
+                'options' => $job->getOptions(),
             ];
         });
     }
