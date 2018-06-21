@@ -78,7 +78,7 @@ class Moovly
     {
         add_menu_page(
             __('Moovly', 'moovly'),
-            __('Moovly', 'moovly'),
+            __('Moovly', 'settings'),
             'manage_options',
             'moovly-settings',
             function () {
