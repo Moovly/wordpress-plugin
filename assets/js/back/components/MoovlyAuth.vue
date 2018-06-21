@@ -1,7 +1,7 @@
 <template>
     <div id="moovly-auth">
         <div class="row">
-            <div class="col-12 col-lg-4">
+            <div class="col-12 col-md-6 col-lg-4">
                 <div class="card m-0 bg-white" v-if="!ui.loading">
                     <div class="card-body">
                         <h2 class="card-title mb-3">Authentication</h2>
@@ -21,16 +21,16 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-8">
+            <div class="col-12 col-md-6 col-lg-8">
                 <div class="jumbotron">
-                    <h2 class="display-4">Retrieving an access token</h2>
+                    <h2 class="display-4">Access tokens</h2>
                     <p>
                       Access tokens are our mechanism of veryfing who you are, in order to get your templates and projects. 
                       To get an access token, you'll need to visit our API Hub (developer.moovly.com) and head over to the <a href="https://developer.moovly.com/docs/personal-access-tokens">Personal Access Token</a>
                       section of the documentation.
                     </p>
-                    
-                    <p>You need to have a Moovly account in order to create access tokens. If you do not have an account yet, head over to our <a href="https://www.moovly.com/sign-up">registration page</a> and sign up.</p>
+
+                    <p>Personal access tokens are long lived, but do expire. When this happens, you will have to create a new one. You can see how long your tokens are valid in the <a href="https://developer.moovly.com/docs/personal-access-tokens">Personal Access Token</a> section</p>
                 </div>
             </div>
         </div>
