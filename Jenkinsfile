@@ -38,7 +38,6 @@ pipeline {
 
     stage('Package') {
       steps {
-         sh 'aws s3 sync moovly-wordpress-plugin.zip s3://${S3_BUCKET}/wordpress-plugin/${S3_BUCKET_DIR_WITH_BUILD_NUMBER}/'
          sh 'docker build -t ${BUILD_TAG_PARSED} .'
       }
     }
