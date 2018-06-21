@@ -5,13 +5,16 @@ services:
     restart: always
     ports:
       - 8080:80
-    environment:
-      WORDPRESS_DB_PASSWORD: example
+    links:
+      - mysql
     volumes:
-      - ./wordpress:/var/www/html
+      - ./:/var/www/html/wp-content/plugins/moovly
 
   mysql:
     image: mysql:5.7
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: moovly
+      MYSQL_USER: moovly
+      MYSQL_PASSWORD: moovly
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
