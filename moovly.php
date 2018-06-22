@@ -4,7 +4,7 @@
  * Description: An integration plugin for the Moovly API.
  * Author: Moovly
  * Author URI:
- * Version: 0.0.1
+ * Version: 1.0.0
  * Plugin URI:
  */
 

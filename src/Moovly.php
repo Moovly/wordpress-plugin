@@ -78,18 +78,29 @@ class Moovly
     {
         add_menu_page(
             __('Moovly', 'moovly'),
-            __('Moovly', 'settings'),
+            __('Moovly', 'moovly'),
+            'manage_options',
+            'moovly',
+            function () {
+                return $this->settings->makeView();
+            },
+            plugin_dir_url(__FILE__) . '../dist/images/moovly_small.png'
+        );
+
+        add_submenu_page(
+            'moovly',
+            __('Settings', 'moovly'),
+            __('Settings', 'moovly'),
             'manage_options',
             'moovly-settings',
             function () {
                 return $this->settings->makeView();
-            },
-            plugin_dir_url( __FILE__ ) . '../dist/images/moovly_small.png'
+            }
         );
 
         if ($this->api->auth->hasToken()) {
             add_submenu_page(
-                'moovly-settings',
+                'moovly',
                 __('Templates', 'moovly'),
                 __('Templates', 'moovly'),
                 'manage_options',
@@ -100,7 +111,7 @@ class Moovly
             );
 
             add_submenu_page(
-                'moovly-settings',
+                'moovly',
                 __('Projects', 'moovly'),
                 __('Projects', 'moovly'),
                 'manage_options',
