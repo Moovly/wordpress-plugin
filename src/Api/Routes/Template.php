@@ -4,6 +4,7 @@ namespace Moovly\Api\Routes;
 
 use Moovly\Api\Api;
 use Moovly\Api\Routes\Job;
+use Illuminate\Support\Str;
 use Moovly\Api\Services\MoovlyApi;
 use Moovly\SDK\Factory\JobFactory;
 use Moovly\SDK\Factory\ValueFactory;
@@ -104,8 +105,9 @@ class Template extends Api
 
     private function createTemplateJobFromRequest($template, $request)
     {
+        $name = $request->get_param('name') ??  "Moovly Wordpress Plugin: {$template->getName()}, " . date('d/m/Y');
         $job = JobFactory::create([
-                ValueFactory::create("moovly_wp_plugin_" . time(), "Moovly Wordpress Plugin: {$template->getName()}, " . date('d/m/Y'), collect($request->get_param('variables'))->mapWithKeys(function ($variable) {
+                ValueFactory::create(Str::uuid(), $name, collect($request->get_param('variables'))->mapWithKeys(function ($variable) {
                     return $variable;
                 })->toArray()),
         ])->setTemplate($template)
