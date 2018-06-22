@@ -1,17 +1,21 @@
 <template>
     <div class="row justify-content-center">
         <div class="col-12 col-md-8">
-            <moovly-job :job="job"></moovly-job>
             <div class="my-5 card p-5">
-                <div v-if="ui.template.preview">
-                    <video controls>
-                        <source :src="ui.template.preview" />
+                <div v-if="!ui.loading && !job.id && ui.template.preview" class="embed-responsive embed-responsive-16by9">
+                    <video controls class="embed-responsive-item py-3">
+                        <source :src="ui.template.preview.url" />
                     </video>
                 </div>
 
                 <h5 class="card-title">Moovly Template</h5>
-                <form action="" v-if="!ui.loading && !ui.error" @submit.prevent="submit">
+                <moovly-job :job="job"></moovly-job>
+                <form action="" v-if="!ui.loading && !job.id && !ui.error" @submit.prevent="submit">
                     <h6 class="mb-5">{{ ui.template.name }}</h6>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" v-model="job.name" class="form-control" placeholder="Give it a name">
+                    </div>
                     <moovly-variable v-model="ui.template.variables[index]" v-for="(variable, index) in ui.template.variables" :key="variable.id"/>
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <div class="alert alert-danger my-5" v-if="form.error">
@@ -19,11 +23,14 @@
                         <p class="mb-0">Please try again later.</p>
                     </div>
                 </form>
-                 <spinner v-else/>
+                 <div class="alert alert-info my-5 text-center" v-if="ui.loading && form.processing">
+                     <p class="mb-0">Submitting your data...</p>
+                 </div>
                 <div class="alert alert-danger text-center my-5" v-if="!ui.loading && ui.error">
                     <p class="mb-0"> Whoops, looks like something went wrong.</p>
                     <p class="mb-0">Refresh the application to try again.</p>
                 </div>
+                 <spinner v-if="ui.loading && !job.id"/>
             </div>
         </div>
     </div>
@@ -53,17 +60,18 @@
                     template: {
                         name: '',
                         variables: [],
-                        preview: null
+                        preview: {}
                     },
                     loading: false,
                     error: false,
                 },
                 form: {
-                    error: false,
-                    loading: false,
                     processing: false,
                 },
-                job: null,
+                job: {
+                    name: '',
+                    id: null,
+                },
                 templates: {
                     show: `${window.location.origin}/wp-json/moovly/v1/templates/${this.id}`,
                     save:  `${window.location.origin}/wp-json/moovly/v1/templates/${this.id}/store`,
@@ -80,6 +88,7 @@
                 this.ui.loading = true;
                 axios.get(this.templates.show).then(response => {
                     this.ui.template.name = response.data.name;
+                    this.ui.template.preview = response.data.preview;
                     this.ui.template.variables = response.data.variables.map(variable => {
                         variable.value = '';
                         return variable;
@@ -92,7 +101,8 @@
             },
 
             submit() {
-                this.form.loading = true;
+                this.ui.loading = true;
+                this.form.processing = true;
                 let variableValues = this.ui.template.variables.map(variable => {
                     return {
                        [variable.id]: variable.value,
@@ -101,15 +111,16 @@
                 axios.post(this.templates.save, {
                     variables: variableValues,
                 }).then(response => {
-                    this.form.error = false;
-                    this.form.loading = false;
-                    this.form.processing = true;
+                    this.ui.error = false;
+                    this.ui.loading = false;
+                    this.form.processing = false;
                     this.job = {
                         id: response.data.job_id,
                     };
                 }).catch(error => {
-                    this.form.error = true;
-                    this.form.loading = false;
+                    this.ui.error = true;
+                    this.ui.loading = false;
+                    this.form.processing = false;
                 })
             }
         }

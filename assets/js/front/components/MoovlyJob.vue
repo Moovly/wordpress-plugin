@@ -52,7 +52,7 @@
 
         methods: {
             poll() {
-                if(!this.job) return;
+                if(!this.job.id) return;
 
                 console.log('Polling...');
                 this.ui.loading = true;
