@@ -82,7 +82,7 @@ class Moovly
             'manage_options',
             'moovly',
             function () {
-                return $this->settings->makeView();
+                return $this->makeView();
             },
             plugin_dir_url(__FILE__) . '../dist/images/moovly_small.png'
         );
@@ -121,5 +121,10 @@ class Moovly
                 }
             );
         }
+    }
+
+    public function makeView()
+    {
+        echo "<moovly></moovly>";
     }
 }
