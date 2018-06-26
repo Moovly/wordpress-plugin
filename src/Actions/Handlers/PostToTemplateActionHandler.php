@@ -79,7 +79,7 @@ class PostToTemplateActionHandler
     protected function preparePost()
     {
         return collect([
-            'post_title' => $this->getNormalizedPostTitle(),
+            'post_name' => $this->getNormalizedPostTitle(),
             'post_content' => $this->getNormalizedPostContent(),
         ]);
     }
