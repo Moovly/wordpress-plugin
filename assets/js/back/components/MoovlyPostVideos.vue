@@ -22,7 +22,9 @@
                                 <th>{{ video.job.status }}</th>
                                 <th>
                                     <span v-if="!video.job.id">Not available</span>
-                                    <span v-for="(value, index) in video.job.values" :key="index"> {{ value.shortcode }}</span>
+                                    <span v-for="(value, index) in video.job.values" :key="index">
+                                        <moovly-shortcode :shortcode="value.shortcode" />
+                                    </span>
                                 </th>
                             </tr>
                         </tbody>
@@ -34,10 +36,12 @@
 </template>
 <script>
     import MoovlyHeader from './shared/MoovlyHeader';
+    import MoovlyShortcode from './shared/MoovlyShortcode';
 
     export default {
         components: {
             MoovlyHeader,
+            MoovlyShortcode
         },
         data() {
             return {

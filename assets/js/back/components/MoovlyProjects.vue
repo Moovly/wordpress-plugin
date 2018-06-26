@@ -18,7 +18,7 @@
                                 <th scope="row">{{ index + 1 }}</th>
                                 <th>{{ project.title }}</th>
                                 <th>{{ project.description }}</th>
-                                <th><pre><code>{{ project.shortcode }}</code></pre></th>
+                                <th><moovly-shortcode :shortcode="project.shortcode" /></th>
                             </tr>
                         </tbody>
                     </table>
@@ -29,10 +29,12 @@
 </template>
 <script>
     import MoovlyHeader from './shared/MoovlyHeader';
+     import MoovlyShortcode from './shared/MoovlyShortcode';
 
     export default {
          components: {
             MoovlyHeader,
+            MoovlyShortcode,
         },
 
         mounted() {
