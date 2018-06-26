@@ -2,18 +2,22 @@
 namespace Moovly\Api\Routes;
 
 use WP_Query;
+use WP_Error;
 use Moovly\Api\Api;
 use Moovly\Templates;
 use Moovly\SDK\Model\Job;
+use Moovly\Api\Services\MoovlyApi;
 use Moovly\Shortcodes\Factories\PostVideoShortCodeFactory;
 
 class PostVideo extends Api
 {
+    use MoovlyApi;
     public $group= "post-videos";
 
     public function __construct()
     {
         parent::__construct();
+        $this->registerMoovlyService();
         add_action('rest_api_init', [$this, 'registerEndpoints']);
     }
 
@@ -23,6 +27,11 @@ class PostVideo extends Api
             'methods' => 'GET',
             'callback' => [$this, 'index'],
             'permission_callback' => [$this, 'index_permissions'],
+        ]);
+
+        register_rest_route($this->namespace, '/(?P<id>[^/]+)', [
+            'methods' => 'GET',
+            'callback' => [$this, 'show'],
         ]);
     }
 
@@ -42,6 +51,30 @@ class PostVideo extends Api
         return current_user_can('manage_options');
     }
 
+    public function show($request)
+    {
+        $post = get_post($request->get_param('id'));
+
+        if (!$post) {
+            return new WP_Error(404, 'Post not found');
+        }
+        $job = get_post_meta($post->ID, Templates::$post_templates_job_key)[0];
+
+        return $this->moovlyApi('getJob', $job['job_id'], function ($job) use ($post) {
+            return [
+                'id' => $job->getId(),
+                'status' => $job->getStatus(),
+                'values' => $this->mapJobValuesToResponse($job->getValues(), $post),
+            ];
+        }, function ($error) use ($job) {
+            return [
+                'id' =>  $job['job_id'],
+                'status' => $job['job_status'],
+                'values' => [],
+            ];
+        });
+    }
+
     protected function getPostsWithVideo($request)
     {
         return collect((new WP_Query([
@@ -52,11 +85,16 @@ class PostVideo extends Api
             $job = get_post_meta($post->ID, Templates::$post_templates_job_key);
             $job = $job[0];
             if ($job['job_id']) {
-                $post->job = $this->moovlyApi('getJob', function ($job) {
+                $post->job = $this->moovlyApi('getJob', $job['job_id'], function ($job) use ($post) {
+                    update_post_meta($post->ID, Templates::$post_templates_job_key, [
+                        'job_id' => $job->getId(),
+                        'job_status' => $job->getStatus(),
+                    ]);
+
                     return [
                         'id' => $job->getId(),
                         'status' => $job->getStatus(),
-                        'values' => $this->mapJobValuesToResponse($job->getValues()),
+                        'values' => $this->mapJobValuesToResponse($job->getValues(), $post),
                     ];
                 }, function ($error) use ($job) {
                     return [
@@ -75,13 +113,13 @@ class PostVideo extends Api
         });
     }
 
-    private function mapJobValuesToResponse($values)
+    private function mapJobValuesToResponse($values, $post)
     {
-        return collect(array_wrap($values))->map(function ($value) {
+        return collect(array_wrap($values))->map(function ($value) use ($post) {
             return [
                 'status' => $value->getStatus(),
                 'url' => $value->getUrl(),
-                'shortcode' => PostVideoShortCodeFactory::generate($value),
+                'shortcode' => PostVideoShortCodeFactory::generate($post),
             ];
         });
     }
