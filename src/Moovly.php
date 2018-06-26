@@ -5,6 +5,7 @@ namespace Moovly;
 use Moovly\Api\Api;
 use Moovly\Projects;
 use Moovly\Settings;
+use Moovly\PostVideos;
 use Moovly\Actions\Actions;
 use Moovly\Shortcodes\Shortcodes;
 
@@ -19,6 +20,7 @@ class Moovly
     public function __construct()
     {
         $this->shortcodes = new Shortcodes;
+        $this->postVideos = new PostVideos;
         $this->templates = new Templates;
         $this->projects = new Projects;
         $this->settings = new Settings;
@@ -58,7 +60,7 @@ class Moovly
                 'root' => esc_url_raw(rest_url($this->api->domain)),
                 'version' => $this->api->version,
                 'nonce' => wp_create_nonce('wp_rest'),
-            ]);
+                ]);
 
             wp_enqueue_script('moovly');
             wp_add_inline_script('moovly', $this->getAssetsScript(), $after = false);
@@ -132,6 +134,17 @@ class Moovly
                 'moovly-projects',
                 function () {
                     return $this->projects->makeView();
+                }
+            );
+
+            add_submenu_page(
+                'moovly',
+                __('Post Videos', 'moovly'),
+                __('Post Videos', 'moovly'),
+                'manage_options',
+                'moovly-post-videos',
+                function () {
+                    return $this->postVideos->makeView();
                 }
             );
         }
