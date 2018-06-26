@@ -95,7 +95,7 @@ class Moovly
             function () {
                 return $this->makeView();
             },
-            plugin_dir_url(__FILE__) . '../dist/images/moovly_small.png'
+            plugin_dir_url(__DIR__) . '/dist/images/moovly_small.png'
         );
 
         add_submenu_page(
