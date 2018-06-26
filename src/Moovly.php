@@ -5,6 +5,7 @@ namespace Moovly;
 use Moovly\Api\Api;
 use Moovly\Projects;
 use Moovly\Settings;
+use Moovly\Actions\Actions;
 use Moovly\Shortcodes\Shortcodes;
 
 class Moovly
@@ -21,6 +22,7 @@ class Moovly
         $this->templates = new Templates;
         $this->projects = new Projects;
         $this->settings = new Settings;
+        $this->actions = new Actions;
         $this->api = new Api;
     }
 
@@ -28,6 +30,7 @@ class Moovly
     {
         $this->api->register();
         $this->shortcodes->register();
+        $this->actions->register();
         $this->version = get_file_data(__DIR__ . '/../moovly.php', [
             'Version' => 'Version',
         ])['Version'];
