@@ -1,14 +1,7 @@
 <template>
     <div id="moovly-templates">
         <div class="container-fluid">
-            <div class="plugin-header">
-                <div class="plugin-header__branding">
-                    <img src="/wp-content/plugins/moovly/src/../dist/images/moovly.png" /><h2>Moovly</h2>
-                </div>
-                <div class="plugin-header__page-name">
-                    <h3> > Templates</h3>
-                </div>
-            </div>
+             <moovly-header page="Templates" />
             <div class="row">
                 <div class="col-12">
                     <table class="table table-moovly" v-if="!ui.loading">
@@ -37,7 +30,13 @@
     </div>
 </template>
 <script>
+    import MoovlyHeader from './shared/MoovlyHeader';
+
     export default {
+        components: {
+            MoovlyHeader,
+        },
+
         mounted() {
             this.fetch();
         },

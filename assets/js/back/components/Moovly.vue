@@ -3,11 +3,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="plugin-header">
-                        <div class="plugin-header__branding">
-                            <img src="/wp-content/plugins/moovly/src/../dist/images/moovly.png" /><h2>Moovly</h2>
-                        </div>
-                    </div>
+                    <moovly-header/>
                 </div>
                 <div class="col-12">
                     <div class="jumbotron jumbotron-light">
@@ -51,7 +47,11 @@
     </div>
 </template>
 <script>
+    import MoovlyHeader from './shared/MoovlyHeader';
+
     export default {
-        //
+        components: {
+            MoovlyHeader,
+        }
     }
 </script>

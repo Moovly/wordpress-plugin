@@ -1,12 +1,7 @@
 <template>
     <div id="moovly-settings" class="settings">
         <div class="container-fluid">
-            <div class="plugin-header">
-                <div class="plugin-header__branding">
-                    <img src="/wp-content/plugins/moovly/src/../dist/images/moovly.png" /><h2>Moovly</h2>
-                </div>
-                <div class="plugin-header__page-name"><h3> > Settings</h3></div>
-            </div>
+            <moovly-header page="Settings" />
             <div class="settings__body pt-5">
                 <h4 class="settings__divider">Settings</h4>
 
@@ -58,11 +53,13 @@
 <script>
     import MoovlyAuth from './MoovlyAuth';
     import MoovlyTemplates from './MoovlyTemplates';
+    import MoovlyHeader from './shared/MoovlyHeader';
 
     export default {
         components: {
             MoovlyAuth,
             MoovlyTemplates,
+            MoovlyHeader,
         },
 
         data() {

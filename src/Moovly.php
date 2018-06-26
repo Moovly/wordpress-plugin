@@ -58,6 +58,7 @@ class Moovly
             ]);
 
             wp_enqueue_script('moovly');
+            wp_add_inline_script('moovly', $this->getAssetsScript(), $after = false);
         }
     }
 
@@ -72,6 +73,16 @@ class Moovly
         ]);
 
         wp_enqueue_script('moovly');
+    }
+
+    public function getAssetsScript()
+    {
+        $logo = plugin_dir_url(__DIR__) . "/dist/images/moovly.png";
+        return "
+        window.moovlyAssets = {
+            logo: '{$logo}',
+        };
+        ";
     }
 
     public function addMenuItems()
