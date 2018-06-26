@@ -28,7 +28,7 @@ class PostToTemplateActionHandler
     public function handle()
     {
         return tap($this->post->ID, function () {
-            if ($this->template) {
+            if ($this->template && $this->post->post_type === 'post') {
                 $this->dispatchMoovlyJob();
             }
         });
