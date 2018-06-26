@@ -8,12 +8,10 @@ class PostVideoShortCodeFactory
 {
     public static $tag = "moovly-post-video";
 
-    public static function generate(?Value $value)
+    public static function generate($post)
     {
-        if (!$value) {
-            return '';
-        }
+        $tag = self::$tag;
 
-        return sprintf("[{$tag} url='%s']", $value->getUrl());
+        return sprintf("[{$tag} post-id='%s']", $post->ID);
     }
 }
