@@ -20,7 +20,7 @@ class Auth extends Api
 
     public static function getToken()
     {
-        return get_option(self::$auth_key);
+        return get_option(self::$auth_key) ?: '';
     }
 
     public function hasToken()
