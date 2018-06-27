@@ -100,7 +100,7 @@ class Template extends Api
         }
 
         return [
-            'post_templates' => get_option(Templates::$post_templates_key),
+            'post_templates' => get_option(Templates::$post_templates_key) ?: [],
         ];
     }
 
