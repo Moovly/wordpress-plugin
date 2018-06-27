@@ -11,6 +11,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Post title</th>
+                                <th scope="col">Template</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Shortcode</th>
                             </tr>
@@ -19,6 +20,7 @@
                             <tr v-for="(video, index) in ui.videos" :key="video.id">
                                 <th scope="row">{{ index + 1 }}</th>
                                 <th><a :href="video.url">{{ video.title }}</a></th>
+                                <th>{{ video.job.template }}</th>
                                 <th>{{ video.job.status }}</th>
                                 <th>
                                     <span v-if="!video.job.id">Not available</span>
