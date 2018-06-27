@@ -31,6 +31,10 @@ class Templates
             $template = $templates[0];
         }
 
+        if (is_null($template)) {
+            return (new MoovlyTemplate)->setId('')->setVariables([]);
+        }
+
         return (new MoovlyTemplate())
         ->setId($template['id'] ?? '')
         ->setVariables(
