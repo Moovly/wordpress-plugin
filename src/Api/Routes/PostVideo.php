@@ -63,12 +63,14 @@ class PostVideo extends Api
         return $this->moovlyApi('getJob', $job['job_id'], function ($job) use ($post) {
             return [
                 'id' => $job->getId(),
+                'template' => $job->getTemplate(),
                 'status' => $job->getStatus(),
                 'values' => $this->mapJobValuesToResponse($job->getValues(), $post),
             ];
         }, function ($error) use ($job) {
             return [
                 'id' =>  $job['job_id'],
+                'template' => $job['job_template'],
                 'status' => $job['job_status'],
                 'values' => [],
             ];
@@ -82,31 +84,35 @@ class PostVideo extends Api
             'nopaging' => true,
             'meta_key' => Templates::$post_templates_job_key,
         ]))->posts)->each(function ($post) {
-            $job = get_post_meta($post->ID, Templates::$post_templates_job_key);
-            $job = $job[0];
-            if ($job['job_id']) {
-                $post->job = $this->moovlyApi('getJob', $job['job_id'], function ($job) use ($post) {
+            $jobMeta = get_post_meta($post->ID, Templates::$post_templates_job_key);
+            $jobMeta = $jobMeta[0];
+            if ($jobMeta['job_id']) {
+                $post->job = $this->moovlyApi('getJob', $jobMeta['job_id'], function ($job) use ($post, $jobMeta) {
                     update_post_meta($post->ID, Templates::$post_templates_job_key, [
                         'job_id' => $job->getId(),
                         'job_status' => $job->getStatus(),
+                        'job_template' => $jobMeta['job_template'],
                     ]);
 
                     return [
                         'id' => $job->getId(),
+                        'template' => $jobMeta['job_template'],
                         'status' => $job->getStatus(),
                         'values' => $this->mapJobValuesToResponse($job->getValues(), $post),
                     ];
-                }, function ($error) use ($job) {
+                }, function ($error) use ($jobMeta) {
                     return [
-                        'id' =>  $job['job_id'],
-                        'status' => $job['job_status'],
+                        'id' =>  $jobMeta['job_id'],
+                        'template' => $jobMeta['job_template'],
+                        'status' => $jobMeta['job_status'],
                         'values' => [],
                     ];
                 });
             } else {
                 $post->job = [
-                    'id' =>  $job['job_id'],
-                    'status' => $job['job_status'],
+                    'id' =>  $jobMeta['job_id'],
+                    'status' => $jobMeta['job_status'],
+                    'template' => $jobMeta['job_template'],
                     'values' => [],
                 ];
             }

@@ -42,6 +42,7 @@ class Templates
 
         return (new MoovlyTemplate())
         ->setId($template['id'] ?? '')
+        ->setName($template['name'])
         ->setVariables(
             $template['variables']->map(function ($variableData) {
                 return (new Variable())

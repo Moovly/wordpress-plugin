@@ -50,7 +50,7 @@ class PostToTemplateActionHandler
         $this->moovlyApi('createJob', $job, function ($job) {
             $this->savePostTemplate($job);
         }, function ($error) use ($job) {
-            $this->savePostTemplate($job->setStatus('Failed due to incompatible template'));
+            $this->savePostTemplate($job->setTemplate($this->template)->setStatus('Failed due to incompatible template'));
         });
     }
 
@@ -59,6 +59,7 @@ class PostToTemplateActionHandler
         $jobValues = [
             'job_id' => $job->getId(),
             'job_status' => $job->getStatus(),
+            'job_template' => $job->getTemplate()->getName(),
         ];
 
         if (! add_post_meta($this->post->ID, Templates::$post_templates_job_key, $jobValues, $unique = true)) {
