@@ -110,6 +110,7 @@
                 });
                 axios.post(this.templates.save, {
                     variables: variableValues,
+                    name: this.job.name,
                 }).then(response => {
                     this.ui.error = false;
                     this.ui.loading = false;
