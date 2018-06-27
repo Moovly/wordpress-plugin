@@ -21,6 +21,11 @@ class Templates
         return self::selectPostTemplate($randomize = false);
     }
 
+    public static function getRandomPostTemplate() : MoovlyTemplate
+    {
+        return self::selectPostTemplate($randomize = true);
+    }
+
     private static function selectPostTemplate($randomize = false) : MoovlyTemplate
     {
         $templates = get_option(self::$post_templates_key);
