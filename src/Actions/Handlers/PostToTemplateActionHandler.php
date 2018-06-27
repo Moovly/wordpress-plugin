@@ -50,7 +50,7 @@ class PostToTemplateActionHandler
         $this->moovlyApi('createJob', $job, function ($job) {
             $this->savePostTemplate($job);
         }, function ($error) use ($job) {
-            $this->savePostTemplate($job->setStatus('failed'));
+            $this->savePostTemplate($job->setStatus('Failed due to incompatible template'));
         });
     }
 
