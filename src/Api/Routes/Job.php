@@ -31,7 +31,7 @@ class Job extends Api
 
     public static function getQuality()
     {
-        return get_option(self::$quality_key);
+        return get_option(self::$quality_key) ?: '480p';
     }
 
     public function registerEndpoints()
