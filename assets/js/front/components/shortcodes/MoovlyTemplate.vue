@@ -2,12 +2,10 @@
     <div class="row justify-content-center">
         <div class="col-12 col-md-8">
             <div class="my-5 card p-5">
-                <div v-if="!ui.loading && !job.id && ui.template.preview" class="embed-responsive embed-responsive-16by9">
-                    <video controls class="embed-responsive-item py-3">
-                        <source :src="ui.template.preview.url" />
-                    </video>
-                </div>
-
+                <moovly-video
+                    v-if="!ui.loading && !job.id && ui.template.preview"
+                    :src="[ui.template.preview.url]"
+                />
                 <h5 class="card-title">Moovly Template</h5>
                 <moovly-job :job="job"></moovly-job>
                 <form action="" v-if="!ui.loading && !job.id && !ui.error" @submit.prevent="submit">
@@ -39,6 +37,7 @@
     import MoovlyVariable from './../MoovlyVariable';
     import MoovlyJob from './../MoovlyJob';
     import Spinner from './../Spinner';
+    import MoovlyVideo from './../MoovlyVideo';
 
     export default {
         props: {
@@ -50,6 +49,7 @@
 
         components: {
             MoovlyVariable,
+            MoovlyVideo,
             MoovlyJob,
             Spinner,
         },
