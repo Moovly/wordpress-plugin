@@ -1,15 +1,19 @@
 <template>
-    <div v-if="!ui.loading && ui.videos.length" class="embed-responsive embed-responsive-16by9">
-        <moovly-video
-            v-for="video in ui.videos"
-            :key="video.url"
-            :src="[video.url]"
-            :autoplay="autoplay"
-        />
+    <div>
+        <div v-if="!ui.loading && ui.videos.length" class="embed-responsive embed-responsive-16by9">
+            <moovly-video
+                v-for="video in ui.videos"
+                :key="video.url"
+                :src="[video.url]"
+                :autoplay="autoplay"
+            />
+        </div>
+        <spinner v-else />
     </div>
 </template>
 <script>
     import MoovlyVideo from '../MoovlyVideo';
+    import Spinner from '../Spinner';
 
     export default {
         props: {
@@ -23,6 +27,7 @@
 
         components: {
             MoovlyVideo,
+            Spinner,
         },
 
         data() {
