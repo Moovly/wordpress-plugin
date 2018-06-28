@@ -87,7 +87,7 @@ class PostToTemplateActionHandler
 
     private function getNormalizedPostTitle()
     {
-        return Str::limit($this->post->post_title, $this->getTemplateVariableRequirementsFor('post_title')['maximum_length'], $endWith = "...");
+        return Str::limit($this->post->post_title, $this->getTemplateVariableRequirementsFor('post_name')['maximum_length'], $endWith = "...");
     }
 
     private function getNormalizedPostContent()
