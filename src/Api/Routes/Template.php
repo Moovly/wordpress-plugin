@@ -3,7 +3,9 @@
 namespace Moovly\Api\Routes;
 
 use Moovly\Api\Api;
+use Moovly\Templates;
 use Moovly\Api\Routes\Job;
+use Illuminate\Support\Str;
 use Moovly\Api\Services\MoovlyApi;
 use Moovly\SDK\Factory\JobFactory;
 use Moovly\SDK\Factory\ValueFactory;
@@ -29,6 +31,12 @@ class Template extends Api
             'methods' => 'GET',
             'callback' => [$this, 'index'],
             'permission_callback' => [$this, 'index_permissions'],
+        ]);
+
+        register_rest_route($this->namespace, '/settings', [
+            'methods' => ['GET', 'POST'],
+            'callback' => [$this, 'settings'],
+            'permission_callback' => [$this, 'settings_permissions'],
         ]);
 
         register_rest_route($this->namespace, '/(?P<id>[^/]+)', [
@@ -78,13 +86,39 @@ class Template extends Api
         });
     }
 
+    public function settings($request)
+    {
+        if ($request->get_method() === 'POST') {
+            $templates = collect($request->get_param('post_templates'))->map(function ($templateId) {
+                return $this->moovlyApi('getTemplate', $templateId, function ($template) {
+                    return $this->mapTemplateToResponse($template);
+                });
+            })->toArray();
+            if (is_array($templates)) {
+                update_option(Templates::$post_templates_key, $templates);
+            }
+        }
+
+        return [
+            'post_templates' => get_option(Templates::$post_templates_key) ?: [],
+        ];
+    }
+
+    public function settings_permissions()
+    {
+        return current_user_can('manage_options');
+    }
+
     private function mapTemplateToResponse($template)
     {
         return [
             'id' => $template->getId(),
             'name' => $template->getName(),
             'thumbnail' => $template->getThumbnail(),
-            'preview' => $template->getPreview(),
+            'preview' => [
+                'show' => true,
+                'url' => $template->getPreview(),
+            ],
             'variables' => $this->mapTemplateVariablesToResponse($template->getVariables()),
         ];
     }
@@ -104,8 +138,9 @@ class Template extends Api
 
     private function createTemplateJobFromRequest($template, $request)
     {
+        $name = $request->get_param('name') ??  "Moovly Wordpress Plugin: {$template->getName()}, " . date('d/m/Y');
         $job = JobFactory::create([
-                ValueFactory::create("moovly_wp_plugin_" . time(), "Moovly Wordpress Plugin: {$template->getName()}, " . date('d/m/Y'), collect($request->get_param('variables'))->mapWithKeys(function ($variable) {
+                ValueFactory::create(Str::uuid(), $name, collect($request->get_param('variables'))->mapWithKeys(function ($variable) {
                     return $variable;
                 })->toArray()),
         ])->setTemplate($template)

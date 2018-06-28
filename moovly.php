@@ -3,9 +3,10 @@
  * Plugin Name: Moovly
  * Description: An integration plugin for the Moovly API.
  * Author: Moovly
- * Author URI:
- * Version: 0.0.1
- * Plugin URI:
+ * Author URI: https://www.moovly.com
+ * Version: 1.0.0
+ * Plugin URI: https://github.com/Moovly/wordpress-plugin
+
  */
 
 require __DIR__ . '/vendor/autoload.php';

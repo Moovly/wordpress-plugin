@@ -8,6 +8,7 @@ class ProjectShortcodeHandler extends ShortcodeHandler
     {
         return $this->make([
             'id' => $this->getAttribute('id'),
+            'autoplay' => $this->getAttribute('autoplay', 'false'),
         ]);
     }
 }
