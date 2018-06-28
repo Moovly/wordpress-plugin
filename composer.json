@@ -6,7 +6,8 @@
     "require": {
         "moovly/moovly-php-sdk": "^1.1.1",
         "illuminate/support": "^5.6",
-        "ramsey/uuid": "^3.7"
+        "ramsey/uuid": "^3.7",
+        "symfony/http-foundation": "^4.1"
     },
     "autoload": {
         "psr-4": {
