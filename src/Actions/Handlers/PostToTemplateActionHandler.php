@@ -118,55 +118,32 @@ class PostToTemplateActionHandler
     private function getFeaturedImageAsFile()
     {
         $imageUrl = get_the_post_thumbnail_url($this->post);
-        if ($imageUrl) {
-            $rawImg = imagecreatefromstring(file_get_contents($imageUrl));
-            $mimeType = exif_imagetype($imageUrl);
+        
+        if (!$imageUrl) {
+            return null;
+        }
+        
+        $rawImg = imagecreatefromstring(file_get_contents($imageUrl));
+        $mimeType = exif_imagetype($imageUrl);
 
-            switch ($mimeType) {
-                case 2:
-                    $mime = "image/jpeg";
-                    $ext = '.jpg';
-                    imagejpeg($rawImg, wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image.jpg", 100);
-                    break;
-                case 3:
-                    $mime = "image/png";
-                    $ext = '.png';
-                    imagepng($rawImg, wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image.png", 0);
-                    break;
-                default:
-                    $mime = "image/jpeg";
-                    $ext = '.jpg';
-                    imagejpeg($rawImg, wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image.jpg", 100);
-            }
-
-
-            $file =  new UploadedFile(wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image{$ext}", "moovly_plugin_tmp_featured_image{$ext}", $mime);
-
-            return $this->moovlyApi('uploadAsset', $file, function ($object) use ($file) {
-                unlink($file);
-                return $object->getId();
-            }, function ($error) use ($file) {
-                unlink($file);
-                $this->savePostTemplate($job->setTemplate($this->template)->setStatus('Something went wrong on our side...'));
-            });
+        switch ($mimeType) {
+            case 2:
+                $mime = "image/jpeg";
+                $ext = '.jpg';
+                imagejpeg($rawImg, wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image.jpg", 100);
+                break;
+            case 3:
+                $mime = "image/png";
+                $ext = '.png';
+                imagepng($rawImg, wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image.png", 0);
+                break;
+            default:
+                $mime = "image/jpeg";
+                $ext = '.jpg';
+                imagejpeg($rawImg, wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image.jpg", 100);
         }
 
-        $rawImage = imagecreatefromstring(file_get_contents($imageUrl));
-        $extension = pathinfo($imageUrl)['extension'];
-
-        if ($extension === 'jpg') {
-            $extension === 'jpeg';
-        }
-
-        if ($extension === 'jpeg') {
-            imagejpeg($rawImage, wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image." . $extension, 100);
-        }
-
-        if ($extension === 'png') {
-            imagepng($rawImage, wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image." . $extension, 100);
-        }
-
-        $file = new UploadedFile(wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image." . $extension, 'moovly_plugin_tmp_featured_image.' . $extension, 'image/' . $extension);
+        $file = new UploadedFile(wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image{$ext}", "moovly_plugin_tmp_featured_image{$ext}", $mime);
 
         return $this->moovlyApi('uploadAsset', $file, function ($object) use ($file) {
             unlink($file);
