@@ -6,7 +6,6 @@
                     v-if="!ui.loading && !job.id && ui.template.preview"
                     :src="[ui.template.preview.url]"
                 />
-                <h5 class="card-title">Moovly Template</h5>
                 <moovly-job :job="job"></moovly-job>
                 <form action="" v-if="!ui.loading && !job.id && !ui.error" @submit.prevent="submit">
                     <h6 class="mb-5">{{ ui.template.name }}</h6>
