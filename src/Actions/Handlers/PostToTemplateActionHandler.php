@@ -29,12 +29,7 @@ class PostToTemplateActionHandler
     public function handle()
     {
         return tap($this->post->ID, function () {
-            if (
-                $this->template &&
-                $this->template->getId() &&
-                $this->post->post_type === 'post' &&
-                $this->post->post_satus !== 'trash'
-                ) {
+            if ($this->template && $this->template->getId() && $this->post->post_type === 'post') {
                 $this->dispatchMoovlyJob();
             }
         });
@@ -118,22 +113,35 @@ class PostToTemplateActionHandler
     private function getFeaturedImageAsFile()
     {
         $imageUrl = get_the_post_thumbnail_url($this->post);
-        if ($imageUrl) {
-            $rawImg = imagecreatefromstring(file_get_contents($imageUrl));
-            imagejpeg($rawImg, wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image.jpg", 100);
-
-            $file =  new UploadedFile(wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image.jpg", 'moovly_plugin_tmp_featured_image.jpg', 'image/jpeg');
-
-            return $this->moovlyApi('uploadAsset', $file, function ($object) use ($file) {
-                unlink($file);
-                return $object->getId();
-            }, function ($error) use ($file) {
-                unlink($file);
-                $this->savePostTemplate($job->setTemplate($this->template)->setStatus('Something went wrong on our side...'));
-            });
+        
+        if (!$imageUrl) {
+            return null;
         }
+        
+        $rawImage = imagecreatefromstring(file_get_contents($imageUrl));
+        $extension = pathinfo($imageUrl)['extension'];
+        
+        if ($extension === 'jpg') {
+            $extension === 'jpeg';
+        }
+        
+        if ($extension === 'jpeg') {
+            imagejpeg($rawImage, wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image." . $extension, 100);
+        }
+        
+        if ($extension === 'png') {
+            imagepng($rawImage, wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image." . $extension, 100);
+        }
+        
+        $file = new UploadedFile(wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image." . $extension, 'moovly_plugin_tmp_featured_image.' . $extension, 'image/' . $extension);
 
-        return null;
+        return $this->moovlyApi('uploadAsset', $file, function ($object) use ($file) {
+            unlink($file);
+            return $object->getId();
+        }, function ($error) use ($file) {
+            unlink($file);
+            $this->savePostTemplate($job->setTemplate($this->template)->setStatus('Something went wrong on our side...'));
+        });
     }
 
     private function getTemplateVariableRequirementsFor($variableNames)
