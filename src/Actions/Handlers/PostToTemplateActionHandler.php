@@ -88,7 +88,7 @@ class PostToTemplateActionHandler
 
     private function getNormalizedPostTitle()
     {
-        return Str::limit($this->post->post_title, $this->getTemplateVariableRequirementsFor('post_name')['maximum_length'], $endWith = "...");
+        return Str::limit($this->post->post_title, $this->getTemplateVariableRequirementsFor(['post_name', 'post_title'])['maximum_length'], $endWith = "...");
     }
 
     private function getNormalizedPostContent()
@@ -100,11 +100,11 @@ class PostToTemplateActionHandler
         return $limitedContent;
     }
 
-    private function getTemplateVariableRequirementsFor($variableName)
+    private function getTemplateVariableRequirementsFor($variableNames)
     {
         return collect($this->template->getVariables())->flatten()->first(
-            function ($variable) use ($variableName) {
-                return $variable->getName() === $variableName;
+            function ($variable) use ($variableNames) {
+                return collect(array_wrap($variableNames))->contains($variable->getName());
             },
             (new Variable())->setRequirements([
                 'maximum_length' => 300,
