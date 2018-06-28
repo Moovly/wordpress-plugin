@@ -33,7 +33,7 @@ class PostToTemplateActionHandler
                 $this->template &&
                 $this->template->getId() &&
                 $this->post->post_type === 'post' &&
-                $this->post->post_satus !== 'trash'
+                $this->post->post_satus === 'publish'
                 ) {
                 $this->dispatchMoovlyJob();
             }
