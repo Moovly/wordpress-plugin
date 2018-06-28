@@ -81,6 +81,7 @@ class PostToTemplateActionHandler
     {
         return collect([
             'post_name' => $this->getNormalizedPostTitle(),
+            'post_title' => $this->getNormalizedPostTitle(),
             'post_content' => $this->getNormalizedPostContent(),
         ]);
     }
