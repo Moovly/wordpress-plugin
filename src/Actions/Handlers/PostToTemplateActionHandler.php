@@ -100,10 +100,14 @@ class PostToTemplateActionHandler
     private function getNormalizedPostContent()
     {
         $strippedContent = strip_shortcodes($this->post->post_content);
-        $content = str_replace('<!--more-->', '', $strippedContent);
-        $limitedContent = Str::limit($content, $this->getTemplateVariableRequirementsFor('post_content')['maximum_length'] - 3, $endWith = '...');
+        $strippedContent = explode('<!--more-->', $strippedContent);
 
-        return $limitedContent;
+        foreach ($strippedContent as $content) {
+            if (Str::length($content) <= $this->getTemplateVariableRequirementsFor('post_content')['maximum_length']) {
+                return $content;
+            }
+            return  Str::limit($content, $this->getTemplateVariableRequirementsFor('post_content')['maximum_length'] - 3, $endWith = '...');
+        }
     }
 
     private function getFeaturedImageAsFile()
