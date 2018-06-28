@@ -120,9 +120,27 @@ class PostToTemplateActionHandler
         $imageUrl = get_the_post_thumbnail_url($this->post);
         if ($imageUrl) {
             $rawImg = imagecreatefromstring(file_get_contents($imageUrl));
-            imagejpeg($rawImg, wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image.jpg", 100);
+            $mimeType = exif_imagetype($imageUrl);
 
-            $file =  new UploadedFile(wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image.jpg", 'moovly_plugin_tmp_featured_image.jpg', 'image/jpeg');
+            switch ($mimeType) {
+                case 2:
+                    $mime = "image/jpeg";
+                    $ext = '.jpg';
+                    imagejpeg($rawImg, wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image.jpg", 100);
+                    break;
+                case 3:
+                    $mime = "image/png";
+                    $ext = '.png';
+                    imagepng($rawImg, wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image.png", 0);
+                    break;
+                default:
+                    $mime = "image/jpeg";
+                    $ext = '.jpg';
+                    imagejpeg($rawImg, wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image.jpg", 100);
+            }
+
+
+            $file =  new UploadedFile(wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image{$ext}", "moovly_plugin_tmp_featured_image{$ext}", $mime);
 
             return $this->moovlyApi('uploadAsset', $file, function ($object) use ($file) {
                 unlink($file);
