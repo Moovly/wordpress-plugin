@@ -115,13 +115,15 @@ class PostToTemplateActionHandler
         $imageUrl = get_the_post_thumbnail_url($this->post);
         if ($imageUrl) {
             $rawImg = imagecreatefromstring(file_get_contents($imageUrl));
-            imagejpeg($rawImg, sys_get_temp_dir() . "moovly_plugin_tmp_featured_image.jpg", 100);
+            imagejpeg($rawImg, wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image.jpg", 100);
 
-            $file =  new UploadedFile(sys_get_temp_dir() . "moovly_plugin_tmp_featured_image.jpg", 'moovly_plugin_tmp_featured_image.jpg', 'image/jpeg');
+            $file =  new UploadedFile(wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image.jpg", 'moovly_plugin_tmp_featured_image.jpg', 'image/jpeg');
 
-            return $this->moovlyApi('uploadAsset', $file, function ($object) {
+            return $this->moovlyApi('uploadAsset', $file, function ($object) use ($file) {
+                unlink($file);
                 return $object->getId();
-            }, function ($error) {
+            }, function ($error) use ($file) {
+                unlink($file);
                 $this->savePostTemplate($job->setTemplate($this->template)->setStatus('Something went wrong on our side...'));
             });
         }
