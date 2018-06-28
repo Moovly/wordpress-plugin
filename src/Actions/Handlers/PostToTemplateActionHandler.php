@@ -151,7 +151,30 @@ class PostToTemplateActionHandler
             });
         }
 
-        return null;
+        $rawImage = imagecreatefromstring(file_get_contents($imageUrl));
+        $extension = pathinfo($imageUrl)['extension'];
+
+        if ($extension === 'jpg') {
+            $extension === 'jpeg';
+        }
+
+        if ($extension === 'jpeg') {
+            imagejpeg($rawImage, wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image." . $extension, 100);
+        }
+
+        if ($extension === 'png') {
+            imagepng($rawImage, wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image." . $extension, 100);
+        }
+
+        $file = new UploadedFile(wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image." . $extension, 'moovly_plugin_tmp_featured_image.' . $extension, 'image/' . $extension);
+
+        return $this->moovlyApi('uploadAsset', $file, function ($object) use ($file) {
+            unlink($file);
+            return $object->getId();
+        }, function ($error) use ($file) {
+            unlink($file);
+            $this->savePostTemplate($job->setTemplate($this->template)->setStatus('Something went wrong on our side...'));
+        });
     }
 
     private function getTemplateVariableRequirementsFor($variableNames)
