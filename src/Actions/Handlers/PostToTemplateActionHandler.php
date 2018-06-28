@@ -9,6 +9,7 @@ use Moovly\SDK\Model\Variable;
 use Moovly\Api\Services\MoovlyApi;
 use Moovly\SDK\Factory\JobFactory;
 use Moovly\SDK\Factory\ValueFactory;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class PostToTemplateActionHandler
 {
@@ -50,7 +51,11 @@ class PostToTemplateActionHandler
         $this->moovlyApi('createJob', $job, function ($job) {
             $this->savePostTemplate($job);
         }, function ($error) use ($job) {
-            $this->savePostTemplate($job->setTemplate($this->template)->setStatus('Failed due to incompatible template'));
+            if ($error->getCode() === 500) {
+                $this->savePostTemplate($job->setTemplate($this->template)->setStatus('Something went wrong on our side...'));
+            } else {
+                $this->savePostTemplate($job->setTemplate($this->template)->setStatus('Failed due to incompatible template'));
+            }
         });
     }
 
@@ -83,6 +88,7 @@ class PostToTemplateActionHandler
             'post_name' => $this->getNormalizedPostTitle(),
             'post_title' => $this->getNormalizedPostTitle(),
             'post_content' => $this->getNormalizedPostContent(),
+            'featured_image' => $this->getFeaturedImageAsFile(),
         ]);
     }
 
@@ -98,6 +104,25 @@ class PostToTemplateActionHandler
         $limitedContent = Str::limit($content, $this->getTemplateVariableRequirementsFor('post_content')['maximum_length'] - 3, $endWith = '...');
 
         return $limitedContent;
+    }
+
+    private function getFeaturedImageAsFile()
+    {
+        $imageUrl = get_the_post_thumbnail_url($this->post);
+        if ($imageUrl) {
+            $rawImg = imagecreatefromstring(file_get_contents($imageUrl));
+            imagejpeg($rawImg, sys_get_temp_dir() . "moovly_plugin_tmp_featured_image.jpg", 100);
+
+            $file =  new UploadedFile(sys_get_temp_dir() . "moovly_plugin_tmp_featured_image.jpg", 'moovly_plugin_tmp_featured_image.jpg', 'image/jpeg');
+
+            return $this->moovlyApi('uploadAsset', $file, function ($object) {
+                return $object->getId();
+            }, function ($error) {
+                $this->savePostTemplate($job->setTemplate($this->template)->setStatus('Something went wrong on our side...'));
+            });
+        }
+
+        return null;
     }
 
     private function getTemplateVariableRequirementsFor($variableNames)
