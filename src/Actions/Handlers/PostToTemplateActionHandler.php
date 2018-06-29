@@ -161,7 +161,7 @@ class PostToTemplateActionHandler
                 return collect(array_wrap($variableNames))->contains($variable->getName());
             },
             (new Variable())->setRequirements([
-                'maximum_length' => 300,
+                'maximum_length' => 100,
             ])
         )->getRequirements();
     }
