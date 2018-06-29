@@ -2,7 +2,7 @@ pipeline {
   agent { label 'ecs' }
 
   environment {
-    CONTAINER_NAME = "wordpress-plugin"
+    CONTAINER_NAME = "moovly-wordpress-plugin"
     CONTAINER_URL = "016352445818.dkr.ecr.eu-west-1.amazonaws.com/${CONTAINER_NAME}"
     CONTAINER_URL_NUMBER = "${CONTAINER_URL}:${BRANCH_NAME.replaceAll('[^a-zA-Z0-9-]', '').toLowerCase()}-${BUILD_NUMBER}"
     CONTAINER_URL_BRANCH = "${CONTAINER_URL}:${BRANCH_NAME.replaceAll('[^a-zA-Z0-9-]', '').toLowerCase()}"
