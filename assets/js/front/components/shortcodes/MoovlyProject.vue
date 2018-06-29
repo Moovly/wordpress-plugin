@@ -1,6 +1,6 @@
 <template>
     <div class="row justify-content-center">
-        <div class="col-12 col-md-8">
+        <div :style="'width:' + width">
             <div v-if="!ui.loading && ui.project">
                 <div class="embed-responsive embed-responsive-16by9" >
                     <moovly-video
@@ -30,6 +30,10 @@
             },
             autoplay: {
                 default: false,
+            },
+            width: {
+                type: String,
+                default: '100%',
             }
         },
 

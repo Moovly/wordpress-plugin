@@ -1,6 +1,6 @@
 <template>
     <div class="row justify-content-center">
-        <div class="col-12 col-md-8">
+        <div :style="'width:' + width">
             <div class="my-5 card p-5">
                 <moovly-video
                     v-if="!ui.loading && !job.id && ui.template.preview"
@@ -43,6 +43,10 @@
             id: {
                 type: String,
                 required: true,
+            },
+            width: {
+                type: String,
+                default: '100%',
             }
         },
 
