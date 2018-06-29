@@ -84,6 +84,8 @@ class PostToTemplateActionHandler
             return [
                 $variable->getId() => $postValues->get($variable->getName(), $default = '')
             ];
+        })->reject(function ($variable) {
+            return is_null($variable);
         })->toArray();
     }
 
