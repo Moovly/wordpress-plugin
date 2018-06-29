@@ -118,11 +118,11 @@ class PostToTemplateActionHandler
     private function getFeaturedImageAsFile()
     {
         $imageUrl = get_the_post_thumbnail_url($this->post);
-        
+
         if (!$imageUrl) {
             return null;
         }
-        
+
         $rawImg = imagecreatefromstring(file_get_contents($imageUrl));
         $mimeType = exif_imagetype($imageUrl);
 
