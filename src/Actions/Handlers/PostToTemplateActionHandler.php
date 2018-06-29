@@ -126,15 +126,14 @@ class PostToTemplateActionHandler
         }
 
         $rawImg = imagecreatefromstring(file_get_contents($imageUrl));
-        $mimeType = exif_imagetype($imageUrl);
-
-        switch ($mimeType) {
-            case 2:
+        $extension = pathinfo($imageUrl)['extension'];
+        switch ($extension) {
+            case 'jpg':
                 $mime = "image/jpeg";
                 $ext = '.jpg';
                 imagejpeg($rawImg, wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image.jpg", 100);
                 break;
-            case 3:
+            case 'png':
                 $mime = "image/png";
                 $ext = '.png';
                 imagepng($rawImg, wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image.png", 0);
