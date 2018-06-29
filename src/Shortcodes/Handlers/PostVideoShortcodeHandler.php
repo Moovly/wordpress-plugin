@@ -9,6 +9,9 @@ class PostVideoShortcodeHandler extends ShortcodeHandler
         return $this->make([
             'post-id' => $this->getAttribute('post-id', $this->getPostId()),
             'autoplay' => $this->getAttribute('autoplay', 'false'),
+            'width' => $this->getAttribute('width', '100%'),
+            'style' => $this->getAttribute('style', ''),
+            'class' => $this->getAttribute('class', '')
         ]);
     }
 
