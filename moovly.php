@@ -26,7 +26,7 @@ function activate_moovly_plugin()
     if (version_compare(PHP_VERSION, '7.1', '<')) {
         wp_die(
             '<p>The <strong>Moovly</strong> plugin requires PHP version 7.1 or greater. ' 
-                . 'To read more about this and other prerequisites, head over to our ' . 
+                . 'To read more about this and other prerequisites, head over to our '
                 . '<a href="https://developer.moovly.com/docs/integrations/wordpress">Documentation</a> page</p>'
             ,
             'Plugin Activation Error',
