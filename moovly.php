@@ -30,7 +30,7 @@ function activate_moovly_plugin()
                 . '<a href="https://developer.moovly.com/docs/integrations/wordpress">Documentation</a> page</p>'
             ,
             'Plugin Activation Error',
-            ['response' => 200, 'back_link' => true];
+            ['response' => 200, 'back_link' => true]
         );
     }
     
