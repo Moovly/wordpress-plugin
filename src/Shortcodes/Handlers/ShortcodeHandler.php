@@ -33,6 +33,11 @@ abstract class ShortcodeHandler
 
     protected function mapAttributesToHtmlProperties($attributes)
     {
+        $attributes = array_merge([
+            'width' => $this->getAttribute('width', '100%'),
+            'class' => $this->getAttribute('class'),
+        ], $attributes);
+
         array_walk($attributes, function (&$value, $key) {
             $value = "$key='$value'";
         });

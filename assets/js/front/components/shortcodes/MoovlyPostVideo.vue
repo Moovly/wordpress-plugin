@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :style="'width:' + width">
         <div v-if="!ui.loading && ui.videos.length" class="embed-responsive embed-responsive-16by9">
             <moovly-video
                 v-for="video in ui.videos"
@@ -23,6 +23,10 @@
             autoplay: {
                 required: false,
             },
+            width: {
+                type: String,
+                default: '100%',
+            }
         },
 
         components: {
