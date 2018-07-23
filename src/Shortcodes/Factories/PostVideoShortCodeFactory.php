@@ -8,6 +8,10 @@ class PostVideoShortCodeFactory
 {
     public static $tag = "moovly-post-video";
 
+    /**
+     * @param WP_Post $post
+     * @return string
+     */
     public static function generate($post)
     {
         $tag = self::$tag;

@@ -4,6 +4,7 @@ namespace Moovly\Api\Routes;
 
 use Moovly\Api\Api;
 use Moovly\Api\Services\MoovlyApi;
+use Moovly\SDK\Model\Asset as MoovlyAsset;
 
 class Asset extends Api
 {
@@ -41,12 +42,18 @@ class Asset extends Api
         return $this->uploadFile($request);
     }
 
+    /**
+     * @param $request
+     *
+     * @return \WP_Error
+     */
     private function uploadFile($request)
     {
         $file = collect($request->get_file_params())->map(function ($file) {
             move_uploaded_file($file['tmp_name'], $file['name']);
             return new \SplFileInfo($file['name']);
         })->first();
+
         return $this->moovlyApi('uploadAsset', $file, function ($object) use ($file) {
             unlink($file->getPathName());
             return [
@@ -61,9 +68,15 @@ class Asset extends Api
         });
     }
 
+    /**
+     * @param MoovlyAsset[] $assets
+     *
+     * @return static
+     */
     private function mapAssetsToResponse($assets)
     {
         return collect(array_wrap($assets))->map(function ($asset) {
+            /** @var MoovlyAsset $asset */
             return [
                 'type' => $asset->getType(),
                 'version' => $asset->getVersion(),

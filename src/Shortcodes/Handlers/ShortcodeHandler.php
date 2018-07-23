@@ -19,6 +19,12 @@ abstract class ShortcodeHandler
 
     abstract public function handle();
 
+    /**
+     * @param string $name
+     * @param string $default
+     *
+     * @return mixed
+     */
     public function getAttribute($name, $default = '')
     {
         return shortcode_atts([
@@ -26,11 +32,24 @@ abstract class ShortcodeHandler
         ], $this->attributes)[$name];
     }
 
+    /**
+     * @param \stdClass $attributes
+     *
+     * @return string
+     */
     public function make($attributes)
     {
-        return "<div id='{$this->tag}' class='moovly-plugin' ><{$this->tag} {$this->mapAttributesToHtmlProperties($attributes)} ></{$this->tag}></div>";
+        return "<div id='{$this->tag}' class='moovly-plugin' >" .
+            "<{$this->tag} {$this->mapAttributesToHtmlProperties($attributes)} ></{$this->tag}>" .
+            "</div>"
+        ;
     }
 
+    /**
+     * @param $attributes
+     *
+     * @return string
+     */
     protected function mapAttributesToHtmlProperties($attributes)
     {
         $attributes = array_merge([

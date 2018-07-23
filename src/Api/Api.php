@@ -18,6 +18,8 @@ class Api
 
     public $group = '';
 
+    public $namespace;
+
     protected $routes = [
         'auth' => Auth::class,
         'accounts' => Account::class,

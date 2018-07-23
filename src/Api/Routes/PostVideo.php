@@ -85,7 +85,9 @@ class PostVideo extends Api
             'meta_key' => Templates::$post_templates_job_key,
         ]))->posts)->each(function ($post) {
             $jobMeta = get_post_meta($post->ID, Templates::$post_templates_job_key)[0];
-            $post->job = $this->moovlyApi('getJob', $jobMeta['job_id'] ?? '', function ($job) use ($post, $jobMeta) {
+            $jobId = key_exists('job_id', $jobMeta) ? $jobMeta['job_id'] : '';
+
+            $post->job = $this->moovlyApi('getJob', $jobId, function ($job) use ($post, $jobMeta) {
                 update_post_meta($post->ID, Templates::$post_templates_job_key, [
                         'job_id' => $job->getId(),
                         'job_status' => $job->getStatus(),

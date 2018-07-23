@@ -16,40 +16,54 @@ class Templates
         echo '<moovly-templates></moovly-templates>';
     }
 
-    public static function getPostTemplate() : MoovlyTemplate
+    /**
+     * @return MoovlyTemplate
+     */
+    public static function getPostTemplate()
     {
         return self::selectPostTemplate($randomize = false);
     }
 
-    public static function getRandomPostTemplate() : MoovlyTemplate
+    /**
+     * @return MoovlyTemplate
+     */
+    public static function getRandomPostTemplate()
     {
         return self::selectPostTemplate($randomize = true);
     }
 
-    private static function selectPostTemplate($randomize = false) : MoovlyTemplate
+    /**
+     * @param bool $randomize
+     *
+     * @return MoovlyTemplate
+     */
+    private static function selectPostTemplate($randomize = false)
     {
         $templates = get_option(self::$post_templates_key);
+        $template = $templates[0];
 
         if ($randomize) {
             $template = array_rand($templates, 1);
-        } else {
-            $template = $templates[0];
         }
 
         if (is_null($template)) {
             return (new MoovlyTemplate)->setId('')->setVariables([]);
         }
 
-        return (new MoovlyTemplate())
-        ->setId($template['id'] ?? '')
-        ->setName($template['name'])
-        ->setVariables(
-            $template['variables']->map(function ($variableData) {
+        $variables = $template['variables']->map(
+            function ($variableData) {
                 return (new Variable())
                     ->setId($variableData['id'])
                     ->setName($variableData['name'])
-                    ->setRequirements($variableData['requirements']);
-            })->toArray()
-        );
+                    ->setRequirements($variableData['requirements'])
+                ;
+            }
+        )->toArray();
+
+        return (new MoovlyTemplate())
+            ->setId(key_exists('id', $template) ? $template['id'] : '')
+            ->setName($template['name'])
+            ->setVariables($variables)
+        ;
     }
 }

@@ -2,10 +2,16 @@
 
 namespace Moovly\Shortcodes\Factories;
 
+use Moovly\SDK\Model\Template;
+
 class TemplateShortCodeFactory
 {
     public static $tag = "moovly-template";
 
+    /**
+     * @param Template $template
+     * @return string
+     */
     public static function generate($template)
     {
         $tag = self::$tag;

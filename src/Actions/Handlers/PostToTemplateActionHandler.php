@@ -2,8 +2,9 @@
 
 namespace Moovly\Actions\Handlers;
 
+use Moovly\SDK\Model\Value;
 use Moovly\Templates;
-use Moovly\Api\Routes\Job;
+use Moovly\SDK\Model\Job;
 use Illuminate\Support\Str;
 use Moovly\SDK\Model\Variable;
 use Moovly\Api\Services\MoovlyApi;
@@ -19,6 +20,11 @@ class PostToTemplateActionHandler
 
     protected $template = null;
 
+    /**
+     * PostToTemplateActionHandler constructor.
+     *
+     * @param string $postId
+     */
     public function __construct($postId)
     {
         $this->registerMoovlyService();
@@ -26,6 +32,9 @@ class PostToTemplateActionHandler
         $this->template = Templates::getPostTemplate();
     }
 
+    /**
+     * @return mixed
+     */
     public function handle()
     {
         return tap($this->post->ID, function () {
@@ -40,8 +49,12 @@ class PostToTemplateActionHandler
         });
     }
 
+    /**
+     * @return void
+     */
     protected function dispatchMoovlyJob()
     {
+        /** @var Job $job */
         $job = JobFactory::create([
             ValueFactory::create(
                 Str::uuid(),
@@ -49,8 +62,8 @@ class PostToTemplateActionHandler
                 $this->mapPostToTemplateVariables()
             )
         ])
-        ->setTemplate($this->template)
-        ->setOptions([])
+            ->setTemplate($this->template)
+            ->setOptions([])
         ;
 
         $this->moovlyApi('createJob', $job, function ($job) {
@@ -64,6 +77,9 @@ class PostToTemplateActionHandler
         });
     }
 
+    /**
+     * @param Job $job
+     */
     protected function savePostTemplate($job)
     {
         $jobValues = [
@@ -72,15 +88,17 @@ class PostToTemplateActionHandler
             'job_template' => $job->getTemplate()->getName(),
         ];
 
-        if (! add_post_meta($this->post->ID, Templates::$post_templates_job_key, $jobValues, $unique = true)) {
+        if (!add_post_meta($this->post->ID, Templates::$post_templates_job_key, $jobValues, $unique = true)) {
             update_post_meta($this->post->ID, Templates::$post_templates_job_key, $jobValues);
         }
     }
 
     protected function mapPostToTemplateVariables()
     {
+        /** @var array[] $postValues */
         $postValues = $this->preparePost();
         return collect($this->template->getVariables())->flatten()->mapWithKeys(function ($variable) use ($postValues) {
+            /** @var Variable $variable */
             return [
                 $variable->getId() => $postValues->get($variable->getName(), $default = '')
             ];
@@ -101,7 +119,11 @@ class PostToTemplateActionHandler
 
     private function getNormalizedPostTitle()
     {
-        return Str::limit($this->post->post_title, $this->getTemplateVariableRequirementsFor(['post_name', 'post_title'])['maximum_length'], $endWith = "...");
+        return Str::limit(
+            $this->post->post_title,
+            $this->getTemplateVariableRequirementsFor(['post_name', 'post_title'])['maximum_length'],
+            $endWith = "..."
+        );
     }
 
     private function getNormalizedPostContent()
@@ -113,7 +135,12 @@ class PostToTemplateActionHandler
             if (Str::length($content) <= $this->getTemplateVariableRequirementsFor('post_content')['maximum_length']) {
                 return $content;
             }
-            return  Str::limit($content, $this->getTemplateVariableRequirementsFor('post_content')['maximum_length'] - 3, $endWith = '...');
+
+            return  Str::limit(
+                $content,
+                $this->getTemplateVariableRequirementsFor('post_content')['maximum_length'] - 3,
+                $endWith = '...'
+            );
         }
     }
 
@@ -144,14 +171,20 @@ class PostToTemplateActionHandler
                 imagejpeg($rawImg, wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image.jpg", 100);
         }
 
-        $file = new UploadedFile(wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image{$ext}", "moovly_plugin_tmp_featured_image{$ext}", $mime);
+        $file = new UploadedFile(
+            wp_upload_dir()['path'] . "/moovly_plugin_tmp_featured_image{$ext}",
+            "moovly_plugin_tmp_featured_image{$ext}",
+            $mime
+        );
 
         return $this->moovlyApi('uploadAsset', $file, function ($object) use ($file) {
             unlink($file);
             return $object->getId();
         }, function ($error) use ($file) {
             unlink($file);
-            $this->savePostTemplate($job->setTemplate($this->template)->setStatus('Something went wrong on our side...'));
+            $this->savePostTemplate(
+                $job->setTemplate($this->template)->setStatus('Something went wrong on our side...')
+            );
         });
     }
 

@@ -3,6 +3,7 @@
 namespace Moovly\Api\Routes;
 
 use Moovly\Api\Api;
+use Moovly\SDK\Model\Variable;
 use Moovly\Templates;
 use Moovly\Api\Routes\Job;
 use Illuminate\Support\Str;
@@ -109,6 +110,10 @@ class Template extends Api
         return current_user_can('manage_options');
     }
 
+    /**
+     * @param TemplateModel $template
+     * @return array
+     */
     private function mapTemplateToResponse($template)
     {
         return [
@@ -126,6 +131,7 @@ class Template extends Api
     private function mapTemplateVariablesToResponse($templateVariables)
     {
         return collect($templateVariables)->map(function ($variable) {
+            /** @var Variable $variable */
             return [
                 'id' => $variable->getId(),
                 'weight' => $variable->getWeight(),
@@ -136,19 +142,30 @@ class Template extends Api
         })->sortBy('weight')->values();
     }
 
+    /**
+     * @param TemplateModel $template
+     * @param $request
+     * @return \WP_Error
+     */
     private function createTemplateJobFromRequest($template, $request)
     {
-        $name = $request->get_param('name') ??  "Moovly Wordpress Plugin: {$template->getName()}, " . date('d/m/Y');
+        $name = "Moovly Wordpress Plugin: {$template->getName()}, " . date('d/m/Y');
+        $name = is_null($request->get_param('name')) ? $name : $request->get_param('name');
+
         $job = JobFactory::create([
-                ValueFactory::create(Str::uuid(), $name, collect($request->get_param('variables'))->mapWithKeys(function ($variable) {
+            ValueFactory::create(
+                Str::uuid(),
+                $name,
+                collect($request->get_param('variables'))->mapWithKeys(function ($variable) {
                     return $variable;
                 })->toArray()),
-        ])->setTemplate($template)
+            ])->setTemplate($template)
         ->setOptions([
             'create_moov' => Job::savesProjects(),
         ]);
 
         return $this->moovlyApi('createJob', $job, function ($job) {
+            /** @var \Moovly\SDK\Model\Job $job */
             return [
                 'job_id' => $job->getId(),
                 'options' => $job->getOptions(),
