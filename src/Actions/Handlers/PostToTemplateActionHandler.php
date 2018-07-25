@@ -39,12 +39,10 @@ class PostToTemplateActionHandler
     public function handle()
     {
         return tap($this->post->ID, function () {
-            if (
-                $this->template &&
-                $this->template->getId() &&
-                $this->post->post_type === 'post' &&
-                $this->post->post_status === 'publish'
-                ) {
+            $isPost = $this->post->post_type === 'post';
+            $isPublish = $this->post->post_status === 'publish';
+
+            if ($this->template && $this->template->getId() && $isPost && $isPublish) {
                 $this->dispatchMoovlyJob();
             }
         });
@@ -69,15 +67,26 @@ class PostToTemplateActionHandler
             ->setOptions([])
         ;
 
-        $this->moovlyApi('createJob', $job, function ($job) {
-            $this->savePostTemplate($job);
-        }, function ($error) use ($job) {
-            if ($error->getCode() === 500) {
-                $this->savePostTemplate($job->setTemplate($this->template)->setStatus('Something went wrong on our side...'));
-            } else {
-                $this->savePostTemplate($job->setTemplate($this->template)->setStatus('Failed due to incompatible template'));
+        $this->moovlyApi(
+            'createJob',
+            $job,
+            function ($job) {
+                $this->savePostTemplate($job);
+            },
+            function ($error) use ($job) {
+                if ($error->getCode() === 500) {
+                    $this->savePostTemplate(
+                        $job->setTemplate($this->template)->setStatus('Something went wrong on our side...')
+                    );
+
+                    return;
+                }
+
+                $this->savePostTemplate(
+                    $job->setTemplate($this->template)->setStatus('Failed due to incompatible template')
+                );
             }
-        });
+        );
     }
 
     /**
