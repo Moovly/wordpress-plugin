@@ -10,6 +10,7 @@ use Moovly\SDK\Model\Variable;
 use Moovly\Api\Services\MoovlyApi;
 use Moovly\SDK\Factory\JobFactory;
 use Moovly\SDK\Factory\ValueFactory;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class PostToTemplateActionHandler
@@ -51,13 +52,15 @@ class PostToTemplateActionHandler
 
     /**
      * @return void
+     *
+     * @throws
      */
     protected function dispatchMoovlyJob()
     {
         /** @var Job $job */
         $job = JobFactory::create([
             ValueFactory::create(
-                Str::uuid(),
+                (string) Uuid::uuid4(),
                 "Moovly Wordpress plugin post hook for {$this->post->post_title}",
                 $this->mapPostToTemplateVariables()
             )

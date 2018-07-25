@@ -12,6 +12,7 @@ use Moovly\SDK\Factory\JobFactory;
 use Moovly\SDK\Factory\ValueFactory;
 use Moovly\SDK\Model\Template as TemplateModel;
 use Moovly\Shortcodes\Factories\TemplateShortCodeFactory;
+use Ramsey\Uuid\Uuid;
 
 class Template extends Api
 {
@@ -145,7 +146,7 @@ class Template extends Api
     /**
      * @param TemplateModel $template
      * @param $request
-     * @return \WP_Error
+     * @throws
      */
     private function createTemplateJobFromRequest($template, $request)
     {
@@ -154,7 +155,7 @@ class Template extends Api
 
         $job = JobFactory::create([
             ValueFactory::create(
-                Str::uuid(),
+                (string) Uuid::uuid4(),
                 $name,
                 collect($request->get_param('variables'))->mapWithKeys(function ($variable) {
                     return $variable;
