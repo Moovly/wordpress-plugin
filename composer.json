@@ -4,9 +4,10 @@
     "type": "wordpress-plugin",
     "minimum-stability": "dev",
     "require": {
-        "illuminate/support": "^5.6",
+        "php": "~5.6 || ^7.1",
+        "illuminate/support": "^5.3",
         "ramsey/uuid": "^3.7",
-        "symfony/http-foundation": "^4.1",
+        "symfony/http-foundation": "^3.4",
         "moovly/moovly-php-sdk": "~0.56.1"
     },
     "autoload": {
