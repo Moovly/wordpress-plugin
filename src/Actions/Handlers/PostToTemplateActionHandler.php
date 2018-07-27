@@ -28,7 +28,6 @@ class PostToTemplateActionHandler
      */
     public function __construct($postId)
     {
-        $this->registerMoovlyService();
         $this->post = get_post($postId);
         $this->template = Templates::getPostTemplate();
     }
@@ -67,26 +66,23 @@ class PostToTemplateActionHandler
             ->setOptions([])
         ;
 
-        $this->moovlyApi(
-            'createJob',
-            $job,
-            function ($job) {
-                $this->savePostTemplate($job);
-            },
-            function ($error) use ($job) {
-                if ($error->getCode() === 500) {
-                    $this->savePostTemplate(
-                        $job->setTemplate($this->template)->setStatus('Something went wrong on our side...')
-                    );
+        try {
+            $job = $this->getMoovlyService()->createJob($job);
 
-                    return;
-                }
-
+            $this->savePostTemplate($job);
+        } catch (\Exception $e) {
+            if ($e->getCode() === 500) {
                 $this->savePostTemplate(
-                    $job->setTemplate($this->template)->setStatus('Failed due to incompatible template')
+                    $job->setTemplate($this->template)->setStatus('Something went wrong on our side...')
                 );
+
+                return;
             }
-        );
+
+            $this->savePostTemplate(
+                $job->setTemplate($this->template)->setStatus('Failed due to incompatible template')
+            );
+        }
     }
 
     /**
@@ -154,6 +150,8 @@ class PostToTemplateActionHandler
                 $endWith = '...'
             );
         }
+
+        return $strippedContent[0];
     }
 
     private function getFeaturedImageAsFile()
@@ -189,15 +187,15 @@ class PostToTemplateActionHandler
             $mime
         );
 
-        return $this->moovlyApi('uploadAsset', $file, function ($object) use ($file) {
+        try {
+            $object = $this->getMoovlyService()->uploadAsset($file);
+
             unlink($file);
+
             return $object->getId();
-        }, function ($error) use ($file) {
+        } catch (\Exception $e) {
             unlink($file);
-            $this->savePostTemplate(
-                $job->setTemplate($this->template)->setStatus('Something went wrong on our side...')
-            );
-        });
+        }
     }
 
     private function getTemplateVariableRequirementsFor($variableNames)

@@ -3,6 +3,7 @@
 namespace Moovly\Api\Routes;
 
 use Moovly\Api\Api;
+use Moovly\SDK\Exception\BadRequestException;
 use Moovly\SDK\Model\Variable;
 use Moovly\Templates;
 use Moovly\Api\Routes\Job;
@@ -13,9 +14,14 @@ use Moovly\SDK\Factory\ValueFactory;
 use Moovly\SDK\Model\Template as TemplateModel;
 use Moovly\Shortcodes\Factories\TemplateShortCodeFactory;
 use Ramsey\Uuid\Uuid;
+use WP_Error;
 
 class Template extends Api
 {
+    const TEMPLATE_ERROR_400_STRIPPED = 'The API call you made resulted in a Bad Request response (HTTP 400). ' .
+        'The reason given by the server: Object: '
+    ;
+
     use MoovlyApi;
 
     public $group = "templates";
@@ -23,7 +29,6 @@ class Template extends Api
     public function __construct()
     {
         parent::__construct();
-        $this->registerMoovlyService();
         add_action('rest_api_init', [$this, 'registerEndpoints']);
     }
 
@@ -54,19 +59,23 @@ class Template extends Api
 
     public function index()
     {
-        return $this->moovlyApi('getTemplates', function ($templates) {
-            return array_map(function (TemplateModel $template) {
-                $result = new \stdClass();
+        try {
+            $templates = $this->getMoovlyService()->getTemplates();
+        } catch (\Exception $e) {
+            return $this->throwWPError(null, $e);
+        }
 
-                $result->identifier = $template->getId();
-                $result->title = $template->getName();
-                $result->shortcode = TemplateShortCodeFactory::generate($template);
-                $result->thumbnail = $template->getThumbnail();
-                $result->preview = $template->getPreview();
+        return array_map(function (TemplateModel $template) {
+            $result = new \stdClass();
 
-                return $result;
-            }, $templates);
-        });
+            $result->identifier = $template->getId();
+            $result->title = $template->getName();
+            $result->shortcode = TemplateShortCodeFactory::generate($template);
+            $result->thumbnail = $template->getThumbnail();
+            $result->preview = $template->getPreview();
+
+            return $result;
+        }, $templates);
     }
 
     public function index_permissions()
@@ -76,29 +85,46 @@ class Template extends Api
 
     public function show($request)
     {
-        return $this->moovlyApi('getTemplate', $request->get_param('id'), function ($template) {
-            return $this->mapTemplateToResponse($template);
-        });
+        try {
+            $template = $this->getMoovlyService()->getTemplate($request->get_param('id'));
+        } catch (\Exception $e) {
+            return $this->throwWPError(null, $e);
+        }
+
+        return $this->mapTemplateToResponse($template);
     }
 
     public function store($request)
     {
-        return $this->moovlyApi('getTemplate', $request->get_param('id'), function ($template) use ($request) {
-            return $this->createTemplateJobFromRequest($template, $request);
-        });
+        try {
+            $template = $this->getMoovlyService()->getTemplate($request->get_param('id'));
+        } catch (\Exception $e) {
+            return $this->throwWPError(null, $e);
+        }
+
+        return $this->createTemplateJobFromRequest($template, $request);
     }
 
     public function settings($request)
     {
-        if ($request->get_method() === 'POST') {
-            $templates = collect($request->get_param('post_templates'))->map(function ($templateId) {
-                return $this->moovlyApi('getTemplate', $templateId, function ($template) {
-                    return $this->mapTemplateToResponse($template);
-                });
-            })->toArray();
-            if (is_array($templates)) {
-                update_option(Templates::$post_templates_key, $templates);
+        if ($request->get_method() !== 'POST') {
+            return [
+                'post_templates' => get_option(Templates::$post_templates_key) ?: [],
+            ];
+        }
+
+        $templates = collect($request->get_param('post_templates'))->map(function ($templateId) {
+            try {
+                $template = $this->getMoovlyService()->getTemplate($templateId);
+            } catch (\Exception $e) {
+                return $this->throwWPError(null, $e);
             }
+
+            return $this->mapTemplateToResponse($template);
+        })->toArray();
+
+        if (is_array($templates)) {
+            update_option(Templates::$post_templates_key, $templates);
         }
 
         return [
@@ -165,12 +191,17 @@ class Template extends Api
             'create_moov' => Job::savesProjects(),
         ]);
 
-        return $this->moovlyApi('createJob', $job, function ($job) {
-            /** @var \Moovly\SDK\Model\Job $job */
-            return [
-                'job_id' => $job->getId(),
-                'options' => $job->getOptions(),
-            ];
-        });
+        try {
+            $job = $this->getMoovlyService()->createJob($job);
+        } catch (BadRequestException $bre) {
+            $message = str_replace(self::TEMPLATE_ERROR_400_STRIPPED, '', $bre->getMessage());
+
+            return new WP_Error($bre->getCode(), $message, ['status' => $bre->getCode()]);
+        }
+
+        return [
+            'job_id' => $job->getId(),
+            'options' => $job->getOptions(),
+        ];
     }
 }

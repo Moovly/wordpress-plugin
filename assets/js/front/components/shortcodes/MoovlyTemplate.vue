@@ -3,11 +3,14 @@
         <div :style="'width:' + width">
             <div class="my-5 card p-5">
                 <moovly-video
-                    v-if="!ui.loading && !job.id && ui.template.preview"
+                    v-if="!ui.loading && !job.id && ui.template.preview && ui.template.preview.url !== null"
                     :src="[ui.template.preview.url]"
                 />
                 <moovly-job :job="job"></moovly-job>
-                <form action="" v-if="!ui.loading && !job.id && !ui.error" @submit.prevent="submit">
+                <div class="alert alert-danger text-center my-5" v-if="!ui.loading && ui.error">
+                  <p class="mb-0">{{ui.error_message}}</p>
+                </div>
+                <form action="" v-if="!ui.loading && !job.id" @submit.prevent="submit">
                     <h6 class="mb-5">{{ ui.template.name }}</h6>
                     <div class="form-group">
                         <label for="name">Name</label>
@@ -23,10 +26,6 @@
                  <div class="alert alert-info my-5 text-center" v-if="ui.loading && form.processing">
                      <p class="mb-0">Submitting your data...</p>
                  </div>
-                <div class="alert alert-danger text-center my-5" v-if="!ui.loading && ui.error">
-                    <p class="mb-0"> Whoops, looks like something went wrong.</p>
-                    <p class="mb-0">Refresh the application to try again.</p>
-                </div>
                  <spinner v-if="ui.loading && !job.id"/>
             </div>
         </div>
@@ -123,6 +122,7 @@
                     };
                 }).catch(error => {
                     this.ui.error = true;
+                    this.ui.error_message = error.response.data.message || '';
                     this.ui.loading = false;
                     this.form.processing = false;
                 })

@@ -18,7 +18,6 @@ class Job extends Api
     public function __construct()
     {
         parent::__construct();
-        $this->registerMoovlyService();
         self::$save_projects_key = "{$this->domain}_jobs_create_moov";
         self::$quality_key = "{$this->domain}_jobs_quality";
         add_action('rest_api_init', [$this, 'registerEndpoints']);
@@ -50,13 +49,17 @@ class Job extends Api
 
     public function status($request)
     {
-        return $this->moovlyApi('getJob', $request->get_param('id'), function ($job) {
-            return [
-                'id' => $job->getId(),
-                'status' => $job->getStatus(),
-                'values' => $this->mapValuesToResponse($job->getValues()),
-            ];
-        });
+        try {
+            $job = $this->getMoovlyService()->getJob($request->get_param('id'));
+        } catch (\Exception $e) {
+            return $this->throwWPError(null, $e);
+        }
+
+        return [
+            'id' => $job->getId(),
+            'status' => $job->getStatus(),
+            'values' => $this->mapValuesToResponse($job->getValues()),
+        ];
     }
 
     public function settings($request)
@@ -79,11 +82,11 @@ class Job extends Api
 
     private function mapValuesToResponse($values)
     {
-        return collect(array_wrap($values))->map(function ($value) {
+        return array_map(function ($value) {
             return [
                 'status' => $value->getStatus(),
                 'url' => $value->getUrl(),
             ];
-        });
+        }, array_wrap($values));
     }
 }

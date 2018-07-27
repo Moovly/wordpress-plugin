@@ -15,7 +15,6 @@ class Project extends Api
     public function __construct()
     {
         parent::__construct();
-        $this->registerMoovlyService();
         add_action('rest_api_init', [$this, 'registerEndpoints']);
     }
 
@@ -35,11 +34,15 @@ class Project extends Api
 
     public function index($request)
     {
-        return $this->moovlyApi('getProjects', null, function ($projects) {
-            return collect(array_wrap($projects))->map(function ($project) {
-                return $this->mapProjectToResponse($project);
-            });
-        });
+        try {
+            $projects = $this->getMoovlyService()->getProjects();
+        } catch (\Exception $e) {
+            return $this->throwWPError(null, $e);
+        }
+
+        return array_map(function ($project) {
+            return $this->mapProjectToResponse($project);
+        }, $projects);
     }
 
     public function index_permissions()
@@ -49,9 +52,13 @@ class Project extends Api
 
     public function show($request)
     {
-        return $this->moovlyApi('getProject', $request->get_param('id'), function ($template) {
-            return $this->mapProjectToResponse($template);
-        });
+        try {
+            $project = $this->getMoovlyService()->getProject($request->get_param('id'));
+        } catch (\Exception $e) {
+            return $this->throwWPError(null, $e);
+        }
+
+        return $this->mapProjectToResponse($project);
     }
 
     private function mapProjectToResponse($project)
@@ -67,13 +74,13 @@ class Project extends Api
 
     private function mapRendersToResponse($renders)
     {
-        return collect(array_wrap($renders))->map(function ($render) {
+        return array_map(function ($render) {
             return [
-                'id' => $render->getId(),
+            'id' => $render->getId(),
                 'url' => $render->getUrl(),
                 'quality' => $render->getQuality(),
                 'project_id' => $render->getProjectId(),
             ];
-        });
+        }, array_wrap($renders));
     }
 }

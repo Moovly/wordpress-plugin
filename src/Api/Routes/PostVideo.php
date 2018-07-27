@@ -17,7 +17,6 @@ class PostVideo extends Api
     public function __construct()
     {
         parent::__construct();
-        $this->registerMoovlyService();
         add_action('rest_api_init', [$this, 'registerEndpoints']);
     }
 
@@ -60,65 +59,71 @@ class PostVideo extends Api
         }
         $job = get_post_meta($post->ID, Templates::$post_templates_job_key)[0];
 
-        return $this->moovlyApi('getJob', $job['job_id'], function ($job) use ($post) {
-            return [
-                'id' => $job->getId(),
-                'template' => $job->getTemplate(),
-                'status' => $job->getStatus(),
-                'values' => $this->mapJobValuesToResponse($job->getValues(), $post),
-            ];
-        }, function ($error) use ($job) {
+        try {
+            $job = $this->getMoovlyService()->getJob($job['job_id']);
+        } catch (\Exception $e) {
             return [
                 'id' =>  $job['job_id'],
                 'template' => $job['job_template'],
                 'status' => $job['job_status'],
                 'values' => [],
             ];
-        });
+        }
+
+        return [
+            'id' => $job->getId(),
+            'template' => $job->getTemplate(),
+            'status' => $job->getStatus(),
+            'values' => $this->mapJobValuesToResponse($job->getValues(), $post),
+        ];
     }
 
     protected function getPostsWithVideo($request)
     {
-        return collect((new WP_Query([
+        $posts = collect((new WP_Query([
             'post_type' => 'post',
             'nopaging' => true,
             'meta_key' => Templates::$post_templates_job_key,
-        ]))->posts)->each(function ($post) {
+        ]))->posts);
+
+        $posts->each(function ($post) {
             $jobMeta = get_post_meta($post->ID, Templates::$post_templates_job_key)[0];
             $jobId = key_exists('job_id', $jobMeta) ? $jobMeta['job_id'] : '';
 
-            $post->job = $this->moovlyApi('getJob', $jobId, function ($job) use ($post, $jobMeta) {
-                update_post_meta($post->ID, Templates::$post_templates_job_key, [
-                        'job_id' => $job->getId(),
-                        'job_status' => $job->getStatus(),
-                        'job_template' => $jobMeta['job_template'],
-                    ]);
+            try {
+                $job = $this->getMoovlyService()->getJob($jobId);
+            } catch (\Exception $e) {
+                return [
+                    'id' =>  $jobMeta['job_id'],
+                    'template' => $jobMeta['job_template'],
+                    'status' => $jobMeta['job_status'],
+                    'values' => [],
+                ];
+            }
 
-                return [
-                        'id' => $job->getId(),
-                        'template' => $jobMeta['job_template'],
-                        'status' => $job->getStatus(),
-                        'values' => $this->mapJobValuesToResponse($job->getValues(), $post),
-                    ];
-            }, function ($error) use ($jobMeta) {
-                return [
-                        'id' =>  $jobMeta['job_id'],
-                        'template' => $jobMeta['job_template'],
-                        'status' => $jobMeta['job_status'],
-                        'values' => [],
-                    ];
-            });
+            update_post_meta($post->ID, Templates::$post_templates_job_key, [
+                'job_id' => $job->getId(),
+                'job_status' => $job->getStatus(),
+                'job_template' => $jobMeta['job_template'],
+            ]);
+
+            $post->job = [
+                'id' => $job->getId(),
+                'template' => $jobMeta['job_template'],
+                'status' => $job->getStatus(),
+                'values' => $this->mapJobValuesToResponse($job->getValues(), $post),
+            ];
         });
     }
 
     private function mapJobValuesToResponse($values, $post)
     {
-        return collect(array_wrap($values))->map(function ($value) use ($post) {
+        return array_map(function ($value) use ($post) {
             return [
                 'status' => $value->getStatus(),
                 'url' => $value->getUrl(),
                 'shortcode' => PostVideoShortCodeFactory::generate($post),
             ];
-        });
+        }, array_wrap($values));
     }
 }

@@ -9,45 +9,61 @@ use Moovly\SDK\Client\APIClient;
 use Moovly\SDK\Service\MoovlyService;
 use Moovly\SDK\Exception\MoovlyException;
 
+/**
+ * Trait MoovlyApi
+ * @package Moovly\Api\Services
+ *
+ * Trait to be used until we introduce DI
+ */
 trait MoovlyApi
 {
-    protected $client;
+    /**
+     * @var APIClient
+     */
+    private $client;
 
-    protected $moovly;
+    /**
+     * @var MoovlyService
+     */
+    private $moovly;
 
-    public function registerMoovlyService()
-    {
-        $this->client = new APIClient;
-        $this->moovly = new MoovlyService($this->client, Auth::getToken());
-    }
-
-    public function moovlyApi($method, $arguments = null, $successCallback = null, $errorCallback = null)
-    {
-        if (is_callable($arguments)) {
-            $errorCallback = $successCallback;
-            $successCallback = $arguments;
-        }
-
-        try {
-            $response = $this->moovly->{$method}($arguments);
-            if (is_callable($successCallback)) {
-                return $successCallback($response);
-            }
-
-            return $response;
-        } catch (MoovlyException $e) {
-            return $this->throwWPError($errorCallback, $e);
-        } catch (\Exception $e) {
-            return $this->throwWPError($errorCallback, $e);
-        }
-    }
-
-    private function throwWPError($errorCallback, $e)
+    /**
+     * Creates a WordPress error object
+     *
+     * @param array|null|mixed $errorCallback
+     * @param \Exception $e
+     *
+     * @return WP_Error
+     */
+    public function throwWPError($errorCallback, $e)
     {
         if (is_callable($errorCallback)) {
             return $errorCallback($e);
         }
 
         return new WP_Error($e->getCode(), $e->getMessage(), ['status' => $e->getCode()]);
+    }
+
+    /**
+     * Lazily loads the MoovlyService and returns it
+     *
+     * @return MoovlyService
+     */
+    public function getMoovlyService()
+    {
+        if (is_null($this->moovly)) {
+            $this->registerMoovlyService();
+        }
+
+        return $this->moovly;
+    }
+
+    /**
+     * Constructs the pseudo-DI for the MoovlyService
+     */
+    private function registerMoovlyService()
+    {
+        $this->client = new APIClient;
+        $this->moovly = new MoovlyService($this->client, Auth::getToken());
     }
 }

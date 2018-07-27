@@ -15,7 +15,6 @@ class Asset extends Api
     public function __construct()
     {
         parent::__construct();
-        $this->registerMoovlyService();
         add_action('rest_api_init', [$this, 'registerEndpoints']);
     }
 
@@ -45,7 +44,7 @@ class Asset extends Api
     /**
      * @param $request
      *
-     * @return \WP_Error
+     * @return array
      */
     private function uploadFile($request)
     {
@@ -54,18 +53,23 @@ class Asset extends Api
             return new \SplFileInfo($file['name']);
         })->first();
 
-        return $this->moovlyApi('uploadAsset', $file, function ($object) use ($file) {
-            unlink($file->getPathName());
-            return [
-                'id' => $object->getId(),
-                'type' => $object->getType(),
-                'status' => $object->getStatus(),
-                'tags' => $object->getTags(),
-                'description' => $object->getDescription(),
-                'thumbnail' => $object->getThumbnailPath(),
-                'assets' => $this->mapAssetsToResponse($object->getAssets()),
-            ];
-        });
+        try {
+            $object = $this->getMoovlyService()->uploadAsset($file);
+        } catch (\Exception $e) {
+            return $this->throwWPError(null, $e);
+        }
+
+        unlink($file->getPathName());
+
+        return [
+            'id' => $object->getId(),
+            'type' => $object->getType(),
+            'status' => $object->getStatus(),
+            'tags' => $object->getTags(),
+            'description' => $object->getDescription(),
+            'thumbnail' => $object->getThumbnailPath(),
+            'assets' => $this->mapAssetsToResponse($object->getAssets()),
+        ];
     }
 
     /**

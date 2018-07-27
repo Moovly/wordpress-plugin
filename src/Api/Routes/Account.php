@@ -14,7 +14,6 @@ class Account extends Api
     public function __construct()
     {
         parent::__construct();
-        $this->registerMoovlyService();
         add_action('rest_api_init', [$this, 'registerEndpoints']);
     }
 
@@ -29,9 +28,11 @@ class Account extends Api
 
     public function me()
     {
-        return $this->moovlyApi('getCurrentUser', function ($user) {
-            return $user;
-        });
+        try {
+            return $this->getMoovlyService()->getCurrentUser();
+        } catch (\Exception $e) {
+            return $this->throwWPError(null, $e);
+        }
     }
 
     public function me_permissions()

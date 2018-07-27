@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "097fe581655b321f612ecd9b96acc460",
+    "content-hash": "fbe4e52aa5e48607d5e76b5004aff369",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -71,7 +71,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2015-11-06T14:35:42+00:00"
+            "time": "2015-11-06 14:35:42"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -136,7 +136,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2018-06-25T23:51:40+00:00"
+            "time": "2018-06-25 23:51:40"
         },
         {
             "name": "guzzlehttp/promises",
@@ -187,7 +187,7 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2018-03-25T01:26:01+00:00"
+            "time": "2018-03-25 01:26:01"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -253,7 +253,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2018-06-08T08:55:26+00:00"
+            "time": "2018-06-08 08:55:26"
         },
         {
             "name": "illuminate/contracts",
@@ -295,7 +295,7 @@
             ],
             "description": "The Illuminate Contracts package.",
             "homepage": "https://laravel.com",
-            "time": "2017-09-20T12:31:30+00:00"
+            "time": "2017-09-20 12:31:30"
         },
         {
             "name": "illuminate/support",
@@ -352,20 +352,20 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2017-08-15T13:25:41+00:00"
+            "time": "2017-08-15 13:25:41"
         },
         {
             "name": "moovly/moovly-php-sdk",
-            "version": "0.56.1",
+            "version": "dev-release/5.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Moovly/moovly-php-sdk.git",
-                "reference": "69f5414db292abb1d92ed6b9ea91f22407a2ac4c"
+                "reference": "92cf88ae5b0e84429227e44a544dbbe28d2b0154"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Moovly/moovly-php-sdk/zipball/69f5414db292abb1d92ed6b9ea91f22407a2ac4c",
-                "reference": "69f5414db292abb1d92ed6b9ea91f22407a2ac4c",
+                "url": "https://api.github.com/repos/Moovly/moovly-php-sdk/zipball/92cf88ae5b0e84429227e44a544dbbe28d2b0154",
+                "reference": "92cf88ae5b0e84429227e44a544dbbe28d2b0154",
                 "shasum": ""
             },
             "require": {
@@ -395,7 +395,7 @@
                 "moovly",
                 "video"
             ],
-            "time": "2018-07-17T09:45:24+00:00"
+            "time": "2018-07-27 08:24:30"
         },
         {
             "name": "nicmart/string-template",
@@ -535,7 +535,7 @@
                 "request",
                 "response"
             ],
-            "time": "2016-08-06T14:39:51+00:00"
+            "time": "2016-08-06 14:39:51"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -657,7 +657,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2018-07-19T23:38:55+00:00"
+            "time": "2018-07-19 23:38:55"
         },
         {
             "name": "symfony/http-foundation",
@@ -711,7 +711,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2018-07-19T07:08:28+00:00"
+            "time": "2018-07-19 07:08:28"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -769,7 +769,7 @@
                 "polyfill",
                 "portable"
             ],
-            "time": "2018-05-17T18:32:56+00:00"
+            "time": "2018-05-17 18:32:56"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -828,7 +828,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2018-05-30T15:56:36+00:00"
+            "time": "2018-05-30 15:56:36"
         },
         {
             "name": "symfony/polyfill-php70",
@@ -887,13 +887,15 @@
                 "portable",
                 "shim"
             ],
-            "time": "2018-04-26T10:06:28+00:00"
+            "time": "2018-04-26 10:06:28"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "moovly/moovly-php-sdk": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
