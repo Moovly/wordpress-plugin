@@ -28,13 +28,14 @@ pipeline {
         sh 'docker run --rm --workdir=/app -v ${WORKSPACE}:/app node:8-stretch npm install'
         sh 'docker run --rm --workdir=/app -v ${WORKSPACE}:/app node:8-stretch npm run production'
         sh 'docker run --rm --workdir=/app -v ${WORKSPACE}:/app samepagelabs/zip zip -r moovly dist/* src/* vendor/* moovly.php README.md readme.txt package.json package-lock.json'
-        sh 'aws s3 cp ./moovly.zip s3://${S3_BUCKET}/wordpress-plugin/${S3_BUCKET_DIR_WITH_BUILD_NUMBER}/'
         sh 'aws s3 cp ./moovly.zip s3://${S3_BUCKET}/wordpress-plugin/latest/'
+        sh 'cp ./moovly.zip ./moovly-1.0.${BUILD_NUMBER}'
+        sh 'aws s3 cp ./moovly-1.0.${BUILD_NUMBER} s3://${S3_BUCKET}/wordpress-plugin/'
       }
 
       post {
         always {
-          archive 'moovly-wordpress-plugin*'
+          archive 'moovly*'
         }
       }
     }
