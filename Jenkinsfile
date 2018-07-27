@@ -22,7 +22,7 @@ pipeline {
 
     stage('Build') {
       steps {
-        sh 'sed -i "s@{{build}}@${env.BUILD_NUMBER}@" moovly.php'
+        sh 'sed -i "s@{{build}}@${BUILD_NUMBER}@" moovly.php'
         sh 'docker run --rm -v ${WORKSPACE}:/app composer install --no-dev --optimize-autoloader --no-scripts --prefer-dist'
         sh 'find . -type d | grep .git | xargs rm -rf'
         sh 'docker run --rm --workdir=/app -v ${WORKSPACE}:/app node:8-stretch npm install'
