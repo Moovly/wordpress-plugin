@@ -36,13 +36,13 @@ class PostVideo extends Api
 
     public function index($request)
     {
-        return $this->getPostsWithVideo($request)->map(function ($postWithVideo) {
+        return array_map(function($postWithVideo) {
             return [
                 'title' => $postWithVideo->post_title,
                 'url' => (get_edit_post_link($postWithVideo->ID, $htmlEncode = false)),
                 'job' => $postWithVideo->job,
             ];
-        });
+        }, $this->getPostsWithVideo($request));
     }
 
     public function index_permissions()
@@ -80,13 +80,13 @@ class PostVideo extends Api
 
     protected function getPostsWithVideo($request)
     {
-        $posts = collect((new WP_Query([
+        $posts = new WP_Query([
             'post_type' => 'post',
             'nopaging' => true,
             'meta_key' => Templates::$post_templates_job_key,
-        ]))->posts);
+        ]);
 
-        $posts->each(function ($post) {
+        foreach ($posts->posts as &$post) {
             $jobMeta = get_post_meta($post->ID, Templates::$post_templates_job_key)[0];
             $jobId = key_exists('job_id', $jobMeta) ? $jobMeta['job_id'] : '';
 
@@ -113,7 +113,9 @@ class PostVideo extends Api
                 'status' => $job->getStatus(),
                 'values' => $this->mapJobValuesToResponse($job->getValues(), $post),
             ];
-        });
+        }
+
+        return $posts->posts;
     }
 
     private function mapJobValuesToResponse($values, $post)
