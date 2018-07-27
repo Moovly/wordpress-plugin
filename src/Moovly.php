@@ -27,6 +27,11 @@ class Moovly
 
     public $actions;
 
+    /**
+     * @var string
+     */
+    private $pluginDirectoryName;
+
     public function __construct()
     {
         $this->shortcodes = new Shortcodes;
@@ -36,6 +41,7 @@ class Moovly
         $this->settings = new Settings;
         $this->actions = new Actions;
         $this->api = new Api;
+        $this->pluginDirectoryName = explode(DIRECTORY_SEPARATOR, plugin_basename( __FILE__ ))[0];
     }
 
     public function initialize()
@@ -71,8 +77,22 @@ class Moovly
             return "$classes moovly-plugin";
         });
 
-        wp_enqueue_style('moovly', plugins_url("moovly/dist/moovly.css"), [], $this->version, 'all');
-        wp_register_script('moovly', plugins_url("moovly/dist/moovly-plugin.js"), [], $this->version, true);
+        wp_enqueue_style(
+            'moovly',
+            plugins_url($this->pluginDirectoryName . "/dist/moovly.css"),
+            [],
+            $this->version,
+            'all'
+        );
+
+        wp_register_script(
+            'moovly',
+            plugins_url($this->pluginDirectoryName . "/dist/moovly-plugin.js"),
+            [],
+            $this->version,
+            true
+        );
+
         wp_localize_script('moovly', 'moovlyApiSettings', [
             'root' => esc_url_raw(rest_url($this->api->domain)),
             'version' => $this->api->version,
@@ -85,8 +105,21 @@ class Moovly
 
     public function registerAssets()
     {
-        wp_enqueue_style('moovly', plugins_url("moovly/dist/moovly.css"), $this->version, 'all');
-        wp_register_script('moovly', plugins_url("moovly/dist/moovly.js"), [], $this->version, true);
+        wp_enqueue_style(
+            'moovly',
+            plugins_url($this->pluginDirectoryName . "/dist/moovly.css"),
+            $this->version,
+            'all'
+        );
+
+        wp_register_script(
+            'moovly',
+            plugins_url($this->pluginDirectoryName . "/dist/moovly.js"),
+            [],
+            $this->version,
+            true
+        );
+
         wp_localize_script('moovly', 'moovlyApiSettings', [
             'root' => esc_url_raw(rest_url($this->api->domain)),
             'version' => $this->api->version,
