@@ -4,7 +4,7 @@
  * Description: An integration plugin for the Moovly API.
  * Author: Moovly
  * Author URI: https://www.moovly.com
- * Version: 1.0.0
+ * Version: 1.0.{{build}}
  * Plugin URI: https://github.com/Moovly/wordpress-plugin
 
  */
