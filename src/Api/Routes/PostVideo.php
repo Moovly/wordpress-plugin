@@ -84,7 +84,7 @@ class PostVideo extends Api
         $posts = new WP_Query([
             'post_type' => 'post',
             'nopaging' => true,
-            //'meta_key' => Templates::$post_templates_job_key,
+            'meta_key' => Templates::$post_templates_job_key,
         ]);
 
         $result = [];
@@ -101,12 +101,16 @@ class PostVideo extends Api
             try {
                 $job = $this->getMoovlyService()->getJob($jobId);
             } catch (\Exception $e) {
-                $job = [
+                $post->job = [
                     'id' =>  $jobMeta['job_id'],
                     'template' => $jobMeta['job_template'],
                     'status' => $jobMeta['job_status'],
                     'values' => [],
                 ];
+
+                $result[] = $post;
+
+                continue;
             }
 
             update_post_meta($post->ID, Templates::$post_templates_job_key, [
