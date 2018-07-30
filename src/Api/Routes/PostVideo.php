@@ -1,4 +1,5 @@
 <?php
+
 namespace Moovly\Api\Routes;
 
 use WP_Query;
@@ -83,17 +84,24 @@ class PostVideo extends Api
         $posts = new WP_Query([
             'post_type' => 'post',
             'nopaging' => true,
-            'meta_key' => Templates::$post_templates_job_key,
+            //'meta_key' => Templates::$post_templates_job_key,
         ]);
+
+        $result = [];
 
         foreach ($posts->posts as &$post) {
             $jobMeta = get_post_meta($post->ID, Templates::$post_templates_job_key)[0];
+
+            if (empty($jobMeta)) {
+                continue;
+            }
+
             $jobId = key_exists('job_id', $jobMeta) ? $jobMeta['job_id'] : '';
 
             try {
                 $job = $this->getMoovlyService()->getJob($jobId);
             } catch (\Exception $e) {
-                return [
+                $job = [
                     'id' =>  $jobMeta['job_id'],
                     'template' => $jobMeta['job_template'],
                     'status' => $jobMeta['job_status'],
@@ -113,9 +121,11 @@ class PostVideo extends Api
                 'status' => $job->getStatus(),
                 'values' => $this->mapJobValuesToResponse($job->getValues(), $post),
             ];
+
+            $result[] = $post;
         }
 
-        return $posts->posts;
+        return $result;
     }
 
     private function mapJobValuesToResponse($values, $post)
