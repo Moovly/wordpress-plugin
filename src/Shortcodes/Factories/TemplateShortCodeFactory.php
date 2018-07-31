@@ -10,11 +10,13 @@ class TemplateShortCodeFactory
 
     /**
      * @param Template $template
+     *
      * @return string
      */
     public static function generate($template)
     {
         $tag = self::$tag;
+
         return sprintf("[{$tag} id='%s']", $template->getId());
     }
 }

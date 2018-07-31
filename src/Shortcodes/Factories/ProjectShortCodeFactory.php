@@ -16,6 +16,7 @@ class ProjectShortCodeFactory
     public static function generate($project)
     {
         $tag = self::$tag;
+
         return sprintf("[{$tag} id='%s']", $project->getId());
     }
 }

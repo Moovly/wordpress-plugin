@@ -10,6 +10,7 @@ class PostVideoShortCodeFactory
 
     /**
      * @param WP_Post $post
+     *
      * @return string
      */
     public static function generate($post)
