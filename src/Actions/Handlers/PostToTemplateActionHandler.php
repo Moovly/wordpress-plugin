@@ -17,6 +17,8 @@ class PostToTemplateActionHandler
 {
     use MoovlyApi;
 
+    private $templateService;
+
     protected $post;
 
     protected $template = null;
@@ -29,7 +31,8 @@ class PostToTemplateActionHandler
     public function __construct($postId)
     {
         $this->post = get_post($postId);
-        $this->template = Templates::getPostTemplate();
+        $this->templateService = new Templates();
+        $this->template = $this->templateService->getPostTemplate();
     }
 
     /**
@@ -163,6 +166,7 @@ class PostToTemplateActionHandler
         }
 
         $rawImg = imagecreatefromstring(file_get_contents($imageUrl));
+
         $extension = pathinfo($imageUrl)['extension'];
         switch ($extension) {
             case 'jpg':

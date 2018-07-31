@@ -3,6 +3,7 @@
 namespace Moovly\Api\Routes;
 
 use Moovly\Api\Api;
+use Moovly\Api\Transformers\TemplateTransformer;
 use Moovly\SDK\Exception\BadRequestException;
 use Moovly\SDK\Model\Variable;
 use Moovly\Templates;
@@ -83,6 +84,11 @@ class Template extends Api
         return current_user_can('manage_options');
     }
 
+    /**
+     * @param WP_REST_Request $request
+     *
+     * @return array
+     */
     public function show($request)
     {
         try {
@@ -91,9 +97,14 @@ class Template extends Api
             return $this->throwWPError(null, $e);
         }
 
-        return $this->mapTemplateToResponse($template);
+        return TemplateTransformer::transform($template);
     }
 
+    /**
+     * @param WP_REST_Request $request
+     *
+     * @return array
+     */
     public function store($request)
     {
         try {
@@ -105,6 +116,11 @@ class Template extends Api
         return $this->createTemplateJobFromRequest($template, $request);
     }
 
+    /**
+     * @param WP_REST_Request $request
+     *
+     * @return array
+     */
     public function settings($request)
     {
         if ($request->get_method() !== 'POST') {
@@ -120,7 +136,7 @@ class Template extends Api
                 return $this->throwWPError(null, $e);
             }
 
-            return $this->mapTemplateToResponse($template);
+            return TemplateTransformer::transform($template);
         })->toArray();
 
         if (is_array($templates)) {
@@ -139,39 +155,10 @@ class Template extends Api
 
     /**
      * @param TemplateModel $template
-     * @return array
-     */
-    private function mapTemplateToResponse($template)
-    {
-        return [
-            'id' => $template->getId(),
-            'name' => $template->getName(),
-            'thumbnail' => $template->getThumbnail(),
-            'preview' => [
-                'show' => true,
-                'url' => $template->getPreview(),
-            ],
-            'variables' => $this->mapTemplateVariablesToResponse($template->getVariables()),
-        ];
-    }
-
-    private function mapTemplateVariablesToResponse($templateVariables)
-    {
-        return collect($templateVariables)->map(function ($variable) {
-            /** @var Variable $variable */
-            return [
-                'id' => $variable->getId(),
-                'weight' => $variable->getWeight(),
-                'type' => $variable->getType(),
-                'name' => $variable->getName(),
-                'requirements' => $variable->getRequirements(),
-            ];
-        })->sortBy('weight')->values();
-    }
-
-    /**
-     * @param TemplateModel $template
      * @param $request
+     *
+     * @return array
+     *
      * @throws
      */
     private function createTemplateJobFromRequest($template, $request)

@@ -2,11 +2,14 @@
 
 namespace Moovly;
 
+use Moovly\Api\Services\MoovlyApi;
 use Moovly\SDK\Model\Variable;
 use Moovly\SDK\Model\Template as MoovlyTemplate;
 
 class Templates
 {
+    use MoovlyApi;
+
     public static $post_templates_key = 'moovly_post_templates';
 
     public static $post_templates_job_key = 'moovly_post_template_job';
@@ -19,9 +22,9 @@ class Templates
     /**
      * @return MoovlyTemplate
      */
-    public static function getPostTemplate()
+    public function getPostTemplate()
     {
-        return self::selectPostTemplate($randomize = false);
+        return $this->selectPostTemplate($randomize = false);
     }
 
     /**
@@ -37,7 +40,7 @@ class Templates
      *
      * @return MoovlyTemplate
      */
-    private static function selectPostTemplate($randomize = false)
+    private function selectPostTemplate($randomize = false)
     {
         $templates = get_option(self::$post_templates_key);
         $template = $templates[0];
@@ -47,23 +50,13 @@ class Templates
         }
 
         if (is_null($template)) {
-            return (new MoovlyTemplate)->setId('')->setVariables([]);
+            return (new MoovlyTemplate())->setId('')->setVariables([]);
         }
 
-        $variables = $template['variables']->map(
-            function ($variableData) {
-                return (new Variable())
-                    ->setId($variableData['id'])
-                    ->setName($variableData['name'])
-                    ->setRequirements($variableData['requirements'])
-                ;
-            }
-        )->toArray();
-
-        return (new MoovlyTemplate())
-            ->setId(key_exists('id', $template) ? $template['id'] : '')
-            ->setName($template['name'])
-            ->setVariables($variables)
-        ;
+        try {
+            return $this->getMoovlyService()->getTemplate($template['id']);
+        } catch (\Exception $e) {
+            return (new MoovlyTemplate())->setId('')->setVariables([]);
+        }
     }
 }
