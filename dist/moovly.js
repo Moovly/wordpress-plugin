@@ -13472,27 +13472,47 @@ __webpack_require__(69);
 
 
 var moovly = {
-    shortcodes: {
-        templates: new Vue({
-            el: "#moovly-template",
-            components: {
-                MoovlyTemplate: __WEBPACK_IMPORTED_MODULE_0__components_shortcodes_MoovlyTemplate___default.a
-            }
-        }),
-        projects: new Vue({
-            el: "#moovly-project",
-            components: {
-                MoovlyProject: __WEBPACK_IMPORTED_MODULE_1__components_shortcodes_MoovlyProject___default.a
-            }
-        }),
-        videos: new Vue({
-            el: "#moovly-post-video",
-            components: {
-                MoovlyPostVideo: __WEBPACK_IMPORTED_MODULE_2__components_shortcodes_MoovlyPostVideo___default.a
-            }
-        })
-    }
+  shortcodes: {
+    templates: [],
+    projects: [],
+    postVideos: []
+  }
 };
+
+var buildElements = function buildElements(className, components) {
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = document.getElementsByClassName(className)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var element = _step.value;
+
+      moovly.shortcodes.postVideos.push(new Vue({
+        el: "#" + element.id,
+        components: components,
+        name: element.id
+      }));
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+};
+
+buildElements('moovly-post-video', { MoovlyPostVideo: __WEBPACK_IMPORTED_MODULE_2__components_shortcodes_MoovlyPostVideo___default.a });
+buildElements('moovly-template', { MoovlyTemplate: __WEBPACK_IMPORTED_MODULE_0__components_shortcodes_MoovlyTemplate___default.a });
+buildElements('moovly-project', { MoovlyProject: __WEBPACK_IMPORTED_MODULE_1__components_shortcodes_MoovlyProject___default.a });
 
 window.moovly = moovly;
 

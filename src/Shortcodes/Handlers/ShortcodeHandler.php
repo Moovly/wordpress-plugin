@@ -39,8 +39,10 @@ abstract class ShortcodeHandler
      */
     public function make($attributes)
     {
-        return "<div id='{$this->tag}' class='moovly-plugin' >" .
-            "<{$this->tag} {$this->mapAttributesToHtmlProperties($attributes)} ></{$this->tag}>" .
+        $name = $this->tag . rand(1, 1000000);
+
+        return "<div id='{$name}' class='moovly-plugin {$this->tag}'>" .
+                "<{$this->tag} {$this->mapAttributesToHtmlProperties($attributes)} ></{$this->tag}>" .
             "</div>"
         ;
     }
