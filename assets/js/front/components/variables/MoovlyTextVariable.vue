@@ -20,6 +20,12 @@
             :placeholder="'Minimum: ' + variable.requirements.minimum_length + ', Maximum: ' + variable.requirements.maximum_length"
             required
         >
+        <p v-if="variable.requirements.minimum_length <= variable.value.length">
+            Characters left until maximum: {{ variable.requirements.maximum_length - variable.value.length}}
+        </p>
+        <p v-if="variable.requirements.minimum_length > variable.value.length">
+            Characters left until minimum: {{ variable.requirements.minimum_length - variable.value.length}}
+        </p>
     </div>
 </template>
 <script>
