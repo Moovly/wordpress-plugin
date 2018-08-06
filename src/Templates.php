@@ -53,6 +53,10 @@ class Templates
             return (new MoovlyTemplate())->setId('')->setVariables([]);
         }
 
+        if ($template instanceof WP_Error || !is_array($template)) {
+            return (new MoovlyTemplate())->setId('')->setVariables([]);
+        }
+
         try {
             return $this->getMoovlyService()->getTemplate($template['id']);
         } catch (\Exception $e) {
