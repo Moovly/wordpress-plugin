@@ -8,7 +8,7 @@
         "illuminate/support": "^5.3",
         "ramsey/uuid": "^3.7",
         "moovly/moovly-php-sdk": "dev-release/5.6#a0e0997762198f90f0cc2e6692737e8d16863e89",
-        "symfony/http-foundation": "^4.2@dev"
+        "symfony/http-foundation": "~3.1"
     },
     "autoload": {
         "psr-4": {
