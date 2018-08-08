@@ -19,7 +19,7 @@ echo "Starting commit for version ${version}"
 cd ../
 
 # This is also done in the build plan, but is done in case this scripts gets run locally
-find . -type d | grep .git | xargs rm -rf
+find ./vendor -type d | grep .git | xargs rm -rf
 
 rsync -RrPz dist/* src/* vendor/* moovly.php README.md readme.txt package.json package-lock.json ./svn/trunk
 
