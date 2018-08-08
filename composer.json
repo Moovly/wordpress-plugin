@@ -7,12 +7,15 @@
         "php": "~5.6 || ^7.1",
         "illuminate/support": "^5.3",
         "ramsey/uuid": "^3.7",
-        "symfony/http-foundation": "^3.4",
-        "moovly/moovly-php-sdk": "dev-release/5.6#a0e0997762198f90f0cc2e6692737e8d16863e89"
+        "moovly/moovly-php-sdk": "dev-release/5.6#a0e0997762198f90f0cc2e6692737e8d16863e89",
+        "symfony/http-foundation": "^4.2@dev"
     },
     "autoload": {
         "psr-4": {
             "Moovly\\": "src/"
         }
+    },
+    "require-dev": {
+        "giacocorsiglia/wordpress-stubs": "dev-master"
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Moovly\Actions\Handlers;
 
-use Moovly\SDK\Model\Value;
+use GuzzleHttp\Psr7\UploadedFile;
 use Moovly\Templates;
 use Moovly\SDK\Model\Job;
 use Illuminate\Support\Str;
@@ -11,7 +11,6 @@ use Moovly\Api\Services\MoovlyApi;
 use Moovly\SDK\Factory\JobFactory;
 use Moovly\SDK\Factory\ValueFactory;
 use Ramsey\Uuid\Uuid;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class PostToTemplateActionHandler
 {
@@ -110,9 +109,9 @@ class PostToTemplateActionHandler
         $postValues = $this->preparePost();
         return collect($this->template->getVariables())->flatten()->mapWithKeys(function ($variable) use ($postValues) {
             /** @var Variable $variable */
-            return [
-                $variable->getId() => $postValues->get($variable->getName(), $default = '')
-            ];
+            $hasVariable = key_exists($variable->getName(), $postValues);
+
+            return [$variable->getId() => $hasVariable ? $postValues[$variable->getName()] : '',];
         })->reject(function ($variable) {
             return is_null($variable);
         })->toArray();
@@ -120,12 +119,12 @@ class PostToTemplateActionHandler
 
     protected function preparePost()
     {
-        return collect([
+        return [
             'post_name' => $this->getNormalizedPostTitle(),
             'post_title' => $this->getNormalizedPostTitle(),
             'post_content' => $this->getNormalizedPostContent(),
             'featured_image' => $this->getFeaturedImageAsFile(),
-        ]);
+        ];
     }
 
     private function getNormalizedPostTitle()
