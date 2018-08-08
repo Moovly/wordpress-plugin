@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-apt-get install rsync -y
+apt-get update && apt-get install rsync -y
 
 rm -rf ./svn
 
