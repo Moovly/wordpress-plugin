@@ -17,14 +17,12 @@ same post that is used to generate said video. We'll use your title, content (up
 your featured image to fill a template(s) of your choice. If you want to spruce up your post with that video, use the 
 [moovly-post-video] shortcode.
 
+
 If you want to engage your visitors, you'll definitly love our [moovly-template] shortcode. We'll generate a form based on your
 template settings and when your visitor enters his/her/x information, they'll be presented a video with their content.
 
+
 == Installation ==
-
-This section describes how to install the plugin and get it working.
-
-e.g.
 
 1. Install the WordPress plugin
 1. Activate the plugin through the 'Plugins' screen in WordPress
@@ -33,6 +31,12 @@ e.g.
 1. Create a new post or save an existing post.
 
 == Changelog ==
+
+= 1.0.95 =
+
+* We have gone golden. A lot of bugfixes, improvements and tweaks from the 1.0 version and we now have
+a stable plugin, which is live on the WordPress.org plugin repo! Huurray! We haven't added any other features
+since the 1.0, but rather fleshed everything out.
 
 = 1.0 =
 * The first release of our plugin, including Templates, Projects and Post automation.
