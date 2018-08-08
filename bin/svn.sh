@@ -31,4 +31,4 @@ cd ./svn
 
 svn status
 
-svn commit -m "Adding working dir of version ${version}"
+svn commit -m "Adding working dir of version ${version}"  --username $SVN_USERNAME --password $SVN_PASSWORD
