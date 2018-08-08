@@ -6,6 +6,8 @@ rm -rf ./svn
 
 mkdir -p ./svn
 
+export SVN_REPO=https://plugins.svn.wordpress.org/moovly
+
 svn checkout $SVN_REPO svn --username $SVN_USERNAME --password $SVN_PASSWORD
 
 cd ./svn
