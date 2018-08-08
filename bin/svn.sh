@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
+apt-get install rsync -y
+
 rm -rf ./svn
 
 mkdir -p ./svn
 
-svn checkout $SVN_REPO svn --username=$SVN_USERNAME --password=$SVN_PASSWORD
+svn checkout $SVN_REPO svn --username $SVN_USERNAME --password $SVN_PASSWORD
 
 cd ./svn
 
