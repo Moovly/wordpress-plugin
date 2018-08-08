@@ -17,7 +17,7 @@
             </small>
           </div>
 
-          <div v-if="ui.videos.length === 0">
+          <div v-if="ui.videos.length === 0 && !ui.loading">
             <moovly-no-post-videos />
           </div>
 
