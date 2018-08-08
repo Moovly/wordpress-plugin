@@ -2,7 +2,6 @@
 
 namespace Moovly\Actions\Handlers;
 
-use GuzzleHttp\Psr7\UploadedFile;
 use Moovly\Templates;
 use Moovly\SDK\Model\Job;
 use Illuminate\Support\Str;
@@ -11,6 +10,7 @@ use Moovly\Api\Services\MoovlyApi;
 use Moovly\SDK\Factory\JobFactory;
 use Moovly\SDK\Factory\ValueFactory;
 use Ramsey\Uuid\Uuid;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class PostToTemplateActionHandler
 {
