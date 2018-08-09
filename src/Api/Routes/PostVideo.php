@@ -12,6 +12,7 @@ use Moovly\Shortcodes\Factories\PostVideoShortCodeFactory;
 class PostVideo extends Api
 {
     use MoovlyApi;
+
     public $group = "post-videos";
 
     public function __construct()
