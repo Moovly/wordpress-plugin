@@ -31,11 +31,29 @@ We know there is some issues with PHP5.6 and OPCache. We recommend running it on
 
 == Installation ==
 
+1. Take a backup of your website
 1. Install the WordPress plugin
 1. Activate the plugin through the 'Plugins' screen in WordPress
 1. Go to the Moovly -> Settings page and enter your Personal Access Token
 1. Pick your post template in the list of templates.
 1. Create a new post or save an existing post.
+
+== Frequently Asked Questions ==
+
+= I ran into some issues with the plugin. Can I get some help?
+You can contact our technical support at api@moovly.com.
+
+= What is the recommended installation
+We suggest a PHP 7.1 installation, and the latest WordPress version. If you are not sure about these things, make sure
+to system administrator. If you are the system administrator and are not sure, you can always install a PHPInfo plugin
+that will tell you all the information that is needed
+
+= Is this plugin free?
+The plugin will always stay free. However, the rendering of videos amongst other things can become paying when the API
+goes out of beta. To keep up to date with this, you can visit our developer portal (https://developer.moovly.com)
+
+To create the Templates needed for this plugin to work, you currently do need a paid subscription for Moovly. A Free
+Trial does not cover this functionality.
 
 == Changelog ==
 
