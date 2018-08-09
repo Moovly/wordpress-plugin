@@ -27,7 +27,7 @@ We have been busy working on this plugin for a couple of months and it has been 
 we cannot garantuee 100% that it will work on your website. If you want to install this **Make sure to backup your
 website and if possible, run it on an staging environment first**.
 
-We know there is some issues with PHP5.6 and OPCache. We recommend running it on PHP 7.1.
+We recommend running it on PHP 7.1.
 
 == Installation ==
 
@@ -46,7 +46,12 @@ You can contact our technical support at api@moovly.com.
 = What is the recommended installation
 We suggest a PHP 7.1 installation, and the latest WordPress version. If you are not sure about these things, make sure
 to system administrator. If you are the system administrator and are not sure, you can always install a PHPInfo plugin
-that will tell you all the information that is needed
+that will tell you all the information that is needed.
+
+We have tested it on 5.6 but there are some installs we have ran into an issue that breaks the code. If you get an error
+amongst the lines of "Cannot use X as Y because the name is already in use." than your install is affected with this
+issue. We strongly suggest then you try to upgrade to PHP 7.1. Some plugins you might have installed might not be
+supported, so please try this on a test site (or staging site) first.
 
 = Is this plugin free?
 The plugin will always stay free. However, the rendering of videos amongst other things can become paying when the API
@@ -54,6 +59,11 @@ goes out of beta. To keep up to date with this, you can visit our developer port
 
 To create the Templates needed for this plugin to work, you currently do need a paid subscription for Moovly. A Free
 Trial does not cover this functionality.
+
+= I've updated and the plugin stopped working. What can I do?
+We've some random behavior on older when you update the plugin, it randomly stops working for your visitors. Disabling
+and re-activating this should solve it. This is also not unique to our plugin, but rather with more JavaScript heavy
+plugins like ours.
 
 == Changelog ==
 
