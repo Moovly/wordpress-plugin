@@ -6,14 +6,13 @@ use WP_Query;
 use WP_Error;
 use Moovly\Api\Api;
 use Moovly\Templates;
-use Moovly\SDK\Model\Job;
 use Moovly\Api\Services\MoovlyApi;
 use Moovly\Shortcodes\Factories\PostVideoShortCodeFactory;
 
 class PostVideo extends Api
 {
     use MoovlyApi;
-    public $group= "post-videos";
+    public $group = "post-videos";
 
     public function __construct()
     {
