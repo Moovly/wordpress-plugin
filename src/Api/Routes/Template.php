@@ -23,6 +23,18 @@ class Template extends Api
         'The reason given by the server: Object: '
     ;
 
+    const TEMPLATE_EMAIL_KEY                  = 'email_address';
+
+    const WORDPRESS_POST_CONTENT_TEMPLATE_KEY = 'post_content';
+    const WORDPRESS_POST_TITLE_TEMPLATE_KEY   = 'post_title';
+    const WORDPRESS_POST_NAME_TEMPLATE_KEY    = 'post_name';
+
+    const WORDPRESS_TEMPLATE_KEYS = [
+        self::WORDPRESS_POST_CONTENT_TEMPLATE_KEY,
+        self::WORDPRESS_POST_TITLE_TEMPLATE_KEY,
+        self::WORDPRESS_POST_NAME_TEMPLATE_KEY,
+    ];
+
     use MoovlyApi;
 
     public $group = "templates";
@@ -69,11 +81,16 @@ class Template extends Api
         return array_map(function (TemplateModel $template) {
             $result = new \stdClass();
 
+            $isPostAutomation = $this->doesTemplateHaveWordPressFields($template);
+            $isEmail = $this->doesTemplateHaveEmailCollect($template);
+
             $result->identifier = $template->getId();
             $result->title = $template->getName();
             $result->shortcode = TemplateShortCodeFactory::generate($template);
             $result->thumbnail = $template->getThumbnail();
             $result->preview = $template->getPreview();
+            $result->supports_post_automation = $isPostAutomation && !$isEmail;
+            $result->is_email_enabled = $isEmail;
 
             return $result;
         }, $templates);
@@ -190,5 +207,48 @@ class Template extends Api
             'job_id' => $job->getId(),
             'options' => $job->getOptions(),
         ];
+    }
+
+    /**
+     * @param TemplateModel $template
+     *
+     * @return bool
+     */
+    private function doesTemplateHaveWordPressFields(TemplateModel $template)
+    {
+        $postContentTargets = array_filter($template->getVariables(), function (Variable $variable) {
+           return $variable->getName() === self::WORDPRESS_POST_CONTENT_TEMPLATE_KEY;
+        });
+
+        $postNameTargets = array_filter($template->getVariables(), function (Variable $variable) {
+            $isTitle = $variable->getName() === self::WORDPRESS_POST_TITLE_TEMPLATE_KEY;
+            $isName = $variable->getName() === self::WORDPRESS_POST_NAME_TEMPLATE_KEY;
+
+            return $isTitle || $isName;
+        });
+
+        if (count($postContentTargets) === 1 && count($postNameTargets) >= 1) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param TemplateModel $template
+     *
+     * @return bool
+     */
+    private function doesTemplateHaveEmailCollect(TemplateModel $template)
+    {
+        $emailTargets = array_filter($template->getVariables(), function (Variable $variable) {
+            return $variable->getName() === self::TEMPLATE_EMAIL_KEY;
+        });
+
+        if (count($emailTargets) === 1) {
+            return true;
+        }
+
+        return false;
     }
 }

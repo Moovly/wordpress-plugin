@@ -23,18 +23,20 @@
               <th scope="col">Thumbnail</th>
               <th scope="col">Template name</th>
               <th scope="col">Shortcode</th>
+              <th scope="col" class="text-center">Sends result to form submitter</th>
               <th scope="col" class="text-center">Use for posts</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="(template, index) in ui.templates" :key="template.identifier">
-              <th scope="row">{{ index + 1 }}</th>
-              <th><img :src="template.thumbnail" style="max-width: 75px"/></th>
-              <th>{{ template.title }}</th>
-              <th>
+              <td scope="row">{{ index + 1 }}</td>
+              <td><img :src="template.thumbnail" style="max-width: 75px"/></td>
+              <td>{{ template.title }}</td>
+              <td>
                 <moovly-shortcode :shortcode="template.shortcode"/>
-              </th>
-              <th class="text-center">
+              </td>
+              <td class="text-center">{{ template.is_email_enabled ? 'Yes' : 'No'}}</td>
+              <td class="text-center">
                 <input
                     type="radio"
                     :id="template.id"
@@ -42,8 +44,9 @@
                     v-model="ui.selectedTemplate"
                     :checked="isChecked(template)"
                     @change="updatePostTemplates"
+                    v-if="template.supports_post_automation"
                 >
-              </th>
+              </td>
             </tr>
             </tbody>
           </table>
