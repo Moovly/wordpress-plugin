@@ -1,6 +1,10 @@
 <template>
   <div :style="'width:' + width">
-    <div v-if="!ui.loading && ui.videos.length" class="embed-responsive embed-responsive-16by9">
+    <div
+        v-if="!ui.loading && ui.videos.length"
+        class="embed-responsive embed-responsive-16by9"
+        style="height: inherit;"
+    >
       <moovly-video
           v-for="video in ui.videos"
           :key="video.url"

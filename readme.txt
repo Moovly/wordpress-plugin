@@ -65,7 +65,17 @@ We've some random behavior on older when you update the plugin, it randomly stop
 and re-activating this should solve it. This is also not unique to our plugin, but rather with more JavaScript heavy
 plugins like ours.
 
+= Does this work with Gutenberg
+Yes it does. It should work with any editor in theory, but some third-party editors strip [] or "" tags, which is vital
+for shortcodes in general. Ones that do this, are therefore not supported with the visual editor, but you can always
+resort to the code editor, which will allow you to put the shortcode in.
+
 == Changelog ==
+
+= 1.0.100 =
+
+* Fixed a bug where some WordPress themes broke the post-code shortcode by not setting the height of the HTML element
+correctly.
 
 = 1.0.95 =
 

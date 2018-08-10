@@ -1,6 +1,6 @@
 <template>
   <div class="row justify-content-center">
-    <div :style="'width:' + width">
+    <div :style="'width:' + width + '; height: inherit;'">
       <div class="my-5 card p-5">
         <moovly-video
             v-if="!ui.loading && !job.id && ui.template.preview && ui.template.preview.url !== null"

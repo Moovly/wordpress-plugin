@@ -1,6 +1,6 @@
 <template>
   <div class="row justify-content-center">
-    <div :style="'width:' + width">
+    <div :style="'width:' + width + '; height: inherit;'">
       <div v-if="!ui.loading && ui.project">
         <div class="embed-responsive embed-responsive-16by9">
           <moovly-video
