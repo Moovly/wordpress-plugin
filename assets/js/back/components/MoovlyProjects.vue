@@ -17,19 +17,23 @@
             <thead>
             <tr>
               <th scope="col">#</th>
+              <th scope="col">Thumbnail</th>
               <th scope="col">Title</th>
               <th scope="col">Description</th>
+              <th scope="col">Is rendered</th>
               <th scope="col">Shortcode</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="(project, index) in ui.projects" :key="project.identifier">
-              <th scope="row">{{ index + 1 }}</th>
-              <th>{{ project.title }}</th>
-              <th>{{ project.description }}</th>
-              <th>
-                <moovly-shortcode :shortcode="project.shortcode"/>
-              </th>
+              <td scope="row">{{ index + 1 }}</td>
+              <td><img :src="project.thumbnail" v-if="project.thumbnail" style="max-width: 75px;"/></td>
+              <td>{{ project.title }}</td>
+              <td>{{ project.description }}</td>
+              <td>{{project.renders.length > 0 ? "Yes" : "No"}}</td>
+              <td>
+                <moovly-shortcode :shortcode="project.shortcode" v-if="project.renders.length > 0"/>
+              </td>
             </tr>
             </tbody>
           </table>
