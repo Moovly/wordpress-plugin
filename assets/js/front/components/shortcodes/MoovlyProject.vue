@@ -64,10 +64,13 @@
         this.ui.loading = true;
         axios.get(`${window.location.origin}/wp-json/moovly/v1/projects/${this.id}`).then(response => {
           this.ui.loading = false;
+          this.ui.error = false;
           this.ui.project = response.data;
         }).catch(error => {
           this.ui.loading = true;
           this.ui.error = true;
+
+          window.setTimeout(this.fetch, 10000);
         });
       }
     }
