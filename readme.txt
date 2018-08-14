@@ -12,22 +12,15 @@ Enables your content and visitors' input to create engaging videos.
 
 == Description ==
 
-The Moovly Wordpress Plugin will allow you to generate videos from your existing/new posts, which can be used in the
-same post that is used to generate said video. We'll use your title, content (up to the <!---readmore---> line) and
-your featured image to fill a template(s) of your choice. If you want to spruce up your post with that video, use the 
-[moovly-post-video] shortcode.
+The Moovly Wordpress Plugin will allow you to generate videos from your existing/new posts, which can be used in the same post that is used to generate said video. We'll use your title, content (up to the <!---readmore---> line) and your featured image to fill a template(s) of your choice. If you want to spruce up your post with that video, use the [moovly-post-video] shortcode.
 
-
-If you want to engage your visitors, you'll definitly love our [moovly-template] shortcode. We'll generate a form based on your
-template settings and when your visitor enters his/her/x information, they'll be presented a video with their content.
+If you want to engage your visitors, you'll definitly love our [moovly-template] shortcode. We'll generate a form based on your template settings and when your visitor enters his/her/x information, they'll be presented a video with their content.
 
 https://vimeo.com/278291940/9bf70bf578
 
 ## Warning: This plugin is still in beta
 
-We have been busy working on this plugin for a couple of months and it has been verified with our environments. However,
-we cannot garantuee 100% that it will work on your website. If you want to install this **Make sure to backup your
-website and if possible, run it on an staging environment first**.
+We have been busy working on this plugin for a couple of months and it has been verified with our environments. However, we cannot garantuee 100% that it will work on your website. If you want to install this **Make sure to backup your website and if possible, run it on an staging environment first**.
 
 We recommend running it on PHP 7.1.
 
@@ -73,6 +66,11 @@ for shortcodes in general. Ones that do this, are therefore not supported with t
 resort to the code editor, which will allow you to put the shortcode in.
 
 == Changelog ==
+
+= 1.0.105 =
+
+* Had to rollback some technical improvements since it broke on the WordPress plugin repository install process.
+* Changed Template Form required field "Name" to "Video title" to avoid conflicts with template variables.
 
 = 1.0.102 =
 
