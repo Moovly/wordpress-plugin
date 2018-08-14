@@ -3,6 +3,7 @@ require('./bootstrap');
 import MoovlyTemplate from './components/shortcodes/MoovlyTemplate';
 import MoovlyProject from './components/shortcodes/MoovlyProject';
 import MoovlyPostVideo from "./components/shortcodes/MoovlyPostVideo";
+import 'promise-polyfill/src/polyfill';
 
 let moovly = {
   shortcodes: {
