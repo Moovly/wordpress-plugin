@@ -72,6 +72,13 @@ resort to the code editor, which will allow you to put the shortcode in.
 
 == Changelog ==
 
+= 1.0.102 =
+
+* Improve project fetching. If you are being throttled, we'll retry in 10 seconds to make sure that video gets shown.
+* Humanize template variable names in forms, for easier reading
+* Prevent shortcodes for unrendered projects to show up
+* Add thumbnail to project view
+
 = 1.0.100 =
 
 * Fixed a bug where some WordPress themes broke the post-code shortcode by not setting the height of the HTML element
