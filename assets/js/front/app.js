@@ -13,7 +13,11 @@ let moovly = {
 };
 
 const buildElements = (className, components) => {
-  for (const element of document.getElementsByClassName(className)) {
+  const classes = document.getElementsByClassName(className);
+
+  for (let index = 0; index < classes.length; index++) {
+    let element = classes[index];
+
     moovly.shortcodes.postVideos.push(new Vue({
       el: "#" + element.id,
       components: components,
