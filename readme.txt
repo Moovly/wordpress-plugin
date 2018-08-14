@@ -65,7 +65,20 @@ Yes it does. It should work with any editor in theory, but some third-party edit
 for shortcodes in general. Ones that do this, are therefore not supported with the visual editor, but you can always
 resort to the code editor, which will allow you to put the shortcode in.
 
+= Do you support Internet Explorer =
+
+No, we do no support Internet Explorer. It is unsupported by Microsoft and all active development has stopped. The
+technologies we use do not work on Internet Explorer. However, if you do want to use this plugin, use a modern browser
+like Chrome, Firefox or Safari.
+
+If you want to make sure that your users upgrade, consider installing a plugin like WP Browser Update, which will notify
+users of old browsers to upgrade as well.
+
 == Changelog ==
+
+= 1.0.108 =
+
+* Ensure compability with Microsoft Edge browser.
 
 = 1.0.105 =
 
