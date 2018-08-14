@@ -4,7 +4,7 @@ namespace Moovly\Api\Routes;
 
 use Moovly\Api\Api;
 use Moovly\Api\Services\MoovlyApi;
-use Moovly\Api\Transformers\ProjectTransformer;
+use Moovly\SDK\Model\Render;
 use Moovly\Shortcodes\Factories\ProjectShortCodeFactory;
 
 /**
@@ -60,7 +60,7 @@ class Project extends Api
         }
 
         return array_map(function ($project) {
-            return ProjectTransformer::transform($project);
+            return $this->transform($project);
         }, $projects);
     }
 
@@ -85,6 +85,32 @@ class Project extends Api
             return $this->throwWPError(null, $e);
         }
 
-        return ProjectTransformer::transform($project);
+        return $this->transform($project);
+    }
+
+    /**
+     * @param \Moovly\SDK\Model\Project $project
+     *
+     * @return array
+     */
+    private function transform($project)
+    {
+        $renders = array_map(function ($render) {
+            /** @var Render $render */
+            return [
+                'id' => $render->getId(),
+                'url' => $render->getUrl(),
+                'quality' => $render->getQuality(),
+                'project_id' => $render->getProjectId(),
+            ];
+        }, array_wrap($project->getRenders()));
+
+        return [
+            'title' => $project->getLabel(),
+            'description' => $project->getDescription(),
+            'shortcode' => ProjectShortCodeFactory::generate($project),
+            'thumbnail' => $project->getThumbnailPath(),
+            'renders' => $renders,
+        ];
     }
 }
