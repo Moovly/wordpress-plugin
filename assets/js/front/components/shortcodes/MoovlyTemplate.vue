@@ -13,7 +13,7 @@
         <form action="" v-if="!ui.loading && !job.id" @submit.prevent="submit">
           <h6 class="mb-5">{{ ui.template.name }}</h6>
           <div class="form-group">
-            <label for="name">Name</label>
+            <label for="name">Video title</label>
             <input type="text" id="name" name="name" v-model="job.name" class="form-control"
                    placeholder="Give it a name">
           </div>
