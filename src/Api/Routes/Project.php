@@ -4,20 +4,34 @@ namespace Moovly\Api\Routes;
 
 use Moovly\Api\Api;
 use Moovly\Api\Services\MoovlyApi;
+use Moovly\Api\Transformers\ProjectTransformer;
 use Moovly\Shortcodes\Factories\ProjectShortCodeFactory;
 
+/**
+ * Class Project
+ * @package Moovly\Api\Routes
+ */
 class Project extends Api
 {
     use MoovlyApi;
 
+    /**
+     * @var string
+     */
     public $group = "projects";
 
+    /**
+     * Project constructor.
+     */
     public function __construct()
     {
         parent::__construct();
         add_action('rest_api_init', [$this, 'registerEndpoints']);
     }
 
+    /**
+     * @return void
+     */
     public function registerEndpoints()
     {
         register_rest_route($this->namespace, '/index', [
@@ -32,6 +46,11 @@ class Project extends Api
         ]);
     }
 
+    /**
+     * @param \WP_REST_Request $request
+     *
+     * @return array|\WP_Error
+     */
     public function index($request)
     {
         try {
@@ -41,15 +60,23 @@ class Project extends Api
         }
 
         return array_map(function ($project) {
-            return $this->mapProjectToResponse($project);
+            return ProjectTransformer::transform($project);
         }, $projects);
     }
 
+    /**
+     * @return bool
+     */
     public function index_permissions()
     {
         return current_user_can('manage_options');
     }
 
+    /**
+     * @param \WP_REST_Request $request
+     *
+     * @return array|\WP_Error
+     */
     public function show($request)
     {
         try {
@@ -58,29 +85,6 @@ class Project extends Api
             return $this->throwWPError(null, $e);
         }
 
-        return $this->mapProjectToResponse($project);
-    }
-
-    private function mapProjectToResponse($project)
-    {
-        return [
-            'title' => $project->getLabel(),
-            'description' => $project->getDescription(),
-            'shortcode' => ProjectShortCodeFactory::generate($project),
-            'thumbnail' => $project->getThumbnailPath(),
-            'renders' => $this->mapRendersToResponse($project->getRenders()),
-        ];
-    }
-
-    private function mapRendersToResponse($renders)
-    {
-        return array_map(function ($render) {
-            return [
-            'id' => $render->getId(),
-                'url' => $render->getUrl(),
-                'quality' => $render->getQuality(),
-                'project_id' => $render->getProjectId(),
-            ];
-        }, array_wrap($renders));
+        return ProjectTransformer::transform($project);
     }
 }
