@@ -12,6 +12,7 @@
     "dependencies": {
         "axios": "^0.18.0",
         "bootstrap": "^4.0.0",
+        "humanize-string": "^1.0.2",
         "vue": "^2.5.16"
     }
 }

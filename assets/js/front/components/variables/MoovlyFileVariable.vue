@@ -1,6 +1,6 @@
 <template>
   <div class="form-group">
-    <label :for="variable.id"> {{ variable.name}} </label>
+    <label :for="variable.id"> {{ variable.label}} <small>({{variable.name}})</small></label>
     <template v-if="!ui.object">
       <input
           type="file"

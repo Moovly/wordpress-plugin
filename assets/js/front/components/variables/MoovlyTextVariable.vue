@@ -1,6 +1,6 @@
 <template>
   <div class="form-group">
-    <label :for="variable.id"> {{ variable.name }}</label>
+    <label :for="variable.id"> {{ variable.label}} <small>({{variable.name}})</small> </label>
     <textarea
         v-if="variable.type === 'text' && variable.requirements.multiline"
         :id="variable.id"
