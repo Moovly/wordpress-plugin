@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ae14a6dda046ef6b63c13891a3464bf",
+    "content-hash": "edd596411412d5bb0003bdae90a2bd75",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -360,12 +360,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Moovly/moovly-php-sdk.git",
-                "reference": "a0e0997762198f90f0cc2e6692737e8d16863e89"
+                "reference": "4c10251b42d94976be2c530b642f74870aa3b2eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Moovly/moovly-php-sdk/zipball/a0e0997762198f90f0cc2e6692737e8d16863e89",
-                "reference": "a0e0997762198f90f0cc2e6692737e8d16863e89",
+                "url": "https://api.github.com/repos/Moovly/moovly-php-sdk/zipball/4c10251b42d94976be2c530b642f74870aa3b2eb",
+                "reference": "4c10251b42d94976be2c530b642f74870aa3b2eb",
                 "shasum": ""
             },
             "require": {
@@ -395,7 +395,7 @@
                 "moovly",
                 "video"
             ],
-            "time": "2018-07-31 09:06:28"
+            "time": "2018-08-24 14:26:46"
         },
         {
             "name": "nicmart/string-template",

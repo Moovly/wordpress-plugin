@@ -76,6 +76,11 @@ users of old browsers to upgrade as well.
 
 == Changelog ==
 
+= 1.0.110 =
+
+* As we have moved away from unsigned uploads, one of our upload calls got broken. If you cannot upload any videos,
+please update to this version and your troubles will be resolved.
+
 = 1.0.108 =
 
 * Ensure compability with Microsoft Edge browser.
