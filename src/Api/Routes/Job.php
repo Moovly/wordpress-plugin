@@ -55,11 +55,15 @@ class Job extends Api
             return $this->throwWPError(null, $e);
         }
 
-        return [
+        $response = [
             'id' => $job->getId(),
             'status' => $job->getStatus(),
             'values' => $this->mapValuesToResponse($job->getValues()),
         ];
+        
+        $result = new WP_REST_Response($response, 200);
+        $result->set_headers(array('Cache-Control' => 'no-cache'));
+        return $result;
     }
 
     public function settings($request)
