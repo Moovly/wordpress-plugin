@@ -11,11 +11,11 @@ export SVN_REPO=https://plugins.svn.wordpress.org/moovly
 
 echo $SVN_USERNAME
 
-svn checkout $SVN_REPO svn --username $SVN_USERNAME --password $SVN_PASSWORD
+svn --no-auth-cache checkout $SVN_REPO svn --username $SVN_USERNAME --password $SVN_PASSWORD
 
 cd ./svn
 
-svn upgrade
+svn --no-auth-cache upgrade
 
 version=$(cat ../VERSION.md)
 
@@ -30,6 +30,6 @@ rsync -RrPz dist/* src/* vendor/* moovly.php README.md readme.txt package.json p
 
 cd ./svn
 
-svn status
+svn --no-auth-cache status
 
-svn commit -m "Adding working dir of version ${version}"  --username $SVN_USERNAME --password $SVN_PASSWORD
+svn --no-auth-cache commit -m "Adding working dir of version ${version}"  --username $SVN_USERNAME --password $SVN_PASSWORD
