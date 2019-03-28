@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-apt-get update && apt-get install rsync -y
+sudo yum -y update
+sudo yum install -y rsync svn
 
 rm -rf ./svn
 
