@@ -60,8 +60,8 @@ class Job extends Api
             'status' => $job->getStatus(),
             'values' => $this->mapValuesToResponse($job->getValues()),
         ];
-        
-        $result = new WP_REST_Response($response, 200);
+
+        $result = new \WP_REST_Response($response, 200);
         $result->set_headers(array('Cache-Control' => 'no-cache'));
         return $result;
     }
