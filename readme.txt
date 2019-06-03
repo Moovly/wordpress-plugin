@@ -1,9 +1,9 @@
 === Plugin Name ===
-Contributors: nielsvermaut
+Contributors: nielscor, nielsvermaut
 Tags: automation, video creation
 Requires at least: 4.9
-Tested up to: 4.9
-Stable tag: 4.9
+Tested up to: 5.2
+Stable tag: 5.2
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -75,6 +75,10 @@ If you want to make sure that your users upgrade, consider installing a plugin l
 users of old browsers to upgrade as well.
 
 == Changelog ==
+
+= 1.0.118 =
+
+* Fixed a bug where the status of a job was cached, making some jobs stuck on pending forever.
 
 = 1.0.110 =
 
