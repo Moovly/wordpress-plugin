@@ -50,7 +50,13 @@ class Job extends Api
     public function status($request)
     {
         try {
-            $job = $this->getMoovlyService()->getJob($request->get_param('id'));
+            $id = $request->get_param('id');
+
+            if (empty($id)) {
+                throw new \Exception('Id not found in request');
+
+            }
+            $job = $this->getMoovlyService()->getJob($id);
         } catch (\Exception $e) {
             return $this->throwWPError(null, $e);
         }
