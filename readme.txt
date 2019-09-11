@@ -1,6 +1,6 @@
 === Plugin Name ===
-Contributors: nielscor, nielsvermaut
-Tags: automation, video creation
+Contributors: jonathanstevens, nielscor, nielsvermaut
+Tags: automation, video creation, video
 Requires at least: 4.9
 Tested up to: 5.2
 Stable tag: 5.2
@@ -14,15 +14,15 @@ Enables your content and visitors' input to create engaging videos.
 
 The Moovly Wordpress Plugin will allow you to generate videos from your existing/new posts, which can be used in the same post that is used to generate said video. We'll use your title, content (up to the <!---readmore---> line) and your featured image to fill a template(s) of your choice. If you want to spruce up your post with that video, use the [moovly-post-video] shortcode.
 
-If you want to engage your visitors, you'll definitly love our [moovly-template] shortcode. We'll generate a form based on your template settings and when your visitor enters his/her/x information, they'll be presented a video with their content.
+If you want to engage your visitors, you'll definitely love our [moovly-template] shortcode. We'll generate a form based on your template settings and when your visitor enters his/her information, they'll be presented a video with their content.
 
 https://vimeo.com/278291940/9bf70bf578
 
 ## Warning: This plugin is still in beta
 
-We have been busy working on this plugin for a couple of months and it has been verified with our environments. However, we cannot garantuee 100% that it will work on your website. If you want to install this **Make sure to backup your website and if possible, run it on an staging environment first**.
+We have been busy working on this plugin for a couple of months and it has been verified in our environments. However, we cannot guarantee 100% that it will work on your website. If you want to install this **make sure to backup your website and if possible, run it on a test environment first**.
 
-We recommend running it on PHP 7.1.
+We recommend running it on PHP 7.3.
 
 == Installation ==
 
@@ -39,13 +39,13 @@ We recommend running it on PHP 7.1.
 You can contact our technical support at api@moovly.com.
 
 = What is the recommended installation
-We suggest a PHP 7.1 installation, and the latest WordPress version. If you are not sure about these things, make sure
-to system administrator. If you are the system administrator and are not sure, you can always install a PHPInfo plugin
-that will tell you all the information that is needed.
+We suggest a PHP 7.3 installation, and the latest WordPress version. If you are not sure about these things, make sure
+to contact your system administrator. If you are the system administrator and are not sure, you can always install a
+PHPInfo plugin that will tell you all the information that is needed.
 
 We have tested it on 5.6 but there are some installs we have ran into an issue that breaks the code. If you get an error
-amongst the lines of "Cannot use X as Y because the name is already in use." than your install is affected with this
-issue. We strongly suggest then you try to upgrade to PHP 7.1. Some plugins you might have installed might not be
+amongst the lines of "Cannot use X as Y because the name is already in use." then your install is affected with this
+issue. We strongly suggest then you try to upgrade to PHP 7.3. Some plugins you might have installed might not be
 supported, so please try this on a test site (or staging site) first.
 
 = Is this plugin free?
@@ -56,9 +56,9 @@ To create the Templates needed for this plugin to work, you currently do need a 
 Trial does not cover this functionality.
 
 = I've updated and the plugin stopped working. What can I do?
-We've some random behavior on older when you update the plugin, it randomly stops working for your visitors. Disabling
-and re-activating this should solve it. This is also not unique to our plugin, but rather with more JavaScript heavy
-plugins like ours.
+We have some random behavior on older WordPress versions that when you update the plugin it randomly stops working for
+your visitors. Disabling and re-activating this should solve it. This is also not unique to our plugin, but rather with
+more JavaScript intensive plugins like ours.
 
 = Does this work with Gutenberg
 Yes it does. It should work with any editor in theory, but some third-party editors strip [] or "" tags, which is vital
@@ -75,6 +75,10 @@ If you want to make sure that your users upgrade, consider installing a plugin l
 users of old browsers to upgrade as well.
 
 == Changelog ==
+
+= 1.0.120 =
+
+* Fixed a bug where the video preview would ignore the size restrictions and break your layout.
 
 = 1.0.118 =
 

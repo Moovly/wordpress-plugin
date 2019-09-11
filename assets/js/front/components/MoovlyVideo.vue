@@ -2,6 +2,7 @@
   <div>
     <video
         class="embed-responsive-item py-3"
+        :style="'width:' + width"
         controls
         @loadeddata="loaded"
         :poster="poster"
@@ -36,6 +37,10 @@
       },
       autoplay: {
         default: false,
+      },
+      width: {
+        type: String,
+        default: '100%',
       }
     },
 
