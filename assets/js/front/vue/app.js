@@ -1,4 +1,4 @@
-require('./bootstrap');
+require('../common/bootstrap');
 
 import MoovlyTemplate from './components/shortcodes/MoovlyTemplate';
 import MoovlyProject from './components/shortcodes/MoovlyProject';
@@ -28,7 +28,7 @@ const buildElements = (className, components) => {
 };
 
 buildElements('moovly-post-video', {MoovlyPostVideo});
-buildElements('moovly-template', {MoovlyTemplate});
+//buildElements('moovly-template', {MoovlyTemplate});
 buildElements('moovly-project', {MoovlyProject});
 
 window.moovly = moovly;
