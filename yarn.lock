@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@moovly/plugins-wordpress@^0.0.23":
-  version "0.0.23"
-  resolved "https://verdaccio.tools.moovly.com/@moovly%2fplugins-wordpress/-/plugins-wordpress-0.0.23.tgz#f546b6e9bea0328daeff250eb3d03772dfbe045f"
-  integrity sha512-gxqQyuUsQkcARoFbKJAuUriOpjKiBMoTlyIDripxR6Mu4xMin0x+ht9dmUiTxoxyPAAQya8O55FEbbMD/9V8fQ==
+"@moovly/plugins-embed@^0.0.24":
+  version "0.0.24"
+  resolved "https://verdaccio.tools.moovly.com/@moovly%2fplugins-embed/-/plugins-embed-0.0.24.tgz#e2e58ab8315d57277ff6b868d0d859c1a508a151"
+  integrity sha512-C48nXsuQkiQKbzcfArNJp7b/n8M0er5qRIQ4tTQ5o7Biwns2B82HZnir9UJMdmhBS8X12KS2/DZP9w6MMTYAQA==
 
 abbrev@1:
   version "1.1.1"

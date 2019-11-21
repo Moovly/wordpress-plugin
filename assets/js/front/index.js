@@ -1,4 +1,4 @@
-import { MoovlyPlugins } from "@moovly/plugins-wordpress";
+import { MoovlyPlugins } from "@moovly/plugins-embed";
 
 const getElementAndRenderCorrectComponent = (className, Component) => {
   const elements = document.getElementsByClassName(className);
