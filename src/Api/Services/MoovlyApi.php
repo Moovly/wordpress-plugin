@@ -52,16 +52,31 @@ trait MoovlyApi
     public function getMoovlyService()
     {
         if (is_null($this->moovly)) {
-            $this->registerMoovlyService();
+            $this->registerMoovlyServiceAndClient();
         }
 
         return $this->moovly;
     }
 
     /**
+     * Lazily loads the MoovlyService and returns it
+     *
+     * @return APIClient
+     */
+    public function getMoovlyClient()
+    {
+        if (is_null($this->client)) {
+            $this->registerMoovlyServiceAndClient();
+        }
+
+        return $this->client;
+    }
+
+
+    /**
      * Constructs the pseudo-DI for the MoovlyService
      */
-    private function registerMoovlyService()
+    private function registerMoovlyServiceAndClient()
     {
         $this->client = new APIClient;
         $this->moovly = new MoovlyService($this->client, Auth::getToken());
