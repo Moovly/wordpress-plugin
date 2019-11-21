@@ -6,10 +6,11 @@
         "production": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
-        "laravel-mix": "^2.1",
-        "cross-env": "^4.0.0"
+        "cross-env": "^4.0.0",
+        "laravel-mix": "^2.1"
     },
     "dependencies": {
+        "@moovly/plugins-wordpress": "^0.0.23",
         "axios": "^0.18.0",
         "bootstrap": "^4.0.0",
         "humanize-string": "^1.0.2",
