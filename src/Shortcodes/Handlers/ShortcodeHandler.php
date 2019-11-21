@@ -37,7 +37,7 @@ abstract class ShortcodeHandler
      *
      * @return string
      */
-    public function make($attributes)
+    public function makeVueTag($attributes)
     {
         $name = $this->tag . rand(1, 1000000);
 
@@ -46,21 +46,33 @@ abstract class ShortcodeHandler
             "</div>"
         ;
     }
+    /**
+     * @param \stdClass $attributes
+     *
+     * @return string
+     */
+    public function makeReactTag($attributes)
+    {
+        $name = $this->tag . rand(1, 1000000);
+
+        return "<div id='{$name}' class='moovly-plugin {$this->tag}' {$this->mapAttributesToHtmlProperties($attributes, true)}></div>";
+    }
 
     /**
      * @param $attributes
      *
      * @return string
      */
-    protected function mapAttributesToHtmlProperties($attributes)
+    protected function mapAttributesToHtmlProperties($attributes, $asDataProperty = false)
     {
         $attributes = array_merge([
             'width' => $this->getAttribute('width', '100%'),
             'class' => $this->getAttribute('class'),
         ], $attributes);
 
-        array_walk($attributes, function (&$value, $key) {
-            $value = "$key='$value'";
+        array_walk($attributes, function (&$value, $key) use ($asDataProperty) {
+            $property = $asDataProperty? "data-${key}" : $key;
+            $value = "$property='$value'";
         });
 
         return implode(' ', $attributes);

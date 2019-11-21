@@ -6,7 +6,7 @@ class PostVideoShortcodeHandler extends ShortcodeHandler
 {
     public function handle()
     {
-        return $this->make([
+        return $this->makeVueTag([
             'post-id' => $this->getAttribute('post-id', $this->getPostId()),
             'autoplay' => $this->getAttribute('autoplay', 'false'),
         ]);
