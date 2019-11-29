@@ -41,7 +41,7 @@ class Moovly
         $this->settings = new Settings;
         $this->actions = new Actions;
         $this->api = new Api;
-        $this->pluginDirectoryName = explode(DIRECTORY_SEPARATOR, plugin_basename( __FILE__ ))[0];
+        $this->pluginDirectoryName = explode(DIRECTORY_SEPARATOR, plugin_basename(__FILE__))[0];
     }
 
     public function initialize()
@@ -119,7 +119,13 @@ class Moovly
             $this->version,
             true
         );
-
+        wp_register_script(
+            'moovly',
+            plugins_url($this->pluginDirectoryName . "/dist/moovly-custom.js"),
+            [],
+            $this->version,
+            true
+        );
         wp_localize_script('moovly', 'moovlyApiSettings', [
             'root' => esc_url_raw(rest_url($this->api->domain)),
             'version' => $this->api->version,

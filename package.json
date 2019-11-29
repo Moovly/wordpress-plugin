@@ -10,7 +10,7 @@
         "laravel-mix": "^2.1"
     },
     "dependencies": {
-        "@moovly/plugins-embed": "^0.0.24",
+        "@moovly/plugins-embed": "^0.0.26",
         "axios": "^0.18.0",
         "bootstrap": "^4.0.0",
         "humanize-string": "^1.0.2",

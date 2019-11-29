@@ -1,16 +1,16 @@
-require('../common/bootstrap');
+require("../common/bootstrap");
 
-import MoovlyTemplate from './components/shortcodes/MoovlyTemplate';
-import MoovlyProject from './components/shortcodes/MoovlyProject';
+import MoovlyTemplate from "./components/shortcodes/MoovlyTemplate";
+import MoovlyProject from "./components/shortcodes/MoovlyProject";
 import MoovlyPostVideo from "./components/shortcodes/MoovlyPostVideo";
-import 'promise-polyfill/src/polyfill';
+import "promise-polyfill/src/polyfill";
 
 let moovly = {
   shortcodes: {
     templates: [],
     projects: [],
-    postVideos: [],
-  },
+    postVideos: []
+  }
 };
 
 const buildElements = (className, components) => {
@@ -19,16 +19,18 @@ const buildElements = (className, components) => {
   for (let index = 0; index < classes.length; index++) {
     let element = classes[index];
 
-    moovly.shortcodes.postVideos.push(new Vue({
-      el: "#" + element.id,
-      components: components,
-      name: element.id
-    }));
+    moovly.shortcodes.postVideos.push(
+      new Vue({
+        el: "#" + element.id,
+        components: components,
+        name: element.id
+      })
+    );
   }
 };
 
-buildElements('moovly-post-video', {MoovlyPostVideo});
-//buildElements('moovly-template', {MoovlyTemplate});
-buildElements('moovly-project', {MoovlyProject});
+buildElements("moovly-post-video", { MoovlyPostVideo });
+buildElements("moovly-template", { MoovlyTemplate });
+buildElements("moovly-project", { MoovlyProject });
 
 window.moovly = moovly;
