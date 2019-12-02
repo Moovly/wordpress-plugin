@@ -20,6 +20,11 @@ class Asset extends Api
 
     public function registerEndpoints()
     {
+        register_rest_route($this->namespace, '/upload-object', [
+            'methods' => 'POST',
+            'callback' => [$this, 'objectUpload'],
+        ]);
+
         register_rest_route($this->namespace, '/upload-image', [
             'methods' => 'POST',
             'callback' => [$this, 'image'],
@@ -29,6 +34,17 @@ class Asset extends Api
             'methods' => 'POST',
             'callback' => [$this, 'video'],
         ]);
+    }
+
+    public function objectUpload($request)
+    {
+        try {
+            $object = $this->getMoovlyService()->getUploadUrl($request->get_param('file_name'));
+        } catch (\Exception $e) {
+            return $this->throwWPError(null, $e);
+        }
+
+        return $object;
     }
 
     public function image($request)

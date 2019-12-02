@@ -108,12 +108,10 @@ class Template extends Api
     public function show($request)
     {
         try {
-            $template = $this->getMoovlyClient()->getTemplate($request->get_param('id'));
+            return $this->getMoovlyClient()->getTemplate($request->get_param('id'));
         } catch (\Exception $e) {
             return $this->throwWPError(null, $e);
         }
-
-        return $template;
     }
 
     /**
