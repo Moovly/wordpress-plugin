@@ -42,9 +42,8 @@ abstract class ShortcodeHandler
         $name = $this->tag . rand(1, 1000000);
 
         return "<div id='{$name}' class='moovly-plugin {$this->tag}'>" .
-                "<{$this->tag} {$this->mapAttributesToHtmlProperties($attributes)} ></{$this->tag}>" .
-            "</div>"
-        ;
+            "<{$this->tag} {$this->mapAttributesToHtmlProperties($attributes)} ></{$this->tag}>" .
+            "</div>";
     }
     /**
      * @param \stdClass $attributes
@@ -55,7 +54,7 @@ abstract class ShortcodeHandler
     {
         $name = $this->tag . rand(1, 1000000);
 
-        return "<div id='{$name}' class='moovly-plugin {$this->tag}' {$this->mapAttributesToHtmlProperties($attributes, true)}></div>";
+        return "<div id='{$name}' class='{$this->tag}' {$this->mapAttributesToHtmlProperties($attributes, true)}></div>";
     }
 
     /**
@@ -71,7 +70,7 @@ abstract class ShortcodeHandler
         ], $attributes);
 
         array_walk($attributes, function (&$value, $key) use ($asDataProperty) {
-            $property = $asDataProperty? "data-${key}" : $key;
+            $property = $asDataProperty ? "data-${key}" : $key;
             $value = "$property='$value'";
         });
 

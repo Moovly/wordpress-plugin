@@ -209,18 +209,18 @@
   resolved "https://verdaccio.tools.moovly.com/@emotion%2fweak-memoize/-/weak-memoize-0.2.4.tgz#622a72bebd1e3f48d921563b4b60a762295a81fc"
   integrity sha512-6PYY5DVdAY1ifaQW6XYTnOMihmBVT27elqSjEoodchsGjzYlEsTQMcEhSud99kVawatyTZRTiVkJ/c6lwbQ7nA==
 
-"@moovly/plugins-embed@^0.0.31":
-  version "0.0.31"
-  resolved "https://verdaccio.tools.moovly.com/@moovly%2fplugins-embed/-/plugins-embed-0.0.31.tgz#4a58689ef34f1fba2d6a4bece392600fc0adb44a"
-  integrity sha512-hj31dzP7toSf4HNE/7FkqxhFYB4ktEoiwbhj3eXnDH2M0BEmY0yBEYlGl8XqNWDlteoreqYA0SVm2ASTBZcQDg==
+"@moovly/plugins-embed@^0.0.35":
+  version "0.0.35"
+  resolved "https://verdaccio.tools.moovly.com/@moovly%2fplugins-embed/-/plugins-embed-0.0.35.tgz#c11e7a7451b25af9771890a317bb734d96a1139f"
+  integrity sha512-FgH6gey/bdjZZcPbWgLUU6Fmcl/GeqrJmtfZUE3buy7+EHhKGDnd9T8TNGNnsEtM1/n5G8S7r7K+PI/WPBXRTQ==
   dependencies:
-    "@moovly/ui" "^1.0.60"
+    "@moovly/ui" "^1.0.79"
     styled-components "^4.3.2"
 
-"@moovly/ui@^1.0.60":
-  version "1.0.78"
-  resolved "https://verdaccio.tools.moovly.com/@moovly%2fui/-/ui-1.0.78.tgz#aa8b2e75876554974a40374e57ecc9628dcb5420"
-  integrity sha512-XJVih6AeeWWl1UnYniAYnwgNqmwl1ZEBZkmy6oJJo29nXDdKFBRLWNhFAjTyZm8TTYUpngHJnLsZJKUcHHWwrw==
+"@moovly/ui@^1.0.79":
+  version "1.0.79"
+  resolved "https://verdaccio.tools.moovly.com/@moovly%2fui/-/ui-1.0.79.tgz#afe7be3fd6e2a88dfea84a4022be8fef67f73c64"
+  integrity sha512-rZK7IOuwir1KM8P8DS2zTT3dgtyAm8rbwZvJDsSsT37u+v049GJKnx8SJSuumojStDe/2AfmXT1nX8WoHGBtHA==
   dependencies:
     "@babel/polyfill" "7.6.0"
     "@babel/runtime" "7.6.0"
