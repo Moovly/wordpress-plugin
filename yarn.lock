@@ -209,10 +209,10 @@
   resolved "https://verdaccio.tools.moovly.com/@emotion%2fweak-memoize/-/weak-memoize-0.2.4.tgz#622a72bebd1e3f48d921563b4b60a762295a81fc"
   integrity sha512-6PYY5DVdAY1ifaQW6XYTnOMihmBVT27elqSjEoodchsGjzYlEsTQMcEhSud99kVawatyTZRTiVkJ/c6lwbQ7nA==
 
-"@moovly/plugins-embed@^0.0.35":
-  version "0.0.35"
-  resolved "https://verdaccio.tools.moovly.com/@moovly%2fplugins-embed/-/plugins-embed-0.0.35.tgz#c11e7a7451b25af9771890a317bb734d96a1139f"
-  integrity sha512-FgH6gey/bdjZZcPbWgLUU6Fmcl/GeqrJmtfZUE3buy7+EHhKGDnd9T8TNGNnsEtM1/n5G8S7r7K+PI/WPBXRTQ==
+"@moovly/plugins-embed@^1.0.0":
+  version "1.0.0"
+  resolved "https://verdaccio.tools.moovly.com/@moovly%2fplugins-embed/-/plugins-embed-1.0.0.tgz#dbd401bd471b1a534886db0c0c3ec92726e9725f"
+  integrity sha512-gUSbN0OttGVswlVqgBqZszAzxPCgJ+2usDdGenuv35o/u0cClqoj7onxCGANxPUyAMWluRsU5C4Nn7Obvz0Ozg==
   dependencies:
     "@moovly/ui" "^1.0.79"
     styled-components "^4.3.2"
