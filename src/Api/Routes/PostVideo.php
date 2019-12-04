@@ -37,7 +37,7 @@ class PostVideo extends Api
 
     public function index($request)
     {
-        return array_map(function($postWithVideo) {
+        return array_map(function ($postWithVideo) {
             return [
                 'title' => $postWithVideo->post_title,
                 'url' => (get_edit_post_link($postWithVideo->ID, $htmlEncode = false)),

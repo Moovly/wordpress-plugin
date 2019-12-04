@@ -15,7 +15,6 @@ const buildElements = (className, components) => {
 
   for (let index = 0; index < classes.length; index++) {
     let element = classes[index];
-    debugger;
     moovly.shortcodes.postVideos.push(
       new Vue({
         el: "#" + element.id,
