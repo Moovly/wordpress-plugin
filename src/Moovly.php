@@ -119,13 +119,7 @@ class Moovly
             $this->version,
             true
         );
-        wp_register_script(
-            'moovly',
-            plugins_url($this->pluginDirectoryName . "/dist/moovly-custom.js"),
-            [],
-            $this->version,
-            true
-        );
+
         wp_localize_script('moovly', 'moovlyApiSettings', [
             'root' => esc_url_raw(rest_url($this->api->domain)),
             'version' => $this->api->version,

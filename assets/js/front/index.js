@@ -1,3 +1,6 @@
+import "./common/bootstrap";
+import "./vue";
+
 import { MoovlyPlugin } from "@moovly/plugins-embed";
 
 const getElementAndRenderCorrectComponent = (className, Component) => {
