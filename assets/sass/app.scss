@@ -1,21 +1,36 @@
 .moovly-plugin {
-    @import '~bootstrap/scss/bootstrap-reboot';
-    @import '~bootstrap/scss/bootstrap-grid';
-    @import '~bootstrap/scss/mixins';
-    @import '~bootstrap/scss/utilities';
-    @import '~bootstrap/scss/type';
-    @import '~bootstrap/scss/code';
-    @import '~bootstrap/scss/alert';
-    @import '~bootstrap/scss/buttons';
-    @import '~bootstrap/scss/card';
-    @import '~bootstrap/scss/forms';
-    @import '~bootstrap/scss/input-group';
-    @import '~bootstrap/scss/jumbotron';
-    @import '~bootstrap/scss/tables';
-    @import 'moovly';
+  @import "~bootstrap/scss/bootstrap-reboot";
+  @import "~bootstrap/scss/bootstrap-grid";
+  @import "~bootstrap/scss/mixins";
+  @import "~bootstrap/scss/utilities";
+  @import "~bootstrap/scss/type";
+  @import "~bootstrap/scss/code";
+  @import "~bootstrap/scss/alert";
+  @import "~bootstrap/scss/buttons";
+  @import "~bootstrap/scss/card";
+  @import "~bootstrap/scss/forms";
+  @import "~bootstrap/scss/input-group";
+  @import "~bootstrap/scss/jumbotron";
+  @import "~bootstrap/scss/tables";
+  @import "moovly";
 
-    .input-icon {
-        height: 1rem;
-        width: 1rem;
+  .input-icon {
+    height: 1rem;
+    width: 1rem;
+  }
+}
+.moovly-template {
+  .template-field {
+    input:not([type="checkbox"]):not([type="radio"]),
+    select:not([type="checkbox"]):not([type="radio"]),
+    textarea:not([type="checkbox"]):not([type="radio"]) {
+      border-width: 1px;
+      border-style: solid;
+      border-color: rgb(223, 223, 223);
+      color: rgb(165, 165, 165);
     }
+  }
+  .template-field-loader > div {
+    width: 200px;
+  }
 }
