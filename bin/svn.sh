@@ -35,6 +35,8 @@ cp ../readme.txt trunk
 cp ../package.json trunk
 cp ../package-lock.json trunk
 
+rm -rf trunk/vendor/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php
+
 # DO THE ADD ALL NOT KNOWN FILES UNIX COMMAND
 svn --no-auth-cache add --force * --auto-props --parents --depth infinity -q
 
