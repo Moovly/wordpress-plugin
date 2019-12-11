@@ -3,6 +3,9 @@
 sudo yum -y update
 sudo yum install -y rsync svn
 
+# This is also done in the build plan, but is done in case this scripts gets run locally
+find ./vendor -type d | grep .git | xargs rm -rf
+
 rm -rf ./svn
 
 mkdir -p ./svn
@@ -17,17 +20,36 @@ cd ./svn
 
 svn --no-auth-cache upgrade
 
-echo "Starting commit for version ${VERSION}"
+svn --no-auth-cache update
 
-cd ../
+rm -Rf trunk
+mkdir trunk
 
-# This is also done in the build plan, but is done in case this scripts gets run locally
-find ./vendor -type d | grep .git | xargs rm -rf
+cp -R dist trunk
+cp -R src trunk
+cp -R vendor trunk
+cp moovly.php trunk
+cp README.md trunk
+cp readme.txt trunk
+cp package.json trunk
+cp package-lock.json trunk
 
-rsync -RrPz dist/* src/* vendor/* moovly.php README.md readme.txt package.json package-lock.json ./svn/trunk
+# DO THE ADD ALL NOT KNOWN FILES UNIX COMMAND
+svn --no-auth-cache- add --force * --auto-props --parents --depth infinity -q
 
-cd ./svn
+# DO THE REMOVE ALL DELETED FILES UNIX COMMAND
+MISSING_PATHS=$( svn --no-auth-cache status | sed -e '/^!/!d' -e 's/^!//' )
+
+# iterate over filepaths
+for MISSING_PATH in $MISSING_PATHS; do
+    svn --no-auth-cache rm --force "$MISSING_PATH"
+done
+
+# COPY TRUNK TO TAGS/$VERSION
+echo "Copying trunk to new tag"
+svn copy trunk tags/${VERSION}
 
 svn --no-auth-cache status
 
-svn --no-auth-cache commit -m "Adding working dir of version ${VERSION}"  --username $SVN_USERNAME --password $SVN_PASSWORD
+echo "Starting commit for version $VERSION"
+svn --no-auth-cache commit -m "Adding working dir of version $VERSION"  --username $SVN_USERNAME --password $SVN_PASSWORD
