@@ -30,7 +30,7 @@ pipeline {
         sh 'aws s3 cp ./moovly.zip s3://${S3_BUCKET}/wordpress-plugin/latest/'
         sh 'cp ./moovly.zip ./moovly-1.0.${BUILD_NUMBER}'
         sh 'aws s3 cp ./moovly-1.0.${BUILD_NUMBER} s3://${S3_BUCKET}/wordpress-plugin/'
-        sh 'export SVN_REPO=https://plugins.svn.wordpress.org/moovly'
+        sh 'export VERSION=1.0.${BUILD_NUMBER}'
 
         withCredentials([string(credentialsId: 'wordpress_username', variable: 'SVN_USERNAME'), string(credentialsId: 'wordpress_password', variable: 'SVN_PASSWORD')]) {
             sh './bin/svn.sh'

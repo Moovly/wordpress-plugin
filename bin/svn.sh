@@ -17,9 +17,7 @@ cd ./svn
 
 svn --no-auth-cache upgrade
 
-version=$(cat ../VERSION.md)
-
-echo "Starting commit for version ${version}"
+echo "Starting commit for version ${VERSION}"
 
 cd ../
 
@@ -32,4 +30,4 @@ cd ./svn
 
 svn --no-auth-cache status
 
-svn --no-auth-cache commit -m "Adding working dir of version ${version}"  --username $SVN_USERNAME --password $SVN_PASSWORD
+svn --no-auth-cache commit -m "Adding working dir of version ${VERSION}"  --username $SVN_USERNAME --password $SVN_PASSWORD
