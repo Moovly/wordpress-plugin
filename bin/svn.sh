@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+VERSION=$1
 sudo yum -y update
 sudo yum install -y rsync svn
 
