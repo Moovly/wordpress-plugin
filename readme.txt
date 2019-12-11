@@ -4,7 +4,7 @@ Tags: automation, video creation, video
 Requires at least: 4.9
 Tested up to: 5.2
 Stable tag: 5.2
-Requires PHP: 5.6
+Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,11 +43,6 @@ We suggest a PHP 7.3 installation, and the latest WordPress version. If you are 
 to contact your system administrator. If you are the system administrator and are not sure, you can always install a
 PHPInfo plugin that will tell you all the information that is needed.
 
-We have tested it on 5.6 but there are some installs we have ran into an issue that breaks the code. If you get an error
-amongst the lines of "Cannot use X as Y because the name is already in use." then your install is affected with this
-issue. We strongly suggest then you try to upgrade to PHP 7.3. Some plugins you might have installed might not be
-supported, so please try this on a test site (or staging site) first.
-
 = Is this plugin free?
 The plugin will always stay free. However, the rendering of videos amongst other things can become paying when the API
 goes out of beta. To keep up to date with this, you can visit our developer portal (https://developer.moovly.com)
@@ -75,6 +70,10 @@ If you want to make sure that your users upgrade, consider installing a plugin l
 users of old browsers to upgrade as well.
 
 == Changelog ==
+
+= 1.0.134 =
+
+* Remove PHP 5.6 support
 
 = 1.0.123 =
 
