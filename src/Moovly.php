@@ -41,7 +41,7 @@ class Moovly
         $this->settings = new Settings;
         $this->actions = new Actions;
         $this->api = new Api;
-        $this->pluginDirectoryName = explode(DIRECTORY_SEPARATOR, plugin_basename( __FILE__ ))[0];
+        $this->pluginDirectoryName = explode(DIRECTORY_SEPARATOR, plugin_basename(__FILE__))[0];
     }
 
     public function initialize()

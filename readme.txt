@@ -76,6 +76,11 @@ users of old browsers to upgrade as well.
 
 == Changelog ==
 
+= 1.0.123 =
+
+* Add screen and webcam recording to template
+* Update template styling
+
 = 1.0.120 =
 
 * Fixed a bug where the video preview would ignore the size restrictions and break your layout.

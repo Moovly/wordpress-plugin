@@ -20,8 +20,7 @@ use WP_Error;
 class Template extends Api
 {
     const TEMPLATE_ERROR_400_STRIPPED = 'The API call you made resulted in a Bad Request response (HTTP 400). ' .
-        'The reason given by the server: Object: '
-    ;
+        'The reason given by the server: Object: ';
 
     const TEMPLATE_EMAIL_KEY                  = 'email_address';
 
@@ -109,12 +108,10 @@ class Template extends Api
     public function show($request)
     {
         try {
-            $template = $this->getMoovlyService()->getTemplate($request->get_param('id'));
+            return $this->getMoovlyClient()->getTemplate($request->get_param('id'));
         } catch (\Exception $e) {
             return $this->throwWPError(null, $e);
         }
-
-        return TemplateTransformer::transform($template);
     }
 
     /**
@@ -124,6 +121,7 @@ class Template extends Api
      */
     public function store($request)
     {
+
         try {
             $template = $this->getMoovlyService()->getTemplate($request->get_param('id'));
         } catch (\Exception $e) {
@@ -181,19 +179,21 @@ class Template extends Api
     private function createTemplateJobFromRequest($template, $request)
     {
         $name = "Moovly Wordpress Plugin: {$template->getName()}, " . date('d/m/Y');
-        $name = is_null($request->get_param('name')) ? $name : $request->get_param('name');
+        $name = is_null($request->get_param('title')) ? $name : $request->get_param('title');
+        $id = is_null($request->get_param('external_id')) ? (string) Uuid::uuid4() : $request->get_param('external_id');
 
         $job = JobFactory::create([
             ValueFactory::create(
-                (string) Uuid::uuid4(),
+                $id,
                 $name,
-                collect($request->get_param('variables'))->mapWithKeys(function ($variable) {
+                collect($request->get_param('template_variables'))->mapWithKeys(function ($variable) {
                     return $variable;
-                })->toArray()),
-            ])->setTemplate($template)
-        ->setOptions([
-            'create_moov' => Job::savesProjects(),
-        ]);
+                })->toArray()
+            ),
+        ])->setTemplate($template)
+            ->setOptions([
+                'create_moov' => Job::savesProjects(),
+            ]);
 
         try {
             $job = $this->getMoovlyService()->createJob($job);
@@ -204,7 +204,7 @@ class Template extends Api
         }
 
         return [
-            'job_id' => $job->getId(),
+            'id' => $job->getId(),
             'options' => $job->getOptions(),
         ];
     }
@@ -217,7 +217,7 @@ class Template extends Api
     private function doesTemplateHaveWordPressFields(TemplateModel $template)
     {
         $postContentTargets = array_filter($template->getVariables(), function (Variable $variable) {
-           return $variable->getName() === self::WORDPRESS_POST_CONTENT_TEMPLATE_KEY;
+            return $variable->getName() === self::WORDPRESS_POST_CONTENT_TEMPLATE_KEY;
         });
 
         $postNameTargets = array_filter($template->getVariables(), function (Variable $variable) {

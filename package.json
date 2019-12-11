@@ -6,14 +6,18 @@
         "production": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
+        "babel-preset-react": "^6.24.1",
+        "cross-env": "^4.0.0",
         "laravel-mix": "^2.1",
-        "cross-env": "^4.0.0"
+        "resolve-url-loader": "^3.1.1",
+        "sass-loader": "^7.0.0"
     },
     "dependencies": {
+        "@moovly/plugins-embed": "^1.0.47",
         "axios": "^0.18.0",
         "bootstrap": "^4.0.0",
         "humanize-string": "^1.0.2",
         "promise-polyfill": "^8.1.0",
-        "vue": "^2.5.16"
+        "vue": "^2.6.10"
     }
 }
