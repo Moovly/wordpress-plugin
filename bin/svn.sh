@@ -25,17 +25,17 @@ svn --no-auth-cache update
 rm -Rf trunk
 mkdir trunk
 
-cp -R dist trunk
-cp -R src trunk
-cp -R vendor trunk
-cp moovly.php trunk
-cp README.md trunk
-cp readme.txt trunk
-cp package.json trunk
-cp package-lock.json trunk
+cp -R ../dist trunk
+cp -R ../src trunk
+cp -R ../vendor trunk
+cp ../moovly.php trunk
+cp ../README.md trunk
+cp ../readme.txt trunk
+cp ../package.json trunk
+cp ../package-lock.json trunk
 
 # DO THE ADD ALL NOT KNOWN FILES UNIX COMMAND
-svn --no-auth-cache- add --force * --auto-props --parents --depth infinity -q
+svn --no-auth-cache add --force * --auto-props --parents --depth infinity -q
 
 # DO THE REMOVE ALL DELETED FILES UNIX COMMAND
 MISSING_PATHS=$( svn --no-auth-cache status | sed -e '/^!/!d' -e 's/^!//' )
