@@ -1,0 +1,72 @@
+name: CI/CD
+
+on: push
+
+env:
+  ECR_REPOSITORY: moovly-wordpress-plugin
+
+jobs:
+  build:
+    runs-on: [ubuntu-latest]
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v1
+      with:
+        php-version: '7.3'
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '8.x'
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-west-1
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+    - name: Build
+      run: |
+        sed -i "s@{{build}}@${GITHUB_SHA}@" moovly.php'
+        Composer install --no-dev --optimize-autoloader --no-scripts --prefer-dist
+        npm install
+        npm run production
+        zip -r moovly dist/* src/* vendor/* moovly.php README.md readme.txt package.json package-lock.json
+    - name: Upload to s3 and SVN
+      run: |
+        aws s3 cp ./moovly.zip s3://${S3_BUCKET}/wordpress-plugin/latest/
+        cp ./moovly.zip ./moovly-1.0.${GITHUB_SHA}
+        aws s3 cp ./moovly-1.0.${GITHUB_SHA} s3://${S3_BUCKET}/wordpress-plugin/
+        ./bin/svn.sh 1.0.${GITHUB_SHA}
+      env:
+        SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+        SVN_PASSWORD: ${{ secrets.SVN_PASSWORD}}
+    - name: Build, tag and push to Amazon ECR
+      id: build-image
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      run: |
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
+  deploy-prod:
+    needs: [build]
+    runs-on: [ubuntu-latest]
+    steps:
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-west-1
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+    - run: echo "::set-env name=BRANCH::${GITHUB_REF#refs/*/}"
+    - name: Pull, tag and push to Amazon ECR
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      run: |
+        docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
+        docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA $ECR_REGISTRY/$ECR_REPOSITORY:${BRANCH//\//-}
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:${BRANCH//\//-}
