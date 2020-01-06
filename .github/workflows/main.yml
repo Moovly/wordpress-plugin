@@ -44,7 +44,8 @@ jobs:
         ./bin/svn.sh ${TAG}
       env:
         SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
-        SVN_PASSWORD: ${{ secrets.SVN_PASSWORD}}
+        SVN_PASSWORD: ${{ secrets.builds.moovly.com}}
+        S3_BUCKET: builds.moovly.com
     - name: Build, tag and push to Amazon ECR
       id: build-image
       env:
