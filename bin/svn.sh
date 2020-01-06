@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
+set -e
 
 VERSION=$1
-sudo yum -y update
-sudo yum install -y rsync svn
 
 # This is also done in the build plan, but is done in case this scripts gets run locally
 find ./vendor -type d | grep .git | xargs rm -rf
