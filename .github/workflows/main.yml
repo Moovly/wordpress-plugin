@@ -32,7 +32,7 @@ jobs:
     - name: Build
       run: |
         sed -i "s@{{build}}@${TAG}@" moovly.php
-        Composer install --no-dev --optimize-autoloader --no-scripts --prefer-dist
+        composer install --no-dev --optimize-autoloader --no-scripts --prefer-dist
         npm install
         npm run production
         zip -r moovly dist/* src/* vendor/* moovly.php README.md readme.txt package.json package-lock.json
