@@ -1,6 +1,8 @@
 name: CI/CD
 
-on: push
+on:
+  release:
+    types: [published]
 
 env:
   ECR_REPOSITORY: moovly-wordpress-plugin
@@ -26,9 +28,10 @@ jobs:
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
+    - run: echo "::set-env name=TAG::${GITHUB_REF#refs/*/}"
     - name: Build
       run: |
-        sed -i "s@{{build}}@${GITHUB_SHA}@" moovly.php'
+        sed -i "s@{{build}}@${TAG}@" moovly.php
         Composer install --no-dev --optimize-autoloader --no-scripts --prefer-dist
         npm install
         npm run production
@@ -36,9 +39,9 @@ jobs:
     - name: Upload to s3 and SVN
       run: |
         aws s3 cp ./moovly.zip s3://${S3_BUCKET}/wordpress-plugin/latest/
-        cp ./moovly.zip ./moovly-1.0.${GITHUB_SHA}
-        aws s3 cp ./moovly-1.0.${GITHUB_SHA} s3://${S3_BUCKET}/wordpress-plugin/
-        ./bin/svn.sh 1.0.${GITHUB_SHA}
+        cp ./moovly.zip ./moovly-${TAG}
+        aws s3 cp ./moovly-${TAG} s3://${S3_BUCKET}/wordpress-plugin/
+        ./bin/svn.sh ${TAG}
       env:
         SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
         SVN_PASSWORD: ${{ secrets.SVN_PASSWORD}}
