@@ -40,3 +40,4 @@ Upload the ZIP-file in the Wordpress plugin section
 ### From Plugin Store
 
 TO DO
+
