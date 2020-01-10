@@ -373,12 +373,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Moovly/moovly-php-sdk.git",
-                "reference": "1637b3c1ede4ecbc18ec9d85067050e80ff02e40"
+                "reference": "c5067cdf2de9bf83ae9f83b91abd21f2a43d2a91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Moovly/moovly-php-sdk/zipball/1637b3c1ede4ecbc18ec9d85067050e80ff02e40",
-                "reference": "1637b3c1ede4ecbc18ec9d85067050e80ff02e40",
+                "url": "https://api.github.com/repos/Moovly/moovly-php-sdk/zipball/c5067cdf2de9bf83ae9f83b91abd21f2a43d2a91",
+                "reference": "c5067cdf2de9bf83ae9f83b91abd21f2a43d2a91",
                 "shasum": ""
             },
             "require": {
@@ -408,7 +408,7 @@
                 "moovly",
                 "video"
             ],
-            "time": "2019-12-02T11:01:43+00:00"
+            "time": "2020-01-10T12:28:14+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -416,12 +416,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "cb6d9852f5c298635944981db058b3d4a3b02dfc"
+                "reference": "c83a7387beb405f762328412f7cb0b4ae59f3c49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/cb6d9852f5c298635944981db058b3d4a3b02dfc",
-                "reference": "cb6d9852f5c298635944981db058b3d4a3b02dfc",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/c83a7387beb405f762328412f7cb0b4ae59f3c49",
+                "reference": "c83a7387beb405f762328412f7cb0b4ae59f3c49",
                 "shasum": ""
             },
             "require": {
@@ -478,7 +478,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2020-01-03T21:54:45+00:00"
+            "time": "2020-01-10T10:50:15+00:00"
         },
         {
             "name": "nicmart/string-template",
@@ -808,12 +808,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "f6da4ae7c5027f4b6c1f8bd83ec920683a9ceaa6"
+                "reference": "da6fcde1775739f723272696a76edc73b6046e8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/f6da4ae7c5027f4b6c1f8bd83ec920683a9ceaa6",
-                "reference": "f6da4ae7c5027f4b6c1f8bd83ec920683a9ceaa6",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/da6fcde1775739f723272696a76edc73b6046e8d",
+                "reference": "da6fcde1775739f723272696a76edc73b6046e8d",
                 "shasum": ""
             },
             "require": {
@@ -887,7 +887,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2020-01-02T18:51:30+00:00"
+            "time": "2020-01-08T22:47:00+00:00"
         },
         {
             "name": "symfony/http-foundation",
