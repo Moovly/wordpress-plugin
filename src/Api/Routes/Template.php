@@ -178,6 +178,7 @@ class Template extends Api
      */
     private function createTemplateJobFromRequest($template, $request)
     {
+       
         $name = "Moovly Wordpress Plugin: {$template->getName()}, " . date('d/m/Y');
         $name = is_null($request->get_param('title')) ? $name : $request->get_param('title');
         $id = is_null($request->get_param('external_id')) ? (string) Uuid::uuid4() : $request->get_param('external_id');
@@ -186,9 +187,7 @@ class Template extends Api
             ValueFactory::create(
                 $id,
                 $name,
-                collect($request->get_param('template_variables'))->mapWithKeys(function ($variable) {
-                    return $variable;
-                })->toArray()
+              $request->get_param('template_variables')
             ),
         ])->setTemplate($template)
             ->setOptions([
