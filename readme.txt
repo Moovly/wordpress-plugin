@@ -24,8 +24,11 @@ We have been busy working on this plugin for a couple of months and it has been 
 
 We recommend running it on PHP 7.3.
 
+Our plugin does not work with Permalink setting set to "Plain".
+
 == Installation ==
 
+1. Make sure the Settings -> Permalinks 'Common settings' is not set to 'Plain'.
 1. Take a backup of your website
 1. Install the WordPress plugin
 1. Activate the plugin through the 'Plugins' screen in WordPress
