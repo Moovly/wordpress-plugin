@@ -54,7 +54,7 @@ class Project extends Api
     public function index($request)
     {
         try {
-            $projects = $this->getMoovlyService()->getProjects();
+            $projects = $this->getMoovlyService()->getProjects('unarchived', ['renders']);
         } catch (\Exception $e) {
             return $this->throwWPError(null, $e);
         }
