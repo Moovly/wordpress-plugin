@@ -53,8 +53,8 @@ abstract class ShortcodeHandler
     public function makeReactTag($attributes)
     {
         $name = $this->tag . rand(1, 1000000);
-
-        return "<div id='{$name}' class='{$this->tag}' {$this->mapAttributesToHtmlProperties($attributes, true)}></div>";
+        $rest = rest_url();
+        return "<div id='{$name}' data-rest='{$rest}' class='{$this->tag}' {$this->mapAttributesToHtmlProperties($attributes, true)}></div>";
     }
 
     /**
