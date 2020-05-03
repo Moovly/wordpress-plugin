@@ -2,10 +2,14 @@
 
 namespace Moovly;
 
+use Moovly\Shortcodes\Traits\ShortcodeTrait;
+
 class PostVideos
 {
+    use ShortcodeTrait;
+
     public function makeView()
     {
-        echo '<moovly-post-videos></moovly-post-videos>';
+        echo $this->createVueTag('moovly-post-videos');
     }
 }

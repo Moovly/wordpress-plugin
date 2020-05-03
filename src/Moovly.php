@@ -8,9 +8,12 @@ use Moovly\Settings;
 use Moovly\PostVideos;
 use Moovly\Actions\Actions;
 use Moovly\Shortcodes\Shortcodes;
+use Moovly\Shortcodes\Traits\ShortcodeTrait;
 
 class Moovly
 {
+    use ShortcodeTrait;
+
     public $version;
 
     public $settings;
@@ -201,6 +204,6 @@ class Moovly
 
     public function makeView()
     {
-        echo "<moovly></moovly>";
+        echo $this->createVueTag('moovly');
     }
 }

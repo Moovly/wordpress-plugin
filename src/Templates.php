@@ -5,10 +5,12 @@ namespace Moovly;
 use Moovly\Api\Services\MoovlyApi;
 use Moovly\SDK\Model\Variable;
 use Moovly\SDK\Model\Template as MoovlyTemplate;
+use Moovly\Shortcodes\Traits\ShortcodeTrait;
 
 class Templates
 {
     use MoovlyApi;
+    use ShortcodeTrait;
 
     public static $post_templates_key = 'moovly_post_templates';
 
@@ -16,7 +18,7 @@ class Templates
 
     public function makeView()
     {
-        echo '<moovly-templates></moovly-templates>';
+        echo $this->createVueTag('moovly-templates');
     }
 
     /**
