@@ -1,3 +1,3 @@
-FROM wordpress:4.9-php5.6
+FROM wordpress:5.5.1-php7.2
 
 ADD ./ /var/www/html/wp-content/plugins/moovly
