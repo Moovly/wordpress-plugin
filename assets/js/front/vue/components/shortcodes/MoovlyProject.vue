@@ -3,11 +3,6 @@
     <div :style="'width:' + width + '; height: inherit;'">
       <div v-if="!ui.loading && ui.project">
         <div class="embed-responsive embed-responsive-16by9">
-          <moovly-video
-            :src="ui.project.renders"
-            :poster="ui.project.thumbnail"
-            :autoplay="autoplay"
-          />
           <video controls class="embed-responsive-item py-3" :poster="ui.project.thumbnail">
             <source v-for="render in ui.project.renders" :key="render.id" :src="render.url" />Your browser does not support the video tag!
           </video>
