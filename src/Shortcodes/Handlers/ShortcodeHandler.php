@@ -41,8 +41,10 @@ abstract class ShortcodeHandler
     {
         $name = $this->tag . rand(1, 1000000);
 
+        $rest = rest_url();
+
         return "<div id='{$name}' class='moovly-plugin {$this->tag}'>" .
-            "<{$this->tag} {$this->mapAttributesToHtmlProperties($attributes)} ></{$this->tag}>" .
+            "<{$this->tag} rest-api-call='{$rest}' {$this->mapAttributesToHtmlProperties($attributes)} ></{$this->tag}>" .
             "</div>";
     }
     /**
@@ -53,8 +55,8 @@ abstract class ShortcodeHandler
     public function makeReactTag($attributes)
     {
         $name = $this->tag . rand(1, 1000000);
-
-        return "<div id='{$name}' class='{$this->tag}' {$this->mapAttributesToHtmlProperties($attributes, true)}></div>";
+        $rest = rest_url();
+        return "<div id='{$name}' data-rest='{$rest}' class='{$this->tag}' {$this->mapAttributesToHtmlProperties($attributes, true)}></div>";
     }
 
     /**

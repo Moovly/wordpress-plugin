@@ -2,14 +2,18 @@ import "./common/bootstrap";
 import "./vue";
 
 import { MoovlyPlugin } from "@moovly/plugins-embed";
-MoovlyPlugin.setProxies({
-  "fetch-template": "/wp-json/moovly/v1/templates/:id",
-  "upload-object": "/wp-json/moovly/v1/objects/upload",
-  "template-job-create": "/wp-json/moovly/v1/templates/:id/store",
-  "template-job-poll": "/wp-json/moovly/v1/jobs/:id/status"
-});
+
 const getElementAndRenderCorrectComponent = (className, Component) => {
   const elements = document.getElementsByClassName(className);
+  if (elements.length) {
+    const item = elements[0];
+    MoovlyPlugin.setProxies({
+      "fetch-template": `${item.dataset.rest}moovly/v1/templates/:id`,
+      "upload-object": `${item.dataset.rest}moovly/v1/objects/upload`,
+      "template-job-create": `${item.dataset.rest}moovly/v1/templates/:id/store`,
+      "template-job-poll": `${item.dataset.rest}moovly/v1/jobs/:id/status`,
+    });
+  }
   for (let i = 0; i < elements.length; i++) {
     const element = elements[i];
     element.classList.remove("moovly-template");
@@ -17,7 +21,7 @@ const getElementAndRenderCorrectComponent = (className, Component) => {
       container: element,
       templateId: element.dataset.id,
       withPreview: true,
-      pollTillSuccess: true
+      pollTillSuccess: true,
     });
   }
 };

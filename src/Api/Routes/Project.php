@@ -80,7 +80,7 @@ class Project extends Api
     public function show($request)
     {
         try {
-            $project = $this->getMoovlyService()->getProject($request->get_param('id'));
+            $project = $this->getMoovlyService()->getProject($request->get_param('id'), ['renders']);
         } catch (\Exception $e) {
             return $this->throwWPError(null, $e);
         }

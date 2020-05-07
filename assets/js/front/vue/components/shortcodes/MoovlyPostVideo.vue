@@ -30,6 +30,9 @@ export default {
     width: {
       type: String,
       default: "100%"
+    },
+    restApiCall: {
+      required: true
     }
   },
 
@@ -56,9 +59,7 @@ export default {
     fetch() {
       this.ui.loading = true;
       axios
-        .get(
-          `${window.location.origin}/wp-json/moovly/v1/post-videos/${this.postId}`
-        )
+        .get(`${this.restApiCall}moovly/v1/post-videos/${this.postId}`)
         .then(response => {
           this.ui.loading = false;
           this.ui.videos = response.data.values;

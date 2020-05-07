@@ -60,33 +60,38 @@
         },
         {
             "name": "doctrine/inflector",
-            "version": "1.3.x-dev",
+            "version": "1.4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "ec3a55242203ffa6a4b27c58176da97ff0a7aec1"
+                "reference": "ab5de36233a1995f9c776c741b803eb8207aebef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/ec3a55242203ffa6a4b27c58176da97ff0a7aec1",
-                "reference": "ec3a55242203ffa6a4b27c58176da97ff0a7aec1",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/ab5de36233a1995f9c776c741b803eb8207aebef",
+                "reference": "ab5de36233a1995f9c776c741b803eb8207aebef",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1"
+                "php": "^7.2"
             },
             "require-dev": {
-                "phpunit/phpunit": "^6.2"
+                "doctrine/coding-standard": "^7.0",
+                "phpstan/phpstan": "^0.11",
+                "phpstan/phpstan-phpunit": "^0.11",
+                "phpstan/phpstan-strict-rules": "^0.11",
+                "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Doctrine\\Common\\Inflector\\": "lib/Doctrine/Common/Inflector"
+                    "Doctrine\\Common\\Inflector\\": "lib/Doctrine/Common/Inflector",
+                    "Doctrine\\Inflector\\": "lib/Doctrine/Inflector"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -115,15 +120,35 @@
                     "email": "schmittjoh@gmail.com"
                 }
             ],
-            "description": "Common String Manipulations with regard to casing and singular/plural rules.",
-            "homepage": "http://www.doctrine-project.org",
+            "description": "PHP Doctrine Inflector is a small library that can perform string manipulations with regard to upper/lowercase and singular/plural forms of words.",
+            "homepage": "https://www.doctrine-project.org/projects/inflector.html",
             "keywords": [
                 "inflection",
-                "pluralize",
-                "singularize",
-                "string"
+                "inflector",
+                "lowercase",
+                "manipulation",
+                "php",
+                "plural",
+                "singular",
+                "strings",
+                "uppercase",
+                "words"
             ],
-            "time": "2019-10-30T19:59:35+00:00"
+            "funding": [
+                {
+                    "url": "https://www.doctrine-project.org/sponsorship.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.patreon.com/phpdoctrine",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Finflector",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-05-06T11:01:57+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -429,12 +454,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Moovly/moovly-php-sdk.git",
-                "reference": "918a6ea3e3bae0758d049cdc874ee75aead74f6c"
+                "reference": "4fd192f50a629d33bb630e126f7c596776c86379"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Moovly/moovly-php-sdk/zipball/918a6ea3e3bae0758d049cdc874ee75aead74f6c",
-                "reference": "918a6ea3e3bae0758d049cdc874ee75aead74f6c",
+                "url": "https://api.github.com/repos/Moovly/moovly-php-sdk/zipball/4fd192f50a629d33bb630e126f7c596776c86379",
+                "reference": "4fd192f50a629d33bb630e126f7c596776c86379",
                 "shasum": ""
             },
             "require": {
@@ -464,7 +489,7 @@
                 "moovly",
                 "video"
             ],
-            "time": "2020-04-29T09:00:45+00:00"
+            "time": "2020-05-07T07:49:29+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -472,12 +497,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "4d93cb95a80d9ffbff4018fe58ae3b7dd7f4b99b"
+                "reference": "43944677eaed1d19af9e7b51f5b87de2291be021"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/4d93cb95a80d9ffbff4018fe58ae3b7dd7f4b99b",
-                "reference": "4d93cb95a80d9ffbff4018fe58ae3b7dd7f4b99b",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/43944677eaed1d19af9e7b51f5b87de2291be021",
+                "reference": "43944677eaed1d19af9e7b51f5b87de2291be021",
                 "shasum": ""
             },
             "require": {
@@ -501,7 +526,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.x-dev"
+                    "dev-master": "2.x-dev",
+                    "dev-3.x": "3.x-dev"
                 },
                 "laravel": {
                     "providers": [
@@ -546,7 +572,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-04-20T15:05:43+00:00"
+            "time": "2020-05-07T08:08:03+00:00"
         },
         {
             "name": "nicmart/string-template",
@@ -1501,12 +1527,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "d642c61d39e41d7158f0990f41ba71ebc2c41011"
+                "reference": "3a5c9dee4145da04b240da2df3d4a759619bc2be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/d642c61d39e41d7158f0990f41ba71ebc2c41011",
-                "reference": "d642c61d39e41d7158f0990f41ba71ebc2c41011",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/3a5c9dee4145da04b240da2df3d4a759619bc2be",
+                "reference": "3a5c9dee4145da04b240da2df3d4a759619bc2be",
                 "shasum": ""
             },
             "require": {
@@ -1585,7 +1611,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-04-12T16:48:26+00:00"
+            "time": "2020-05-04T15:54:21+00:00"
         },
         {
             "name": "symfony/translation-contracts",
