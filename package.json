@@ -13,7 +13,7 @@
         "sass-loader": "^7.0.0"
     },
     "dependencies": {
-        "@moovly/plugins-embed": "^1.0.84",
+        "@moovly/plugins-embed": "^1.1.27",
         "axios": "^0.18.0",
         "bootstrap": "^4.0.0",
         "humanize-string": "^1.0.2",
