@@ -6,7 +6,7 @@ class TemplatesShortcodeHandler extends ShortcodeHandler
 {
     public function handle()
     {
-        return $this->makeVueTag([
+        return $this->makeReactTag([
             'tag' => $this->getAttribute('tag', null),
         ]);
     }

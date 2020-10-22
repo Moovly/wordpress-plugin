@@ -6,7 +6,7 @@ class ProjectsShortcodeHandler extends ShortcodeHandler
 {
     public function handle()
     {
-        return $this->makeVueTag([
+        return $this->makeReactTag([
             'page' => $this->getAttribute('page', 0),
         ]);
     }
