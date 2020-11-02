@@ -6,26 +6,27 @@ let moovly = {
   shortcodes: {
     templates: [],
     projects: [],
-    postVideos: []
-  }
+    postVideos: [],
+  },
 };
 
-const buildElements = (className, components) => {
+const buildElements = (className, type, components) => {
   const classes = document.getElementsByClassName(className);
 
   for (let index = 0; index < classes.length; index++) {
     let element = classes[index];
-    moovly.shortcodes.postVideos.push(
+
+    moovly.shortcodes[type].push(
       new Vue({
         el: "#" + element.id,
         components: components,
-        name: element.id
+        name: element.id,
       })
     );
   }
 };
 
-buildElements("moovly-post-video", { MoovlyPostVideo });
-buildElements("moovly-project", { MoovlyProject });
+buildElements("moovly-post-video", "postVideos", { MoovlyPostVideo });
+buildElements("moovly-project", "projects", { MoovlyProject });
 
 window.moovly = moovly;
