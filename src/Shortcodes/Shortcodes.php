@@ -2,15 +2,17 @@
 
 namespace Moovly\Shortcodes;
 
-use Moovly\Shortcodes\Factories\ProjectsShortCodeFactory;
+use Moovly\Shortcodes\Factories\UserRendersShortCodeFactory;
 use Moovly\Shortcodes\Factories\TemplatesShortCodeFactory;
 use Moovly\Shortcodes\Handlers\ProjectShortcodeHandler;
 use Moovly\Shortcodes\Factories\ProjectShortCodeFactory;
-use Moovly\Shortcodes\Handlers\ProjectsShortcodeHandler;
+use Moovly\Shortcodes\Handlers\UserRendersShortCodeHandler;
 use Moovly\Shortcodes\Handlers\TemplateShortcodeHandler;
 use Moovly\Shortcodes\Factories\TemplateShortCodeFactory;
 use Moovly\Shortcodes\Handlers\PostVideoShortcodeHandler;
 use Moovly\Shortcodes\Factories\PostVideoShortCodeFactory;
+use Moovly\Shortcodes\Factories\RemainingCreditsShortCodeFactory;
+use Moovly\Shortcodes\Handlers\RemainingCreditsShortCodeHandler;
 use Moovly\Shortcodes\Handlers\TemplatesShortcodeHandler;
 
 class Shortcodes
@@ -19,8 +21,9 @@ class Shortcodes
         TemplateShortCodeFactory::class => TemplateShortcodeHandler::class,
         TemplatesShortCodeFactory::class => TemplatesShortcodeHandler::class,
         ProjectShortCodeFactory::class => ProjectShortcodeHandler::class,
-        ProjectsShortCodeFactory::class => ProjectsShortcodeHandler::class,
+        UserRendersShortCodeFactory::class => UserRendersShortCodeHandler::class,
         PostVideoShortCodeFactory::class => PostVideoShortcodeHandler::class,
+        RemainingCreditsShortCodeFactory::class => RemainingCreditsShortCodeHandler::class,
     ];
 
     public function register()

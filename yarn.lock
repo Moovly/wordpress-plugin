@@ -213,25 +213,39 @@
   resolved "https://verdaccio.tools.moovly.com/@emotion%2fweak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
-"@moovly/plugins-embed@^1.1.34":
-  version "1.1.34"
-  resolved "https://verdaccio.tools.moovly.com/@moovly%2fplugins-embed/-/plugins-embed-1.1.34.tgz#2d3a84b568324624e20fe067a367d036c0950cca"
-  integrity sha512-UuWMypW6SQD/3J5GzZJmX306gYrZTpYT3z5c+2EloQiVGRb30x5stg8HEkG69moiK2VA3nK/1wHsBzKrJET0WQ==
+"@moovly/plugins-embed@^1.1.50":
+  version "1.1.50"
+  resolved "https://verdaccio.tools.moovly.com/@moovly%2fplugins-embed/-/plugins-embed-1.1.50.tgz#e284beef040113d2fa27c0fdd91618f4477f899d"
+  integrity sha512-ozMmbLMAMycBoxxMRMDlL05NT7wmxRRsqjs5N7ZKthzOhTydVYAjo8Yz46u3GaRWo0gcTC9H34hoMBgoJSSWiQ==
   dependencies:
-    "@moovly/ui" "^1.0.80"
+    "@moovly/ui" "^1.2.62"
     react "16.9.0"
     react-dom "16.9.0"
     styled-components "^4.3.2"
 
-"@moovly/ui@^1.0.80":
-  version "1.2.43"
-  resolved "https://verdaccio.tools.moovly.com/@moovly%2fui/-/ui-1.2.43.tgz#8b89acf5bc56bc5dff70b706252122abb4da32b6"
-  integrity sha512-7lHxW4cOqrlgEtO231UJA0XmhZJN1BiIJZfHfbNn7IgSfjpS39sMkV21Pex6XuWs/BtsmCp8sniaWLYJzWObUQ==
+"@moovly/ui@^1.2.62":
+  version "1.2.62"
+  resolved "https://verdaccio.tools.moovly.com/@moovly%2fui/-/ui-1.2.62.tgz#9e73fa62bef340724ecd25eadc08b4cfa9a3b767"
+  integrity sha512-wyjG7LgmrKlmQgnhGVnEY/tHFoQJQ3EL555k1AfLklFNY9UpXY5ra3pXi6mM4PTQNSMUMHgOKIr6AFVGtrGchw==
   dependencies:
     "@babel/polyfill" "7.6.0"
     "@babel/runtime" "7.6.0"
     indexof "^0.0.1"
     rc-slider "^8.7.1"
+    react-file-drop "^3.0.7"
+    react-modal "^3.11.1"
+    react-select "^3.0.8"
+
+"@moovly/ui@^1.2.63":
+  version "1.2.63"
+  resolved "https://verdaccio.tools.moovly.com/@moovly%2fui/-/ui-1.2.63.tgz#7c4fda39c4527139ca20024bc445aca17a5ca146"
+  integrity sha512-+f1uQ4Ay979LPFCb5SzWYXLWlSJGZc315RMPU42Cz2PJA8BRJxaSFmsU9qC9ZG5ZLoBtxC7XBruDbsWHjM+45Q==
+  dependencies:
+    "@babel/polyfill" "7.6.0"
+    "@babel/runtime" "7.6.0"
+    indexof "^0.0.1"
+    rc-slider "^8.7.1"
+    react-file-drop "^3.0.7"
     react-modal "^3.11.1"
     react-select "^3.0.8"
 
@@ -5668,7 +5682,7 @@ promise-polyfill@^8.1.0:
   resolved "https://verdaccio.tools.moovly.com/promise-polyfill/-/promise-polyfill-8.1.3.tgz#8c99b3cf53f3a91c68226ffde7bde81d7f904116"
   integrity sha512-MG5r82wBzh7pSKDRa9y+vllNHz3e3d4CNj1PQE4BQYxLme0gKYYBm9YENq+UkEikyZ0XbiGWxYlVw3Rl9O/U8g==
 
-prop-types@15.x, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.2:
+prop-types@15.x, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://verdaccio.tools.moovly.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -5889,6 +5903,16 @@ rc-util@^4.0.4, rc-util@^4.15.3, rc-util@^4.4.0:
     react-lifecycles-compat "^3.0.4"
     shallowequal "^1.1.0"
 
+react-dom@16.12.0:
+  version "16.12.0"
+  resolved "https://verdaccio.tools.moovly.com/react-dom/-/react-dom-16.12.0.tgz#0da4b714b8d13c2038c9396b54a92baea633fe11"
+  integrity sha512-LMxFfAGrcS3kETtQaCkTKjMiifahaMySFDn71fZUNpPHZQEzmk/GiAeIT8JSOrHB23fnuCOMruL2a8NYlw+8Gw==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    scheduler "^0.18.0"
+
 react-dom@16.9.0:
   version "16.9.0"
   resolved "https://verdaccio.tools.moovly.com/react-dom/-/react-dom-16.9.0.tgz#5e65527a5e26f22ae3701131bcccaee9fb0d3962"
@@ -5898,6 +5922,13 @@ react-dom@16.9.0:
     object-assign "^4.1.1"
     prop-types "^15.6.2"
     scheduler "^0.15.0"
+
+react-file-drop@^3.0.7:
+  version "3.1.0"
+  resolved "https://verdaccio.tools.moovly.com/react-file-drop/-/react-file-drop-3.1.0.tgz#54f2f433f306f9179997b632f7c349c6ff0e0d4e"
+  integrity sha512-VaDXCU2DNLKwlistNEc0yWy3VEr7UyokLEs0Dz6FHSdXtoCRYmA1i1bBaDG5i1DAhrtQueOuBAI40C1keI38cw==
+  dependencies:
+    prop-types "^15.7.2"
 
 react-input-autosize@^2.2.2:
   version "2.2.2"
@@ -5948,6 +5979,15 @@ react-transition-group@^4.3.0:
     "@babel/runtime" "^7.5.5"
     dom-helpers "^5.0.1"
     loose-envify "^1.4.0"
+    prop-types "^15.6.2"
+
+react@16.12.0:
+  version "16.12.0"
+  resolved "https://verdaccio.tools.moovly.com/react/-/react-16.12.0.tgz#0c0a9c6a142429e3614834d5a778e18aa78a0b83"
+  integrity sha512-fglqy3k5E+81pA8s+7K0/T3DBCF0ZDOher1elBFzF7O6arXJgzyu/FW+COxFvAWXJoJN9KIZbT2LXlukwphYTA==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
     prop-types "^15.6.2"
 
 react@16.9.0:
@@ -6384,6 +6424,14 @@ scheduler@^0.15.0:
   version "0.15.0"
   resolved "https://verdaccio.tools.moovly.com/scheduler/-/scheduler-0.15.0.tgz#6bfcf80ff850b280fed4aeecc6513bc0b4f17f8e"
   integrity sha512-xAefmSfN6jqAa7Kuq7LIJY0bwAPG3xlCj0HMEBQk1lxYiDKZscY2xJ5U/61ZTrYbmNQbXa+gc7czPkVo11tnCg==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+
+scheduler@^0.18.0:
+  version "0.18.0"
+  resolved "https://verdaccio.tools.moovly.com/scheduler/-/scheduler-0.18.0.tgz#5901ad6659bc1d8f3fdaf36eb7a67b0d6746b1c4"
+  integrity sha512-agTSHR1Nbfi6ulI0kYNK0203joW2Y5W4po4l+v03tOoiJKpTBbxpNhWDvqc/4IcOw+KLmSiQLTasZ4cab2/UWQ==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
@@ -6927,7 +6975,7 @@ style-loader@^0.18.2:
     loader-utils "^1.0.2"
     schema-utils "^0.3.0"
 
-styled-components@^4.3.2:
+styled-components@^4.3.2, styled-components@^4.4.0:
   version "4.4.1"
   resolved "https://verdaccio.tools.moovly.com/styled-components/-/styled-components-4.4.1.tgz#e0631e889f01db67df4de576fedaca463f05c2f2"
   integrity sha512-RNqj14kYzw++6Sr38n7197xG33ipEOktGElty4I70IKzQF1jzaD1U4xQ+Ny/i03UUhHlC5NWEO+d8olRCDji6g==

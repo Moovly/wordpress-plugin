@@ -9,6 +9,7 @@ use Moovly\Api\Routes\Account;
 use Moovly\Api\Routes\Project;
 use Moovly\Api\Routes\Template;
 use Moovly\Api\Routes\PostVideo;
+use Moovly\Api\Routes\Render;
 
 class Api
 {
@@ -28,6 +29,7 @@ class Api
         'assets' => Asset::class,
         'projects' => Project::class,
         'postVideos' => PostVideo::class,
+        'renders' => Render::class
     ];
 
     public function __construct()

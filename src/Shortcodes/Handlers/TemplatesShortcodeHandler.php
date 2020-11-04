@@ -7,7 +7,8 @@ class TemplatesShortcodeHandler extends ShortcodeHandler
     public function handle()
     {
         return $this->makeReactTag([
-            'tag' => $this->getAttribute('tag', null),
+            'detail-endpoint' => $this->getAttribute('detail-endpoint', null),
+            'type' => $this->getAttribute('type', null),
         ]);
     }
 }

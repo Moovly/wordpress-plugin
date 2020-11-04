@@ -2,11 +2,9 @@
 
 namespace Moovly\Shortcodes\Factories;
 
-use Moovly\SDK\Model\Project;
-
-class ProjectsShortCodeFactory
+class RemainingCreditsShortCodeFactory
 {
-    public static $tag = "moovly-projects";
+    public static $tag = "moovly-remaining-credits";
 
     /**
      * @return string
