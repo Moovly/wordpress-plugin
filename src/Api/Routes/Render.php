@@ -48,13 +48,31 @@ class Render extends Api
     {
         try {
             $renders = $this->getMoovlyService()->getRendersForUser('generated');
+        
         } catch (\Exception $e) {
             return $this->throwWPError(null, $e);
         }
 
-        return $renders;
+        return array_map(function ($render) {
+            return $this->transform($render);
+        }, $renders);
     }
 
-   
+
+     /**
+     * @param array \Moovly\SDK\Model\Render $render
+     *
+     * @return array
+     */
+    private function transform($render)
+    {
+      
+        return [
+            'id' => $render->getId(),
+            'finished_at' => $render->getDateFinished()->format(DATE_ATOM),
+            'video_url' => $render->getUrl(),
+            'quality' => $render->getQuality(),
+        ];
+    }
    
 }

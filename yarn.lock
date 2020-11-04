@@ -213,33 +213,20 @@
   resolved "https://verdaccio.tools.moovly.com/@emotion%2fweak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
-"@moovly/plugins-embed@^1.1.50":
-  version "1.1.50"
-  resolved "https://verdaccio.tools.moovly.com/@moovly%2fplugins-embed/-/plugins-embed-1.1.50.tgz#e284beef040113d2fa27c0fdd91618f4477f899d"
-  integrity sha512-ozMmbLMAMycBoxxMRMDlL05NT7wmxRRsqjs5N7ZKthzOhTydVYAjo8Yz46u3GaRWo0gcTC9H34hoMBgoJSSWiQ==
+"@moovly/plugins-embed@^1.1.51":
+  version "1.1.51"
+  resolved "https://verdaccio.tools.moovly.com/@moovly%2fplugins-embed/-/plugins-embed-1.1.51.tgz#6e5158e0ecbb37c8ea274b797178544cad9bf88b"
+  integrity sha512-mPFO6Rq5fSqiwXDCyX0V7tic87kqk/zEZt04dzDuZeMZy1vvaSkkdS+ZtRCvFgluNASqvtyajrvTM9KKSgp+gw==
   dependencies:
-    "@moovly/ui" "^1.2.62"
+    "@moovly/ui" "^1.2.64"
     react "16.9.0"
     react-dom "16.9.0"
     styled-components "^4.3.2"
 
-"@moovly/ui@^1.2.62":
-  version "1.2.62"
-  resolved "https://verdaccio.tools.moovly.com/@moovly%2fui/-/ui-1.2.62.tgz#9e73fa62bef340724ecd25eadc08b4cfa9a3b767"
-  integrity sha512-wyjG7LgmrKlmQgnhGVnEY/tHFoQJQ3EL555k1AfLklFNY9UpXY5ra3pXi6mM4PTQNSMUMHgOKIr6AFVGtrGchw==
-  dependencies:
-    "@babel/polyfill" "7.6.0"
-    "@babel/runtime" "7.6.0"
-    indexof "^0.0.1"
-    rc-slider "^8.7.1"
-    react-file-drop "^3.0.7"
-    react-modal "^3.11.1"
-    react-select "^3.0.8"
-
-"@moovly/ui@^1.2.63":
-  version "1.2.63"
-  resolved "https://verdaccio.tools.moovly.com/@moovly%2fui/-/ui-1.2.63.tgz#7c4fda39c4527139ca20024bc445aca17a5ca146"
-  integrity sha512-+f1uQ4Ay979LPFCb5SzWYXLWlSJGZc315RMPU42Cz2PJA8BRJxaSFmsU9qC9ZG5ZLoBtxC7XBruDbsWHjM+45Q==
+"@moovly/ui@^1.2.64":
+  version "1.2.64"
+  resolved "https://verdaccio.tools.moovly.com/@moovly%2fui/-/ui-1.2.64.tgz#be6d88961abf3e41531fd7aa51e74efff1ff0fe7"
+  integrity sha512-IWwbBXNNo0ABznJWeU1TG2I2hV5YzCtv/980unYXi9F8r5rMe/sLa9rDDw9MgdnPbJB4PsxZYY1siur9jI7hMw==
   dependencies:
     "@babel/polyfill" "7.6.0"
     "@babel/runtime" "7.6.0"
@@ -5957,7 +5944,7 @@ react-modal@^3.11.1:
     react-lifecycles-compat "^3.0.0"
     warning "^4.0.3"
 
-react-select@^3.0.8:
+react-select@^3.0.8, react-select@^3.1.0:
   version "3.1.0"
   resolved "https://verdaccio.tools.moovly.com/react-select/-/react-select-3.1.0.tgz#ab098720b2e9fe275047c993f0d0caf5ded17c27"
   integrity sha512-wBFVblBH1iuCBprtpyGtd1dGMadsG36W5/t2Aj8OE6WbByDg5jIFyT7X5gT+l0qmT5TqWhxX+VsKJvCEl2uL9g==
