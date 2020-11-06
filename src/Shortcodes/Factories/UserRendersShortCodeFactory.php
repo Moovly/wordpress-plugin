@@ -4,7 +4,7 @@ namespace Moovly\Shortcodes\Factories;
 
 class UserRendersShortCodeFactory
 {
-    public static $tag = "moovly-user-renders";
+    public static $tag = "moovly-renders";
 
     /**
      * @return string

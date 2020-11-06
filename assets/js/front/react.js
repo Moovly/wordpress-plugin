@@ -44,7 +44,7 @@ getElementAndRenderCorrectComponent("moovly-templates", (element) => {
   });
 });
 
-getElementAndRenderCorrectComponent("moovly-user-renders", (element) => {
+getElementAndRenderCorrectComponent("moovly-renders", (element) => {
   new MoovlyPlugin.Projects.UserRenderList({
     container: element,
   });
