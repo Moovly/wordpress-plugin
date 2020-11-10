@@ -1,28 +1,34 @@
 {
     "private": true,
     "scripts": {
-        "dev": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "watch": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "production": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+        "dev": "npm run development",
+        "development": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "npm run development -- --watch",
+        "watch-poll": "npm run watch -- --watch-poll",
+        "hot": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "prod": "npm run production",
+        "production": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
         "babel-preset-react": "^6.24.1",
-        "cross-env": "^4.0.0",
-        "laravel-mix": "^2.1",
-        "resolve-url-loader": "^3.1.1",
-        "sass-loader": "^7.0.0"
+        "cross-env": "^7.0.2",
+        "laravel-mix": "^5.0",
+        "resolve-url-loader": "^3.1.2",
+        "sass": "^1.29.0",
+        "sass-loader": "^10.0.5",
+        "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
         "@moovly/plugins-embed": "^1.1.52",
-        "@moovly/ui": "^1.2.64",
-        "axios": "^0.18.0",
-        "bootstrap": "^4.0.0",
-        "humanize-string": "^1.0.2",
-        "promise-polyfill": "^8.1.0",
-        "react": "16.12.0",
-        "react-dom": "16.12.0",
+        "@moovly/ui": "^1.2.66",
+        "axios": "^0.21.0",
+        "bootstrap": "^4.5.3",
+        "humanize-string": "^2.1.0",
+        "promise-polyfill": "^8.2.0",
+        "react": "17.0.1",
+        "react-dom": "17.0.1",
         "react-select": "^3.1.0",
-        "styled-components": "^4.4.0",
-        "vue": "^2.6.10"
+        "styled-components": "^5.2.1",
+        "vue": "^2.6.12"
     }
 }
