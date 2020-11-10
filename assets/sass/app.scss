@@ -1,19 +1,22 @@
-.moovly-plugin {
-  @import "~bootstrap/scss/bootstrap-reboot";
-  @import "~bootstrap/scss/bootstrap-grid";
-  @import "~bootstrap/scss/mixins";
-  @import "~bootstrap/scss/utilities";
-  @import "~bootstrap/scss/type";
-  @import "~bootstrap/scss/code";
-  @import "~bootstrap/scss/alert";
-  @import "~bootstrap/scss/buttons";
-  @import "~bootstrap/scss/card";
-  @import "~bootstrap/scss/forms";
-  @import "~bootstrap/scss/input-group";
-  @import "~bootstrap/scss/jumbotron";
-  @import "~bootstrap/scss/tables";
-  @import "moovly";
+@import url("https://fonts.googleapis.com/css?family=Rubik:300,400");
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700,300");
 
+@import "~bootstrap/scss/bootstrap-reboot";
+@import "~bootstrap/scss/bootstrap-grid";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/code";
+@import "~bootstrap/scss/alert";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/card";
+@import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/input-group";
+@import "~bootstrap/scss/jumbotron";
+@import "~bootstrap/scss/tables";
+@import "moovly";
+
+.moovly-plugin {
   .input-icon {
     height: 1rem;
     width: 1rem;
