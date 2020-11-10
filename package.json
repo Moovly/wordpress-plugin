@@ -20,13 +20,13 @@
     },
     "dependencies": {
         "@moovly/plugins-embed": "^1.1.52",
-        "@moovly/ui": "^1.2.66",
+        "@moovly/ui": "^1.2.64",
         "axios": "^0.21.0",
         "bootstrap": "^4.5.3",
         "humanize-string": "^2.1.0",
         "promise-polyfill": "^8.2.0",
-        "react": "17.0.1",
-        "react-dom": "17.0.1",
+        "react": "16.9.0",
+        "react-dom": "16.9.0",
         "react-select": "^3.1.0",
         "styled-components": "^5.2.1",
         "vue": "^2.6.12"
