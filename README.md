@@ -17,9 +17,9 @@ npm run watch
 ## Release
 
 
-* Update version in `moovly.php`
-* run `npm run production`
-* push to remote to start build flow (not ready yet)
+* Optional: Update changelog in `readme.txt`
+* Push to GitHub
+* Create release on GitHub
 
 ## Installation
 
