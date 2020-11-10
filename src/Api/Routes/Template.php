@@ -49,7 +49,6 @@ class Template extends Api
         register_rest_route($this->namespace, '/index', [
             'methods' => 'GET',
             'callback' => [$this, 'index'],
-            'permission_callback' => [$this, 'index_permissions'],
         ]);
 
         register_rest_route($this->namespace, '/settings', [
@@ -69,10 +68,14 @@ class Template extends Api
         ]);
     }
 
-    public function index()
+    public function index($request)
     {
+        $filters = $request->get_param('filters');
+        if (!is_array(($filters))) {
+            $filters =[$filters];
+        }
         try {
-            $templates = $this->getMoovlyService()->getTemplates();
+            $templates = $this->getMoovlyService()->getTemplates($filters);
         } catch (\Exception $e) {
             return $this->throwWPError(null, $e);
         }
@@ -82,7 +85,8 @@ class Template extends Api
 
             $isPostAutomation = $this->doesTemplateHaveWordPressFields($template);
             $isEmail = $this->doesTemplateHaveEmailCollect($template);
-
+            $result->id = $template->getId();
+            $result->name= $template->getName();
             $result->identifier = $template->getId();
             $result->title = $template->getName();
             $result->shortcode = TemplateShortCodeFactory::generate($template);
