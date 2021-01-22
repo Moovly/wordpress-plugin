@@ -5,6 +5,7 @@ namespace Moovly\Api\Routes;
 use Moovly\Api\Api;
 use Moovly\Api\Transformers\TemplateTransformer;
 use Moovly\SDK\Exception\BadRequestException;
+use Moovly\SDK\Factory\NotificationFactory;
 use Moovly\SDK\Model\Variable;
 use Moovly\Templates;
 use Moovly\Api\Routes\Job;
@@ -198,8 +199,15 @@ class Template extends Api
                 'create_moov' => Job::savesProjects(),
                 
             ]);
-        $notifications = $request->get_param('notifications');
-        if (!empty($notifications)) {
+        $notificationsData = $request->get_param('notifications');
+        if (!empty($notificationsData)) {
+            $notifications = [];
+            foreach ($notificationsData as $notificationData) {
+                $notifications = NotificationFactory::create(
+                    $notificationData['type'],
+                    $notificationData['payload']
+                );
+            }
             $job->setNotifications($notifications);
         }
         try {
