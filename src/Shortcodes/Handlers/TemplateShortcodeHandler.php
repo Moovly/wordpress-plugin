@@ -8,6 +8,7 @@ class TemplateShortcodeHandler extends ShortcodeHandler
     {
         return $this->makeReactTag([
             'id' => $this->getAttribute('id'),
+            'publish-to-youtube' => $this->getAttribute('publish-to-youtube', '0'),
         ]);
     }
 }

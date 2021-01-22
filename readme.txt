@@ -73,6 +73,10 @@ If you want to make sure that your users upgrade, consider installing a plugin l
 users of old browsers to upgrade as well.
 
 == Changelog ==
+= 1.0.151 =
+
+* Automatically publish to YouTube by adding `publish-to-youtube=1` in a template shortcode. Make sure to link your account to YouTube via the Moovly Dashboard first.
+
 = 1.0.149 =
 
 * Add renders, templates & remaining credits shortcode
