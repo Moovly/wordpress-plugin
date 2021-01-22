@@ -196,8 +196,12 @@ class Template extends Api
         ])->setTemplate($template)
             ->setOptions([
                 'create_moov' => Job::savesProjects(),
+                
             ]);
-
+        $notifications = $request->get_param('notifications');
+        if (!empty($notifications)) {
+            $job->setNotifications($notifications);
+        }
         try {
             $job = $this->getMoovlyService()->createJob($job);
         } catch (BadRequestException $bre) {

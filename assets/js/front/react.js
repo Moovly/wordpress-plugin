@@ -24,6 +24,7 @@ const getElementAndRenderCorrectComponent = (className, rendercomponent) => {
 
 getElementAndRenderCorrectComponent("moovly-template", (element) => {
   let id = element.dataset.id;
+  const publishToYoutube = element.dataset.publishToYoutube === "1";
   if (id === "query") {
     const parsedQuery = parse(window.location.search.substring(1));
     id = parsedQuery.template_id;
@@ -32,6 +33,7 @@ getElementAndRenderCorrectComponent("moovly-template", (element) => {
     container: element,
     templateId: id,
     withPreview: true,
+    publishToYoutube,
     pollTillSuccess: true,
   });
 });
