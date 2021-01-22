@@ -203,11 +203,12 @@ class Template extends Api
         if (!empty($notificationsData)) {
             $notifications = [];
             foreach ($notificationsData as $notificationData) {
-                $notifications = NotificationFactory::create(
+                array_push($notifications, NotificationFactory::create(
                     $notificationData['type'],
                     $notificationData['payload']
-                );
+                ));
             }
+           
             $job->setNotifications($notifications);
         }
         try {
