@@ -73,6 +73,10 @@ If you want to make sure that your users upgrade, consider installing a plugin l
 users of old browsers to upgrade as well.
 
 == Changelog ==
+= 1.0.151 =
+
+* Publish template to youtube
+
 = 1.0.149 =
 
 * Add renders, templates & remaining credits shortcode
