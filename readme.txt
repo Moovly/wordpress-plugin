@@ -75,7 +75,7 @@ users of old browsers to upgrade as well.
 == Changelog ==
 = 1.0.151 =
 
-* Publish template to youtube
+* Automatically publish to YouTube by adding `publish-to-youtube=1` in a template shortcode. Make sure to link your account to YouTube via the Moovly Dashboard first.
 
 = 1.0.149 =
 
