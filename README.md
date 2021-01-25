@@ -16,7 +16,6 @@ npm run watch
 
 ## Release
 
-
 * Optional: Update changelog in `readme.txt`
 * Push to GitHub
 * Create release on GitHub
