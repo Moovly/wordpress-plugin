@@ -197,7 +197,7 @@ class Template extends Api
         ])->setTemplate($template)
             ->setOptions([
                 'create_moov' => Job::savesProjects(),
-                
+                'create_render' => true,
             ]);
         $notificationsData = $request->get_param('notifications');
         if (!empty($notificationsData)) {
