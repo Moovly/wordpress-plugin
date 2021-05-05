@@ -38,7 +38,6 @@
       <div class="col-sm-4"></div>
       <div class="col-sm-4">
         <h2>About the plugin</h2>
-        <p>Version: 1.0.0</p>
         <a
           href="https://developer.moovly.com/docs/integrations/wordpress"
           target="_blank"

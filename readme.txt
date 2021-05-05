@@ -2,9 +2,9 @@
 Contributors: jonathanstevens, nielscor, nielsvermaut
 Tags: automation, video creation, video
 Requires at least: 4.9
-Tested up to: 5.2
-Stable tag: 5.2
-Requires PHP: 7.0
+Tested up to: 5.7
+Stable tag: 1.0
+Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,19 +12,19 @@ Enables your content and visitors' input to create engaging videos.
 
 == Description ==
 
-The Moovly Wordpress Plugin will allow you to generate videos from your existing/new posts, which can be used in the same post that is used to generate said video. We'll use your title, content (up to the <!---readmore---> line) and your featured image to fill a template(s) of your choice. If you want to spruce up your post with that video, use the [moovly-post-video] shortcode.
+The Moovly Wordpress Plugin will allow you to generate videos from your existing/new posts, which can be used in the
+same post that is used to generate said video. We'll use your title, content (up to the <!---readmore---> line) and your
+featured image to fill a template(s) of your choice. If you want to spruce up your post with that video, use the
+`[moovly-post-video]` shortcode.
 
-If you want to engage your visitors, you'll definitely love our [moovly-template] shortcode. We'll generate a form based on your template settings and when your visitor enters his/her information, they'll be presented a video with their content.
+If you want to engage your visitors, you'll definitely love our `[moovly-template]` shortcode. We'll generate a form based on your template settings and when your visitor enters his/her information, they'll be presented a video with their content.
 
 https://vimeo.com/278291940/9bf70bf578
 
-## Warning: This plugin is still in beta
+We recommend running it on PHP 7.4 or higher. All currently supported PHP versions are compatible with the Moovly plugin.
+The plugin maintains compability with older PHP versions, but we only support the [currently supported PHP versions](https://www.php.net/supported-versions.php).
 
-We have been busy working on this plugin for a couple of months and it has been verified in our environments. However, we cannot guarantee 100% that it will work on your website. If you want to install this **make sure to backup your website and if possible, run it on a test environment first**.
-
-We recommend running it on PHP 7.3.
-
-Our plugin does not work with Permalink setting set to "Plain".
+The plugin does not work with Permalink setting set to "Plain".
 
 == Installation ==
 
@@ -42,16 +42,13 @@ Our plugin does not work with Permalink setting set to "Plain".
 You can contact our technical support at api@moovly.com.
 
 = What is the recommended installation
-We suggest a PHP 7.3 installation, and the latest WordPress version. If you are not sure about these things, make sure
+We suggest a PHP 7.4 installation, and the latest WordPress version. If you are not sure about these things, make sure
 to contact your system administrator. If you are the system administrator and are not sure, you can always install a
 PHPInfo plugin that will tell you all the information that is needed.
 
 = Is this plugin free?
-The plugin will always stay free. However, the rendering of videos amongst other things can become paying when the API
-goes out of beta. To keep up to date with this, you can visit our developer portal (https://developer.moovly.com)
-
-To create the Templates needed for this plugin to work, you currently do need a paid subscription for Moovly. A Free
-Trial does not cover this functionality.
+The plugin will always stay free. However, certain Moovly API operations (video rendering, ...) are not free. The Moovly
+API does come with a free trial. For more information, you can visit our developer portal (https://developer.moovly.com)
 
 = I've updated and the plugin stopped working. What can I do?
 We have some random behavior on older WordPress versions that when you update the plugin it randomly stops working for
@@ -63,16 +60,37 @@ Yes it does. It should work with any editor in theory, but some third-party edit
 for shortcodes in general. Ones that do this, are therefore not supported with the visual editor, but you can always
 resort to the code editor, which will allow you to put the shortcode in.
 
-= Do you support Internet Explorer =
+= Which shortcodes are available?
+```
+[moovly-post-video post-id={optional:wordpress post id} width={optional:html width} class={optional:css class}]
+```
 
-No, we do no support Internet Explorer. It is unsupported by Microsoft and all active development has stopped. The
-technologies we use do not work on Internet Explorer. However, if you do want to use this plugin, use a modern browser
-like Chrome, Firefox or Safari.
+```
+[moovly-templates type={optional:template type} detailEndpoint={optional:string detailEndpoint} ]
+optional types: 'personal' | 'user-shared' | 'group-shared' | 'public'
+```
 
-If you want to make sure that your users upgrade, consider installing a plugin like WP Browser Update, which will notify
-users of old browsers to upgrade as well.
+```
+[moovly-template id={required:template id} width={optional:html width} class={optional:css class} publish-to-youtube={optional:1} ]
+```
+
+```
+[moovly-project id={required:template id} width={optional:html width} class={optional:css class}]
+```
+
+```
+[moovly-renders]
+```
+
+```
+[moovly-remaining-credits]
+```
 
 == Changelog ==
+= 1.0.154 =
+
+* Update documentation
+
 = 1.0.151 =
 
 * Automatically publish to YouTube by adding `publish-to-youtube=1` in a template shortcode. Make sure to link your account to YouTube via the Moovly Dashboard first.
