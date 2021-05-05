@@ -60,12 +60,24 @@ for shortcodes in general. Ones that do this, are therefore not supported with t
 resort to the code editor, which will allow you to put the shortcode in.
 
 = Which shortcodes are available?
-`[moovly-post-video post-id={optional:wordpress post id} width={optional:html width} class={optional:css class}]`
-`[moovly-templates type={optional:template type} detailEndpoint={optional:string detailEndpoint} ] optional types: 'personal' | 'user-shared' | 'group-shared' | 'public'`
-`[moovly-template id={required:template id} width={optional:html width} class={optional:css class} publish-to-youtube={optional:1} ]`
-`[moovly-project id={required:template id} width={optional:html width} class={optional:css class}]`
-`[moovly-renders]`
-`[moovly-remaining-credits]`
+
+``
+
+    Shortcodes
+
+    [moovly-post-video post-id={optional:wordpress post id} width={optional:html width} class={optional:css class}]
+
+    [moovly-templates type={optional:template type} detailEndpoint={optional:string detailEndpoint} ] optional types: 'personal' | 'user-shared' | 'group-shared' | 'public'
+
+    [moovly-template id={required:template id} width={optional:html width} class={optional:css class} publish-to-youtube={optional:1} ]
+
+    [moovly-project id={required:template id} width={optional:html width} class={optional:css class}]
+
+    [moovly-renders]
+
+    [moovly-remaining-credits]
+
+``
 
 == Changelog ==
 = 1.0.154 =
