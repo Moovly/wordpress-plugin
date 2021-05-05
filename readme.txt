@@ -14,8 +14,7 @@ Enables your content and visitors' input to create engaging videos.
 
 The Moovly Wordpress Plugin will allow you to generate videos from your existing/new posts, which can be used in the
 same post that is used to generate said video. We'll use your title, content (up to the <!---readmore---> line) and your
-featured image to fill a template(s) of your choice. If you want to spruce up your post with that video, use the
-`[moovly-post-video]` shortcode.
+featured image to fill a template(s) of your choice. If you want to spruce up your post with that video, use the `[moovly-post-video]` shortcode.
 
 If you want to engage your visitors, you'll definitely love our `[moovly-template]` shortcode. We'll generate a form based on your template settings and when your visitor enters his/her information, they'll be presented a video with their content.
 
@@ -61,30 +60,12 @@ for shortcodes in general. Ones that do this, are therefore not supported with t
 resort to the code editor, which will allow you to put the shortcode in.
 
 = Which shortcodes are available?
-```
-[moovly-post-video post-id={optional:wordpress post id} width={optional:html width} class={optional:css class}]
-```
-
-```
-[moovly-templates type={optional:template type} detailEndpoint={optional:string detailEndpoint} ]
-optional types: 'personal' | 'user-shared' | 'group-shared' | 'public'
-```
-
-```
-[moovly-template id={required:template id} width={optional:html width} class={optional:css class} publish-to-youtube={optional:1} ]
-```
-
-```
-[moovly-project id={required:template id} width={optional:html width} class={optional:css class}]
-```
-
-```
-[moovly-renders]
-```
-
-```
-[moovly-remaining-credits]
-```
+`[moovly-post-video post-id={optional:wordpress post id} width={optional:html width} class={optional:css class}]`
+`[moovly-templates type={optional:template type} detailEndpoint={optional:string detailEndpoint} ] optional types: 'personal' | 'user-shared' | 'group-shared' | 'public'`
+`[moovly-template id={required:template id} width={optional:html width} class={optional:css class} publish-to-youtube={optional:1} ]`
+`[moovly-project id={required:template id} width={optional:html width} class={optional:css class}]`
+`[moovly-renders]`
+`[moovly-remaining-credits]`
 
 == Changelog ==
 = 1.0.154 =
