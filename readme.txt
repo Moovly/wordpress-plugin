@@ -4,7 +4,7 @@ Tags: automation, video creation, video
 Requires at least: 4.9
 Tested up to: 5.7
 Stable tag: 1.0
-Requires PHP: 7.3
+Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,8 +49,6 @@ PHPInfo plugin that will tell you all the information that is needed.
 = Is this plugin free?
 The plugin will always stay free. However, certain Moovly API operations (video rendering, ...) are not free. The Moovly
 API does come with a free trial. For more information, you can visit our developer portal (https://developer.moovly.com)
-
-To create new templates to use with this plugin, you need a paid subscription for Moovly. A Free Trial does not cover this functionality.
 
 = I've updated and the plugin stopped working. What can I do?
 We have some random behavior on older WordPress versions that when you update the plugin it randomly stops working for
