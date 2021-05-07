@@ -80,6 +80,10 @@ resort to the code editor, which will allow you to put the shortcode in.
 ``
 
 == Changelog ==
+= 1.0.159 =
+
+* Add `create-project=1` & `create-render=1` support in a template shortcode.
+
 = 1.0.154 =
 
 * Update documentation
