@@ -927,17 +927,17 @@
     i18next-localstorage-backend "^3.1.2"
     react "^17.0.1"
 
-"@moovly/plugins-embed@^1.2.48":
-  version "1.2.48"
-  resolved "https://verdaccio.tools.moovly.com/@moovly%2fplugins-embed/-/plugins-embed-1.2.48.tgz#5a5f9830fe6204f306750a9c1488a11785028e60"
-  integrity sha512-y3c6RVWitb3r7WgQZvz+KEfBobYAi2s95MI34xRl3VQDJRoyPRuDQjIUs51JkNoh93rNmYWVibU4DQ2CzmZpBg==
+"@moovly/plugins-embed@^1.2.49":
+  version "1.2.49"
+  resolved "https://verdaccio.tools.moovly.com/@moovly%2fplugins-embed/-/plugins-embed-1.2.49.tgz#9dd72ee6160ceaec049d6c4748ec3b92f28e7e98"
+  integrity sha512-B+oTJerkw5+toSceYKkLm2cO6IFGCfitkF2jvTLo7NZzk4bccEUWOW6Mdo3kQ2j5uK7ifhVKJVIp56LcnLIhKA==
   dependencies:
-    "@moovly/ui" "^2.0.31"
+    "@moovly/ui" "^2.1.38"
     react "16.9.0"
     react-dom "16.9.0"
-    styled-components "^4.3.2"
+    styled-components "^4.4.0"
 
-"@moovly/ui@^2.0.31", "@moovly/ui@^2.1.38":
+"@moovly/ui@^2.1.38":
   version "2.1.38"
   resolved "https://verdaccio.tools.moovly.com/@moovly%2fui/-/ui-2.1.38.tgz#65d10111c8154b529a1573b051a8161d121c97e1"
   integrity sha512-sUxlar8+3mGxXi5hP8vGRDprpZe6CRsOE2fG28cBkafozMZylG+KmBAGLRZKIXDOD+APjDPr3rybuz1+Dq6pig==
@@ -7150,7 +7150,7 @@ style-loader@^0.23.1:
     loader-utils "^1.1.0"
     schema-utils "^1.0.0"
 
-styled-components@^4.3.2:
+styled-components@^4.4.0:
   version "4.4.1"
   resolved "https://verdaccio.tools.moovly.com/styled-components/-/styled-components-4.4.1.tgz#e0631e889f01db67df4de576fedaca463f05c2f2"
   integrity sha512-RNqj14kYzw++6Sr38n7197xG33ipEOktGElty4I70IKzQF1jzaD1U4xQ+Ny/i03UUhHlC5NWEO+d8olRCDji6g==
