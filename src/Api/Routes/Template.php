@@ -188,6 +188,9 @@ class Template extends Api
         $name = is_null($request->get_param('title')) ? $name : $request->get_param('title');
         $id = is_null($request->get_param('external_id')) ? (string) Uuid::uuid4() : $request->get_param('external_id');
 
+        $createProject = is_null($request->get_param('create_project')) ? Job::savesProjects() : $request->get_param('create_project');
+        $createRender = is_null($request->get_param('create_render')) ? true : $request->get_param('create_render');
+
         $job = JobFactory::create([
             ValueFactory::create(
                 $id,
@@ -196,9 +199,9 @@ class Template extends Api
             ),
         ])->setTemplate($template)
             ->setOptions([
-                'create_moov' => Job::savesProjects(),
+                'create_project' => $createProject,
                 'quality' => Job::getQuality(),
-                'create_render' => true,
+                'create_render' => $createRender,
             ]);
 
         $notificationsData = $request->get_param('notifications');

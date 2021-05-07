@@ -21,7 +21,7 @@
     "dependencies": {
         "@moovly/i18n": "^1.0.60",
         "@moovly/ui": "^2.1.38",
-        "@moovly/plugins-embed": "^1.2.47",
+        "@moovly/plugins-embed": "^1.2.48",
         "axios": "^0.21.0",
         "bootstrap": "^4.5.3",
         "humanize-string": "^2.1.0",
