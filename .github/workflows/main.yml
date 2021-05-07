@@ -11,75 +11,75 @@ jobs:
   build:
     runs-on: [ubuntu-latest]
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '7.4'
-        tools: composer:v2
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '8.x'
-    - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: eu-west-1
-        role-to-assume: ${{ secrets.AWS_ROLE_GENERAL_TO_ASSUME }}
-        role-external-id: ${{ secrets.AWS_ROLE_EXTERNAL_ID }}
-        role-duration-seconds: 3600
-        role-session-name: CI
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
-    - run: echo "TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-    - name: Build
-      run: |
-        sed -i "s@{{build}}@${TAG}@" moovly.php
-        composer install --no-dev --optimize-autoloader --no-scripts --prefer-dist
-        npm install
-        npm run production
-        zip -r moovly dist/* src/* vendor/* moovly.php README.md readme.txt package.json package-lock.json
-    - name: Upload to s3 and SVN
-      run: |
-        aws s3 cp ./moovly.zip s3://${S3_BUCKET}/wordpress-plugin/latest/
-        cp ./moovly.zip ./moovly-${TAG}
-        aws s3 cp ./moovly-${TAG} s3://${S3_BUCKET}/wordpress-plugin/
-        ./bin/svn.sh ${TAG}
-      env:
-        SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
-        SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-        S3_BUCKET: builds.moovly.com
-    - name: Build, tag and push to Amazon ECR
-      id: build-image
-      env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-      run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
+      - uses: actions/checkout@v2
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "7.4"
+          tools: composer:v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "14.x"
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-1
+          role-to-assume: ${{ secrets.AWS_ROLE_GENERAL_TO_ASSUME }}
+          role-external-id: ${{ secrets.AWS_ROLE_EXTERNAL_ID }}
+          role-duration-seconds: 3600
+          role-session-name: CI
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+      - run: echo "TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: Build
+        run: |
+          sed -i "s@{{build}}@${TAG}@" moovly.php
+          composer install --no-dev --optimize-autoloader --no-scripts --prefer-dist
+          npm install
+          npm run production
+          zip -r moovly dist/* src/* vendor/* moovly.php README.md readme.txt package.json package-lock.json
+      - name: Upload to s3 and SVN
+        run: |
+          aws s3 cp ./moovly.zip s3://${S3_BUCKET}/wordpress-plugin/latest/
+          cp ./moovly.zip ./moovly-${TAG}
+          aws s3 cp ./moovly-${TAG} s3://${S3_BUCKET}/wordpress-plugin/
+          ./bin/svn.sh ${TAG}
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          S3_BUCKET: builds.moovly.com
+      - name: Build, tag and push to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
   deploy-prod:
     needs: [build]
     runs-on: [ubuntu-latest]
     steps:
-    - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: eu-west-1
-        role-to-assume: ${{ secrets.AWS_ROLE_GENERAL_TO_ASSUME }}
-        role-external-id: ${{ secrets.AWS_ROLE_EXTERNAL_ID }}
-        role-duration-seconds: 3600
-        role-session-name: CI
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
-    - run: echo "BRANCH=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-    - name: Pull, tag and push to Amazon ECR
-      env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-      run: |
-        docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
-        docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA $ECR_REGISTRY/$ECR_REPOSITORY:${BRANCH//\//-}
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:${BRANCH//\//-}
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-1
+          role-to-assume: ${{ secrets.AWS_ROLE_GENERAL_TO_ASSUME }}
+          role-external-id: ${{ secrets.AWS_ROLE_EXTERNAL_ID }}
+          role-duration-seconds: 3600
+          role-session-name: CI
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+      - run: echo "BRANCH=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: Pull, tag and push to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        run: |
+          docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
+          docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA $ECR_REGISTRY/$ECR_REPOSITORY:${BRANCH//\//-}
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:${BRANCH//\//-}
