@@ -38,8 +38,8 @@ jobs:
         run: |
           sed -i "s@{{build}}@${TAG}@" moovly.php
           composer install --no-dev --optimize-autoloader --no-scripts --prefer-dist
-          npm install
-          npm run production
+          yarn install --frozen-lockfile
+          yarn run production
           zip -r moovly dist/* src/* vendor/* moovly.php README.md readme.txt package.json package-lock.json
       - name: Upload to s3 and SVN
         run: |
