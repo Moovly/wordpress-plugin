@@ -73,7 +73,7 @@ class Template extends Api
     {
         $filters = $request->get_param('filters');
         if (!is_array(($filters))) {
-            $filters =[$filters];
+            $filters = [$filters];
         }
         try {
             $templates = $this->getMoovlyService()->getTemplates($filters);
@@ -87,7 +87,7 @@ class Template extends Api
             $isPostAutomation = $this->doesTemplateHaveWordPressFields($template);
             $isEmail = $this->doesTemplateHaveEmailCollect($template);
             $result->id = $template->getId();
-            $result->name= $template->getName();
+            $result->name = $template->getName();
             $result->identifier = $template->getId();
             $result->title = $template->getName();
             $result->shortcode = TemplateShortCodeFactory::generate($template);
@@ -183,22 +183,27 @@ class Template extends Api
      */
     private function createTemplateJobFromRequest($template, $request)
     {
-       
+
         $name = "Moovly Wordpress Plugin: {$template->getName()}, " . date('d/m/Y');
         $name = is_null($request->get_param('title')) ? $name : $request->get_param('title');
         $id = is_null($request->get_param('external_id')) ? (string) Uuid::uuid4() : $request->get_param('external_id');
+
+        $createProject = is_null($request->get_param('create_project')) ? Job::savesProjects() : $request->get_param('create_project');
+        $createRender = is_null($request->get_param('create_render')) ? true : $request->get_param('create_render');
 
         $job = JobFactory::create([
             ValueFactory::create(
                 $id,
                 $name,
-              $request->get_param('template_variables')
+                $request->get_param('template_variables')
             ),
         ])->setTemplate($template)
             ->setOptions([
-                'create_moov' => Job::savesProjects(),
-                'create_render' => true,
+                'create_project' => $createProject,
+                'quality' => Job::getQuality(),
+                'create_render' => $createRender,
             ]);
+
         $notificationsData = $request->get_param('notifications');
         if (!empty($notificationsData)) {
             $notifications = [];
@@ -208,7 +213,7 @@ class Template extends Api
                     $notificationData['payload']
                 ));
             }
-           
+
             $job->setNotifications($notifications);
         }
         try {
