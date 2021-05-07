@@ -8,7 +8,7 @@ class TemplateShortcodeHandler extends ShortcodeHandler
 {
     public function handle()
     {
-        $defaultSaveProject = Job::savesProjects()  ? '1' : '0';
+        $defaultSaveProject = Job::savesProjects() ? '1' : '0';
 
         return $this->makeReactTag([
             'id' => $this->getAttribute('id'),
