@@ -40,7 +40,7 @@ jobs:
           composer install --no-dev --optimize-autoloader --no-scripts --prefer-dist
           yarn install --frozen-lockfile
           yarn run production
-          zip -r moovly dist/* src/* vendor/* moovly.php README.md readme.txt package.json package-lock.json
+          zip -r moovly dist/* src/* vendor/* moovly.php README.md readme.txt package.json yarn.lock
       - name: Upload to s3 and SVN
         run: |
           aws s3 cp ./moovly.zip s3://${S3_BUCKET}/wordpress-plugin/latest/
