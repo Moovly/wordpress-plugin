@@ -32,7 +32,7 @@ cp ../moovly.php trunk
 cp ../README.md trunk
 cp ../readme.txt trunk
 cp ../package.json trunk
-cp ../package-lock.json trunk
+cp ../yarn.lock trunk
 
 #polyfill php70 conflicts on svn commit
 rm -rf trunk/vendor/symfony/polyfill-php70/Resources/
