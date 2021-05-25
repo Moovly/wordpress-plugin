@@ -42,17 +42,18 @@ getElementAndRenderCorrectComponent("moovly-template", (element) => {
     pollTillSuccess: true,
   });
 });
-
-getElementAndRenderCorrectComponent("moovly-templates", (element) => {
-  new MoovlyPlugin.Templates.List({
-    container: element,
-    detailEndpoint: element.dataset.detailEndpoint,
-    type: element.dataset.type,
+MoovlyPlugin.load().then(() => {
+  getElementAndRenderCorrectComponent("moovly-templates", (element) => {
+    new MoovlyPlugin.Templates.List({
+      container: element,
+      detailEndpoint: element.dataset.detailEndpoint,
+      type: element.dataset.type,
+    });
   });
-});
 
-getElementAndRenderCorrectComponent("moovly-renders", (element) => {
-  new MoovlyPlugin.Projects.UserRenderList({
-    container: element,
+  getElementAndRenderCorrectComponent("moovly-renders", (element) => {
+    new MoovlyPlugin.Projects.UserRenderList({
+      container: element,
+    });
   });
 });
