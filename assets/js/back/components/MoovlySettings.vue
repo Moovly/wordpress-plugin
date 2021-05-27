@@ -32,7 +32,7 @@
                           >{{ quality.text }}</option>
                         </select>
                       </div>
-                      <div class="form-group form-check">
+                      <div class="form-check">
                         <input
                           type="checkbox"
                           name="create_moov"
@@ -42,9 +42,8 @@
                           true-value="1"
                           false-value="0"
                         />
-                        <label for="create_moov" class="form-check-label mt-1 ml-2">
-                          Save template submissions to
-                          projects
+                        <label for="create_moov" class="form-check-label">
+                          Save template submissions to projects
                         </label>
                       </div>
                       <button class="btn btn-primary mt-4" type="submit">Save Settings</button>

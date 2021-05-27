@@ -1,10 +1,9 @@
 .fadein-appear {
   opacity: 0;
-}
-
-.fadein-appear.fadein-appear-active {
-  opacity: 1;
-  transition: all 0.6s linear;
+  &.fadein-appear-active {
+    opacity: 1;
+    transition: all 0.6s linear;
+  }
 }
 
 .fadein-enter {
