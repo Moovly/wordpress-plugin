@@ -32,7 +32,7 @@
                           >{{ quality.text }}</option>
                         </select>
                       </div>
-                      <div class=" form-check">
+                      <div class="form-check">
                         <input
                           type="checkbox"
                           name="create_moov"
