@@ -60,7 +60,7 @@
           >Moovly</a
         >
         <a
-          href="https://help.moovly.com"
+          href="https://helpcenter.moovly.com"
           class="btn btn-outline-info btn-block"
           target="_blank"
           rel="noopener noreferrer"
