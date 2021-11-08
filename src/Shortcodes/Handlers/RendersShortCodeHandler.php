@@ -5,7 +5,7 @@ namespace Moovly\Shortcodes\Handlers;
 use Moovly\Shortcodes\Factories\RendersShortCodeFactory;
 use Moovly\Shortcodes\Traits\PermissionTrait;
 
-class UserRendersShortCodeHandler extends ShortcodeHandler
+class RendersShortCodeHandler extends ShortcodeHandler
 {
     use PermissionTrait;
 
@@ -15,6 +15,8 @@ class UserRendersShortCodeHandler extends ShortcodeHandler
 
         return $this->makeReactTag([
             'project-id' => $this->getAttribute('project-id', null),
+            'view-type' => $this->getAttribute('view-type', 'grid'),
+            'with-delete' => $this->getAttribute('with-delete', false),
         ]);
     }
 }

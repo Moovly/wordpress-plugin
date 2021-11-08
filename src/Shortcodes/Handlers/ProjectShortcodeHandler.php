@@ -15,6 +15,7 @@ class ProjectShortcodeHandler extends ShortcodeHandler
 
         return $this->makeReactTag([
             'id' => $this->getAttribute('id'),
+            'show-title-description' => $this->getAttribute('show-title-description', false),
         ]);
     }
 }
