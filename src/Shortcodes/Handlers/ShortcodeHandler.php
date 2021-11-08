@@ -2,8 +2,12 @@
 
 namespace Moovly\Shortcodes\Handlers;
 
+use Moovly\Shortcodes\Traits\PermissionTrait;
+
 abstract class ShortcodeHandler
 {
+    use PermissionTrait;
+
     protected $attributes;
 
     protected $content;

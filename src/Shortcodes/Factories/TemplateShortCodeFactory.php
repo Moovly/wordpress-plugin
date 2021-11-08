@@ -8,6 +8,8 @@ class TemplateShortCodeFactory
 {
     public static $tag = "moovly-template";
 
+    public static $defaultPermission = true;
+
     /**
      * @param Template $template
      *

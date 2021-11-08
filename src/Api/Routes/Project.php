@@ -3,9 +3,12 @@
 namespace Moovly\Api\Routes;
 
 use Moovly\Api\Api;
+use Moovly\Api\Routes\Render;
 use Moovly\Api\Services\MoovlyApi;
-use Moovly\SDK\Model\Render;
 use Moovly\Shortcodes\Factories\ProjectShortCodeFactory;
+use Moovly\Shortcodes\Factories\ProjectsShortCodeFactory;
+use Moovly\Shortcodes\Factories\RendersShortCodeFactory;
+use Moovly\Shortcodes\Traits\PermissionTrait;
 
 /**
  * Class Project
@@ -13,7 +16,7 @@ use Moovly\Shortcodes\Factories\ProjectShortCodeFactory;
  */
 class Project extends Api
 {
-    use MoovlyApi;
+    use MoovlyApi, PermissionTrait;
 
     /**
      * @var string
@@ -37,12 +40,16 @@ class Project extends Api
         register_rest_route($this->namespace, '/index', [
             'methods' => 'GET',
             'callback' => [$this, 'index'],
-            'permission_callback' => [$this, 'index_permissions'],
         ]);
 
         register_rest_route($this->namespace, '/(?P<id>[^/]+)', [
             'methods' => 'GET',
             'callback' => [$this, 'show'],
+        ]);
+
+        register_rest_route($this->namespace, '/(?P<id>[^/]+)/renders', [
+            'methods' => 'GET',
+            'callback' => [$this, 'projectRenders'],
         ]);
     }
 
@@ -53,6 +60,9 @@ class Project extends Api
      */
     public function index($request)
     {
+        if (!$this->index_permissions()) {
+            $this->checkShortcodePermission(ProjectsShortCodeFactory::$tag);
+        }
         try {
             $projects = $this->getMoovlyService()->getProjects('unarchived', ['renders']);
         } catch (\Exception $e) {
@@ -79,6 +89,7 @@ class Project extends Api
      */
     public function show($request)
     {
+        $this->checkShortcodePermission(ProjectShortCodeFactory::$tag);
         try {
             $project = $this->getMoovlyService()->getProject($request->get_param('id'), ['renders']);
         } catch (\Exception $e) {
@@ -89,28 +100,48 @@ class Project extends Api
     }
 
     /**
+     * @param \WP_REST_Request $request
+     *
+     * @return array|\WP_Error
+     */
+    public function projectRenders($request)
+    {
+        $this->checkShortcodePermission(RendersShortCodeFactory::$tag);
+        try {
+            $project = $this->getMoovlyService()->getProject($request->get_param('id'), ['renders']);
+        } catch (\Exception $e) {
+            return $this->throwWPError(null, $e);
+        }
+
+        return array_map(function ($render) {
+            return Render::transform($render);
+        }, $project->getRenders());
+    }
+
+
+    /**
      * @param \Moovly\SDK\Model\Project $project
      *
      * @return array
      */
     private function transform($project)
     {
-        $renders = array_map(function ($render) {
-            /** @var Render $render */
-            return [
-                'id' => $render->getId(),
-                'url' => $render->getUrl(),
-                'quality' => $render->getQuality(),
-                'project_id' => $render->getProjectId(),
-            ];
-        }, array_wrap($project->getRenders()));
+
+        $renders = $project->getRenders();
+        usort(
+            $renders,
+            function ($a, $b) {
+                return strtotime($a->getDateFinished()) - strtotime($b->getDateFinished());
+            }
+        );
+        $firstRenders = array_count_values($renders) > 0 ? $renders[0] : null;
 
         return [
             'title' => $project->getLabel(),
             'description' => $project->getDescription(),
             'shortcode' => ProjectShortCodeFactory::generate($project),
             'thumbnail' => $project->getThumbnailPath(),
-            'renders' => $renders,
+            'last_render_url' => $firstRenders ? $firstRenders->getUrl() : null,
         ];
     }
 }

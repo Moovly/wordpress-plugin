@@ -2,11 +2,13 @@
 
 namespace Moovly\Shortcodes\Factories;
 
-use Moovly\SDK\Model\Template;
 
 class TemplatesShortCodeFactory
 {
     public static $tag = "moovly-templates";
+
+    public static $defaultPermission = false;
+
 
     /**
      * @return string

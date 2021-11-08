@@ -4,11 +4,11 @@ namespace Moovly\Shortcodes\Factories;
 
 use Moovly\SDK\Model\Project;
 
-class ProjectShortCodeFactory
+class ProjectsShortCodeFactory
 {
-    public static $tag = "moovly-project";
+    public static $tag = "moovly-projects";
 
-    public static $defaultPermission = true;
+    public static $defaultPermission = false;
 
 
     /**

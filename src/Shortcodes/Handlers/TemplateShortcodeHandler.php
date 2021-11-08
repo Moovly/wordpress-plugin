@@ -3,11 +3,17 @@
 namespace Moovly\Shortcodes\Handlers;
 
 use Moovly\Api\Routes\Job;
+use Moovly\Shortcodes\Factories\TemplateShortCodeFactory;
+use Moovly\Shortcodes\Traits\PermissionTrait;
 
 class TemplateShortcodeHandler extends ShortcodeHandler
 {
+    use PermissionTrait;
+
     public function handle()
     {
+        $this->checkShortcodePermission(TemplateShortCodeFactory::$tag, true);
+
         $defaultSaveProject = Job::savesProjects() ? '1' : '0';
 
         return $this->makeReactTag([

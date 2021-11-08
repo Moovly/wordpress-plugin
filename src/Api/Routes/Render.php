@@ -4,7 +4,8 @@ namespace Moovly\Api\Routes;
 
 use Moovly\Api\Api;
 use Moovly\Api\Services\MoovlyApi;
-
+use Moovly\Shortcodes\Factories\RendersShortCodeFactory;
+use Moovly\Shortcodes\Traits\PermissionTrait;
 
 /**
  * Class Project
@@ -12,7 +13,7 @@ use Moovly\Api\Services\MoovlyApi;
  */
 class Render extends Api
 {
-    use MoovlyApi;
+    use MoovlyApi, PermissionTrait;
 
     /**
      * @var string
@@ -46,9 +47,9 @@ class Render extends Api
      */
     public function generatedIndex()
     {
+        $this->checkShortcodePermission(RendersShortCodeFactory::$tag);
         try {
             $renders = $this->getMoovlyService()->getRendersForUser('generated');
-        
         } catch (\Exception $e) {
             return $this->throwWPError(null, $e);
         }
@@ -59,14 +60,14 @@ class Render extends Api
     }
 
 
-     /**
+    /**
      * @param array \Moovly\SDK\Model\Render $render
      *
      * @return array
      */
-    private function transform($render)
+    public static function transform($render)
     {
-      
+
         return [
             'id' => $render->getId(),
             'finished_at' => $render->getDateFinished()->format(DATE_ATOM),
@@ -74,5 +75,4 @@ class Render extends Api
             'quality' => $render->getQuality(),
         ];
     }
-   
 }
