@@ -10,7 +10,10 @@
             </div>
 
             <h4>Loading your Moovly projects</h4>
-            <small>ProTip: If you don't know where to start, take a look at our webinars</small>
+            <small
+              >ProTip: If you don't know where to start, take a look at our
+              webinars</small
+            >
           </div>
 
           <table class="table table-moovly" v-if="!ui.loading">
@@ -25,23 +28,37 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(project, index) in ui.projects" :key="project.identifier">
+              <tr
+                v-for="(project, index) in ui.projects"
+                :key="project.identifier"
+              >
                 <td scope="row">{{ index + 1 }}</td>
                 <td>
-                  <img :src="project.thumbnail" v-if="project.thumbnail" style="max-width: 75px;" />
+                  <img
+                    :src="project.thumbnail"
+                    v-if="project.thumbnail"
+                    style="max-width: 75px;"
+                  />
                 </td>
                 <td>{{ project.title }}</td>
                 <td>{{ project.description }}</td>
-                <td>{{project.renders.length > 0 ? "Yes" : "No"}}</td>
+                <td>{{ project.last_render_url ? "Yes" : "No" }}</td>
                 <td>
                   <moovly-shortcode
                     :shortcode="project.shortcode"
-                    v-if="project.renders.length > 0"
+                    v-if="project.last_render_url"
                   />
                 </td>
               </tr>
             </tbody>
           </table>
+          <button
+            v-if="!ui.loading"
+            class="btn btn-primary mt-4"
+            v-on:click="loadMore"
+          >
+            Load more
+          </button>
         </div>
       </div>
     </div>
@@ -54,12 +71,12 @@ import MoovlyShortcode from "./shared/MoovlyShortcode";
 export default {
   props: {
     restApiCall: {
-      required: true
-    }
+      required: true,
+    },
   },
   components: {
     MoovlyHeader,
-    MoovlyShortcode
+    MoovlyShortcode,
   },
 
   mounted() {
@@ -70,22 +87,35 @@ export default {
     return {
       ui: {
         projects: [],
-        loading: false
+        page: 1,
+        loading: false,
       },
       projects: {
-        index: `${this.restApiCall}moovly/v1/projects/index`
-      }
+        index: `${this.restApiCall}moovly/v1/projects/index`,
+      },
     };
   },
 
   methods: {
     fetch() {
       this.ui.loading = true;
-      axios.get(this.projects.index).then(response => {
-        this.ui.projects = response.data;
-        this.ui.loading = false;
-      });
-    }
-  }
+      axios
+        .get(`${this.projects.index}?page=${this.ui.page}`)
+        .then((response) => {
+          this.ui.projects = response.data.results;
+          this.ui.loading = false;
+        });
+    },
+    loadMore() {
+      this.ui.page += 1;
+      axios
+        .get(`${this.projects.index}?page=${this.ui.page}`)
+        .then((response) => {
+          response.data.results.forEach((item) => {
+            this.ui.projects.push(item);
+          });
+        });
+    },
+  },
 };
 </script>

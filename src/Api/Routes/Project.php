@@ -60,18 +60,25 @@ class Project extends Api
      */
     public function index($request)
     {
-        if (!$this->index_permissions()) {
+        /*if (!$this->index_permissions()) {
+            print_r('no permissui');
             $this->checkShortcodePermission(ProjectsShortCodeFactory::$tag);
-        }
+        }*/
+
         try {
-            $projects = $this->getMoovlyService()->getProjects('unarchived', ['renders']);
+            $response = $this->getMoovlyService()->getProjects('unarchived', ['renders'], $request->get_param('page') || 1);
         } catch (\Exception $e) {
             return $this->throwWPError(null, $e);
         }
 
-        return array_map(function ($project) {
+
+        $results =  array_map(function ($project) {
             return $this->transform($project);
-        }, $projects);
+        }, $response['results']);
+
+        return array_merge($response, [
+            'results' => $results
+        ]);
     }
 
     /**
