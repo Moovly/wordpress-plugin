@@ -136,14 +136,14 @@ class Project extends Api
                 return strtotime($a->getDateFinished()) - strtotime($b->getDateFinished());
             }
         );
-        $firstRenders = array_count_values($renders) > 0 ? $renders[0] : null;
+        $lastRender = $renders[0] ?? null;
 
         return [
             'title' => $project->getLabel(),
             'description' => $project->getDescription(),
             'shortcode' => ProjectShortCodeFactory::generate($project),
             'thumbnail' => $project->getThumbnailPath(),
-            'last_render_url' => $firstRenders ? $firstRenders->getUrl() : null,
+            'last_render_url' => $lastRender ? $lastRender->getUrl() : null,
         ];
     }
 }
