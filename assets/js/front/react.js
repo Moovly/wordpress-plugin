@@ -12,6 +12,9 @@ const getElementAndRenderCorrectComponent = (className, rendercomponent) => {
       "template-job-poll": `${item.dataset.rest}moovly/v1/jobs/:id/status`,
       "fetch-templates": `${item.dataset.rest}moovly/v1/templates/index`,
       "fetch-renders-user": `${item.dataset.rest}moovly/v1/renders/generated/index`,
+      "fetch-projects": `${item.dataset.rest}moovly/v1/projects/index`,
+      "fetch-project": `${item.dataset.rest}moovly/v1/projects/:id`,
+      "fetch-project-renders": `${item.dataset.rest}moovly/v1/projects/:id/renders`,
     });
   }
   for (let i = 0; i < elements.length; i++) {
@@ -54,6 +57,19 @@ MoovlyPlugin.load().then(() => {
   getElementAndRenderCorrectComponent("moovly-renders", (element) => {
     new MoovlyPlugin.Projects.UserRenderList({
       container: element,
+      projectId: element.dataset.projectId,
+    });
+  });
+  getElementAndRenderCorrectComponent("moovly-projects", (element) => {
+    new MoovlyPlugin.Projects.ProjectList({
+      container: element,
+      detailEndpoint: element.dataset.detailEndpoint,
+    });
+  });
+  getElementAndRenderCorrectComponent("moovly-project", (element) => {
+    new MoovlyPlugin.Projects.ProjectPlayer({
+      container: element,
+      projectId: element.dataset.projectId,
     });
   });
 });

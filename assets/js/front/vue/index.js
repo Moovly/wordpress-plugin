@@ -27,6 +27,5 @@ const buildElements = (className, type, components) => {
 };
 
 buildElements("moovly-post-video", "postVideos", { MoovlyPostVideo });
-buildElements("moovly-project", "projects", { MoovlyProject });
 
 window.moovly = moovly;

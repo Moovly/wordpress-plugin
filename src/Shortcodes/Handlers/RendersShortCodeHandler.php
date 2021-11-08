@@ -13,6 +13,8 @@ class UserRendersShortCodeHandler extends ShortcodeHandler
     {
         $this->checkShortcodePermission(RendersShortCodeFactory::$tag, true);
 
-        return $this->makeReactTag([]);
+        return $this->makeReactTag([
+            'project-id' => $this->getAttribute('project-id', null),
+        ]);
     }
 }

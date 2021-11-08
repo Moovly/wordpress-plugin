@@ -13,9 +13,8 @@ class ProjectShortcodeHandler extends ShortcodeHandler
     {
         $this->checkShortcodePermission(ProjectShortCodeFactory::$tag, true);
 
-        return $this->makeVueTag([
+        return $this->makeReactTag([
             'id' => $this->getAttribute('id'),
-            'autoplay' => $this->getAttribute('autoplay', 'false'),
         ]);
     }
 }
