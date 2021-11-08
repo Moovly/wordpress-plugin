@@ -73,7 +73,9 @@ class Template extends Api
 
     public function index($request)
     {
-        $this->checkShortcodePermission(TemplatesShortCodeFactory::$tag);
+        if (!$this->index_permissions()) {
+            $this->checkShortcodePermission(TemplatesShortCodeFactory::$tag);
+        }
         $filters = $request->get_param('filters');
         if (!is_array(($filters))) {
             $filters = [$filters];

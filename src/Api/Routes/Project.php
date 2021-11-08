@@ -60,10 +60,9 @@ class Project extends Api
      */
     public function index($request)
     {
-        /*if (!$this->index_permissions()) {
-            print_r('no permissui');
+        if (!$this->index_permissions()) {
             $this->checkShortcodePermission(ProjectsShortCodeFactory::$tag);
-        }*/
+        }
 
         try {
             $response = $this->getMoovlyService()->getProjects('unarchived', ['renders'], $request->get_param('page') || 1);
@@ -72,13 +71,9 @@ class Project extends Api
         }
 
 
-        $results =  array_map(function ($project) {
+        return array_map(function ($project) {
             return $this->transform($project);
-        }, $response['results']);
-
-        return array_merge($response, [
-            'results' => $results
-        ]);
+        }, $response);
     }
 
     /**

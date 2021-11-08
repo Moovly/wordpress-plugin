@@ -102,7 +102,7 @@ export default {
       axios
         .get(`${this.projects.index}?page=${this.ui.page}`)
         .then((response) => {
-          this.ui.projects = response.data.results;
+          this.ui.projects = response.data;
           this.ui.loading = false;
         });
     },
@@ -111,7 +111,7 @@ export default {
       axios
         .get(`${this.projects.index}?page=${this.ui.page}`)
         .then((response) => {
-          response.data.results.forEach((item) => {
+          response.data.forEach((item) => {
             this.ui.projects.push(item);
           });
         });
