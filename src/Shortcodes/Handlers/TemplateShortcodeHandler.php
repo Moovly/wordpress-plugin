@@ -12,8 +12,10 @@ class TemplateShortcodeHandler extends ShortcodeHandler
 
     public function handle()
     {
-        $this->checkShortcodePermission(TemplateShortCodeFactory::$tag, true);
-
+        $error = $this->checkShortcodePermission(TemplateShortCodeFactory::$tag, true);
+        if ($error) {
+            return $error;
+        }
         $defaultSaveProject = Job::savesProjects() ? '1' : '0';
 
         return $this->makeReactTag([

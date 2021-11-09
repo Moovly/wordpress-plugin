@@ -11,8 +11,10 @@ class TemplatesShortcodeHandler extends ShortcodeHandler
 
     public function handle()
     {
-        $this->checkShortcodePermission(TemplatesShortCodeFactory::$tag, true);
-
+        $error = $this->checkShortcodePermission(TemplatesShortCodeFactory::$tag, true);
+        if ($error) {
+            return $error;
+        }
         return $this->makeReactTag([
             'detail-endpoint' => $this->getAttribute('detail-endpoint', null),
             'type' => $this->getAttribute('type', null),

@@ -11,8 +11,10 @@ class ProjectsShortcodeHandler extends ShortcodeHandler
 
     public function handle()
     {
-        $this->checkShortcodePermission(ProjectsShortCodeFactory::$tag, true);
-
+        $error = $this->checkShortcodePermission(ProjectsShortCodeFactory::$tag, true);
+        if ($error) {
+            return $error;
+        }
         return $this->makeReactTag([
             'detail-endpoint' => $this->getAttribute('detail-endpoint', null),
         ]);

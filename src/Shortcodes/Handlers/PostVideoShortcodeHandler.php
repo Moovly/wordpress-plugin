@@ -11,7 +11,10 @@ class PostVideoShortcodeHandler extends ShortcodeHandler
     use PermissionTrait;
     public function handle()
     {
-        $this->checkShortcodePermission(PostVideoShortCodeFactory::$tag, true);
+        $error = $this->checkShortcodePermission(PostVideoShortCodeFactory::$tag, true);
+        if ($error) {
+            return $error;
+        }
         return $this->makeVueTag([
             'post-id' => $this->getAttribute('post-id', $this->getPostId()),
             'autoplay' => $this->getAttribute('autoplay', 'false'),

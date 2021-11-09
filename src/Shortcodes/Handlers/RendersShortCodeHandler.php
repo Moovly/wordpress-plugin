@@ -11,8 +11,10 @@ class RendersShortCodeHandler extends ShortcodeHandler
 
     public function handle()
     {
-        $this->checkShortcodePermission(RendersShortCodeFactory::$tag, true);
-
+        $error = $this->checkShortcodePermission(RendersShortCodeFactory::$tag, true);
+        if ($error) {
+            return $error;
+        }
         return $this->makeReactTag([
             'project-id' => $this->getAttribute('project-id', null),
             'view-type' => $this->getAttribute('view-type', 'grid'),

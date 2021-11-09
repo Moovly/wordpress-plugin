@@ -12,8 +12,10 @@ class RemainingCreditsShortCodeHandler extends ShortcodeHandler
 
     public function handle()
     {
-        $this->checkShortcodePermission(RemainingCreditsShortCodeFactory::$tag, true);
-
+        $error = $this->checkShortcodePermission(RemainingCreditsShortCodeFactory::$tag, true);
+        if ($error) {
+            return $error;
+        }
         $credits = $this->getMoovlyService()->getRemainingCredits();
 
         if (!$credits) {

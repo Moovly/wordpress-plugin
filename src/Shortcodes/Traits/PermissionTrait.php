@@ -38,7 +38,6 @@ trait PermissionTrait
 
         $values = get_option($this->permissionShortcodeGroup);
         $valid = $values && isset($values[$permission]) && $values[$permission];
-
         if (!$valid && $htmlOuput) {
             return "<div><p>This shortcode is not enabled in the Moovly plugin settings</p></div>";
         }
