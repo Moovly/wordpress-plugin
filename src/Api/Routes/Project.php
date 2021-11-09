@@ -63,9 +63,11 @@ class Project extends Api
         if (!$this->index_permissions()) {
             $this->checkShortcodePermission(ProjectsShortCodeFactory::$tag);
         }
+        $page = $request->get_param('page') ? intval($request->get_param('page')) : 1;
+        $pageSize = $request->get_param('page_size') ? intval($request->get_param('page_size')) : 25;
 
         try {
-            $response = $this->getMoovlyService()->getProjects('unarchived', ['renders'], $request->get_param('page') || 1);
+            $response = $this->getMoovlyService()->getProjects('unarchived', ['renders'], $page, $pageSize);
         } catch (\Exception $e) {
             return $this->throwWPError(null, $e);
         }
