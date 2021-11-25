@@ -7,6 +7,9 @@ on:
 env:
   ECR_REPOSITORY: moovly-wordpress-plugin
 
+permissions:
+  id-token: write
+
 jobs:
   build:
     runs-on: [ubuntu-latest]
