@@ -4,7 +4,6 @@ namespace Moovly\Actions\Handlers;
 
 use Moovly\Templates;
 use Moovly\SDK\Model\Job;
-use Illuminate\Support\Str;
 use Moovly\SDK\Model\Variable;
 use Moovly\Api\Services\MoovlyApi;
 use Moovly\SDK\Factory\JobFactory;
@@ -129,11 +128,19 @@ class PostToTemplateActionHandler
 
     private function getNormalizedPostTitle()
     {
-        return Str::limit(
+        return $this->stringLimit(
             $this->post->post_title,
             $this->getTemplateVariableRequirementsFor(['post_name', 'post_title'])['maximum_length'],
-            $endWith = "..."
         );
+    }
+
+    public function stringLimit($value, $limit = 100, $end = '...')
+    {
+        if (mb_strwidth($value, 'UTF-8') <= $limit) {
+            return $value;
+        }
+
+        return rtrim(mb_strimwidth($value, 0, $limit, '', 'UTF-8')).$end;
     }
 
     private function getNormalizedPostContent()
@@ -142,14 +149,13 @@ class PostToTemplateActionHandler
         $strippedContent = explode('<!--more-->', $strippedContent);
 
         foreach ($strippedContent as $content) {
-            if (Str::length($content) <= $this->getTemplateVariableRequirementsFor('post_content')['maximum_length']) {
+            if (mb_strlen($content) <= $this->getTemplateVariableRequirementsFor('post_content')['maximum_length']) {
                 return $content;
             }
 
-            return  Str::limit(
+            return $this->stringLimit(
                 $content,
                 $this->getTemplateVariableRequirementsFor('post_content')['maximum_length'] - 3,
-                $endWith = '...'
             );
         }
 

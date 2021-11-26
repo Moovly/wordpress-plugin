@@ -9,7 +9,6 @@ use Moovly\SDK\Factory\NotificationFactory;
 use Moovly\SDK\Model\Variable;
 use Moovly\Templates;
 use Moovly\Api\Routes\Job;
-use Illuminate\Support\Str;
 use Moovly\Api\Services\MoovlyApi;
 use Moovly\SDK\Factory\JobFactory;
 use Moovly\SDK\Factory\ValueFactory;
