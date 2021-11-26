@@ -45,6 +45,9 @@ MISSING_PATHS=$( svn --no-auth-cache status | sed -e '/^!/!d' -e 's/^!//' )
 
 # iterate over filepaths
 for MISSING_PATH in $MISSING_PATHS; do
+    if [[ $MISSING_PATH == *"@"* ]]; then
+        MISSING_PATH="$MISSING_PATH@"
+    fi
     svn --no-auth-cache rm --force "$MISSING_PATH"
 done
 
