@@ -76,4 +76,4 @@ jobs:
       - name: Pull, tag and push to Amazon ECR
         run: |
           MANIFEST=$(aws ecr batch-get-image --repository-name $ECR_REPOSITORY --image-ids imageTag=$GITHUB_SHA --query 'images[].imageManifest' --output text)
-          aws ecr put-image --repository-name ${{ inputs.repository }} --image-tag ${BRANCH//\//-} --image-manifest "$MANIFEST"
+          aws ecr put-image --repository-name $ECR_REPOSITORY --image-tag ${BRANCH//\//-} --image-manifest "$MANIFEST"
