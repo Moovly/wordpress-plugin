@@ -37,7 +37,7 @@ jobs:
       - name: Build
         run: |
           sed -i "s@{{build}}@${TAG}@" moovly.php
-          composer install --no-dev --optimize-autoloader --prefer-dist
+          composer update --no-dev --optimize-autoloader --prefer-dist
           yarn install --frozen-lockfile
           yarn run production
           zip -r moovly dist/* src/* vendor/* moovly.php README.md readme.txt package.json yarn.lock
