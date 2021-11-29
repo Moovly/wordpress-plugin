@@ -38,14 +38,15 @@ class PostToTemplateActionHandler
      */
     public function handle()
     {
-        return tap($this->post->ID, function () {
-            $isPost = $this->post->post_type === 'post';
-            $isPublish = $this->post->post_status === 'publish';
+        $postId = $this->post->ID;
+        $isPost = $this->post->post_type === 'post';
+        $isPublish = $this->post->post_status === 'publish';
 
-            if ($this->template && $this->template->getId() && $isPost && $isPublish) {
-                $this->dispatchMoovlyJob();
-            }
-        });
+        if ($this->template && $this->template->getId() && $isPost && $isPublish) {
+            $this->dispatchMoovlyJob();
+        }
+
+        return $postId;
     }
 
     /**
