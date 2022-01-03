@@ -165,6 +165,7 @@ class Project extends Api
         $lastRender = $renders[0] ?? null;
 
         return [
+            'id' => $project->getId(),
             'title' => $project->getLabel(),
             'description' => $project->getDescription(),
             'shortcode' => ProjectShortCodeFactory::generate($project),

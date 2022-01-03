@@ -55,11 +55,17 @@ MoovlyPlugin.load().then(() => {
   });
 
   getElementAndRenderCorrectComponent("moovly-renders", (element) => {
+    let projectId = element.dataset.projectId;
+
+    if (projectId && projectId === "query") {
+      const parsedQuery = parse(window.location.search.substring(1));
+      projectId = parsedQuery.project_id;
+    }
     new MoovlyPlugin.Projects.RenderList({
       container: element,
-      projectId: element.dataset.projectId,
+      projectId: projectId,
       viewType: element.dataset.viewType,
-      canDelete: element.dataset.withDelete,
+      canDelete: element.dataset.allowDelete,
     });
   });
   getElementAndRenderCorrectComponent("moovly-projects", (element) => {
@@ -69,9 +75,15 @@ MoovlyPlugin.load().then(() => {
     });
   });
   getElementAndRenderCorrectComponent("moovly-project", (element) => {
+    let id = element.dataset.id;
+
+    if (id === "query") {
+      const parsedQuery = parse(window.location.search.substring(1));
+      id = parsedQuery.project_id;
+    }
     new MoovlyPlugin.Projects.ProjectPlayer({
       container: element,
-      projectId: element.dataset.id,
+      projectId: id,
       withTitleDescription: element.dataset.showTitleDescription,
     });
   });
