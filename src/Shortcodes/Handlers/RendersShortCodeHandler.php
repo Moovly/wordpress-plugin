@@ -18,7 +18,7 @@ class RendersShortCodeHandler extends ShortcodeHandler
         return $this->makeReactTag([
             'project-id' => $this->getAttribute('project-id', null),
             'view-type' => $this->getAttribute('view-type', 'grid'),
-            'with-delete' => $this->getAttribute('with-delete', false),
+            'allow-delete' => $this->getAttribute('allow-delete', false),
         ]);
     }
 }
