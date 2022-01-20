@@ -45,11 +45,13 @@ class Render extends Api
      *
      * @return array|\WP_Error
      */
-    public function generatedIndex()
+    public function generatedIndex($request)
     {
         $this->checkShortcodePermission(RendersShortCodeFactory::$tag);
+        $page = $request->get_param('page') ? intval($request->get_param('page')) : 1;
+        $pageSize = $request->get_param('page_size') ? intval($request->get_param('page_size')) : 25;
         try {
-            $renders = $this->getMoovlyService()->getRendersForUser('generated');
+            $renders = $this->getMoovlyService()->getRendersForUser('generated', $page, $pageSize);
         } catch (\Exception $e) {
             return $this->throwWPError(null, $e);
         }
