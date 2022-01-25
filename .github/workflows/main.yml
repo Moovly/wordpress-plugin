@@ -7,6 +7,9 @@ on:
 env:
   ECR_REPOSITORY: moovly-wordpress-plugin
 
+permissions:
+  id-token: write
+
 jobs:
   build:
     runs-on: [ubuntu-latest]
@@ -15,7 +18,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "7.4"
+          php-version: "7.1"
           tools: composer:v2
       - uses: actions/setup-node@v1
         with:
@@ -34,7 +37,7 @@ jobs:
       - name: Build
         run: |
           sed -i "s@{{build}}@${TAG}@" moovly.php
-          composer install --no-dev --optimize-autoloader --no-scripts --prefer-dist
+          composer install --no-dev --optimize-autoloader --prefer-dist
           yarn install --frozen-lockfile
           yarn run production
           zip -r moovly dist/* src/* vendor/* moovly.php README.md readme.txt package.json yarn.lock
@@ -73,4 +76,4 @@ jobs:
       - name: Pull, tag and push to Amazon ECR
         run: |
           MANIFEST=$(aws ecr batch-get-image --repository-name $ECR_REPOSITORY --image-ids imageTag=$GITHUB_SHA --query 'images[].imageManifest' --output text)
-          aws ecr put-image --repository-name ${{ inputs.repository }} --image-tag ${BRANCH//\//-} --image-manifest "$MANIFEST"
+          aws ecr put-image --repository-name $ECR_REPOSITORY --image-tag ${BRANCH//\//-} --image-manifest "$MANIFEST"
