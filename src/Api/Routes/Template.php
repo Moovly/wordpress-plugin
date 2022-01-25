@@ -14,6 +14,8 @@ use Moovly\SDK\Factory\JobFactory;
 use Moovly\SDK\Factory\ValueFactory;
 use Moovly\SDK\Model\Template as TemplateModel;
 use Moovly\Shortcodes\Factories\TemplateShortCodeFactory;
+use Moovly\Shortcodes\Factories\TemplatesShortCodeFactory;
+use Moovly\Shortcodes\Traits\PermissionTrait;
 use Ramsey\Uuid\Uuid;
 use WP_Error;
 
@@ -34,7 +36,7 @@ class Template extends Api
         self::WORDPRESS_POST_NAME_TEMPLATE_KEY,
     ];
 
-    use MoovlyApi;
+    use MoovlyApi, PermissionTrait;
 
     public $group = "templates";
 
@@ -70,6 +72,9 @@ class Template extends Api
 
     public function index($request)
     {
+        if (!$this->index_permissions()) {
+            $this->checkShortcodePermission(TemplatesShortCodeFactory::$tag);
+        }
         $filters = $request->get_param('filters');
         if (!is_array(($filters))) {
             $filters = [$filters];
@@ -111,6 +116,8 @@ class Template extends Api
      */
     public function show($request)
     {
+        $this->checkShortcodePermission(TemplateShortCodeFactory::$tag);
+
         try {
             return $this->getMoovlyClient()->getTemplate($request->get_param('id'));
         } catch (\Exception $e) {

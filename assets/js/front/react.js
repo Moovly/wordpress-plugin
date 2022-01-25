@@ -12,6 +12,9 @@ const getElementAndRenderCorrectComponent = (className, rendercomponent) => {
       "template-job-poll": `${item.dataset.rest}moovly/v1/jobs/:id/status`,
       "fetch-templates": `${item.dataset.rest}moovly/v1/templates/index`,
       "fetch-renders-user": `${item.dataset.rest}moovly/v1/renders/generated/index`,
+      "fetch-projects": `${item.dataset.rest}moovly/v1/projects/index`,
+      "fetch-project": `${item.dataset.rest}moovly/v1/projects/:id`,
+      "fetch-project-renders": `${item.dataset.rest}moovly/v1/projects/:id/renders`,
     });
   }
   for (let i = 0; i < elements.length; i++) {
@@ -52,8 +55,36 @@ MoovlyPlugin.load().then(() => {
   });
 
   getElementAndRenderCorrectComponent("moovly-renders", (element) => {
-    new MoovlyPlugin.Projects.UserRenderList({
+    let projectId = element.dataset.projectId;
+
+    if (projectId && projectId === "query") {
+      const parsedQuery = parse(window.location.search.substring(1));
+      projectId = parsedQuery.project_id;
+    }
+    new MoovlyPlugin.Projects.RenderList({
       container: element,
+      projectId: projectId,
+      viewType: element.dataset.viewType,
+      canDelete: element.dataset.allowDelete,
+    });
+  });
+  getElementAndRenderCorrectComponent("moovly-projects", (element) => {
+    new MoovlyPlugin.Projects.ProjectList({
+      container: element,
+      detailEndpoint: element.dataset.detailEndpoint,
+    });
+  });
+  getElementAndRenderCorrectComponent("moovly-project", (element) => {
+    let id = element.dataset.id;
+
+    if (id === "query") {
+      const parsedQuery = parse(window.location.search.substring(1));
+      id = parsedQuery.project_id;
+    }
+    new MoovlyPlugin.Projects.ProjectPlayer({
+      container: element,
+      projectId: id,
+      withTitleDescription: element.dataset.showTitleDescription,
     });
   });
 });

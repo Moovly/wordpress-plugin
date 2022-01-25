@@ -9,7 +9,7 @@
           <div class="col-12">
             <moovly-auth :rest-api-call="restApiCall" />
           </div>
-          <div class="col-12">
+          <div class="col-12 mb-3">
             <div class="jumbotron bg-white m-0">
               <div class="card-body">
                 <h2 class="card-title mb-5">Templates</h2>
@@ -53,6 +53,10 @@
               </div>
             </div>
           </div>
+
+           <div class="col-12">
+            <moovly-permissions   :rest-api-call="restApiCall"/>
+          </div>
         </div>
       </div>
     </div>
@@ -62,12 +66,14 @@
 import MoovlyAuth from "./MoovlyAuth";
 import MoovlyTemplates from "./MoovlyTemplates";
 import MoovlyHeader from "./shared/MoovlyHeader";
+import MoovlyPermissions from "./MoovlyPermissions";
 
 export default {
   components: {
     MoovlyAuth,
     MoovlyTemplates,
-    MoovlyHeader
+    MoovlyHeader,
+    MoovlyPermissions
   },
   props: {
     restApiCall: {

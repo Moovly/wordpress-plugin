@@ -2,9 +2,12 @@
 
 namespace Moovly\Shortcodes\Factories;
 
-class UserRendersShortCodeFactory
+class RendersShortCodeFactory
 {
     public static $tag = "moovly-renders";
+
+    public static $defaultPermission = true;
+
 
     /**
      * @return string

@@ -22,7 +22,7 @@
     },
     "dependencies": {
         "@moovly/i18n": "^1.0.67",
-        "@moovly/plugins-embed": "^1.2.53",
+        "@moovly/plugins-embed": "1.2.75",
         "axios": "^0.21.0",
         "bootstrap": "^4.5.3",
         "humanize-string": "^2.1.0",

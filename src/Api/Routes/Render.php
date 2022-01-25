@@ -4,7 +4,8 @@ namespace Moovly\Api\Routes;
 
 use Moovly\Api\Api;
 use Moovly\Api\Services\MoovlyApi;
-
+use Moovly\Shortcodes\Factories\RendersShortCodeFactory;
+use Moovly\Shortcodes\Traits\PermissionTrait;
 
 /**
  * Class Project
@@ -12,7 +13,7 @@ use Moovly\Api\Services\MoovlyApi;
  */
 class Render extends Api
 {
-    use MoovlyApi;
+    use MoovlyApi, PermissionTrait;
 
     /**
      * @var string
@@ -44,29 +45,34 @@ class Render extends Api
      *
      * @return array|\WP_Error
      */
-    public function generatedIndex()
+    public function generatedIndex($request)
     {
+        $this->checkShortcodePermission(RendersShortCodeFactory::$tag);
+        $page = $request->get_param('page') ? intval($request->get_param('page')) : 1;
+        $pageSize = $request->get_param('page_size') ? intval($request->get_param('page_size')) : 25;
         try {
-            $renders = $this->getMoovlyService()->getRendersForUser('generated');
-        
+            $renders = $this->getMoovlyService()->getRendersForUser('generated', $page, $pageSize);
         } catch (\Exception $e) {
             return $this->throwWPError(null, $e);
         }
 
-        return array_map(function ($render) {
-            return $this->transform($render);
-        }, $renders);
+        return [
+            'results' =>  array_map(function ($render) {
+                return $this->transform($render);
+            }, $renders['renders']),
+            'count' => $renders['count']
+        ];
     }
 
 
-     /**
+    /**
      * @param array \Moovly\SDK\Model\Render $render
      *
      * @return array
      */
-    private function transform($render)
+    public static function transform($render)
     {
-      
+
         return [
             'id' => $render->getId(),
             'finished_at' => $render->getDateFinished()->format(DATE_ATOM),
@@ -74,5 +80,4 @@ class Render extends Api
             'quality' => $render->getQuality(),
         ];
     }
-   
 }

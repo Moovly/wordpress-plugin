@@ -6,6 +6,9 @@ class RemainingCreditsShortCodeFactory
 {
     public static $tag = "moovly-remaining-credits";
 
+    public static $defaultPermission = true;
+
+
     /**
      * @return string
      */

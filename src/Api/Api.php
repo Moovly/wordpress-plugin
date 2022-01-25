@@ -6,6 +6,7 @@ use Moovly\Api\Routes\Job;
 use Moovly\Api\Routes\Auth;
 use Moovly\Api\Routes\Asset;
 use Moovly\Api\Routes\Account;
+use Moovly\Api\Routes\Permissions;
 use Moovly\Api\Routes\Project;
 use Moovly\Api\Routes\Template;
 use Moovly\Api\Routes\PostVideo;
@@ -29,7 +30,8 @@ class Api
         'assets' => Asset::class,
         'projects' => Project::class,
         'postVideos' => PostVideo::class,
-        'renders' => Render::class
+        'renders' => Render::class,
+        'permissions' =>  Permissions::class,
     ];
 
     public function __construct()
@@ -39,7 +41,7 @@ class Api
 
     public function register()
     {
-        foreach ($this->routes as $group=>$route) {
+        foreach ($this->routes as $group => $route) {
             $this->{$group} = new $route();
         }
 

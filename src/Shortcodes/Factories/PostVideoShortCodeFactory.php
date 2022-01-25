@@ -8,6 +8,9 @@ class PostVideoShortCodeFactory
 {
     public static $tag = "moovly-post-video";
 
+    public static $defaultPermission = true;
+
+
     /**
      * @param WP_Post $post
      *

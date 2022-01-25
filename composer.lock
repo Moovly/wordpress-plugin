@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3b0cb25c547b01344bc143f26868c1e3",
+    "content-hash": "adfbc0c9d204546a5b4365dfec7de9b5",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -71,32 +71,6 @@
                 "rest",
                 "web service"
             ],
-            "support": {
-                "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/6.5"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/GrahamCampbell",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/Nyholm",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/alexeyshockov",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/gmponos",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/sagikazarmark",
-                    "type": "github"
-                }
-            ],
             "time": "2020-07-02T06:52:04+00:00"
         },
         {
@@ -119,7 +93,6 @@
             "require-dev": {
                 "symfony/phpunit-bridge": "^4.4 || ^5.1"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -168,20 +141,6 @@
                 "issues": "https://github.com/guzzle/promises/issues",
                 "source": "https://github.com/guzzle/promises/tree/1.5.1"
             },
-            "funding": [
-                {
-                    "url": "https://github.com/GrahamCampbell",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/Nyholm",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/guzzlehttp/promises",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2021-10-22T20:56:57+00:00"
         },
         {
@@ -274,38 +233,20 @@
                 "uri",
                 "url"
             ],
-            "support": {
-                "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/1.x"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/GrahamCampbell",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/Nyholm",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/guzzlehttp/psr7",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2021-10-05T13:56:00+00:00"
         },
         {
             "name": "moovly/moovly-php-sdk",
-            "version": "1.3.7",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Moovly/moovly-php-sdk.git",
-                "reference": "bc4e6e340fb54acdcbc2781eedff38463fca5a1c"
+                "reference": "4a11954af68e4ce98c1b96f7924831ce8adc3b9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Moovly/moovly-php-sdk/zipball/bc4e6e340fb54acdcbc2781eedff38463fca5a1c",
-                "reference": "bc4e6e340fb54acdcbc2781eedff38463fca5a1c",
+                "url": "https://api.github.com/repos/Moovly/moovly-php-sdk/zipball/4a11954af68e4ce98c1b96f7924831ce8adc3b9e",
+                "reference": "4a11954af68e4ce98c1b96f7924831ce8adc3b9e",
                 "shasum": ""
             },
             "require": {
@@ -336,11 +277,7 @@
                 "moovly",
                 "video"
             ],
-            "support": {
-                "issues": "https://github.com/Moovly/moovly-php-sdk/issues",
-                "source": "https://github.com/Moovly/moovly-php-sdk/tree/1.3.7"
-            },
-            "time": "2021-11-16T14:00:39+00:00"
+            "time": "2022-01-20T12:38:06+00:00"
         },
         {
             "name": "nicmart/string-template",
@@ -381,10 +318,6 @@
                 }
             ],
             "description": "StringTemplate is a very simple string template engine for php. I've written it to have a thing like sprintf, but with named and nested substutions.",
-            "support": {
-                "issues": "https://github.com/nicmart/StringTemplate/issues",
-                "source": "https://github.com/nicmart/StringTemplate/tree/master"
-            },
             "time": "2016-10-23T19:52:41+00:00"
         },
         {
@@ -454,7 +387,6 @@
             "require": {
                 "php": ">=5.3.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -628,16 +560,6 @@
                 "source": "https://github.com/ramsey/uuid",
                 "wiki": "https://github.com/ramsey/uuid/wiki"
             },
-            "funding": [
-                {
-                    "url": "https://github.com/ramsey",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/ramsey/uuid",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2021-09-25T23:07:42+00:00"
         },
         {
@@ -690,20 +612,6 @@
             "support": {
                 "source": "https://github.com/symfony/http-foundation/tree/3.4"
             },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2020-10-24T10:57:07+00:00"
         },
         {
@@ -729,7 +637,6 @@
             "suggest": {
                 "ext-ctype": "For best performance"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -773,20 +680,6 @@
             "support": {
                 "source": "https://github.com/symfony/polyfill-ctype/tree/main"
             },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2021-10-20T20:35:02+00:00"
         },
         {
@@ -857,23 +750,6 @@
                 "portable",
                 "shim"
             ],
-            "support": {
-                "source": "https://github.com/symfony/polyfill-intl-idn/tree/v1.20.0"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2020-10-23T14:02:19+00:00"
         },
         {
@@ -941,23 +817,6 @@
                 "portable",
                 "shim"
             ],
-            "support": {
-                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.20.0"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2020-10-23T14:02:19+00:00"
         },
         {
@@ -1021,23 +880,6 @@
                 "portable",
                 "shim"
             ],
-            "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.20.0"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2020-10-23T14:02:19+00:00"
         },
         {
@@ -1057,7 +899,6 @@
             "require": {
                 "php": ">=7.1"
             },
-            "default-branch": true,
             "type": "metapackage",
             "extra": {
                 "branch-alias": {
@@ -1093,20 +934,6 @@
             "support": {
                 "source": "https://github.com/symfony/polyfill-php70/tree/v1.20.0"
             },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2020-10-23T14:02:19+00:00"
         },
         {
@@ -1126,7 +953,6 @@
             "require": {
                 "php": ">=7.1"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1167,23 +993,6 @@
                 "portable",
                 "shim"
             ],
-            "support": {
-                "source": "https://github.com/symfony/polyfill-php72/tree/v1.23.0"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2021-05-27T09:17:38+00:00"
         }
     ],
@@ -1208,7 +1017,6 @@
                 "johnpbloch/wordpress": "5.1.1",
                 "php": "^7.1"
             },
-            "default-branch": true,
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1246,6 +1054,5 @@
     "platform-dev": [],
     "platform-overrides": {
         "php": "7.1.3"
-    },
-    "plugin-api-version": "2.1.0"
+    }
 }
