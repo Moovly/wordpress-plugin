@@ -56,9 +56,12 @@ class Render extends Api
             return $this->throwWPError(null, $e);
         }
 
-        return array_map(function ($render) {
-            return $this->transform($render);
-        }, $renders);
+        return [
+            'results' =>  array_map(function ($render) {
+                return $this->transform($render);
+            }, $renders['renders']),
+            'count' => $renders['count']
+        ];
     }
 
 

@@ -484,16 +484,16 @@
         },
         {
             "name": "moovly/moovly-php-sdk",
-            "version": "2.0.0",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Moovly/moovly-php-sdk.git",
-                "reference": "dcc6e9f9517756e0c8396ee53fd5ad33a2299945"
+                "reference": "4a11954af68e4ce98c1b96f7924831ce8adc3b9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Moovly/moovly-php-sdk/zipball/dcc6e9f9517756e0c8396ee53fd5ad33a2299945",
-                "reference": "dcc6e9f9517756e0c8396ee53fd5ad33a2299945",
+                "url": "https://api.github.com/repos/Moovly/moovly-php-sdk/zipball/4a11954af68e4ce98c1b96f7924831ce8adc3b9e",
+                "reference": "4a11954af68e4ce98c1b96f7924831ce8adc3b9e",
                 "shasum": ""
             },
             "require": {
@@ -524,7 +524,7 @@
                 "moovly",
                 "video"
             ],
-            "time": "2022-01-20T08:15:37+00:00"
+            "time": "2022-01-20T12:38:06+00:00"
         },
         {
             "name": "nesbot/carbon",
