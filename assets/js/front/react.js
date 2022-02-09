@@ -15,6 +15,7 @@ const getElementAndRenderCorrectComponent = (className, rendercomponent) => {
       "fetch-projects": `${item.dataset.rest}moovly/v1/projects/index`,
       "fetch-project": `${item.dataset.rest}moovly/v1/projects/:id`,
       "fetch-project-renders": `${item.dataset.rest}moovly/v1/projects/:id/renders`,
+      "remove-project-render": `${item.dataset.rest}moovly/v1/projects/:id/renders/:renderId`,
     });
   }
   for (let i = 0; i < elements.length; i++) {
