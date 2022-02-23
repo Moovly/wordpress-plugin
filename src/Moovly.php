@@ -91,18 +91,16 @@ class Moovly
         if ($found) {
 
             // $url contains the path to your plugin folder
-
             wp_enqueue_style(
                 'moovly',
                 plugins_url($this->pluginDirectoryName . "/dist/moovly.css"),
-                [],
                 $this->version,
                 'all'
             );
 
             wp_register_script(
                 'moovly',
-                plugins_url($this->pluginDirectoryName . "/dist/moovly-plugin.js"),
+                plugins_url($this->pluginDirectoryName . "/dist/moovly.js"),
                 [],
                 $this->version,
                 true
@@ -122,7 +120,21 @@ class Moovly
         add_filter('admin_body_class', function ($classes) {
             return "$classes moovly-plugin";
         });
+        wp_enqueue_style(
+            'moovly',
+            plugins_url($this->pluginDirectoryName . "/dist/moovly.css"),
+            [],
+            $this->version,
+            'all'
+        );
 
+        wp_register_script(
+            'moovly',
+            plugins_url($this->pluginDirectoryName . "/dist/moovly-plugin.js"),
+            [],
+            $this->version,
+            true
+        );
         wp_localize_script('moovly', 'moovlyApiSettings', [
             'root' => esc_url_raw(rest_url($this->api->domain)),
             'version' => $this->api->version,
@@ -130,25 +142,13 @@ class Moovly
         ]);
 
         wp_enqueue_script('moovly');
+
         wp_add_inline_script('moovly', $this->getAssetsScript(), $after = false);
     }
 
     public function registerAssets()
     {
-        wp_enqueue_style(
-            'moovly',
-            plugins_url($this->pluginDirectoryName . "/dist/moovly.css"),
-            $this->version,
-            'all'
-        );
 
-        wp_register_script(
-            'moovly',
-            plugins_url($this->pluginDirectoryName . "/dist/moovly.js"),
-            [],
-            $this->version,
-            true
-        );
 
         wp_localize_script('moovly', 'moovlyApiSettings', [
             'root' => esc_url_raw(rest_url($this->api->domain)),
