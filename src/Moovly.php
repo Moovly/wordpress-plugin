@@ -59,6 +59,7 @@ class Moovly
             'Version' => 'Version',
         ])['Version'];
 
+        add_action('the_posts', [$this, 'checkIfShortcodeIsUsed']);
         add_action('admin_enqueue_scripts', [$this, 'registerAdminAssets']);
         add_action('wp_enqueue_scripts', [$this, 'registerAssets']);
         add_action('admin_menu', [$this, 'addMenuItems']);
@@ -71,6 +72,44 @@ class Moovly
         $this->api->auth->deleteToken();
     }
 
+    public  function checkIfShortcodeIsUsed($posts)
+    {
+
+        if (empty($posts)) {
+            return $posts;
+        }
+        $found = false;
+
+        foreach ($posts as $post) {
+            if (stripos($post->post_content, '[moovly-')) {
+                $found = true;
+                break;
+            }
+        }
+
+
+        if ($found) {
+
+            // $url contains the path to your plugin folder
+            wp_enqueue_style(
+                'moovly',
+                plugins_url($this->pluginDirectoryName . "/dist/moovly.css"),
+                $this->version,
+                'all'
+            );
+
+            wp_register_script(
+                'moovly',
+                plugins_url($this->pluginDirectoryName . "/dist/moovly.js"),
+                [],
+                $this->version,
+                true
+            );
+        }
+
+        return $posts;
+    }
+
     public function registerAdminAssets($page)
     {
         if (strpos($page, 'moovly') === false) {
@@ -81,7 +120,6 @@ class Moovly
         add_filter('admin_body_class', function ($classes) {
             return "$classes moovly-plugin";
         });
-
         wp_enqueue_style(
             'moovly',
             plugins_url($this->pluginDirectoryName . "/dist/moovly.css"),
@@ -97,7 +135,6 @@ class Moovly
             $this->version,
             true
         );
-
         wp_localize_script('moovly', 'moovlyApiSettings', [
             'root' => esc_url_raw(rest_url($this->api->domain)),
             'version' => $this->api->version,
@@ -105,25 +142,13 @@ class Moovly
         ]);
 
         wp_enqueue_script('moovly');
+
         wp_add_inline_script('moovly', $this->getAssetsScript(), $after = false);
     }
 
     public function registerAssets()
     {
-        wp_enqueue_style(
-            'moovly',
-            plugins_url($this->pluginDirectoryName . "/dist/moovly.css"),
-            $this->version,
-            'all'
-        );
 
-        wp_register_script(
-            'moovly',
-            plugins_url($this->pluginDirectoryName . "/dist/moovly.js"),
-            [],
-            $this->version,
-            true
-        );
 
         wp_localize_script('moovly', 'moovlyApiSettings', [
             'root' => esc_url_raw(rest_url($this->api->domain)),
