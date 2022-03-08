@@ -91,6 +91,6 @@ class Job extends Api
                 'status' => $value->getStatus(),
                 'url' => $value->getUrl(),
             ];
-        }, array_wrap($values));
+        }, $values);
     }
 }
