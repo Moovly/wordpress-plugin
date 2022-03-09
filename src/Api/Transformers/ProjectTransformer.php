@@ -23,7 +23,7 @@ class ProjectTransformer
                 'quality' => $render->getQuality(),
                 'project_id' => $render->getProjectId(),
             ];
-        }, array_wrap($project->getRenders()));
+        }, $project->getRenders());
 
         return [
             'title' => $project->getLabel(),

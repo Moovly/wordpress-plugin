@@ -140,6 +140,6 @@ class PostVideo extends Api
                 'url' => $value->getUrl(),
                 'shortcode' => PostVideoShortCodeFactory::generate($post),
             ];
-        }, array_wrap($values));
+        }, $values);
     }
 }

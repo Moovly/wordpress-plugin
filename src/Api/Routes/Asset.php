@@ -96,7 +96,7 @@ class Asset extends Api
      */
     private function mapAssetsToResponse($assets)
     {
-        return collect(array_wrap($assets))->map(function ($asset) {
+        return collect($assets)->map(function ($asset) {
             /** @var MoovlyAsset $asset */
             return [
                 'type' => $asset->getType(),

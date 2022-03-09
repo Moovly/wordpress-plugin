@@ -212,7 +212,7 @@ class PostToTemplateActionHandler
     {
         return collect($this->template->getVariables())->flatten()->first(
             function ($variable) use ($variableNames) {
-                return collect(array_wrap($variableNames))->contains($variable->getName());
+                return collect($variableNames)->contains($variable->getName());
             },
             (new Variable())->setRequirements([
                 'maximum_length' => 100,
