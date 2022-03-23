@@ -56,7 +56,7 @@ class Template extends Api
         register_rest_route($this->namespace, '/settings', [
             'methods' => ['GET', 'POST'],
             'callback' => [$this, 'settings'],
-            'permission_callback' => [$this, 'settings_permissions'],
+            'permission_callback' => [$this, 'can_manage_options'],
         ]);
 
         register_rest_route($this->namespace, '/(?P<id>[^/]+)', [
@@ -72,7 +72,7 @@ class Template extends Api
 
     public function index($request)
     {
-        if (!$this->index_permissions()) {
+        if (!$this->can_manage_options()) {
             $this->checkShortcodePermission(TemplatesShortCodeFactory::$tag);
         }
         $filters = $request->get_param('filters');
@@ -104,10 +104,7 @@ class Template extends Api
         }, $templates);
     }
 
-    public function index_permissions()
-    {
-        return current_user_can('manage_options');
-    }
+
 
     /**
      * @param WP_REST_Request $request

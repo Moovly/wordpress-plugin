@@ -64,7 +64,7 @@ class Project extends Api
      */
     public function index($request)
     {
-        if (!$this->index_permissions()) {
+        if (!$this->can_manage_options()) {
             $this->checkShortcodePermission(ProjectsShortCodeFactory::$tag);
         }
 
@@ -84,13 +84,7 @@ class Project extends Api
         }, $response);
     }
 
-    /**
-     * @return bool
-     */
-    public function index_permissions()
-    {
-        return current_user_can('manage_options');
-    }
+
 
     /**
      * @param \WP_REST_Request $request

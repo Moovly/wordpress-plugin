@@ -26,7 +26,7 @@ class PostVideo extends Api
         register_rest_route($this->namespace, '/index', [
             'methods' => 'GET',
             'callback' => [$this, 'index'],
-            'permission_callback' => [$this, 'index_permissions'],
+            'permission_callback' => [$this, 'can_manage_options'],
         ]);
 
         register_rest_route($this->namespace, '/(?P<id>[^/]+)', [
@@ -46,10 +46,6 @@ class PostVideo extends Api
         }, $this->getPostsWithVideo($request));
     }
 
-    public function index_permissions()
-    {
-        return current_user_can('manage_options');
-    }
 
     public function show($request)
     {
