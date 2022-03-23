@@ -47,4 +47,9 @@ class Api
 
         return $this;
     }
+
+    public function can_manage_options()
+    {
+        return current_user_can('manage_options');
+    }
 }

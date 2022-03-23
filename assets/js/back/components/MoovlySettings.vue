@@ -29,7 +29,8 @@
                             v-for="quality in settings.jobs.options"
                             :key="quality.value"
                             :value="quality.value"
-                          >{{ quality.text }}</option>
+                            >{{ quality.text }}</option
+                          >
                         </select>
                       </div>
                       <div class="form-check">
@@ -46,7 +47,9 @@
                           Save template submissions to projects
                         </label>
                       </div>
-                      <button class="btn btn-primary mt-4" type="submit">Save Settings</button>
+                      <button class="btn btn-primary mt-4" type="submit">
+                        Save Settings
+                      </button>
                     </form>
                   </div>
                 </div>
@@ -54,8 +57,8 @@
             </div>
           </div>
 
-           <div class="col-12">
-            <moovly-permissions   :rest-api-call="restApiCall"/>
+          <div class="col-12">
+            <moovly-permissions :rest-api-call="restApiCall" />
           </div>
         </div>
       </div>
@@ -73,12 +76,12 @@ export default {
     MoovlyAuth,
     MoovlyTemplates,
     MoovlyHeader,
-    MoovlyPermissions
+    MoovlyPermissions,
   },
   props: {
     restApiCall: {
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
@@ -89,14 +92,14 @@ export default {
           options: [
             { value: "480p", text: "480p" },
             { value: "720p", text: "720p" },
-            { value: "1080p", text: "1080p" }
-          ]
-        }
+            { value: "1080p", text: "1080p" },
+          ],
+        },
       },
       ui: {
         loading: false,
-        error: false
-      }
+        error: false,
+      },
     };
   },
 
@@ -109,12 +112,12 @@ export default {
       this.ui.loading = true;
       axios
         .get(`${this.restApiCall}moovly/v1/jobs/settings`)
-        .then(response => {
+        .then((response) => {
           this.settings.jobs.create_moov = response.data.create_moov;
           this.settings.jobs.quality = response.data.quality;
           this.ui.loading = false;
         })
-        .catch(error => {
+        .catch((error) => {
           this.ui.loading = false;
           this.ui.error = true;
         });
@@ -125,18 +128,18 @@ export default {
       axios
         .post(`${this.restApiCall}moovly/v1/jobs/settings`, {
           quality: this.settings.jobs.quality,
-          create_moov: this.settings.jobs.create_moov
+          create_moov: this.settings.jobs.create_moov,
         })
-        .then(response => {
+        .then((response) => {
           this.settings.jobs.create_moov = response.data.create_moov;
           this.settings.jobs.quality = response.data.quality;
           this.ui.loading = false;
         })
-        .catch(error => {
+        .catch((error) => {
           this.ui.loading = false;
           this.ui.error = true;
         });
-    }
-  }
+    },
+  },
 };
 </script>

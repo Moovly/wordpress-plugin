@@ -19,14 +19,15 @@ class Permissions extends Api
 
     public function registerEndpoints()
     {
-
         register_rest_route($this->namespace, '/shortcodes', [
             'methods' => 'GET',
             'callback' => [$this, 'getShortcodePermissions'],
+            'permission_callback' => [$this, 'can_manage_options'],
         ]);
         register_rest_route($this->namespace, '/shortcodes', [
             'methods' => 'PUT',
             'callback' => [$this, 'updateShortcodePermissions'],
+            'permission_callback' => [$this, 'can_manage_options'],
         ]);
     }
 
@@ -38,7 +39,6 @@ class Permissions extends Api
 
     public function updateShortcodePermissions($request)
     {
-        print_r($request->get_param('permissions'));
         return $this->updatePermission($this->permissionShortcodeGroup, $request->get_param('permissions'));
     }
 }

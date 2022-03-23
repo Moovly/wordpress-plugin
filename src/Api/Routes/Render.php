@@ -37,6 +37,7 @@ class Render extends Api
         register_rest_route($this->namespace, '/generated/index', [
             'methods' => 'GET',
             'callback' => [$this, 'generatedIndex'],
+            'permission_callback' => '__return_true',
         ]);
     }
 

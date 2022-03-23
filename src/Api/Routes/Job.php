@@ -38,12 +38,13 @@ class Job extends Api
         register_rest_route($this->namespace, '/(?P<id>[^/]+)/status', [
             'methods' => 'GET',
             'callback' => [$this, 'status'],
+            'permission_callback' => '__return_true',
         ]);
 
         register_rest_route($this->namespace, '/settings', [
             'methods' => ['GET', 'POST'],
             'callback' => [$this, 'settings'],
-            'permission_callback' => [$this, 'settings_permissions'],
+            'permission_callback' => [$this, 'can_manage_options'],
         ]);
     }
 
@@ -79,10 +80,6 @@ class Job extends Api
         ];
     }
 
-    public function settings_permissions()
-    {
-        return current_user_can('manage_options');
-    }
 
     private function mapValuesToResponse($values)
     {

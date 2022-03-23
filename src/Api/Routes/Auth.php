@@ -38,19 +38,19 @@ class Auth extends Api
         register_rest_route($this->namespace, '/callback', [
             'methods' => 'GET',
             'callback' => [$this, 'callback'],
-            'permission_callback' => [$this, 'callback_permissions'],
+            'permission_callback' => [$this, 'can_manage_options'],
         ]);
 
         register_rest_route($this->namespace, '/token', [
             'methods' => 'GET',
             'callback' => [$this, 'token'],
-            'permission_callback' => [$this, 'token_permissions'],
+            'permission_callback' => [$this, 'can_manage_options'],
         ]);
 
         register_rest_route($this->namespace, '/token', [
             'methods' => 'POST',
             'callback' => [$this, 'store'],
-            'permission_callback' => [$this, 'token_permissions'],
+            'permission_callback' => [$this, 'can_manage_options'],
         ]);
     }
 
@@ -67,20 +67,14 @@ class Auth extends Api
         wp_redirect(admin_url("/admin.php?page=moovly-settings"), 301);
     }
 
-    public function callback_permissions()
-    {
-        return current_user_can('manage_options');
-    }
+
 
     public function token()
     {
         return self::getToken();
     }
 
-    public function token_permissions()
-    {
-        return current_user_can('manage_options');
-    }
+
 
     public function store($request)
     {
