@@ -32,6 +32,7 @@ class PostVideo extends Api
         register_rest_route($this->namespace, '/(?P<id>[^/]+)', [
             'methods' => 'GET',
             'callback' => [$this, 'show'],
+            'permission_callback' => '__return_true',
         ]);
     }
 

@@ -51,6 +51,7 @@ class Template extends Api
         register_rest_route($this->namespace, '/index', [
             'methods' => 'GET',
             'callback' => [$this, 'index'],
+            'permission_callback' => '__return_true',
         ]);
 
         register_rest_route($this->namespace, '/settings', [
@@ -62,11 +63,13 @@ class Template extends Api
         register_rest_route($this->namespace, '/(?P<id>[^/]+)', [
             'methods' => 'GET',
             'callback' => [$this, 'show'],
+            'permission_callback' => '__return_true',
         ]);
 
         register_rest_route($this->namespace, '/(?P<id>[^/]+)/store', [
             'methods' => 'POST',
             'callback' => [$this, 'store'],
+            'permission_callback' => '__return_true',
         ]);
     }
 

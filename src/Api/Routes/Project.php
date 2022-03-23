@@ -40,20 +40,24 @@ class Project extends Api
         register_rest_route($this->namespace, '/index', [
             'methods' => 'GET',
             'callback' => [$this, 'index'],
+            'permission_callback' => '__return_true',
         ]);
 
         register_rest_route($this->namespace, '/(?P<id>[^/]+)', [
             'methods' => 'GET',
             'callback' => [$this, 'show'],
+            'permission_callback' => '__return_true',
         ]);
 
         register_rest_route($this->namespace, '/(?P<id>[^/]+)/renders', [
             'methods' => 'GET',
             'callback' => [$this, 'projectRenders'],
+            'permission_callback' => '__return_true',
         ]);
         register_rest_route($this->namespace, '/(?P<id>[^/]+)/renders/(?P<render_id>[^/]+)', [
             'methods' => 'DELETE',
             'callback' => [$this, 'deleteProjectRender'],
+            'permission_callback' => '__return_true',
         ]);
     }
 
