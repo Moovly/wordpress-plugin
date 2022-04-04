@@ -1176,10 +1176,10 @@
   resolved "https://verdaccio.tools.moovly.com/@emotion%2fweak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
-"@moovly/i18n@^1.0.67":
-  version "1.0.67"
-  resolved "https://verdaccio.tools.moovly.com/@moovly%2fi18n/-/i18n-1.0.67.tgz#c9ceb59559031cb5befdfc74126639c04d015c93"
-  integrity sha512-+ivf4E2w8hi5/5bM+PZo8VaqcvVA5Rhexb6zSGvfgwFCbLsl7KStnZmEyOvsm/d3vbpsAvzGdyPSZWL1oRPpYQ==
+"@moovly/i18n@^1.0.76":
+  version "1.0.76"
+  resolved "https://verdaccio.tools.moovly.com/@moovly%2fi18n/-/i18n-1.0.76.tgz#7be878010ac638d32f884af524e750f5e6a3dff2"
+  integrity sha512-ARQZE39/pkJhewvxuIgGTSxQoFIsOty3QTat11XV/qX2cYfHSWxsYyeCN4W2LbeuQyEQO8HafO2wvhrBGbzSbQ==
   dependencies:
     dotenv "^8.2.0"
     googleapis "^67.1.1"
