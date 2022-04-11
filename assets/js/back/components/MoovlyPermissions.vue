@@ -4,9 +4,10 @@
       <div class="col-12">
         <div class="jumbotron m-0 bg-white" v-if="!ui.loading">
           <div class="card-body">
-            <h2 class="card-title mb-5">Permissions</h2>
             <div class="row">
-              <div class="col-12 col-md-6 col-lg-4"></div>
+              <div class="col-12 col-md-6 col-lg-4">
+                <h2 class="card-title small">Permissions</h2>
+              </div>
               <div class="col-12 col-md-6 col-lg-8">
                 <h5>Enabled shortcodes</h5>
                 <form @submit.prevent="submit">

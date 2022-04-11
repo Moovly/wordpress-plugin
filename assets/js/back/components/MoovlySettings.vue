@@ -9,12 +9,16 @@
           <div class="col-12">
             <moovly-auth :rest-api-call="restApiCall" />
           </div>
+          <div class="col-12">
+            <moovly-global-settings :rest-api-call="restApiCall" />
+          </div>
           <div class="col-12 mb-3">
             <div class="jumbotron bg-white m-0">
               <div class="card-body">
-                <h2 class="card-title mb-5">Templates</h2>
                 <div class="row">
-                  <div class="col-12 col-md-6 col-lg-4"></div>
+                  <div class="col-12 col-md-6 col-lg-4">
+                    <h2 class="card-title small">Templates</h2>
+                  </div>
                   <div class="col-12 col-md-6 col-lg-8">
                     <form @submit.prevent="submit" class="w-50">
                       <div class="form-group">
@@ -70,6 +74,7 @@ import MoovlyAuth from "./MoovlyAuth";
 import MoovlyTemplates from "./MoovlyTemplates";
 import MoovlyHeader from "./shared/MoovlyHeader";
 import MoovlyPermissions from "./MoovlyPermissions";
+import MoovlyGlobalSettings from "./MoovlyGlobalSettings";
 
 export default {
   components: {
@@ -77,6 +82,7 @@ export default {
     MoovlyTemplates,
     MoovlyHeader,
     MoovlyPermissions,
+    MoovlyGlobalSettings,
   },
   props: {
     restApiCall: {

@@ -25,28 +25,31 @@ const getElementAndRenderCorrectComponent = (className, rendercomponent) => {
     rendercomponent(element);
   }
 };
+const localeElement = document.querySelector("[data-moovly-plugin-locale]");
+MoovlyPlugin.load(
+  localeElement ? localeElement.dataset.moovlyPluginLocale : "en"
+).then(() => {
+  getElementAndRenderCorrectComponent("moovly-template", (element) => {
+    let id = element.dataset.id;
+    const publishToYoutube = element.dataset.publishToYoutube === "1";
+    const createProject = element.dataset.createProject === "1";
+    const createRender = element.dataset.createRender === "1";
 
-getElementAndRenderCorrectComponent("moovly-template", (element) => {
-  let id = element.dataset.id;
-  const publishToYoutube = element.dataset.publishToYoutube === "1";
-  const createProject = element.dataset.createProject === "1";
-  const createRender = element.dataset.createRender === "1";
-
-  if (id === "query") {
-    const parsedQuery = parse(window.location.search.substring(1));
-    id = parsedQuery.template_id;
-  }
-  new MoovlyPlugin.Templates.QuickEdit({
-    container: element,
-    templateId: id,
-    withPreview: true,
-    publishToYoutube,
-    createProject,
-    createRender,
-    pollTillSuccess: true,
+    if (id === "query") {
+      const parsedQuery = parse(window.location.search.substring(1));
+      id = parsedQuery.template_id;
+    }
+    new MoovlyPlugin.Templates.QuickEdit({
+      container: element,
+      templateId: id,
+      withPreview: true,
+      publishToYoutube,
+      createProject,
+      createRender,
+      pollTillSuccess: true,
+    });
   });
-});
-MoovlyPlugin.load().then(() => {
+
   getElementAndRenderCorrectComponent("moovly-templates", (element) => {
     new MoovlyPlugin.Templates.List({
       container: element,

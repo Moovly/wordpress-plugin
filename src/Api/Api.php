@@ -11,6 +11,7 @@ use Moovly\Api\Routes\Project;
 use Moovly\Api\Routes\Template;
 use Moovly\Api\Routes\PostVideo;
 use Moovly\Api\Routes\Render;
+use Moovly\Api\Routes\Settings;
 
 class Api
 {
@@ -32,6 +33,7 @@ class Api
         'postVideos' => PostVideo::class,
         'renders' => Render::class,
         'permissions' =>  Permissions::class,
+        'settings' =>  Settings::class,
     ];
 
     public function __construct()

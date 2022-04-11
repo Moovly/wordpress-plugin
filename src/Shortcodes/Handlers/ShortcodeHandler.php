@@ -3,10 +3,11 @@
 namespace Moovly\Shortcodes\Handlers;
 
 use Moovly\Shortcodes\Traits\PermissionTrait;
+use Moovly\Shortcodes\Traits\SettingTrait;
 
 abstract class ShortcodeHandler
 {
-    use PermissionTrait;
+    use PermissionTrait, SettingTrait;
 
     protected $attributes;
 
@@ -60,7 +61,7 @@ abstract class ShortcodeHandler
     {
         $name = $this->tag . rand(1, 1000000);
         $rest = rest_url();
-        return "<div id='{$name}' data-rest='{$rest}' class='{$this->tag}' {$this->mapAttributesToHtmlProperties($attributes, true)}></div>";
+        return "<div id='{$name}' data-moovly-plugin-locale='{$this->getSetting($this->localeSettingKey,$this->defaultLocale)}' data-rest='{$rest}' class='{$this->tag}' {$this->mapAttributesToHtmlProperties($attributes, true)}></div>";
     }
 
     /**
