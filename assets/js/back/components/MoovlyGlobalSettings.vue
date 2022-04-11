@@ -11,7 +11,7 @@
               <div class="col-12 col-md-6 col-lg-8">
                 <form @submit.prevent="submit">
                   <div class="form-group">
-                    <label for="localesetting">Current Locale</label>
+                    <label for="localesetting">Current language</label>
                     <select
                       id="localesetting"
                       class="form-control"
