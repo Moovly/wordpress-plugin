@@ -7,6 +7,7 @@ use Moovly\Projects;
 use Moovly\Settings;
 use Moovly\PostVideos;
 use Moovly\Actions\Actions;
+use Moovly\Api\Services\MoovlyWarningService;
 use Moovly\Shortcodes\Shortcodes;
 use Moovly\Shortcodes\Traits\ShortcodeTrait;
 
@@ -54,6 +55,7 @@ class Moovly
         $this->api->register();
         $this->shortcodes->register();
         $this->actions->register();
+        $this->moovlyWarningService = new MoovlyWarningService($this->api->auth->hasToken(), $this->api->auth->token());
 
         $this->version = get_file_data(__DIR__ . '/../moovly.php', [
             'Version' => 'Version',
