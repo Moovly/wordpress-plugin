@@ -237,16 +237,16 @@
         },
         {
             "name": "moovly/moovly-php-sdk",
-            "version": "2.0.2",
+            "version": "2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Moovly/moovly-php-sdk.git",
-                "reference": "4a11954af68e4ce98c1b96f7924831ce8adc3b9e"
+                "reference": "9250cc66697143e6aa3d2fbaf3b258ab817f9be3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Moovly/moovly-php-sdk/zipball/4a11954af68e4ce98c1b96f7924831ce8adc3b9e",
-                "reference": "4a11954af68e4ce98c1b96f7924831ce8adc3b9e",
+                "url": "https://api.github.com/repos/Moovly/moovly-php-sdk/zipball/9250cc66697143e6aa3d2fbaf3b258ab817f9be3",
+                "reference": "9250cc66697143e6aa3d2fbaf3b258ab817f9be3",
                 "shasum": ""
             },
             "require": {
@@ -277,7 +277,11 @@
                 "moovly",
                 "video"
             ],
-            "time": "2022-01-20T12:38:06+00:00"
+            "support": {
+                "issues": "https://github.com/Moovly/moovly-php-sdk/issues",
+                "source": "https://github.com/Moovly/moovly-php-sdk/tree/2.0.3"
+            },
+            "time": "2022-07-08T11:37:18+00:00"
         },
         {
             "name": "nicmart/string-template",
@@ -1054,5 +1058,6 @@
     "platform-dev": [],
     "platform-overrides": {
         "php": "7.1.3"
-    }
+    },
+    "plugin-api-version": "2.3.0"
 }

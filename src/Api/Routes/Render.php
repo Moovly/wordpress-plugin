@@ -79,6 +79,9 @@ class Render extends Api
             'finished_at' => $render->getDateFinished()->format(DATE_ATOM),
             'video_url' => $render->getUrl(),
             'quality' => $render->getQuality(),
+            'width' => $render->getWidth(),
+            'height' => $render->getHeight(),
+            'thumbnail' => $render->getThumbnail(),
         ];
     }
 }
