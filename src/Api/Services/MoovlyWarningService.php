@@ -65,6 +65,16 @@ class MoovlyWarningService
                     ];
                 }
             }
+            try {
+                $license = $this->getMoovlyService()->getUserLicense();
+                if ($license->getExpired()) {
+                    $warnings[] = [
+                        'text' => "<strong>Moovly Plugin: </strong> Your subscription is expired",
+                        'type' => 'error'
+                    ];
+                }
+            } catch (Exception $e) {
+            }
         }
         if (count($warnings) > 0) {
             foreach ($warnings as $warning) {
