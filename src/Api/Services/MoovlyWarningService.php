@@ -66,7 +66,7 @@ class MoovlyWarningService
                 }
             }
             try {
-                $license = $this->getMoovlyService()->getUserLicense();
+                $license = $this->getMoovlyService()->getUserSubscription();
                 if ($license->getExpired()) {
                     $warnings[] = [
                         'text' => "<strong>Moovly Plugin: </strong> Your subscription is expired",
