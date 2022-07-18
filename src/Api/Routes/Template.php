@@ -90,7 +90,7 @@ class Template extends Api
 
         return array_map(function (TemplateModel $template) {
             $result = new \stdClass();
-
+            $quality = $template->getQuality();
             $isPostAutomation = $this->doesTemplateHaveWordPressFields($template);
             $isEmail = $this->doesTemplateHaveEmailCollect($template);
             $result->id = $template->getId();
@@ -102,7 +102,8 @@ class Template extends Api
             $result->preview = $template->getPreview();
             $result->supports_post_automation = $isPostAutomation && !$isEmail;
             $result->is_email_enabled = $isEmail;
-
+            $result->stage_width = isset($quality['stage_width']) ? $quality['stage_width'] : null;
+            $result->stage_height = isset($quality['stage_height']) ? $quality['stage_height'] : null;
             return $result;
         }, $templates);
     }
