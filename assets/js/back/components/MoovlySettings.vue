@@ -13,7 +13,7 @@
             <moovly-global-settings :rest-api-call="restApiCall" />
           </div>
           <div class="col-12 mb-3">
-            <div class="jumbotron bg-white m-0">
+            <div id="moovly-template-settings" class="jumbotron bg-white m-0">
               <div class="card-body">
                 <div class="row">
                   <div class="col-12 col-md-6 col-lg-4">
