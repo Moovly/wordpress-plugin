@@ -73,7 +73,7 @@ abstract class ShortcodeHandler
     {
         $attributes = array_merge([
             'width' => $this->getAttribute('width', '100%'),
-            'class' => $this->getAttribute('class'),
+            'class' => "test",
         ], $attributes);
 
         array_walk($attributes, function (&$value, $key) use ($asDataProperty) {
