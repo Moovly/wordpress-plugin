@@ -16,7 +16,7 @@
             </small>
           </div>
 
-          <table class="table table-moovly" v-if="!ui.loading">
+          <table class="table table-moovly" id="table-templates" v-if="!ui.loading">
             <thead>
               <tr>
                 <th scope="col">#</th>
