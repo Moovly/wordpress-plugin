@@ -77,7 +77,7 @@ class Project extends Api
         $pageSize = $request->get_param('page_size') ? intval($request->get_param('page_size')) : 25;
 
         try {
-            $response = $this->getMoovlyService()->getProjects('unarchived', ['renders'], $page, $pageSize);
+            $response = $this->getMoovlyService()->getProjects('unarchived', ['renders', 'stage-settings'], $page, $pageSize);
         } catch (\Exception $e) {
             return $this->throwWPError(null, $e);
         }
@@ -169,6 +169,7 @@ class Project extends Api
             'shortcode' => ProjectShortCodeFactory::generate($project),
             'thumbnail' => $project->getThumbnailPath(),
             'last_render_url' => $lastRender ? $lastRender->getUrl() : null,
+            'stage' => $project->getStage()
         ];
     }
 }
