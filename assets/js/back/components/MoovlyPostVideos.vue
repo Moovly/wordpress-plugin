@@ -19,7 +19,7 @@
             <moovly-no-post-videos />
           </div>
 
-          <table class="table table-moovly" v-if="!ui.loading && ui.videos.length > 0">
+          <table class="table table-moovly" id="table-post-videos" v-if="!ui.loading && ui.videos.length > 0">
             <thead>
               <tr>
                 <th scope="col">#</th>

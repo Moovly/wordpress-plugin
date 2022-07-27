@@ -21,7 +21,10 @@ const getElementAndRenderCorrectComponent = (className, rendercomponent) => {
   for (let i = 0; i < elements.length; i++) {
     const element = elements[i];
     element.classList.remove(className);
-
+    if (element.dataset.class) {
+      element.classList.add(element.dataset.class);
+      delete element.dataset.class;
+    }
     rendercomponent(element);
   }
 };
