@@ -88,7 +88,7 @@ export default {
         })
         .catch(() => {
           this.ui.save.error = false;
-          util.toastError("something went wrong");
+          util.toastError("error, unable to save");
         });
     },
   },
