@@ -34,6 +34,11 @@
         </div>
       </div>
     </div>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
   </div>
 </template>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js" />
@@ -84,7 +89,7 @@ export default {
         .put(this.settings.update, this.state)
         .then(() => {
           this.ui.save.success = true;
-          util.toastSuccess("successfully changed");
+          util.toastSuccess("successfully saved");
         })
         .catch(() => {
           this.ui.save.error = false;
