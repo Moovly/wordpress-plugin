@@ -12,5 +12,5 @@ const successToast = (text, background) =>
 
 export default {
   toastSuccess: (text) => successToast(text, "#3c8f49"),
-  toastError: (text) => successToast(text, "#ff2d55"),
+  toastError: (text) => successToast(text, "#d42242"),
 };
