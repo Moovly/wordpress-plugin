@@ -237,16 +237,16 @@
         },
         {
             "name": "moovly/moovly-php-sdk",
-            "version": "2.0.4",
+            "version": "2.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Moovly/moovly-php-sdk.git",
-                "reference": "ef83a3cf524bba2d64bf8eb82a3f0e457bf7dfe1"
+                "reference": "d6d0d1baff252e7a0a2284031fd0fb3e7ffa0ac8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Moovly/moovly-php-sdk/zipball/ef83a3cf524bba2d64bf8eb82a3f0e457bf7dfe1",
-                "reference": "ef83a3cf524bba2d64bf8eb82a3f0e457bf7dfe1",
+                "url": "https://api.github.com/repos/Moovly/moovly-php-sdk/zipball/d6d0d1baff252e7a0a2284031fd0fb3e7ffa0ac8",
+                "reference": "d6d0d1baff252e7a0a2284031fd0fb3e7ffa0ac8",
                 "shasum": ""
             },
             "require": {
@@ -279,9 +279,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Moovly/moovly-php-sdk/issues",
-                "source": "https://github.com/Moovly/moovly-php-sdk/tree/2.0.4"
+                "source": "https://github.com/Moovly/moovly-php-sdk/tree/2.0.5"
             },
-            "time": "2022-07-11T07:21:43+00:00"
+            "time": "2022-07-28T08:05:55+00:00"
         },
         {
             "name": "nicmart/string-template",

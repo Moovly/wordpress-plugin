@@ -1189,10 +1189,10 @@
     i18next-localstorage-backend "^3.1.2"
     react "^17.0.1"
 
-"@moovly/plugins-embed@1.2.96":
-  version "1.2.96"
-  resolved "https://verdaccio.tools.moovly.com/@moovly%2fplugins-embed/-/plugins-embed-1.2.96.tgz#45e17bcbad80eb044aedc1ae14fe2faf82dc0624"
-  integrity sha512-tTgal17MXKV5dpmBjvfgpmDWwsVasQ72bUyNdxpgKWNeEy1r0bBC5N3J8PhnmDAkhvtvm/ug4H8GgpFZtAEV8A==
+"@moovly/plugins-embed@1.2.99":
+  version "1.2.99"
+  resolved "https://verdaccio.tools.moovly.com/@moovly%2fplugins-embed/-/plugins-embed-1.2.99.tgz#f491702e61e829d511a968785efa4dba01297eda"
+  integrity sha512-lBmP8cMaCYn+GuB1x9CgQnEn4QQCH+ubCyKNBQyc9NtNmwb2wuRcApeXS/C0KJtSv3Qz4JHodrqQtplsQNHUsw==
   dependencies:
     "@moovly/ui" "^2.1.38"
     react "^17"
