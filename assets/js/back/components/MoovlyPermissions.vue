@@ -93,7 +93,7 @@ export default {
         .put(this.permissions.shortcodes, { permissions })
         .then(() => {
           this.ui.save.success = true;
-          util.toastSuccess("successfully saved permissions");
+          util.toastSuccess("permissions saved");
         })
         .catch(() => {
           this.ui.save.error = false;

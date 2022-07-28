@@ -83,7 +83,7 @@ export default {
         .put(this.settings.update, this.state)
         .then(() => {
           this.ui.save.success = true;
-          util.toastSuccess("successfully saved language");
+          util.toastSuccess("language saved");
         })
         .catch(() => {
           this.ui.save.error = false;
