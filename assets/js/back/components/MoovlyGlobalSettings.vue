@@ -36,7 +36,6 @@
     </div>
   </div>
 </template>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js" />
 <script>
 import { supportedLanguages } from "@moovly/i18n";
 import util from "../util";
@@ -84,11 +83,11 @@ export default {
         .put(this.settings.update, this.state)
         .then(() => {
           this.ui.save.success = true;
-          util.toastSuccess("successfully saved");
+          util.toastSuccess("successfully saved language");
         })
         .catch(() => {
           this.ui.save.error = false;
-          util.toastError("error, unable to save");
+          util.toastError("error, unable to save language");
         });
     },
   },

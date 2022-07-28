@@ -43,6 +43,8 @@
   </div>
 </template>
 <script>
+import util from "../util";
+
 export default {
   props: {
     restApiCall: {
@@ -91,9 +93,11 @@ export default {
         .put(this.permissions.shortcodes, { permissions })
         .then(() => {
           this.ui.save.success = true;
+          util.toastSuccess("successfully saved permissions");
         })
         .catch(() => {
           this.ui.save.error = false;
+          util.toastError("error, unable to save permissions");
         });
     },
   },

@@ -75,6 +75,7 @@ import MoovlyTemplates from "./MoovlyTemplates";
 import MoovlyHeader from "./shared/MoovlyHeader";
 import MoovlyPermissions from "./MoovlyPermissions";
 import MoovlyGlobalSettings from "./MoovlyGlobalSettings";
+import util from "../util";
 
 export default {
   components: {
@@ -140,10 +141,12 @@ export default {
           this.settings.jobs.create_moov = response.data.create_moov;
           this.settings.jobs.quality = response.data.quality;
           this.ui.loading = false;
+          util.toastSuccess("successfully saved template settings");
         })
         .catch((error) => {
           this.ui.loading = false;
           this.ui.error = true;
+          util.toastError("error, unable to save template settings");
         });
     },
   },

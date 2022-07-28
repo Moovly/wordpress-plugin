@@ -3,12 +3,20 @@
     <div :style="'width:' + width + '; height: inherit;'">
       <div class="my-5 card p-5">
         <moovly-video
-          v-if="!ui.loading && !job.id && ui.template.preview && ui.template.preview.url !== null"
+          v-if="
+            !ui.loading &&
+              !job.id &&
+              ui.template.preview &&
+              ui.template.preview.url !== null
+          "
           :src="[ui.template.preview.url]"
         />
         <moovly-job :job="job"></moovly-job>
-        <div class="alert alert-danger text-center my-5" v-if="!ui.loading && ui.error">
-          <p class="mb-0">{{ui.error_message}}</p>
+        <div
+          class="alert alert-danger text-center my-5"
+          v-if="!ui.loading && ui.error"
+        >
+          <p class="mb-0">{{ ui.error_message }}</p>
         </div>
         <form action v-if="!ui.loading && !job.id" @submit.prevent="submit">
           <h6 class="mb-5">{{ ui.template.name }}</h6>
@@ -34,7 +42,10 @@
             <p class="mb-0">Please try again later.</p>
           </div>
         </form>
-        <div class="alert alert-info my-5 text-center" v-if="ui.loading && form.processing">
+        <div
+          class="alert alert-info my-5 text-center"
+          v-if="ui.loading && form.processing"
+        >
           <p class="mb-0">Submitting your data...</p>
         </div>
         <spinner v-if="ui.loading && !job.id" />
@@ -47,27 +58,28 @@ import MoovlyVariable from "./../MoovlyVariable";
 import MoovlyJob from "./../MoovlyJob";
 import Spinner from "./../Spinner";
 import MoovlyVideo from "./../MoovlyVideo";
+import util from "../../../../back/util";
 
 export default {
   props: {
     id: {
       type: String,
-      required: true
+      required: true,
     },
     width: {
       type: String,
-      default: "100%"
+      default: "100%",
     },
     restApiCall: {
-      required: true
-    }
+      required: true,
+    },
   },
 
   components: {
     MoovlyVariable,
     MoovlyVideo,
     MoovlyJob,
-    Spinner
+    Spinner,
   },
 
   data() {
@@ -76,22 +88,22 @@ export default {
         template: {
           name: "",
           variables: [],
-          preview: {}
+          preview: {},
         },
         loading: false,
-        error: false
+        error: false,
       },
       form: {
-        processing: false
+        processing: false,
       },
       job: {
         name: "",
-        id: null
+        id: null,
       },
       templates: {
         show: `${this.restApiCall}moovly/v1/templates/${this.id}`,
-        save: `${this.restApiCall}moovly/v1/templates/${this.id}/store`
-      }
+        save: `${this.restApiCall}moovly/v1/templates/${this.id}/store`,
+      },
     };
   },
 
@@ -104,16 +116,18 @@ export default {
       this.ui.loading = true;
       axios
         .get(this.templates.show)
-        .then(response => {
+        .then((response) => {
           this.ui.template.name = response.data.name;
           this.ui.template.preview = response.data.preview;
-          this.ui.template.variables = response.data.variables.map(variable => {
-            variable.value = "";
-            return variable;
-          });
+          this.ui.template.variables = response.data.variables.map(
+            (variable) => {
+              variable.value = "";
+              return variable;
+            }
+          );
           this.ui.loading = false;
         })
-        .catch(error => {
+        .catch((error) => {
           this.ui.loading = false;
           this.ui.error = true;
         });
@@ -122,31 +136,33 @@ export default {
     submit() {
       this.ui.loading = true;
       this.form.processing = true;
-      let variableValues = this.ui.template.variables.map(variable => {
+      let variableValues = this.ui.template.variables.map((variable) => {
         return {
-          [variable.id]: variable.value
+          [variable.id]: variable.value,
         };
       });
       axios
         .post(this.templates.save, {
           variables: variableValues,
-          name: this.job.name
+          name: this.job.name,
         })
-        .then(response => {
+        .then((response) => {
           this.ui.error = false;
           this.ui.loading = false;
           this.form.processing = false;
           this.job = {
-            id: response.data.job_id
+            id: response.data.job_id,
           };
+          util.toastSuccess("successfully saved template settings");
         })
-        .catch(error => {
+        .catch((error) => {
           this.ui.error = true;
           this.ui.error_message = error.response.data.message || "";
           this.ui.loading = false;
           this.form.processing = false;
+          util.toastError("error, unable to save template settings");
         });
-    }
-  }
+    },
+  },
 };
 </script>
