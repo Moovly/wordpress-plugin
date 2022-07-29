@@ -9,40 +9,47 @@
               <div class="col-12 col-md-6 col-lg-4">
                 <h2 class="h6">Access tokens</h2>
                 <p>
-                  Access tokens are our mechanism of veryfing who you are, in order to get your templates and projects.
-                  To get an access token, you'll need to visit our API Hub (developer.moovly.com) and head over to the
+                  Access tokens are our mechanism of veryfing who you are, in
+                  order to get your templates and projects. To get an access
+                  token, you'll need to visit our API Hub (developer.moovly.com)
+                  and head over to the
                   <a
                     href="https://developer.moovly.com/docs/personal-access-tokens"
                     target="_blank"
                   >
-                    Personal Access
-                    Token
+                    Personal Access Token
                   </a>
                   section of the documentation.
                 </p>
 
                 <p>
-                  You need to have a Moovly account in order to create access tokens. If you do not have an account
-                  yet, head over to our
-                  <a
-                    href="https://www.moovly.com/sign-up"
-                    target="_blank"
-                  >registration page</a>
+                  You need to have a Moovly account in order to create access
+                  tokens. If you do not have an account yet, head over to our
+                  <a href="https://www.moovly.com/sign-up" target="_blank"
+                    >registration page</a
+                  >
                   and sign up.
                 </p>
                 <p>
-                  Personal access tokens are long lived, but do expire. When this happens, you will have to create a
-                  new one. You can see how long your tokens are valid in the
+                  Personal access tokens are long lived, but do expire. When
+                  this happens, you will have to create a new one. You can see
+                  how long your tokens are valid in the
                   <a
                     href="https://developer.moovly.com/docs/personal-access-tokens"
-                  >Personal Access Token</a> section
+                    >Personal Access Token</a
+                  >
+                  section
                 </p>
               </div>
               <div class="col-12 col-md-6 col-lg-8">
                 <form @submit.prevent="saveToken">
                   <label for="token">Access Token</label>
                   <div class="input-group mb-5">
-                    <input class="form-control" :type="tokenInputType" v-model="ui.token.value" />
+                    <input
+                      class="form-control"
+                      :type="tokenInputType"
+                      v-model="ui.token.value"
+                    />
                     <div class="input-group-append">
                       <a
                         class="input-group-text"
@@ -73,7 +80,9 @@
                       </a>
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-primary">Save Token</button>
+                  <button type="submit" class="btn btn-primary">
+                    Save Token
+                  </button>
                 </form>
               </div>
             </div>
@@ -84,16 +93,18 @@
   </div>
 </template>
 <script>
+import { addLoggedInMenuItems, removeLoggedInMenuItems } from "../menu";
+import util from "../util";
 import MoovlyAccount from "./MoovlyAccount";
 
 export default {
   components: {
-    MoovlyAccount
+    MoovlyAccount,
   },
   props: {
     restApiCall: {
-      required: true
-    }
+      required: true,
+    },
   },
   mounted() {
     this.checkToken();
@@ -104,28 +115,28 @@ export default {
       auth: {
         url: "https://oauth.services.moovly.com/login?callback=",
         callback: `${this.restApiCall}moovly/v1/auth/callback?_wpnonce=${window.moovlyApiSettings.nonce}`,
-        token: `${this.restApiCall}moovly/v1/auth/token`
+        token: `${this.restApiCall}moovly/v1/auth/token`,
       },
       ui: {
         loading: false,
         token: {
           value: null,
-          show: false
-        }
-      }
+          show: false,
+        },
+      },
     };
   },
 
   computed: {
     tokenInputType: function() {
       return this.ui.token.show ? "text" : "password";
-    }
+    },
   },
 
   methods: {
     checkToken() {
       this.ui.loading = true;
-      axios.get(this.auth.token).then(response => {
+      axios.get(this.auth.token).then((response) => {
         this.ui.token.value = response.data;
         this.ui.loading = false;
       });
@@ -137,15 +148,18 @@ export default {
 
     saveToken() {
       this.ui.loading = true;
+      const newToken = this.ui.token.value;
       axios
         .post(this.auth.token, {
-          token: this.ui.token.value
+          token: newToken,
         })
-        .then(response => {
+        .then((response) => {
           this.ui.loading = false;
-          location.reload();
+          util.toastSuccess("successfully saved template settings");
+          removeLoggedInMenuItems();
+          if (newToken !== "") addLoggedInMenuItems();
         });
-    }
-  }
+    },
+  },
 };
 </script>
