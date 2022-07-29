@@ -19,6 +19,9 @@ export const removeLoggedInMenuItems = () =>
 export const addLoggedInMenuItems = () => {
   const submenu = document.querySelector("#toplevel_page_moovly .wp-submenu");
   menuItemsAfterLogin.forEach((item) => {
+    if (!!document.querySelector(`[href="admin.php?page=${item.page}"]`)) {
+      return;
+    }
     const li = document.createElement("li");
     const a = document.createElement("a");
     a.innerHTML = item.title;

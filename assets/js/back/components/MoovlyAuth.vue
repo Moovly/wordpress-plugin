@@ -156,8 +156,11 @@ export default {
         .then((response) => {
           this.ui.loading = false;
           util.toastSuccess("successfully saved template settings");
-          removeLoggedInMenuItems();
-          if (newToken !== "") addLoggedInMenuItems();
+          if (newToken !== "") {
+            addLoggedInMenuItems();
+          } else {
+            removeLoggedInMenuItems();
+          }
         });
     },
   },
