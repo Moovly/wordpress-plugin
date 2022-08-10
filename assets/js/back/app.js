@@ -1,3 +1,4 @@
+import "toastify-js/src/toastify.js";
 require("./bootstrap");
 import Vue from "vue";
 import Moovly from "./components/Moovly";

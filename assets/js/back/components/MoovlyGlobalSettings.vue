@@ -38,6 +38,7 @@
 </template>
 <script>
 import { supportedLanguages } from "@moovly/i18n";
+import util from "../util";
 export default {
   props: {
     restApiCall: {
@@ -82,9 +83,11 @@ export default {
         .put(this.settings.update, this.state)
         .then(() => {
           this.ui.save.success = true;
+          util.toastSuccess("language saved");
         })
         .catch(() => {
           this.ui.save.error = false;
+          util.toastError("error, unable to save language");
         });
     },
   },
