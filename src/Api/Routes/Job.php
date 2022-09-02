@@ -15,11 +15,14 @@ class Job extends Api
 
     public static $quality_key;
 
+    public static $email_form_submission;
+
     public function __construct()
     {
         parent::__construct();
         self::$save_projects_key = "{$this->domain}_jobs_create_moov";
         self::$quality_key = "{$this->domain}_jobs_quality";
+        self::$email_form_submission = "{$this->domain}_email_form_submission";
         add_action('rest_api_init', [$this, 'registerEndpoints']);
     }
 
@@ -31,6 +34,11 @@ class Job extends Api
     public static function getQuality()
     {
         return get_option(self::$quality_key) ?: '480p';
+    }
+
+    public static function getEmailFormSubmission()
+    {
+        return get_option(self::$email_form_submission) ?: null;
     }
 
     public function registerEndpoints()
@@ -72,11 +80,14 @@ class Job extends Api
         if ($request->get_method() === 'POST') {
             update_option(self::$save_projects_key, $request->get_param('create_moov'));
             update_option(self::$quality_key, $request->get_param('quality'));
+            $email_form_submission  = $request->get_param('email_form_submission') || null;
+            update_option(self::$email_form_submission, $email_form_submission);
         }
 
         return [
             'create_moov' => get_option(self::$save_projects_key),
             'quality' => self::getQuality(),
+            'email_form_submission' => get_option(self::$email_form_submission),
         ];
     }
 
