@@ -228,7 +228,7 @@ class Template extends Api
                 [
                     'email' => Job::getEmailFormSubmission(),
                     'subject' => 'New Moovly template form submission',
-                    'message' => 'Someone submitted a Moovly template at' . get_bloginfo('name'),
+                    'message' => 'Someone submitted a Moovly template at ' . get_bloginfo('name'),
                 ]
             ));
         }
