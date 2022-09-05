@@ -80,7 +80,7 @@ class Job extends Api
         if ($request->get_method() === 'POST') {
             update_option(self::$save_projects_key, $request->get_param('create_moov'));
             update_option(self::$quality_key, $request->get_param('quality'));
-            $email_form_submission  = $request->get_param('email_form_submission') || null;
+            $email_form_submission = $request->get_param('email_form_submission') ?: null;
             update_option(self::$email_form_submission, $email_form_submission);
         }
 
