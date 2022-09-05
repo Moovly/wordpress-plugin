@@ -20,7 +20,7 @@
                     <h2 class="card-title small">Templates</h2>
                   </div>
                   <div class="col-12 col-md-6 col-lg-8">
-                    <form @submit.prevent="submit" class="w-50">
+                    <form @submit.prevent="submit" class="w-60">
                       <div class="form-group">
                         <label for="quality">Video Quality</label>
                         <select
@@ -37,7 +37,7 @@
                           >
                         </select>
                       </div>
-                      <div class="form-check">
+                      <div class="form-check mb-4">
                         <input
                           type="checkbox"
                           name="create_moov"
@@ -51,6 +51,35 @@
                           Save template submissions to projects
                         </label>
                       </div>
+                      <div class="form-check">
+                        <input
+                          type="checkbox"
+                          name="email_form_submission_checkbox"
+                          id="email_form_submission_checkbox"
+                          class="form-check-input"
+                          v-model="ui.email_form_submission_checkbox"
+                        />
+                        <label
+                          for="email_form_submission_checkbox"
+                          class="form-check-label"
+                        >
+                          Send email notification for every template submission
+                        </label>
+                      </div>
+                      <div
+                        v-if="ui.email_form_submission_checkbox"
+                        class="form"
+                      >
+                        <input
+                          type="email"
+                          name="email_form_submission"
+                          id="email_form_submission"
+                          placeholder="Email"
+                          class="form-control"
+                          v-model="settings.jobs.email_form_submission"
+                        />
+                      </div>
+
                       <button class="btn btn-primary mt-4" type="submit">
                         Save Settings
                       </button>
@@ -95,6 +124,7 @@ export default {
       settings: {
         jobs: {
           create_moov: false,
+          email_form_submission: null,
           quality: "480p",
           options: [
             { value: "480p", text: "480p" },
@@ -106,6 +136,7 @@ export default {
       ui: {
         loading: false,
         error: false,
+        email_form_submission_checkbox: false,
       },
     };
   },
@@ -122,6 +153,11 @@ export default {
         .then((response) => {
           this.settings.jobs.create_moov = response.data.create_moov;
           this.settings.jobs.quality = response.data.quality;
+          this.settings.jobs.email_form_submission =
+            response.data.email_form_submission || null;
+          if (this.settings.jobs.email_form_submission) {
+            this.ui.email_form_submission_checkbox = true;
+          }
           this.ui.loading = false;
         })
         .catch((error) => {
@@ -132,14 +168,23 @@ export default {
 
     submit() {
       this.ui.loading = true;
+      const emailFormSubmission = this.ui.email_form_submission_checkbox
+        ? this.settings.jobs.email_form_submission
+        : null;
       axios
         .post(`${this.restApiCall}moovly/v1/jobs/settings`, {
           quality: this.settings.jobs.quality,
+          email_form_submission: emailFormSubmission,
           create_moov: this.settings.jobs.create_moov,
         })
         .then((response) => {
           this.settings.jobs.create_moov = response.data.create_moov;
           this.settings.jobs.quality = response.data.quality;
+          this.settings.jobs.email_form_submission =
+            response.data.email_form_submission || null;
+          if (this.settings.jobs.email_form_submission) {
+            this.ui.email_form_submission_checkbox = true;
+          }
           this.ui.loading = false;
           util.toastSuccess("successfully saved template settings");
         })

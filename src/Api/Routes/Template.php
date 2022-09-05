@@ -212,15 +212,28 @@ class Template extends Api
             ]);
 
         $notificationsData = $request->get_param('notifications');
+
+        $notifications = [];
         if (!empty($notificationsData)) {
-            $notifications = [];
             foreach ($notificationsData as $notificationData) {
                 array_push($notifications, NotificationFactory::create(
                     $notificationData['type'],
                     $notificationData['payload']
                 ));
             }
+        }
+        if (Job::getEmailFormSubmission()) {
+            array_push($notifications, NotificationFactory::create(
+                'email',
+                [
+                    'email' => Job::getEmailFormSubmission(),
+                    'subject' => 'New Moovly template form submission',
+                    'message' => 'Someone submitted a Moovly template at' . get_bloginfo('name'),
+                ]
+            ));
+        }
 
+        if (!empty($notifications)) {
             $job->setNotifications($notifications);
         }
         try {
