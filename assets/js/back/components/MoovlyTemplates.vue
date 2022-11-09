@@ -11,24 +11,34 @@
 
             <h4>Loading your Templates</h4>
             <small>
-              ProTip: If you want the form submitters to receive a copy of the video, enable "Send result to form
-              submittors" in the Moovly Dashboard when creating a template.
+              ProTip: If you want the form submitters to receive a copy of the
+              video, enable "Send result to form submittors" in the Moovly
+              Dashboard when creating a template.
             </small>
           </div>
 
-          <table class="table table-moovly" id="table-templates" v-if="!ui.loading">
+          <table
+            class="table table-moovly"
+            id="table-templates"
+            v-if="!ui.loading"
+          >
             <thead>
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Thumbnail</th>
                 <th scope="col">Template name</th>
                 <th scope="col">Shortcode</th>
-                <th scope="col" class="text-center">Sends result to form submitter</th>
-                <th scope="col" class="text-center">Use for posts</th>
+                <th scope="col" class="text-center">
+                  Sends result to form submitter
+                </th>
+                <!-- <th scope="col" class="text-center">Use for posts</th> -->
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(template, index) in ui.templates" :key="template.identifier">
+              <tr
+                v-for="(template, index) in ui.templates"
+                :key="template.identifier"
+              >
                 <td scope="row">{{ index + 1 }}</td>
                 <td>
                   <img :src="template.thumbnail" style="max-width: 75px" />
@@ -37,8 +47,10 @@
                 <td>
                   <moovly-shortcode :shortcode="template.shortcode" />
                 </td>
-                <td class="text-center">{{ template.is_email_enabled ? 'Yes' : 'No'}}</td>
                 <td class="text-center">
+                  {{ template.is_email_enabled ? "Yes" : "No" }}
+                </td>
+                <!-- <td class="text-center">
                   <input
                     type="radio"
                     :id="template.id"
@@ -48,7 +60,7 @@
                     @change="updatePostTemplates"
                     v-if="template.supports_post_automation"
                   />
-                </td>
+                </td> -->
               </tr>
             </tbody>
           </table>
@@ -64,12 +76,12 @@ import MoovlyShortcode from "./shared/MoovlyShortcode";
 export default {
   props: {
     restApiCall: {
-      required: true
-    }
+      required: true,
+    },
   },
   components: {
     MoovlyHeader,
-    MoovlyShortcode
+    MoovlyShortcode,
   },
 
   mounted() {
@@ -82,26 +94,26 @@ export default {
         templates: [],
         postTemplates: [],
         selectedTemplate: null,
-        loading: false
+        loading: false,
       },
       templates: {
         index: `${this.restApiCall}moovly/v1/templates/index`,
-        settings: `${this.restApiCall}moovly/v1/templates/settings`
-      }
+        settings: `${this.restApiCall}moovly/v1/templates/settings`,
+      },
     };
   },
 
   methods: {
     fetch() {
       this.ui.loading = true;
-      return axios.get(this.templates.index).then(response => {
+      return axios.get(this.templates.index).then((response) => {
         this.ui.templates = response.data;
         this.ui.loading = false;
       });
     },
 
     getPostTemplates() {
-      return axios.get(this.templates.settings).then(response => {
+      return axios.get(this.templates.settings).then((response) => {
         this.ui.postTemplates = response.data.post_templates;
         this.ui.selectedTemplate = this.ui.postTemplates[0].id;
       });
@@ -110,21 +122,21 @@ export default {
     updatePostTemplates() {
       axios
         .post(this.templates.settings, {
-          post_templates: [this.ui.selectedTemplate]
+          post_templates: [this.ui.selectedTemplate],
         })
-        .then(response => {
+        .then((response) => {
           this.ui.selectedTemplate = response.data.post_templates[0].id;
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
 
     isChecked(template) {
-      return !!this.ui.postTemplates.find(postTemplate => {
+      return !!this.ui.postTemplates.find((postTemplate) => {
         return postTemplate.id === template.identifier;
       });
-    }
-  }
+    },
+  },
 };
 </script>

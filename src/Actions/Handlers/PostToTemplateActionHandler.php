@@ -28,9 +28,9 @@ class PostToTemplateActionHandler
      */
     public function __construct($postId)
     {
-        $this->post = get_post($postId);
-        $this->templateService = new Templates();
-        $this->template = $this->templateService->getPostTemplate();
+        // $this->post = get_post($postId);
+        // $this->templateService = new Templates();
+        // $this->template = $this->templateService->getPostTemplate();
     }
 
     /**
@@ -38,15 +38,15 @@ class PostToTemplateActionHandler
      */
     public function handle()
     {
-        $postId = $this->post->ID;
-        $isPost = $this->post->post_type === 'post';
-        $isPublish = $this->post->post_status === 'publish';
+        // $postId = $this->post->ID;
+        // $isPost = $this->post->post_type === 'post';
+        // $isPublish = $this->post->post_status === 'publish';
 
-        if ($this->template && $this->template->getId() && $isPost && $isPublish) {
-            $this->dispatchMoovlyJob();
-        }
+        // if ($this->template && $this->template->getId() && $isPost && $isPublish) {
+        //     $this->dispatchMoovlyJob();
+        // }
 
-        return $postId;
+        // return $postId;
     }
 
     /**
@@ -65,8 +65,7 @@ class PostToTemplateActionHandler
             )
         ])
             ->setTemplate($this->template)
-            ->setOptions([])
-        ;
+            ->setOptions([]);
 
         try {
             $job = $this->getMoovlyService()->createJob($job);
@@ -141,7 +140,7 @@ class PostToTemplateActionHandler
             return $value;
         }
 
-        return rtrim(mb_strimwidth($value, 0, $limit, '', 'UTF-8')).$end;
+        return rtrim(mb_strimwidth($value, 0, $limit, '', 'UTF-8')) . $end;
     }
 
     private function getNormalizedPostContent()

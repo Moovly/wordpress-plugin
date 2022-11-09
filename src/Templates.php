@@ -21,48 +21,52 @@ class Templates
         echo $this->createVueTag('moovly-templates');
     }
 
-    /**
-     * @return MoovlyTemplate
-     */
-    public function getPostTemplate()
-    {
-        return $this->selectPostTemplate($randomize = false);
-    }
 
-    /**
-     * @return MoovlyTemplate
-     */
-    public static function getRandomPostTemplate()
-    {
-        return self::selectPostTemplate($randomize = true);
-    }
+    // /**
+    //  * @return MoovlyTemplate
+    //  */
+    // public function getPostTemplate()
+    // {
+    //     return $this->selectPostTemplate($randomize = false);
+    // }
 
-    /**
-     * @param bool $randomize
-     *
-     * @return MoovlyTemplate
-     */
-    private function selectPostTemplate($randomize = false)
-    {
-        $templates = get_option(self::$post_templates_key);
-        $template = $templates[0];
+    // /**
+    //  * @return MoovlyTemplate
+    //  */
+    // public static function getRandomPostTemplate()
+    // {
+    //     return self::selectPostTemplate($randomize = true);
+    // }
 
-        if ($randomize) {
-            $template = array_rand($templates, 1);
-        }
+    // /**
+    //  * @param bool $randomize
+    //  *
+    //  * @return MoovlyTemplate
+    //  */
+    // private function selectPostTemplate($randomize = false)
+    // {
+    //     $templates = get_option(self::$post_templates_key);
 
-        if (is_null($template)) {
-            return (new MoovlyTemplate())->setId('')->setVariables([]);
-        }
+    //     if($)
+    //     $template = $templates[0];
 
-        if ($template instanceof WP_Error || !is_array($template)) {
-            return (new MoovlyTemplate())->setId('')->setVariables([]);
-        }
+    //     if ($randomize) {
+    //         $template = array_rand($templates, 1);
+    //     }
 
-        try {
-            return $this->getMoovlyService()->getTemplate($template['id']);
-        } catch (\Exception $e) {
-            return (new MoovlyTemplate())->setId('')->setVariables([]);
-        }
-    }
+    //     if (is_null($template)) {
+    //         return (new MoovlyTemplate())->setId('')->setVariables([]);
+    //     }
+
+    //     if ($template instanceof WP_Error || !is_array($template)) {
+    //         return (new MoovlyTemplate())->setId('')->setVariables([]);
+    //     }
+
+    //     try {
+    //         return $this->getMoovlyService()->getTemplate($template['id']);
+    //     } catch (\Exception $e) {
+    //         return (new MoovlyTemplate())->setId('')->setVariables([]);
+    //     }
+    // }
+
 }

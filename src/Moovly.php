@@ -218,16 +218,16 @@ class Moovly
                 }
             );
 
-            add_submenu_page(
-                'moovly',
-                __('Post Videos', 'moovly'),
-                __('Post Videos', 'moovly'),
-                'manage_options',
-                'moovly-post-videos',
-                function () {
-                    return $this->postVideos->makeView();
-                }
-            );
+            // add_submenu_page(
+            //     'moovly',
+            //     __('Post Videos', 'moovly'),
+            //     __('Post Videos', 'moovly'),
+            //     'manage_options',
+            //     'moovly-post-videos',
+            //     function () {
+            //         return $this->postVideos->makeView();
+            //     }
+            // );
         }
     }
 
