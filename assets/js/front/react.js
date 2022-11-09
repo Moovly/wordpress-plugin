@@ -37,7 +37,7 @@ MoovlyPlugin.load(
     const publishToYoutube = element.dataset.publishToYoutube === "1";
     const createProject = element.dataset.createProject === "1";
     const createRender = element.dataset.createRender === "1";
-
+    const pollTillSuccess = !(element.dataset.pollTillSuccess === "0");
     if (id === "query") {
       const parsedQuery = parse(window.location.search.substring(1));
       id = parsedQuery.template_id;
@@ -49,7 +49,7 @@ MoovlyPlugin.load(
       publishToYoutube,
       createProject,
       createRender,
-      pollTillSuccess: true,
+      pollTillSuccess,
     });
   });
 
