@@ -204,7 +204,11 @@ class Template extends Api
                 $name,
                 $request->get_param('template_variables'),
                 [],
-                ['origin' => 'wordpress', 'origin_identifier' => 'wordpress_moovly_plugin']
+                [
+                    'origin' => 'wordpress',
+                    'origin_identifier' => 'wordpress_moovly_plugin',
+                    'label' => $name
+                ]
             ),
         ])->setTemplate($template)
             ->setOptions([
