@@ -202,7 +202,13 @@ class Template extends Api
             ValueFactory::create(
                 $id,
                 $name,
-                $request->get_param('template_variables')
+                $request->get_param('template_variables'),
+                [],
+                [
+                    'origin' => 'wordpress',
+                    'origin_identifier' => 'wordpress_moovly_plugin',
+                    'label' => $name
+                ]
             ),
         ])->setTemplate($template)
             ->setOptions([
