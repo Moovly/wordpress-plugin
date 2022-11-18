@@ -23,6 +23,7 @@ class TemplateShortcodeHandler extends ShortcodeHandler
             'publish-to-youtube' => $this->getAttribute('publish-to-youtube', '0'),
             'create-project' => $this->getAttribute('create-project', $defaultSaveProject),
             'create-render' => $this->getAttribute('create-render', '1'),
+            'poll-till-success' => $this->getAttribute('poll-till-success', '1'),
         ]);
     }
 }

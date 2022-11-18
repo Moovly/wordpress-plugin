@@ -64,7 +64,7 @@
                   v-model="shortcodeSettings.pollTillSuccess"
                 />
                 <label for="pollTillSuccess" class="form-check-label">
-                  After submission, poll till video is done and show video
+                  show rendered video after form submission
                 </label>
               </div>
             </div>
@@ -83,7 +83,7 @@
                 <th scope="col" class="text-center">
                   Sends result to form submitter
                 </th>
-                <th scope="col" class="text-center">Use for posts</th>
+                <!-- <th scope="col" class="text-center">Use for posts</th> -->
               </tr>
             </thead>
             <tbody>
@@ -102,7 +102,7 @@
                 <td class="text-center">
                   {{ template.is_email_enabled ? "Yes" : "No" }}
                 </td>
-                <td class="text-center">
+                <!-- <td class="text-center">
                   <input
                     type="radio"
                     :id="template.id"
@@ -112,7 +112,7 @@
                     @change="updatePostTemplates"
                     v-if="template.supports_post_automation"
                   />
-                </td>
+                </td> -->
               </tr>
             </tbody>
           </table>
