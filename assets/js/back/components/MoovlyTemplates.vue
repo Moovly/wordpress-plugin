@@ -64,7 +64,7 @@
                   v-model="shortcodeSettings.pollTillSuccess"
                 />
                 <label for="pollTillSuccess" class="form-check-label">
-                  show rendered video after form submission
+                  Show rendered video after form submission
                 </label>
               </div>
             </div>
