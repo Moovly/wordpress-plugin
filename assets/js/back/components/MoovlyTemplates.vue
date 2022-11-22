@@ -147,18 +147,20 @@ export default {
       createRender: true,
       pollTillSuccess: true,
     };
-    const previousShortCodeSettingsLocal = localStorage.getItem(
-      SHORTCODE_SETTINGS
-    );
-    if (previousShortCodeSettingsLocal) {
-      const previousShortCodeSettings = JSON.parse(
-        previousShortCodeSettingsLocal
+    try {
+      const previousShortCodeSettingsLocal = localStorage.getItem(
+        SHORTCODE_SETTINGS
       );
-      shortcodeSettings = {
-        ...shortcodeSettings,
-        ...previousShortCodeSettings,
-      };
-    }
+      if (previousShortCodeSettingsLocal) {
+        const previousShortCodeSettings = JSON.parse(
+          previousShortCodeSettingsLocal
+        );
+        shortcodeSettings = {
+          ...shortcodeSettings,
+          ...previousShortCodeSettings,
+        };
+      }
+    } catch (e) {}
     return {
       ui: {
         templates: [],
@@ -176,7 +178,9 @@ export default {
   watch: {
     shortcodeSettings: {
       handler(val) {
-        localStorage.setItem(SHORTCODE_SETTINGS, JSON.stringify(val));
+        try {
+          localStorage.setItem(SHORTCODE_SETTINGS, JSON.stringify(val));
+        } catch (e) {}
         this.setTemplateShortCode();
       },
       deep: true,
