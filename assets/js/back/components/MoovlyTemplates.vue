@@ -206,6 +206,7 @@ export default {
       return axios.get(this.templates.index).then((response) => {
         this.ui.templates = response.data;
         this.ui.loading = false;
+        this.setTemplateShortCode();
       });
     },
 
