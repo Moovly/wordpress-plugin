@@ -124,7 +124,7 @@
 <script>
 import MoovlyHeader from "./shared/MoovlyHeader";
 import MoovlyShortcode from "./shared/MoovlyShortcode";
-
+const SHORTCODE_SETTINGS = "wp.moovly.shortcodeSettings";
 export default {
   props: {
     restApiCall: {
@@ -141,6 +141,24 @@ export default {
   },
 
   data() {
+    let shortcodeSettings = {
+      publishToYoutube: false,
+      createProject: false,
+      createRender: true,
+      pollTillSuccess: true,
+    };
+    const previousShortCodeSettingsLocal = localStorage.getItem(
+      SHORTCODE_SETTINGS
+    );
+    if (previousShortCodeSettingsLocal) {
+      const previousShortCodeSettings = JSON.parse(
+        previousShortCodeSettingsLocal
+      );
+      shortcodeSettings = {
+        ...shortcodeSettings,
+        ...previousShortCodeSettings,
+      };
+    }
     return {
       ui: {
         templates: [],
@@ -148,12 +166,7 @@ export default {
         selectedTemplate: null,
         loading: false,
       },
-      shortcodeSettings: {
-        publishToYoutube: false,
-        createProject: false,
-        createRender: true,
-        pollTillSuccess: true,
-      },
+      shortcodeSettings,
       templates: {
         index: `${this.restApiCall}moovly/v1/templates/index`,
         settings: `${this.restApiCall}moovly/v1/templates/settings`,
@@ -163,6 +176,7 @@ export default {
   watch: {
     shortcodeSettings: {
       handler(val) {
+        localStorage.setItem(SHORTCODE_SETTINGS, JSON.stringify(val));
         this.setTemplateShortCode();
       },
       deep: true,
