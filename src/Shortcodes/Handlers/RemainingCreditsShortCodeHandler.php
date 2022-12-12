@@ -16,11 +16,11 @@ class RemainingCreditsShortCodeHandler extends ShortcodeHandler
         if ($error) {
             return $error;
         }
-        $credits = $this->getMoovlyService()->getRemainingCredits();
+        $credits = $this->getMoovlyService()->getCreditAccount();
 
         if (!$credits) {
             return '-';
         }
-        return $credits['total_left'];
+        return $credits['total_balance'];
     }
 }
