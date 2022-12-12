@@ -6,7 +6,6 @@ use Moovly\Api\Api;
 use Moovly\Projects;
 use Moovly\Settings;
 use Moovly\PostVideos;
-use Moovly\Actions\Actions;
 use Moovly\Api\Services\MoovlyWarningService;
 use Moovly\Shortcodes\Shortcodes;
 use Moovly\Shortcodes\Traits\ShortcodeTrait;
@@ -29,7 +28,6 @@ class Moovly
 
     public $projects;
 
-    public $actions;
 
     /**
      * @var string
@@ -43,7 +41,6 @@ class Moovly
         $this->templates = new Templates;
         $this->projects = new Projects;
         $this->settings = new Settings;
-        $this->actions = new Actions;
         $this->api = new Api;
 
         $path = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, plugin_basename(__FILE__));
@@ -54,7 +51,6 @@ class Moovly
     {
         $this->api->register();
         $this->shortcodes->register();
-        $this->actions->register();
         $this->moovlyWarningService = new MoovlyWarningService($this->api->auth->hasToken(), $this->api->auth->token());
 
         $this->version = get_file_data(__DIR__ . '/../moovly.php', [
