@@ -12,15 +12,19 @@ class RemainingCreditsShortCodeHandler extends ShortcodeHandler
 
     public function handle()
     {
-        $error = $this->checkShortcodePermission(RemainingCreditsShortCodeFactory::$tag, true);
-        if ($error) {
-            return $error;
-        }
-        $credits = $this->getMoovlyService()->getCreditAccount();
+        try {
+            $error = $this->checkShortcodePermission(RemainingCreditsShortCodeFactory::$tag, true);
+            if ($error) {
+                return $error;
+            }
+            $credits = $this->getMoovlyService()->getCreditAccount();
 
-        if (!$credits) {
+            if (!$credits) {
+                return '-';
+            }
+            return $credits['total_balance'];
+        } catch (\Throwable $e) {
             return '-';
         }
-        return $credits['total_balance'];
     }
 }
