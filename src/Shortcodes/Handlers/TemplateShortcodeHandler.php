@@ -21,6 +21,7 @@ class TemplateShortcodeHandler extends ShortcodeHandler
         return $this->makeReactTag([
             'id' => $this->getAttribute('id'),
             'publish-to-youtube' => $this->getAttribute('publish-to-youtube', '0'),
+            'youtube-privacy' => $this->getAttribute('youtube-privacy', 'public'),
             'create-project' => $this->getAttribute('create-project', $defaultSaveProject),
             'create-render' => $this->getAttribute('create-render', '1'),
             'poll-till-success' => $this->getAttribute('poll-till-success', '1'),

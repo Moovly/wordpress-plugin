@@ -202,7 +202,7 @@ class Template extends Api
             ValueFactory::create(
                 $id,
                 $name,
-                $request->get_param('template_variables'),
+                $request->get_param('template_variables') ?? [],
                 [],
                 [
                     'origin' => 'wordpress',

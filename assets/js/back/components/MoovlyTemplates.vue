@@ -31,6 +31,18 @@
                   Publish video to youtube
                 </label>
               </div>
+              <div v-if="shortcodeSettings.publishToYoutube" class="form-check">
+                <label>Youtube privacy</label>
+                <select
+                  name="youtubePrivacy"
+                  id="youtubePrivacy"
+                  v-model="shortcodeSettings.youtubePrivacy"
+                  class="form-control"
+                >
+                  <option value="public">Public</option>
+                  <option value="private">Private</option>
+                </select>
+              </div>
               <div class="form-check">
                 <input
                   type="checkbox"
@@ -125,6 +137,22 @@
 import MoovlyHeader from "./shared/MoovlyHeader";
 import MoovlyShortcode from "./shared/MoovlyShortcode";
 const SHORTCODE_SETTINGS = "wp.moovly.shortcodeSettings";
+
+const generateShorcode = (temp, shortcodeSettings) => {
+  return `[moovly-template id='${temp.id}'
+    publish-to-youtube='${shortcodeSettings.publishToYoutube ? "1" : 0}'
+    ${
+      shortcodeSettings.publishToYoutube
+        ? `youtube-privacy='${shortcodeSettings.youtubePrivacy || "public"}'`
+        : ""
+    }
+    create-project='${shortcodeSettings.createProject ? "1" : 0}'
+    create-render='${shortcodeSettings.createRender ? "1" : 0}'
+    poll-till-success='${
+      shortcodeSettings.pollTillSuccess ? "1" : 0
+    }']`.replace(/  +/g, " ");
+};
+
 export default {
   props: {
     restApiCall: {
@@ -146,6 +174,7 @@ export default {
       createProject: false,
       createRender: true,
       pollTillSuccess: true,
+      youtubePrivacy: "public",
     };
     try {
       const previousShortCodeSettingsLocal = localStorage.getItem(
@@ -190,15 +219,7 @@ export default {
     setTemplateShortCode() {
       this.ui.templates = this.ui.templates.map((temp) => ({
         ...temp,
-        shortcode: `[moovly-template id='${temp.id}' publish-to-youtube='${
-          this.shortcodeSettings.publishToYoutube ? "1" : 0
-        }' create-project='${
-          this.shortcodeSettings.createProject ? "1" : 0
-        }' create-render='${
-          this.shortcodeSettings.createRender ? "1" : 0
-        }' poll-till-success='${
-          this.shortcodeSettings.pollTillSuccess ? "1" : 0
-        }' ]`,
+        shortcode: generateShorcode(temp, this.shortcodeSettings),
       }));
     },
     fetch() {
