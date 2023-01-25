@@ -35,6 +35,7 @@ MoovlyPlugin.load(
   getElementAndRenderCorrectComponent("moovly-template", (element) => {
     let id = element.dataset.id;
     const publishToYoutube = element.dataset.publishToYoutube === "1";
+    const youtubePrivacy = element.dataset.youtubePrivacy;
     const createProject = element.dataset.createProject === "1";
     const createRender = element.dataset.createRender === "1";
     const pollTillSuccess = !(element.dataset.pollTillSuccess === "0");
@@ -48,6 +49,7 @@ MoovlyPlugin.load(
       withPreview: true,
       publishToYoutube,
       createProject,
+      youtubePrivacy,
       createRender,
       pollTillSuccess,
     });
