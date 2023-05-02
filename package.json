@@ -21,8 +21,8 @@
     "vue-template-compiler": "^2.6.12"
   },
   "dependencies": {
-    "@moovly/i18n": "^1.0.76",
-    "@moovly/plugins-embed": "^1.2.133",
+    "@moovly/i18n": "^1.0.97",
+    "@moovly/plugins-embed": "^1.2.150",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
     "humanize-string": "^2.1.0",
