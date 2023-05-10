@@ -74,7 +74,7 @@ class MoovlyWarningService
                         'text' => "<strong>Moovly Plugin: </strong>Your api token is expired, get a new token  <a target=\"_blank\" href=\"https://developer.moovly.com/developer-portal/personal-access-tokens\">here</a>",
                         'type' => 'error'
                     ];
-                } else if ($daysBetween < 40) {
+                } else if ($daysBetween < 20) {
                     $warnings[] = [
                         'text' => "<strong>Moovly Plugin: </strong>Your api token will expire in $daysBetween days, get a new token  <a target=\"_blank\" href=\"https://developer.moovly.com/developer-portal/personal-access-tokens\">here</a>",
                         'type' => 'watning'
