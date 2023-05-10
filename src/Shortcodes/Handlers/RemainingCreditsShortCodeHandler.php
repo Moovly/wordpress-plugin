@@ -24,6 +24,8 @@ class RemainingCreditsShortCodeHandler extends ShortcodeHandler
             }
             return $credits['total_balance'];
         } catch (\Throwable $e) {
+            print_r($e);
+            die;
             return '-';
         }
     }
