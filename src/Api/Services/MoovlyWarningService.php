@@ -31,7 +31,18 @@ class MoovlyWarningService
             return null;
         }
     }
-
+    public function getDaysBetweenExpiry()
+    {
+        $decodedJwt = $this->decodedJwt();
+        if (!$decodedJwt) {
+            return null;
+        }
+        $exp = $decodedJwt->exp;
+        $now = time();
+        $datediff =  $exp - $now;
+        $days = round($datediff / (60 * 60 * 24));
+        return $days;
+    }
 
     public function checkForWarnings()
     {
@@ -43,7 +54,7 @@ class MoovlyWarningService
                     $creditsLeft = $creditsLeftResponse['total_left'];
                     if ($creditsLeft < 5 && $creditsLeft > 0) {
                         $warnings[] = [
-                            'text' => "<strong>Moovly Plugin: </strong>Only ${creditsLeft} automator credits left, contact your account manager or <a href=\"mailto:sales@moovly.com\">sales@moovly.com</a>",
+                            'text' => "<strong>Moovly Plugin: </strong>Only $creditsLeft automator credits left, contact your account manager or <a href=\"mailto:sales@moovly.com\">sales@moovly.com</a>",
                             'type' => 'warning'
                         ];
                     } else if ($creditsLeft === 0) {
@@ -55,13 +66,18 @@ class MoovlyWarningService
                 }
             } catch (Exception $e) {
             }
-            $decodedJwt = $this->decodedJwt();
-            if ($decodedJwt) {
-                $exp = date('r', $decodedJwt->exp);
-                if ($exp > strtotime('today')) {
+            $daysBetween = $this->getDaysBetweenExpiry();
+            if ($daysBetween !== null) {
+
+                if ($daysBetween <= 0) {
                     $warnings[] = [
                         'text' => "<strong>Moovly Plugin: </strong>Your api token is expired, get a new token  <a target=\"_blank\" href=\"https://developer.moovly.com/developer-portal/personal-access-tokens\">here</a>",
                         'type' => 'error'
+                    ];
+                } else if ($daysBetween < 20) {
+                    $warnings[] = [
+                        'text' => "<strong>Moovly Plugin: </strong>Your api token will expire in $daysBetween days, get a new token  <a target=\"_blank\" href=\"https://developer.moovly.com/developer-portal/personal-access-tokens\">here</a>",
+                        'type' => 'watning'
                     ];
                 }
             }
