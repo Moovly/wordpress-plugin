@@ -22,7 +22,7 @@ class RemainingCreditsShortCodeHandler extends ShortcodeHandler
             if (!$credits) {
                 return '-';
             }
-            return $credits['total_balance'];
+            return '<span class="remaining-credits-number">' . $credits['total_balance'] . '</span>';
         } catch (\Throwable $e) {
             print_r($e);
             die;
