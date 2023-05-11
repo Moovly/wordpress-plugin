@@ -228,6 +228,7 @@ class Template extends Api
                 ));
             }
         }
+
         if (Job::getEmailFormSubmission()) {
             $email = Job::getEmailFormSubmission();
 
