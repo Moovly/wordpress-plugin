@@ -229,10 +229,12 @@ class Template extends Api
             }
         }
         if (Job::getEmailFormSubmission()) {
+            $email = Job::getEmailFormSubmission();
+
             array_push($notifications, NotificationFactory::create(
                 'email',
                 [
-                    'email' => Job::getEmailFormSubmission(),
+                    'email' => explode(',', $email),
                     'subject' => 'New Moovly template form submission',
                     'message' => 'Someone submitted a Moovly template at ' . get_bloginfo('name'),
                 ]

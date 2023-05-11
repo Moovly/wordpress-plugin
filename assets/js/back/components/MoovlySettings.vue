@@ -71,13 +71,17 @@
                         class="form"
                       >
                         <input
-                          type="email"
+                          type="text"
                           name="email_form_submission"
                           id="email_form_submission"
                           placeholder="Email"
                           class="form-control"
                           v-model="settings.jobs.email_form_submission"
                         />
+                        <small class="form-text text-muted"
+                          >use a comma to separate multiple email
+                          addresses</small
+                        >
                       </div>
 
                       <button class="btn btn-primary mt-4" type="submit">
