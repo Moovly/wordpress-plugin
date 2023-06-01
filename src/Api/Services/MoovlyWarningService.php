@@ -46,12 +46,15 @@ class MoovlyWarningService
 
     public function checkForWarnings()
     {
+
+
         $warnings = [];
         if ($this->isLoggedIn) {
             try {
-                $creditsLeftResponse = $this->getMoovlyService()->getRemainingCredits();
+                $creditsLeftResponse = $this->getMoovlyService()->getCreditAccount();
+
                 if ($creditsLeftResponse) {
-                    $creditsLeft = $creditsLeftResponse['total_left'];
+                    $creditsLeft = $creditsLeftResponse['total_balance'];
                     if ($creditsLeft < 5 && $creditsLeft > 0) {
                         $warnings[] = [
                             'text' => "<strong>Moovly Plugin: </strong>Only $creditsLeft automator credits left, contact your account manager or <a href=\"mailto:sales@moovly.com\">sales@moovly.com</a>",
