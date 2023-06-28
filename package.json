@@ -23,7 +23,7 @@
   "dependencies": {
     "@moovly/clients": "^5.1.390",
     "@moovly/i18n": "^1.0.97",
-    "@moovly/plugins-embed": "^1.3.10",
+    "@moovly/plugins-embed": "^1.3.11",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
     "humanize-string": "^2.1.0",

@@ -1144,10 +1144,10 @@
     i18next-http-backend "^1.1.1"
     i18next-localstorage-backend "^3.1.2"
 
-"@moovly/plugins-embed@^1.3.10":
-  version "1.3.10"
-  resolved "https://npm.pkg.github.com/download/@moovly/plugins-embed/1.3.10/e1e8cfed3235f0a621b9d427ae848a64f4f55eba#e1e8cfed3235f0a621b9d427ae848a64f4f55eba"
-  integrity sha512-IJxAiNfWRMhpqz6sqXFAjf8zXBr/7s1BsWJPEM9dAgclRfBeUbmY4AzwFrEOpy8vMgLers/JBBnOZITgDlDJ6A==
+"@moovly/plugins-embed@^1.3.11":
+  version "1.3.11"
+  resolved "https://npm.pkg.github.com/download/@moovly/plugins-embed/1.3.11/144cb66c14f9260f3ebc0c500a30fa6825ef53a2#144cb66c14f9260f3ebc0c500a30fa6825ef53a2"
+  integrity sha512-nYAuUwDkDAkDz3kp3K3LBLexvtS1Cx0uTKH54LCr7AOiIA+GcgeDkXu5fBEzY3qREs7u9wKZJkJNXHPAEnX4+w==
   dependencies:
     "@moovly/ui" "^4.0.126"
     query-string "^6.13.6"
