@@ -1,10 +1,6 @@
 import { parse } from "querystring";
 import { MoovlyPlugin } from "@moovly/plugins-embed";
 
-window.Moovly.emailCampaignReceived = (email) => {
-  debugger;
-};
-
 const getElementAndRenderCorrectComponent = (className, rendercomponent) => {
   const elements = document.getElementsByClassName(className);
   if (elements.length) {
