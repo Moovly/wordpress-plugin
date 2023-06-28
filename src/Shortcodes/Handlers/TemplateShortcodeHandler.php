@@ -25,6 +25,7 @@ class TemplateShortcodeHandler extends ShortcodeHandler
             'create-project' => $this->getAttribute('create-project', $defaultSaveProject),
             'create-render' => $this->getAttribute('create-render', '1'),
             'poll-till-success' => $this->getAttribute('poll-till-success', '1'),
+            'email-campaign' => $this->getAttribute('email-campaign', '1'),
         ]);
     }
 }

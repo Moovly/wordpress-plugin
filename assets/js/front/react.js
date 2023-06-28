@@ -1,6 +1,10 @@
 import { parse } from "querystring";
 import { MoovlyPlugin } from "@moovly/plugins-embed";
 
+window.Moovly.emailCampaignReceived = (email) => {
+  debugger;
+};
+
 const getElementAndRenderCorrectComponent = (className, rendercomponent) => {
   const elements = document.getElementsByClassName(className);
   if (elements.length) {
@@ -39,6 +43,7 @@ MoovlyPlugin.load(
     const createProject = element.dataset.createProject === "1";
     const createRender = element.dataset.createRender === "1";
     const pollTillSuccess = !(element.dataset.pollTillSuccess === "0");
+    const isEmailCampaign = element.dataset.emailCampaign === "1";
     if (id === "query") {
       const parsedQuery = parse(window.location.search.substring(1));
       id = parsedQuery.template_id;
@@ -52,6 +57,7 @@ MoovlyPlugin.load(
       youtubePrivacy,
       createRender,
       pollTillSuccess,
+      isEmailCampaign,
     });
   });
 
