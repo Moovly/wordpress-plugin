@@ -37,6 +37,12 @@ Create a ZIP-file from the following directories or files:
 
 Upload the ZIP-file in the Wordpress plugin section
 
+## Shortcodes
+
+- email-campaign="1"
+Launches the event `window.Moovly.emailCampaignReceived` this can be catched in the wordpress website and do something
+
+
 ### From Plugin Store
 
 TO DO
