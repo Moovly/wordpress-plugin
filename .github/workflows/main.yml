@@ -17,15 +17,18 @@ jobs:
     env:
       GITHUB_NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: "7.1"
           tools: composer:v2
+
       - uses: actions/setup-node@v1
         with:
-          node-version: "14.x"
+          node-version: "16.x"
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@master
         with:
@@ -33,10 +36,13 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_GENERAL_TO_ASSUME }}
           role-duration-seconds: 3600
           role-session-name: CI
+
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
+
       - run: echo "TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
       - name: Build
         run: |
           sed -i "s@{{build}}@${TAG}@" moovly.php
@@ -44,6 +50,7 @@ jobs:
           yarn install --frozen-lockfile
           yarn run production
           zip -r moovly dist/* src/* vendor/* moovly.php README.md readme.txt package.json yarn.lock
+
       - name: Upload to s3 and SVN
         run: |
           aws s3 cp ./moovly.zip s3://${S3_BUCKET}/wordpress-plugin/latest/
@@ -53,7 +60,8 @@ jobs:
         env:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-          S3_BUCKET: builds.moovly.com
+          S3_BUCKET: builds.moovly
+
       - name: Build, tag and push to Amazon ECR
         id: build-image
         env:
@@ -72,10 +80,13 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_GENERAL_TO_ASSUME }}
           role-duration-seconds: 3600
           role-session-name: CI
+
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
+
       - run: echo "BRANCH=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      
       - name: Pull, tag and push to Amazon ECR
         run: |
           MANIFEST=$(aws ecr batch-get-image --repository-name $ECR_REPOSITORY --image-ids imageTag=$GITHUB_SHA --query 'images[].imageManifest' --output text)
